@@ -1,0 +1,19 @@
+#!/bin/tcsh
+#source this script to setup SoLID GEMC on ifarm and farm systems
+#on your local installation, modify ROOTSYS,JLAB_ROOT,SoLID_GEMC,GEMC_FIELD to your path
+setenv ROOTSYS /home/zwzhao/apps/root/root_v5.34.18  #setup root, modify this to your path, comment this line out if you use go_root to build root
+setenv JLAB_ROOT /home/zwzhao/apps/jlab_root #setup basic enviroment variables for gemc,modify this to your path!!!
+setenv JLAB_VERSION devel
+source $JLAB_ROOT/$JLAB_VERSION/ce/jlab.csh       #setup basic enviroment variables for gemc on local installation
+setenv SoLID_GEMC /home/zwzhao/solid/solid_svn/solid/solid_gemc2 #solid_gemc location where you download from SVN, modify this to your path!!!
+setenv GEMC_FIELD $SoLID_GEMC/field     #location of GEMC field map, change this to your path!!!
+setenv GEMC_HOST soliddb.jlab.org   #use this if your system is on jlab network
+#setenv GEMC_HOST 127.0.0.1       #use this if you are tunnleing to access mysql server
+setenv GEMC_DB solid_geometry       #the official detector database
+setenv GEMC_BANK solid_banks        #the official output bank info
+#setenv GEMC_DB   test              #user geometry for test
+#setenv GEMC_BANK test              #user banks for test
+#setenv GEMC_USER soliduser          #this user only can read database, used for run simulation
+#setenv GEMC_PASS ilovesolid         #readonly user password
+setenv GEMC_USER soliddev          #this user can read and write, used for update database
+setenv GEMC_PASS solenoid2011                  #ask other solid gemc develeoper for this password
