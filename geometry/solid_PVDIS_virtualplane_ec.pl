@@ -7,11 +7,11 @@ our %parameters;
 use Getopt::Long;
 use Math::Trig;
 
-my $DetectorName = 'solid_CLEO_PVDIS_virtualplane_ec';
+my $DetectorName = 'solid_PVDIS_virtualplane_ec';
 
 my $DetectorMother="root";
 
-sub solid_CLEO_PVDIS_virtualplane_ec
+sub solid_PVDIS_virtualplane_ec
 {
 make_forwardangle_front();
 make_forwardangle_middle();

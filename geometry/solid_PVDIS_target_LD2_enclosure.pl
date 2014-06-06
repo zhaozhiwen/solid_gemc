@@ -7,11 +7,11 @@ our %parameters;
 use Getopt::Long;
 use Math::Trig;
 
-my $DetectorName = 'solid_CLEO_PVDIS_target_LD2_enclosure';
+my $DetectorName = 'solid_PVDIS_target_LD2_enclosure';
 
 my $DetectorMother="root";
 
-sub solid_CLEO_PVDIS_target_LD2_enclosure
+sub solid_PVDIS_target_LD2_enclosure
 {
 make_target_PVDIS_target();
 }

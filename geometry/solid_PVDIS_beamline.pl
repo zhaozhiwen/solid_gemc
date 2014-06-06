@@ -7,11 +7,11 @@ our %parameters;
 use Getopt::Long;
 use Math::Trig;
 
-my $DetectorName = 'solid_CLEO_PVDIS_beamline';
+my $DetectorName = 'solid_PVDIS_beamline';
 
 my $DetectorMother="root";
 
-sub solid_CLEO_PVDIS_beamline
+sub solid_PVDIS_beamline
 {
 make_beam_entrance();
 make_beam_exit();

@@ -7,11 +7,11 @@ our %parameters;
 use Getopt::Long;
 use Math::Trig;
 
-my $DetectorName = 'solid_CLEO_PVDIS_virtualplane_gem';
+my $DetectorName = 'solid_PVDIS_virtualplane_gem';
 
 my $DetectorMother="root";
 
-sub solid_CLEO_PVDIS_virtualplane_gem
+sub solid_PVDIS_virtualplane_gem
 {
 make_virtualplane_gem();
 }

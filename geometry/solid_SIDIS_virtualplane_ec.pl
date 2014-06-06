@@ -7,23 +7,23 @@ our %parameters;
 use Getopt::Long;
 use Math::Trig;
 
-my $DetectorName = 'solid_CLEO_SIDIS_virtualplane_ec';
+my $DetectorName = 'solid_SIDIS_virtualplane_ec';
 
 my $DetectorMother="root";
 
-sub solid_CLEO_SIDIS_virtualplane_ec
+sub solid_SIDIS_virtualplane_ec
 {
-make_solid_CLEO_SIDIS_virtualplane_ec_forwardangle_front();
-make_solid_CLEO_SIDIS_virtualplane_ec_forwardangle_middle();
-make_solid_CLEO_SIDIS_virtualplane_ec_forwardangle_inner();
-make_solid_CLEO_SIDIS_virtualplane_ec_forwardangle_rear();
-make_solid_CLEO_SIDIS_virtualplane_ec_largeangle_front();
-make_solid_CLEO_SIDIS_virtualplane_ec_largeangle_middle();
-make_solid_CLEO_SIDIS_virtualplane_ec_largeangle_inner();
-make_solid_CLEO_SIDIS_virtualplane_ec_largeangle_rear();
+make_solid_SIDIS_virtualplane_ec_forwardangle_front();
+make_solid_SIDIS_virtualplane_ec_forwardangle_middle();
+make_solid_SIDIS_virtualplane_ec_forwardangle_inner();
+make_solid_SIDIS_virtualplane_ec_forwardangle_rear();
+make_solid_SIDIS_virtualplane_ec_largeangle_front();
+make_solid_SIDIS_virtualplane_ec_largeangle_middle();
+make_solid_SIDIS_virtualplane_ec_largeangle_inner();
+make_solid_SIDIS_virtualplane_ec_largeangle_rear();
 }
 
-sub make_solid_CLEO_SIDIS_virtualplane_ec_forwardangle_front
+sub make_solid_SIDIS_virtualplane_ec_forwardangle_front
 {
  my %detector=init_det();
  $detector{"name"}        = "$DetectorName\_forwardangle_front";
@@ -54,7 +54,7 @@ sub make_solid_CLEO_SIDIS_virtualplane_ec_forwardangle_front
  print_det(\%configuration, \%detector);
 }
 
-sub make_solid_CLEO_SIDIS_virtualplane_ec_forwardangle_middle
+sub make_solid_SIDIS_virtualplane_ec_forwardangle_middle
 {
  my %detector=init_det();
  $detector{"name"}        = "$DetectorName\_forwardangle_middle";
@@ -85,7 +85,7 @@ sub make_solid_CLEO_SIDIS_virtualplane_ec_forwardangle_middle
  print_det(\%configuration, \%detector);
 }
 
-sub make_solid_CLEO_SIDIS_virtualplane_ec_forwardangle_inner
+sub make_solid_SIDIS_virtualplane_ec_forwardangle_inner
 {
  my %detector=init_det();
  $detector{"name"}        = "$DetectorName\_forwardangle_inner";
@@ -116,7 +116,7 @@ sub make_solid_CLEO_SIDIS_virtualplane_ec_forwardangle_inner
  print_det(\%configuration, \%detector);
 }
 
-sub make_solid_CLEO_SIDIS_virtualplane_ec_forwardangle_rear
+sub make_solid_SIDIS_virtualplane_ec_forwardangle_rear
 {
  my %detector=init_det();
  $detector{"name"}        = "$DetectorName\_forwardangle_rear";
@@ -147,7 +147,7 @@ sub make_solid_CLEO_SIDIS_virtualplane_ec_forwardangle_rear
  print_det(\%configuration, \%detector);
 }
 
-sub make_solid_CLEO_SIDIS_virtualplane_ec_largeangle_front
+sub make_solid_SIDIS_virtualplane_ec_largeangle_front
 {
  my %detector=init_det();
  $detector{"name"}        = "$DetectorName\_largeangle_front";
@@ -178,7 +178,7 @@ sub make_solid_CLEO_SIDIS_virtualplane_ec_largeangle_front
  print_det(\%configuration, \%detector);
 }
 
-sub make_solid_CLEO_SIDIS_virtualplane_ec_largeangle_middle
+sub make_solid_SIDIS_virtualplane_ec_largeangle_middle
 {
  my %detector=init_det();
  $detector{"name"}        = "$DetectorName\_largeangle_middle";
@@ -209,7 +209,7 @@ sub make_solid_CLEO_SIDIS_virtualplane_ec_largeangle_middle
  print_det(\%configuration, \%detector);
 }
 
-sub make_solid_CLEO_SIDIS_virtualplane_ec_largeangle_inner
+sub make_solid_SIDIS_virtualplane_ec_largeangle_inner
 {
  my %detector=init_det();
  $detector{"name"}        = "$DetectorName\_largeangle_inner";
@@ -240,7 +240,7 @@ sub make_solid_CLEO_SIDIS_virtualplane_ec_largeangle_inner
  print_det(\%configuration, \%detector);
 }
 
-sub make_solid_CLEO_SIDIS_virtualplane_ec_largeangle_rear
+sub make_solid_SIDIS_virtualplane_ec_largeangle_rear
 {
  my %detector=init_det();
  $detector{"name"}        = "$DetectorName\_largeangle_rear";

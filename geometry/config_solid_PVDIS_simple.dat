@@ -1,7 +1,7 @@
 # Configuration file for new_detector
 
 # Detector name and variation
-detector_name: solid_CLEO_PVDIS_simple
+detector_name: solid_PVDIS_simple
 variation:     Original
 
 # Factory can be MYQL or TEXT
@@ -15,7 +15,7 @@ rmax:       10000
 dbhost: localhost
 
 # Comments/Description
-comment:       solid_CLEO_PVDIS_simple
+comment:       solid_PVDIS_simple
 
 # Verbosity controls the perl script output
 verbosity: 1

@@ -45,46 +45,46 @@ our %configuration = load_configuration($config_file);
 #}
 
 # One can change the "variation" here if one is desired different from the config.dat
-$configuration{"detector_name"} = "solid_CLEO_SIDIS_He3";
+$configuration{"detector_name"} = "solid_SIDIS_He3";
 $configuration{"variation"} = "Original";
 
 # To get the parameters proper authentication is needed.
 # our %parameters    = get_parameters(%configuration);
-# $configuration{"detector_name"} = "solid_CLEO_SIDIS";
+# $configuration{"detector_name"} = "solid_SIDIS";
 
 #Geometry definition
-require "solid_CLEO_solenoid.pl";
-solid_CLEO_solenoid();
-require "solid_CLEO_SIDIS_target_He3_collimator.pl";
-solid_CLEO_SIDIS_target_He3_collimator();
-require "solid_CLEO_SIDIS_target_He3.pl";
-solid_CLEO_SIDIS_target_He3();
-require "solid_CLEO_SIDIS_beamline_He3.pl";
-solid_CLEO_SIDIS_beamline_He3();
-require "solid_CLEO_SIDIS_gem.pl";
-solid_CLEO_SIDIS_gem();
-require "solid_CLEO_SIDIS_cherenkov_heavygas.pl";
-solid_CLEO_SIDIS_cherenkov_heavygas();
-require "solid_CLEO_SIDIS_cherenkov_lightgas.pl";
-solid_CLEO_SIDIS_cherenkov_lightgas();
-require "solid_CLEO_SIDIS_ec_forwardangle.pl";
-solid_CLEO_SIDIS_ec_forwardangle();
-require "solid_CLEO_SIDIS_ec_largeangle.pl";
-solid_CLEO_SIDIS_ec_largeangle();
-require "solid_CLEO_SIDIS_spd_forwardangle.pl";
-solid_CLEO_SIDIS_spd_forwardangle();
-require "solid_CLEO_SIDIS_mrpc_forwardangle.pl";
-solid_CLEO_SIDIS_mrpc_forwardangle();
-require "solid_CLEO_SIDIS_virtualplane_cher.pl";
-solid_CLEO_SIDIS_virtualplane_cher();
-require "solid_CLEO_SIDIS_virtualplane_ec.pl";
-solid_CLEO_SIDIS_virtualplane_ec();
-require "solid_CLEO_SIDIS_virtualplane_gem.pl";
-solid_CLEO_SIDIS_virtualplane_gem();
-require "solid_CLEO_SIDIS_virtualplane_mrpc.pl";
-solid_CLEO_SIDIS_virtualplane_mrpc();
-require "solid_CLEO_SIDIS_virtualplane_spd.pl";
-solid_CLEO_SIDIS_virtualplane_spd();
+require "solid_solenoid.pl";
+solid_solenoid();
+require "solid_SIDIS_target_He3_collimator.pl";
+solid_SIDIS_target_He3_collimator();
+require "solid_SIDIS_target_He3.pl";
+solid_SIDIS_target_He3();
+require "solid_SIDIS_beamline_He3.pl";
+solid_SIDIS_beamline_He3();
+require "solid_SIDIS_gem.pl";
+solid_SIDIS_gem();
+require "solid_SIDIS_cherenkov_heavygas.pl";
+solid_SIDIS_cherenkov_heavygas();
+require "solid_SIDIS_cherenkov_lightgas.pl";
+solid_SIDIS_cherenkov_lightgas();
+require "solid_SIDIS_ec_forwardangle.pl";
+solid_SIDIS_ec_forwardangle();
+require "solid_SIDIS_ec_largeangle.pl";
+solid_SIDIS_ec_largeangle();
+require "solid_SIDIS_spd_forwardangle.pl";
+solid_SIDIS_spd_forwardangle();
+require "solid_SIDIS_mrpc_forwardangle.pl";
+solid_SIDIS_mrpc_forwardangle();
+require "solid_SIDIS_virtualplane_cher.pl";
+solid_SIDIS_virtualplane_cher();
+require "solid_SIDIS_virtualplane_ec.pl";
+solid_SIDIS_virtualplane_ec();
+require "solid_SIDIS_virtualplane_gem.pl";
+solid_SIDIS_virtualplane_gem();
+require "solid_SIDIS_virtualplane_mrpc.pl";
+solid_SIDIS_virtualplane_mrpc();
+require "solid_SIDIS_virtualplane_spd.pl";
+solid_SIDIS_virtualplane_spd();
 
 # Hit definition
 # Execute only when there are changes

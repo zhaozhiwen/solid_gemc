@@ -7,18 +7,18 @@ our %parameters;
 use Getopt::Long;
 use Math::Trig;
 
-my $DetectorName = 'solid_CLEO_SIDIS_virtualplane_spd';
+my $DetectorName = 'solid_SIDIS_virtualplane_spd';
 
 my $DetectorMother="root";
 
-sub solid_CLEO_SIDIS_virtualplane_spd
+sub solid_SIDIS_virtualplane_spd
 {
-make_solid_CLEO_SIDIS_virtualplane_spd_forwardangle_front();
+make_solid_SIDIS_virtualplane_spd_forwardangle_front();
 }
 
  my $z=406.5;
 
-sub make_solid_CLEO_SIDIS_virtualplane_spd_forwardangle_front
+sub make_solid_SIDIS_virtualplane_spd_forwardangle_front
 {
  my %detector=init_det();
  $detector{"name"}        = "$DetectorName\_front";

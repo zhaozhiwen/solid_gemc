@@ -7,11 +7,11 @@ our %parameters;
 use Getopt::Long;
 use Math::Trig;
 
-my $DetectorName = 'solid_CLEO_SIDIS_spd_forwardangle';
+my $DetectorName = 'solid_SIDIS_spd_forwardangle';
 
 my $DetectorMother="root";
 
-sub solid_CLEO_SIDIS_spd_forwardangle
+sub solid_SIDIS_spd_forwardangle
 {
 make_spd_forwardangle();
 }

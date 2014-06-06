@@ -7,11 +7,11 @@ our %parameters;
 use Getopt::Long;
 use Math::Trig;
 
-my $DetectorName = 'solid_CLEO_SIDIS_target_He3_collimator_kill';
+my $DetectorName = 'solid_SIDIS_target_He3_collimator_kill';
 
 my $DetectorMother="root";
 
-sub solid_CLEO_SIDIS_target_He3_collimator_kill
+sub solid_SIDIS_target_He3_collimator_kill
 {
 make_upstream();
 make_downstream();

@@ -7,11 +7,11 @@ our %parameters;
 use Getopt::Long;
 use Math::Trig;
 
-my $DetectorName = 'solid_CLEO_JPsi_target_LH2';
+my $DetectorName = 'solid_JPsi_target_LH2';
 
 my $DetectorMother="root";
 
-sub solid_CLEO_JPsi_target_LH2
+sub solid_JPsi_target_LH2
 {
 make_target();
 }

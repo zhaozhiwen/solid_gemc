@@ -1,7 +1,7 @@
 # Configuration file for new_detector
 
 # Detector name and variation
-detector_name: solid_CLEO_SIDIS_He3
+detector_name: solid_SIDIS_He3
 variation:     Original
 
 # Factory can be MYQL or TEXT
@@ -15,7 +15,7 @@ rmax:       10000
 dbhost: localhost
 
 # Comments/Description
-comment:       solid_CLEO_SIDIS_He3
+comment:       solid_SIDIS_He3
 
 # Verbosity controls the perl script output
 verbosity: 1

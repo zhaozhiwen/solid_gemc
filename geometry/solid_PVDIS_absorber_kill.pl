@@ -7,11 +7,11 @@ our %parameters;
 use Getopt::Long;
 use Math::Trig;
 
-my $DetectorName = 'solid_CLEO_PVDIS_absorber_kill';
+my $DetectorName = 'solid_PVDIS_absorber_kill';
 
 my $DetectorMother="root";
 
-sub solid_CLEO_PVDIS_absorber_kill
+sub solid_PVDIS_absorber_kill
 {
 make_absorber_forwarangle_1();
 make_absorber_forwarangle_2();

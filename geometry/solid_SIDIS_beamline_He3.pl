@@ -7,11 +7,11 @@ our %parameters;
 use Getopt::Long;
 use Math::Trig;
 
-my $DetectorName = 'solid_CLEO_SIDIS_beamline_He3';
+my $DetectorName = 'solid_SIDIS_beamline_He3';
 
 my $DetectorMother="root";
 
-sub solid_CLEO_SIDIS_beamline_He3
+sub solid_SIDIS_beamline_He3
 {
 make_beam_entrance();
 make_beam_exit();
