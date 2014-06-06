@@ -7,11 +7,11 @@ our %parameters;
 use Getopt::Long;
 use Math::Trig;
 
-my $DetectorName = 'solid_CLEO_SIDIS_gem';
+my $DetectorName = 'solid_SIDIS_gem';
 
 my $DetectorMother="root";
 
-sub solid_CLEO_SIDIS_gem
+sub solid_SIDIS_gem
 {
 make_gem();
 }

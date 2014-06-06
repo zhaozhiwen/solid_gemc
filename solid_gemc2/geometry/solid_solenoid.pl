@@ -7,11 +7,11 @@ our %parameters;
 use Getopt::Long;
 use Math::Trig;
 
-my $DetectorName = 'solid_CLEO_solenoid';
+my $DetectorName = 'solid_solenoid';
 
 my $DetectorMother="root";
 
-sub solid_CLEO_solenoid
+sub solid_solenoid
 {
 make_coil_yoke();
 make_cryostat();

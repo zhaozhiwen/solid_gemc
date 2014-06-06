@@ -7,11 +7,11 @@ our %parameters;
 use Getopt::Long;
 use Math::Trig;
 
-my $DetectorName = 'solid_CLEO_PVDIS_ec_forwardangle_block';
+my $DetectorName = 'solid_PVDIS_ec_forwardangle_block';
 
 my $DetectorMother="root";
 
-sub solid_CLEO_PVDIS_ec_forwardangle_block
+sub solid_PVDIS_ec_forwardangle_block
 {
 make_ec_forwardangle_block();
 }

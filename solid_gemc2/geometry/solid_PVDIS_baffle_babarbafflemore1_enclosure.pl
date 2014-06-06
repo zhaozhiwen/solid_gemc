@@ -7,11 +7,11 @@ our %parameters;
 use Getopt::Long;
 use Math::Trig;
 
-my $DetectorName = 'solid_CLEO_PVDIS_baffle_babarbafflemore1_enclosure';
+my $DetectorName = 'solid_PVDIS_baffle_babarbafflemore1_enclosure';
 
 my $DetectorMother="root";
 
-sub solid_CLEO_PVDIS_baffle_babarbafflemore1_enclosure
+sub solid_PVDIS_baffle_babarbafflemore1_enclosure
 {
 make_baffle_plate_inner();
 make_baffle_plate_outer();
@@ -52,7 +52,7 @@ sub make_baffle_plate_inner
     my %detector=init_det();
     $detector{"name"}        = "$DetectorName\_plateinner$n_c";
     $detector{"mother"}      = "$DetectorMother" ;
-    if ($n==1) {$detector{"mother"}    = "solid_CLEO_PVDIS_target_LD2_enclosure_TACV";}
+    if ($n==1) {$detector{"mother"}    = "solid_PVDIS_target_LD2_enclosure_TACV";}
     $detector{"description"} = $detector{"name"};
     $detector{"pos"}        = "0*cm 0*cm $PlateZ[$n-1]*cm";
     if ($n==1) {$detector{"pos"}        = "0*cm 0*cm 30*cm";}
@@ -90,7 +90,7 @@ sub make_baffle_plate_outer
     my %detector=init_det();
     $detector{"name"}        = "$DetectorName\_plateouter$n_c";
     $detector{"mother"}      = "$DetectorMother" ;
-    if ($n==1) {$detector{"mother"}    = "solid_CLEO_PVDIS_target_LD2_enclosure_TACV";}
+    if ($n==1) {$detector{"mother"}    = "solid_PVDIS_target_LD2_enclosure_TACV";}
     $detector{"description"} = $detector{"name"};
     $detector{"pos"}        = "0*cm 0*cm $PlateZ[$n-1]*cm";
     if ($n==1) {$detector{"pos"}        = "0*cm 0*cm 30*cm";}
@@ -127,7 +127,7 @@ sub make_baffle_plate   #viutral container for baffle plate
     my %detector=init_det();
     $detector{"name"}        = "$DetectorName\_plate$n_c";
     $detector{"mother"}      = "$DetectorMother";
-    if ($n==1) {$detector{"mother"}    = "solid_CLEO_PVDIS_target_LD2_enclosure_TACV";}
+    if ($n==1) {$detector{"mother"}    = "solid_PVDIS_target_LD2_enclosure_TACV";}
     $detector{"description"} = $detector{"name"};
     $detector{"pos"}        = "0*cm 0*cm $PlateZ[$n-1]*cm";
     if ($n==1) {$detector{"pos"}        = "0*cm 0*cm 30*cm";}

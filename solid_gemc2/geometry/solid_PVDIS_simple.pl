@@ -45,28 +45,28 @@ our %configuration = load_configuration($config_file);
 #}
 
 # One can change the "variation" here if one is desired different from the config.dat
-$configuration{"detector_name"} = "solid_CLEO_PVDIS_simple";
+$configuration{"detector_name"} = "solid_PVDIS_simple";
 $configuration{"variation"} = "Original";
 
 # To get the parameters proper authentication is needed.
 # our %parameters    = get_parameters(%configuration);
-# $configuration{"detector_name"} = "solid_CLEO_PVDIS";
+# $configuration{"detector_name"} = "solid_PVDIS";
 
 #Geometry definition
-require "solid_CLEO_solenoid_kill.pl";
-solid_CLEO_solenoid_kill();
-require "solid_CLEO_PVDIS_baffle_babarbafflemore1_kill.pl";
-solid_CLEO_PVDIS_baffle_babarbafflemore1_kill();
-require "solid_CLEO_PVDIS_ec_forwardangle_block_kill.pl";
-solid_CLEO_PVDIS_ec_forwardangle_block_kill();
-require "solid_CLEO_PVDIS_ec_forwardangle_kill.pl";
-solid_CLEO_PVDIS_ec_forwardangle_kill();
-require "solid_CLEO_PVDIS_virtualplane_cher.pl";
-solid_CLEO_PVDIS_virtualplane_cher();
-require "solid_CLEO_PVDIS_virtualplane_ec.pl";
-solid_CLEO_PVDIS_virtualplane_ec();
-require "solid_CLEO_PVDIS_virtualplane_gem.pl";
-solid_CLEO_PVDIS_virtualplane_gem();
+require "solid_solenoid_kill.pl";
+solid_solenoid_kill();
+require "solid_PVDIS_baffle_babarbafflemore1_kill.pl";
+solid_PVDIS_baffle_babarbafflemore1_kill();
+require "solid_PVDIS_ec_forwardangle_block_kill.pl";
+solid_PVDIS_ec_forwardangle_block_kill();
+require "solid_PVDIS_ec_forwardangle_kill.pl";
+solid_PVDIS_ec_forwardangle_kill();
+require "solid_PVDIS_virtualplane_cher.pl";
+solid_PVDIS_virtualplane_cher();
+require "solid_PVDIS_virtualplane_ec.pl";
+solid_PVDIS_virtualplane_ec();
+require "solid_PVDIS_virtualplane_gem.pl";
+solid_PVDIS_virtualplane_gem();
 
 # Hit definition
 # Execute only when there are changes

@@ -7,11 +7,11 @@ our %parameters;
 use Getopt::Long;
 use Math::Trig;
 
-my $DetectorName = 'solid_CLEO_PVDIS_baffle_babarbafflemore1_kill';
+my $DetectorName = 'solid_PVDIS_baffle_babarbafflemore1_kill';
 
 my $DetectorMother="root";
 
-sub solid_CLEO_PVDIS_baffle_babarbafflemore1_kill
+sub solid_PVDIS_baffle_babarbafflemore1_kill
 {
 make_baffle_plate_inner();
 make_baffle_plate_outer();

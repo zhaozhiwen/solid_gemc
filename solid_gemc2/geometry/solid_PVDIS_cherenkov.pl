@@ -7,11 +7,11 @@ our %parameters;
 use Getopt::Long;
 use Math::Trig;
 
-my $DetectorName = 'solid_CLEO_PVDIS_cherenkov';
+my $DetectorName = 'solid_PVDIS_cherenkov';
 
 my $DetectorMother="root";
 
-sub solid_CLEO_PVDIS_cherenkov
+sub solid_PVDIS_cherenkov
 {
 make_backchamber();
 make_backchamber_window_front();

@@ -45,32 +45,32 @@ our %configuration = load_configuration($config_file);
 #}
 
 # One can change the "variation" here if one is desired different from the config.dat
-$configuration{"detector_name"} = "solid_CLEO_SIDIS_He3_simple";
+$configuration{"detector_name"} = "solid_SIDIS_He3_simple";
 $configuration{"variation"} = "Original";
 
 # To get the parameters proper authentication is needed.
 # our %parameters    = get_parameters(%configuration);
-# $configuration{"detector_name"} = "solid_CLEO_SIDIS";
+# $configuration{"detector_name"} = "solid_SIDIS";
 
 #Geometry definition
-require "solid_CLEO_solenoid_kill.pl";
-solid_CLEO_solenoid_kill();
-require "solid_CLEO_SIDIS_target_He3_collimator_kill.pl";
-solid_CLEO_SIDIS_target_He3_collimator_kill();
-require "solid_CLEO_SIDIS_ec_forwardangle_kill.pl";
-solid_CLEO_SIDIS_ec_forwardangle_kill();
-require "solid_CLEO_SIDIS_ec_largeangle_kill.pl";
-solid_CLEO_SIDIS_ec_largeangle_kill();
-require "solid_CLEO_SIDIS_virtualplane_cher.pl";
-solid_CLEO_SIDIS_virtualplane_cher();
-require "solid_CLEO_SIDIS_virtualplane_ec.pl";
-solid_CLEO_SIDIS_virtualplane_ec();
-require "solid_CLEO_SIDIS_virtualplane_gem.pl";
-solid_CLEO_SIDIS_virtualplane_gem();
-require "solid_CLEO_SIDIS_virtualplane_mrpc.pl";
-solid_CLEO_SIDIS_virtualplane_mrpc();
-require "solid_CLEO_SIDIS_virtualplane_spd.pl";
-solid_CLEO_SIDIS_virtualplane_spd();
+require "solid_solenoid_kill.pl";
+solid_solenoid_kill();
+require "solid_SIDIS_target_He3_collimator_kill.pl";
+solid_SIDIS_target_He3_collimator_kill();
+require "solid_SIDIS_ec_forwardangle_kill.pl";
+solid_SIDIS_ec_forwardangle_kill();
+require "solid_SIDIS_ec_largeangle_kill.pl";
+solid_SIDIS_ec_largeangle_kill();
+require "solid_SIDIS_virtualplane_cher.pl";
+solid_SIDIS_virtualplane_cher();
+require "solid_SIDIS_virtualplane_ec.pl";
+solid_SIDIS_virtualplane_ec();
+require "solid_SIDIS_virtualplane_gem.pl";
+solid_SIDIS_virtualplane_gem();
+require "solid_SIDIS_virtualplane_mrpc.pl";
+solid_SIDIS_virtualplane_mrpc();
+require "solid_SIDIS_virtualplane_spd.pl";
+solid_SIDIS_virtualplane_spd();
 
 # Hit definition
 # Execute only when there are changes

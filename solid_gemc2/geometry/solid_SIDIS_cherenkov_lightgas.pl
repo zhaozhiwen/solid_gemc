@@ -7,11 +7,11 @@ our %parameters;
 use Getopt::Long;
 use Math::Trig;
 
-my $DetectorName = 'solid_CLEO_SIDIS_cherenkov_lightgas';
+my $DetectorName = 'solid_SIDIS_cherenkov_lightgas';
 
 my $DetectorMother="root";
 
-sub solid_CLEO_SIDIS_cherenkov_lightgas
+sub solid_SIDIS_cherenkov_lightgas
 {
 make_frontchamber();
 make_frontchamber_window_front();
