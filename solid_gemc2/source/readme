@@ -1,0 +1,19 @@
+== for users ===
+This is to build "solid_gemc" with GEMC library to add addtional functionality like hitprocess and so on.
+
+source your set_solid
+cd $GEMC/source
+scons OTP=1 LIBRARY="shared"  <this will produce libgemc.so>
+
+At this dir, run "scons OPT=1", this will create "solid_gemc" binary, you can use it with all feature of GEMC and addtional things we added here
+
+== for expert users ===
+
+This package is to update and replace "solgemc" to make it work with GEMC 2
+
+hitprocess/solid_hitprocess.h and gemc.cc are needed for now.
+They could be removed once GEMC change to make hitprocess like real plugin
+
+
+*******
+Zhiwen Zhao, created 6/9/2014
