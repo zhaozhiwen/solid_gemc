@@ -37,7 +37,7 @@
 /// \author \n &copy; Maurizio Ungaro
 /// \author e-mail: ungaro@jlab.org\n\n\n
 
-const char *GEMC_VERSION = "gemc 2.0.beta3";
+const char *GEMC_VERSION = "gemc 2.0";
 
 // G4 headers
 #include "G4RunManager.hh"
@@ -58,7 +58,6 @@ const char *GEMC_VERSION = "gemc 2.0.beta3";
 #include "HitProcess_MapRegister.h"
 #include "detector_factory.h"
 #include "gemc_MainGui.h"
-#include "MagneticField.h"
 #include "gbank.h"
 #include "MDetectorConstruction.h"
 #include "MEventAction.h"
@@ -77,6 +76,7 @@ const char *GEMC_VERSION = "gemc 2.0.beta3";
 #include "string_utilities.h"
 #include "utils.h"
 
+//header for solid hitprocess
 #include "solid_hitprocess.h"
 
 // c++ headers
@@ -205,7 +205,7 @@ int main( int argc, char **argv )
 	// Process Hit Map
 	gemc_splash.message(" Building gemc Process Hit Factory...");
 	map<string, HitProcess_Factory> hitProcessMap = HitProcess_Map(gemcOpt.optMap["HIT_PROCESS_LIST"].args);
-	solid_hitprocess(hitProcessMap);	
+	solid_hitprocess(hitProcessMap);
 	
 	///< magnetic Field Map
 	gemc_splash.message(" Creating fields Map...");
