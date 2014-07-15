@@ -156,7 +156,8 @@ env = init_environment("qt4 geant4 clhep evio xercesc")
 # Hit Processes
 env.Append(CPPPATH = ['hitprocess'])
 hitp_sources = Split("""
-	hitprocess/solid_ec_hitprocess.cc""")
+	hitprocess/solidec_hitprocess.cc
+	hitprocess/solidgem_hitprocess.cc""")
 env.Library(source = hitp_sources, target = "lib/hitprocess")
 
 #gemc
@@ -180,6 +181,7 @@ env.Append(CPPPATH = incpath)
 #env.Prepend(LIBS =  ['materials', 'mirrors', 'parameters', 'utilities', 'detector', 'sensitivity', 'physics', 'fields', 'hitprocess', 'output', 'gui'])
 env.Program(source = gemc_sources + hitp_sources, target = "solid_gemc")
 #env.Program(source = hitp_sources, target = "solid_gemc")
+#env.Program(source = gemc_sources, target = "solid_gemc")
 
 
 #if env['LIBRARY'] == "static":
