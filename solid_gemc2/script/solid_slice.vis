@@ -8,4 +8,4 @@
 /vis/viewer/set/cutawayMode intersection
 /vis/viewer/addCutawayPlane 0  0  0  cm 1 0 0
 
-
+/vis/scene/add/axes 2 2 -4 1 m
