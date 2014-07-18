@@ -156,10 +156,10 @@ env = init_environment("qt4 geant4 clhep evio xercesc")
 # Hit Processes
 env.Append(CPPPATH = ['hitprocess'])
 hitp_sources = Split("""
-	hitprocess/solidec_hitprocess.cc
-	hitprocess/solidgem_hitprocess.cc
-	hitprocess/solidcc_hitprocess.cc
-	hitprocess/solidmrpc_hitprocess.cc""")
+	hitprocess/solid_ec_hitprocess.cc
+	hitprocess/solid_gem_hitprocess.cc
+	hitprocess/solid_cc_hitprocess.cc
+	hitprocess/solid_mrpc_hitprocess.cc""")
 env.Library(source = hitp_sources, target = "lib/hitprocess")
 
 #gemc
