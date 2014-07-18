@@ -4,18 +4,18 @@
 #include "HitProcess.h"
 #include "HitProcess_MapRegister.h"
 
-#include "solidec_hitprocess.h"
-#include "solidgem_hitprocess.h"
-#include "solidcc_hitprocess.h"
-#include "solidmrpc_hitprocess.h"
+#include "solid_ec_hitprocess.h"
+#include "solid_gem_hitprocess.h"
+#include "solid_cc_hitprocess.h"
+#include "solid_mrpc_hitprocess.h"
 
 //   This function allows us to add in our own hit processor for SoLID
 
 void solid_hitprocess( map<string, HitProcess_Factory> &hitMap ){
-    hitMap["solidec"]  = &solidec_HitProcess::createHitClass;    
-    hitMap["solidgem"] = &solidgem_HitProcess::createHitClass;
-    hitMap["solidcc"]  = &solidcc_HitProcess::createHitClass;    
-    hitMap["solidmrpc"]= &solidmrpc_HitProcess::createHitClass;        
+    hitMap["solid_ec"]  = &solid_ec_HitProcess::createHitClass;    
+    hitMap["solid_gem"] = &solid_gem_HitProcess::createHitClass;
+    hitMap["solid_cc"]  = &solid_cc_HitProcess::createHitClass;    
+    hitMap["solid_mrpc"]= &solid_mrpc_HitProcess::createHitClass;        
 //     hitMap["solid_gem_trace"]  = &solid_gem_trace_HitProcess::createHitClass;    
     return;
 }
