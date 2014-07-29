@@ -1,3 +1,4 @@
+#!/usr/bin/perl -w
 use strict;
 use warnings;
 our %detector;
@@ -48,8 +49,8 @@ make_ec_forwardangle_shield();
 # HOD10POSZ       335.0
 
  my $color="0000ff";
- my $material="Kryptonite";
- my $material_shield="Kryptonite";
+ my $material="SL_Kryptonite";
+ my $material_shield="SL_Kryptonite";
 
 sub make_ec_forwardangle
 {

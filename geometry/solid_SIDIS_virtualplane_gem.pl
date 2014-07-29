@@ -1,3 +1,4 @@
+#!/usr/bin/perl -w
 use strict;
 use warnings;
 our %detector;
@@ -54,7 +55,7 @@ my $Dz   = 0.001/2;
     $detector{"color"}      = "CC6633";
     $detector{"type"}       = "Tube";
     $detector{"dimensions"} = "$Rin[$n-1]*cm $Rout[$n-1]*cm $Dz*cm 0*deg 360*deg";
-    $detector{"material"}   = "Vacuum";
+    $detector{"material"}   = "SL_Vacuum";
     $detector{"mfield"}     = "no";
     $detector{"ncopy"}      = 1;
     $detector{"pMany"}       = 1;

@@ -1,3 +1,4 @@
+#!/usr/bin/perl -w
 use strict;
 use warnings;
 our %detector;
@@ -17,7 +18,7 @@ make_absorber_forwarangle_1();
 make_absorber_forwarangle_2();
 }
 
- my $material="Kryptonite";
+ my $material="SL_Kryptonite";
  my $color="000000";
 
 sub make_absorber_forwarangle_1

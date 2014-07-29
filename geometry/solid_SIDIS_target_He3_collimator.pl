@@ -1,3 +1,4 @@
+#!/usr/bin/perl -w
 use strict;
 use warnings;
 our %detector;
@@ -17,7 +18,8 @@ make_upstream();
 make_downstream();
 }
 
-my $material="Tungsten";
+#G4_W->Tungsten
+my $material="G4_W";
 
 sub make_upstream
 {

@@ -1,3 +1,4 @@
+#!/usr/bin/perl -w
 use strict;
 use warnings;
 our %detector;
@@ -17,7 +18,7 @@ make_upstream();
 make_downstream();
 }
 
-my $material="Kryptonite";
+my $material="SL_Kryptonite";
 
 sub make_upstream
 {

@@ -1,3 +1,5 @@
+#!/usr/bin/perl -w
+
 use strict;
 use warnings;
 our %detector;
@@ -33,12 +35,12 @@ sub make_beam_entrance
  my @Dz   = (150.0,150.0,0.1,0.0125);
  my @name = ("BMP1","BMV1","BMD1","BMW1"); 
  my @mother = ("$DetectorMother","$DetectorName\_BMP1","$DetectorName\_BMV1","$DetectorName\_BMV1"); 
- my @mat  = ("Aluminum","Vacuum","Vacuum","G4_Be");
+ my @mat  = ("G4_Al","SL_Vacuum","SL_Vacuum","G4_Be");
 
 # C           #       name              mat sen F Fmx Fan stmx  Elo epsi st(mu,lo)  user words
 #             #       name               A    Z    g/cm3        RLcm   Int.len cm
 # GPARMED19  235 'Alum,  mf$          '   9  0  1 30. -1. -1.   -1.   0.2    -1.
-# GPARMED04  203 'Vacuum,    mf$      '  16  0  1 30. -1.  2.0  -1.   0.1    -1.
+# GPARMED04  203 'SL_Vacuum,    mf$      '  16  0  1 30. -1.  2.0  -1.   0.1    -1.
 # GPARMED43   99 'Dead absorber$      '  10  0  0  0. -1. -1.   -1.   1.     -1.
 # GPARMED63  265 'Be, mf             $'   5  0  1 30. -1. -1.   -1.   0.05   -1.
 
@@ -93,7 +95,7 @@ sub make_beam_exit
  my @Dz   = (412.5,412.5,0.1,0.0125);
  my @name = ("B3PP","B3PV","B3DM","B3W1"); 
  my @mother=("$DetectorMother","$DetectorName\_B3PP","$DetectorName\_B3PV","$DetectorName\_B3PV");
- my @mat  = ("Aluminum","Vacuum","Vacuum","G4_Be");
+ my @mat  = ("G4_Al","SL_Vacuum","SL_Vacuum","G4_Be");
 
  for(my $n=1; $n<=$NUM; $n++)
  {

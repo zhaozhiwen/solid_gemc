@@ -1,3 +1,4 @@
+#!/usr/bin/perl -w
 use strict;
 use warnings;
 our %detector;
@@ -23,8 +24,8 @@ make_baffle_blocks();
 
 my $color_baffle="00C0C0";
 
-my $material_baffle_within="Air";
-my $material_baffle="Lead";
+my $material_baffle_within="SL_Air";
+my $material_baffle="G4_Pb";
 my $sensitivity_baffle="no";
 my $hit_baffle="no";
 

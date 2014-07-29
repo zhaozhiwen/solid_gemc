@@ -1,3 +1,4 @@
+#!/usr/bin/perl -w
 use strict;
 use warnings;
 our %detector;
@@ -76,7 +77,7 @@ my $Dz   = 9.781/2;
   # unit in mm
  my @layer_thickness = (0.12,0.003,0.12,0.05,0.005,3,0.005,0.05,0.005,2,0.005,0.05,0.005,2,0.005,0.05,0.005,2,0.01,0.05,0.12,0.003,0.12);
 #  my @material = ("Vacuum","Vacuum","Vacuum","Vacuum","Vacuum","Vacuum","Vacuum","Vacuum","Vacuum","Vacuum","Vacuum","Vacuum","Vacuum","Vacuum","Vacuum","Vacuum","Vacuum","Vacuum","Vacuum","Vacuum","Vacuum","Vacuum","Vacuum");
- my @material = ("NEMAG10","NOMEX","NEMAG10","Kapton","Copper","GEMgas","Copper","Kapton","Copper","GEMgas","Copper","Kapton","Copper","GEMgas","Copper","Kapton","Copper","GEMgas","Copper","Kapton","NEMAG10","NOMEX","NEMAG10");
+ my @material = ("SL_NEMAG10","SL_NOMEX","SL_NEMAG10","SL_Kapton","G4_Cu","SL_GEMgas","G4_Cu","SL_Kapton","G4_Cu","SL_GEMgas","G4_Cu","SL_Kapton","G4_Cu","SL_GEMgas","G4_Cu","SL_Kapton","G4_Cu","SL_GEMgas","G4_Cu","SL_Kapton","SL_NEMAG10","SL_NOMEX","SL_NEMAG10");
  my @sens = ("no","no","no","no","SBSGEM","SBSGEM","SBSGEM","no","no","no","no","no","no","no","no","no","no","no","SBSGEM","no","no","no","no");
  my @hitt = ("","","","","SBSGEM","SBSGEM","SBSGEM","","","","","","","","","","","","SBSGEM","","","","");
  my $color_NEMAG10 = "00ff00";
@@ -99,7 +100,7 @@ my $Dz   = 9.781/2;
     $detector{"type"}       = "Tube";
 #    $detector{"dimensions"} = "$Rin[$n-1]*cm $Rout[$n-1]*cm $Dz*mm -6*deg 12*deg";
     $detector{"dimensions"} = "$Rin[$n-1]*cm $Rout[$n-1]*cm $Dz*mm 0*deg 360*deg";
-    $detector{"material"}   = "Vacuum";
+    $detector{"material"}   = "SL_Vacuum";
     $detector{"mfield"}     = "no";
     $detector{"ncopy"}      = $n;
     $detector{"pMany"}       = 1;

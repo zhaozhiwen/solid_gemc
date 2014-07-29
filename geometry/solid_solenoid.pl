@@ -1,3 +1,4 @@
+#!/usr/bin/perl -w
 use strict;
 use warnings;
 our %detector;
@@ -23,8 +24,8 @@ sub make_coil_yoke
 {
  my $NUM  = 17;
  my @name = ("Coil","BarrelYokeInner","BarrelYokeOuter","SlabSpacerUpstream","SlabSpacerDownstream","CoilCollarUpstream","CoilCollarDownstream","EndcapDonut","EndcapBottomInner","EndcapBottomOuter","EndcapNose","FrontPiece","UpstreamShield1","UpstreamShield2","UpstreamShield3","UpstreamShield4","UpstreamShield5");
- my $material_coil = "Aluminum";
- my $material_yoke = "Iron";
+ my $material_coil = "G4_Al";
+ my $material_yoke = "G4_Fe";# "Iron";
  my $color_coil = "ff8000";
  my $color_yoke = "F63BFF";
  
@@ -82,7 +83,7 @@ sub make_cryostat
  my @Rout = (144.00+0.10,176.60-0.01,176.60-0.01,176.60-0.01);
  my @Dz   = ((189*2-2-2)/2,(189*2-2-2)/2,2/2-0.005,2/2-0.005);
  my @name = ("CryostatInner","CryostatOuter","CryostatFlangeUpstream","CryostatFlangeDownstream");
- my $material="StainlessSteel";
+ my $material="SL_StainlessSteel";
  my $color="ffffff";
 
  for(my $n=1; $n<=$Nplate; $n++)

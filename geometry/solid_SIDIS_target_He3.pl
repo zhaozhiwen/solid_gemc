@@ -1,3 +1,4 @@
+#!/usr/bin/perl -w
 use strict;
 use warnings;
 our %detector;
@@ -13,7 +14,7 @@ my $DetectorMother="root";
 
 sub solid_SIDIS_target_He3
 {
-make_target();
+	make_target();
 }
 
 #  --     Target  ==================================
@@ -32,7 +33,8 @@ sub make_target
  my @Dz   = (20.012,20.0,20.0,0.006,0.006);
  my @name = ("TRGB","TCEL","TLHE","TLW1","TLW2"); 
  my @mother = ("$DetectorMother","$DetectorName\_TRGB","$DetectorName\_TRGB","$DetectorName\_TRGB","$DetectorName\_TRGB");
- my @mat  = ("Vacuum","Glass_GE180","He3_10amg","Glass_GE180","Glass_GE180");
+ #SL_Vacuum is the vacuum with certain air, or use G4_Galactic for pure vacuum 
+ my @mat  = ("SL_Vacuum","SL_Glass_GE180","He3_10amg","SL_Glass_GE180","SL_Glass_GE180");
 
 # GPARMED58  233 '3He 10 atm$         '  33  0  1  1. -1. -1.   -1.   0.1    -1. 
 # GPARMXT05   33 '3He 10 atm $        ' 1.33E-3  -1      3.  2.  1.

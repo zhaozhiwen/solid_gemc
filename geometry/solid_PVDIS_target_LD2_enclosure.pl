@@ -1,3 +1,4 @@
+#!/usr/bin/perl -w
 use strict;
 use warnings;
 our %detector;
@@ -40,7 +41,7 @@ sub make_target_PVDIS_target
 
  my @name = ("$DetectorName\_TACH","$DetectorName\_TACV","$DetectorName\_TAW1","$DetectorName\_TAW2","$DetectorName\_TALU","$DetectorName\_TAH2"); 
  my @mother=("$DetectorMother","$DetectorName\_TACH","$DetectorName\_TACH","$DetectorName\_TACH","$DetectorName\_TACV","$DetectorName\_TALU");
- my @mat  = ("Aluminum","Vacuum","Aluminum","Aluminum","Aluminum","LD2");
+ my @mat  = ("G4_Al","SL_Vacuum","G4_Al","G4_Al","G4_Al","LD2");
  my @color = ("0000ff","808080","0000ff","0000ff","0000ff","ff0000");
 
  for(my $n=1; $n<=$NUM; $n++)
