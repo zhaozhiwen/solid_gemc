@@ -1,3 +1,4 @@
+#!/usr/bin/perl -w
 use strict;
 use warnings;
 our %detector;
@@ -211,8 +212,8 @@ sub make_gem
 
  my $Nlayer = 23;
  my @layer_thickness = (0.012,0.0003,0.012,0.005,0.0005,0.3,0.0005,0.005,0.0005,0.2,0.0005,0.005,0.0005,0.2,0.0005,0.005,0.0005,0.2,0.001,0.005,0.012,0.0003,0.012);
-#  my @material = ("Vacuum","Vacuum","Vacuum","Vacuum","Vacuum","Vacuum","Vacuum","Vacuum","Vacuum","Vacuum","Vacuum","Vacuum","Vacuum","Vacuum","Vacuum","Vacuum","Vacuum","Vacuum","Vacuum","Vacuum","Vacuum","Vacuum","Vacuum");
- my @material = ("NEMAG10","NOMEX","NEMAG10","Kapton","Copper","GEMgas","Copper","Kapton","Copper","GEMgas","Copper","Kapton","Copper","GEMgas","Copper","Kapton","Copper","GEMgas","Copper","Kapton","NEMAG10","NOMEX","NEMAG10");
+#  my @material = ("SL_Vacuum","SL_Vacuum","SL_Vacuum","SL_Vacuum","SL_Vacuum","SL_Vacuum","SL_Vacuum","SL_Vacuum","SL_Vacuum","SL_Vacuum","SL_Vacuum","SL_Vacuum","SL_Vacuum","SL_Vacuum","SL_Vacuum","SL_Vacuum","SL_Vacuum","SL_Vacuum","SL_Vacuum","SL_Vacuum","SL_Vacuum","SL_Vacuum","SL_Vacuum");
+ my @material = ("SL_NEMAG10","SL_NOMEX","SL_NEMAG10","SL_Kapton","G4_Cu","SL_GEMgas","G4_Cu","SL_Kapton","G4_Cu","SL_GEMgas","G4_Cu","SL_Kapton","G4_Cu","SL_GEMgas","G4_Cu","SL_Kapton","G4_Cu","SL_GEMgas","G4_Cu","SL_Kapton","SL_NEMAG10","SL_NOMEX","SL_NEMAG10");
 #  my $color_NEMAG10 = "00ff00";
 #  my $color_NOMEX = "ffse14";
 #  my $color_Copper = "ffe731";
@@ -232,7 +233,7 @@ sub make_gem
     $detector{"color"}      = "111111";
     $detector{"type"}       = "Tube";
     $detector{"dimensions"} = "$Rin[$n-1]*cm $Rout[$n-1]*cm $Dz*cm 0*deg 360*deg";
-    $detector{"material"}   = "Vacuum";
+    $detector{"material"}   = "SL_Vacuum";
     $detector{"mfield"}     = "no";
     $detector{"ncopy"}      = 1;
     $detector{"pMany"}       = 1;

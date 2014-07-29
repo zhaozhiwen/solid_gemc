@@ -1,3 +1,4 @@
+#!/usr/bin/perl -w
 use strict;
 use warnings;
 our %detector;
@@ -33,7 +34,7 @@ make_detector_lightout();
 
 # comgeant use C4F10
 
-my $material_gas="CCGas"; # currently CF gas used for clas12
+my $material_gas="SL_CCGas"; # currently CF gas used for clas12
 
 sub make_backchamber
 {
@@ -132,7 +133,7 @@ sub make_detector_lightout
  my $Sphi  = 0;
  my $Dphi  = 360;
  $detector{"dimensions"}  = "$Rmin1*cm $Rmax1*cm $Rmin2*cm $Rmax2*cm $Dz*cm $Sphi*deg $Dphi*deg";
- $detector{"material"}    = "Vacuum";
+ $detector{"material"}    = "SL_Vacuum";
  $detector{"mfield"}      = "no";
  $detector{"ncopy"}       = 1;
  $detector{"pMany"}       = 1;

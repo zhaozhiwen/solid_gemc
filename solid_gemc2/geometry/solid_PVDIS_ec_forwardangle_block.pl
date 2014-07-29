@@ -1,3 +1,4 @@
+#!/usr/bin/perl -w
 use strict;
 use warnings;
 our %detector;
@@ -18,7 +19,7 @@ make_ec_forwardangle_block();
 
 my $color_baffle="00C0C0";
 
-my $material="Lead";
+my $material="G4_Pb";#"Lead";
 
 sub make_ec_forwardangle_block
 {

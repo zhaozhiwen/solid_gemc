@@ -1,3 +1,4 @@
+#!/usr/bin/perl -w
 use strict;
 use warnings;
 our %detector;
@@ -23,8 +24,8 @@ make_baffle_blocks();
 
 my $color_baffle="00C0C0";
 
-my $material_baffle_within="Air";
-my $material_baffle="Lead";
+my $material_baffle_within="SL_Air";
+my $material_baffle="G4_Pb";
 my $sensitivity_baffle="no";
 my $hit_baffle="no";
 
@@ -136,7 +137,7 @@ sub make_baffle_plate   #viutral container for baffle plate
     $detector{"type"}       = "Tube";
     $detector{"dimensions"} = "$Rin[$n-1]*cm $Rout[$n-1]*cm $Dz*cm 0*deg 360*deg";
     $detector{"material"}   = "$material_baffle_within";
-    if ($n==1) {$detector{"material"} = "Vacuum";}
+    if ($n==1) {$detector{"material"} = "SL_Vacuum";}
     $detector{"mfield"}     = "no";
     $detector{"ncopy"}      = 1;
     $detector{"pMany"}       = 1;

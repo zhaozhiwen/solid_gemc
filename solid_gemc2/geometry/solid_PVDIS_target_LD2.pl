@@ -1,3 +1,4 @@
+#!/usr/bin/perl -w
 use strict;
 use warnings;
 our %detector;
@@ -40,7 +41,8 @@ sub make_target_PVDIS_target
  my @Dz   = (40,39.96,0.02,0.02,20.012,20.);
  my @name = ("$DetectorName\_TACH","$DetectorName\_TACV","$DetectorName\_TAW1","$DetectorName\_TAW2","$DetectorName\_TALU","$DetectorName\_TAH2"); 
  my @mother=("$DetectorMother","$DetectorName\_TACH","$DetectorName\_TACH","$DetectorName\_TACH","$DetectorName\_TACV","$DetectorName\_TALU");
- my @mat  = ("Vacuum","Vacuum","Vacuum","Vacuum","Aluminum","LD2");
+ #SL_Vacuum is the vacuum with certain air, or use G4_Galactic for pure vacuum 
+ my @mat  = ("SL_Vacuum","SL_Vacuum","SL_Vacuum","SL_Vacuum","G4_Al","LD2");
  my @color = ("0000ff","808080","0000ff","0000ff","0000ff","ff0000");
 
  for(my $n=1; $n<=$NUM; $n++)

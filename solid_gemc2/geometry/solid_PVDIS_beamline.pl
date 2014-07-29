@@ -1,3 +1,4 @@
+#!/usr/bin/perl -w
 use strict;
 use warnings;
 our %detector;
@@ -51,7 +52,7 @@ sub make_beam_entrance
  my @Dz   = (330,330);
  my @name = ("BMP1","BMV1"); 
  my @mother = ("$DetectorMother","$DetectorName\_BMP1"); 
- my @mat  = ("Aluminum","Vacuum");
+ my @mat  = ("G4_Al","SL_Vacuum");
  my @color = ("0000ff","808080");
 
  for(my $n=1; $n<=$NUM; $n++)
@@ -84,7 +85,7 @@ sub make_beam_exit
  my $NUM  = 2;
  my @name = ("B3PP","B3PV"); 
  my @mother=("$DetectorMother","$DetectorName\_B3PP");
- my @mat  = ("Aluminum","Vacuum");
+ my @mat  = ("G4_Al","SL_Vacuum");
  my @color = ("0000ff","808080");
 
  for(my $n=1; $n<=$NUM; $n++)

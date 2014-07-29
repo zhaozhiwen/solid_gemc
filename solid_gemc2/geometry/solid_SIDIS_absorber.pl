@@ -1,3 +1,4 @@
+#!/usr/bin/perl -w
 use strict;
 use warnings;
 our %detector;
@@ -18,7 +19,7 @@ make_absorber_forwarangle_2();
 make_absorber_largeangle();
 }
 
- my $material="Tungsten";
+ my $material="SL_Tungsten";
 
 sub make_absorber_forwarangle_1
 {

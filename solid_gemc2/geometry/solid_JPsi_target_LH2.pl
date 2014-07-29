@@ -1,3 +1,4 @@
+#!/usr/bin/perl -w
 use strict;
 use warnings;
 our %detector;
@@ -41,7 +42,7 @@ sub make_target
  my @Dz   = (8,7.5+0.0102,0.0102/2,0.0102/2,7.5);
  my @name = ("$DetectorName\_TACH","$DetectorName\_TACL","$DetectorName\_TAW1","$DetectorName\_TAW2","$DetectorName\_TALH");
  my @mother=("$DetectorMother","$DetectorName\_TACH","$DetectorName\_TACH","$DetectorName\_TACH","$DetectorName\_TACH");
- my @mat  = ("Air","Aluminum","Aluminum","Aluminum","LH2");
+ my @mat  = ("SL_Air","G4_Al","G4_Al","G4_Al","G4_lH2");
  my @color  = ("ff0000","ff0000","ff0000","ff0000","00ff00");
 
  for(my $n=1; $n<=$NUM; $n++)

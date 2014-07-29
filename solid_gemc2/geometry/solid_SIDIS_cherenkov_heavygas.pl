@@ -1,3 +1,4 @@
+#!/usr/bin/perl -w
 use strict;
 use warnings;
 our %detector;
@@ -19,7 +20,7 @@ make_chamber_window_back();
 make_hg_lightout();
 }
 
-my $material_gas="CCGas"; # currently CF gas used for clas12
+my $material_gas="SL_CCGas"; # currently CF gas used for clas12
 
 #BaBar
 # Z(306,396)
@@ -67,7 +68,7 @@ sub make_chamber_window_front
  $detector{"color"}       = "CCCC33";
  $detector{"type"}        = "Tube";
  $detector{"dimensions"}  = "83.1*cm 264.9*cm 0.025*cm 0*deg 360*deg";
- $detector{"material"}    = "Aluminum";
+ $detector{"material"}    = "G4_Al";
  $detector{"mfield"}      = "no";
  $detector{"ncopy"}       = 1;
  $detector{"pMany"}       = 1;
@@ -92,7 +93,7 @@ sub make_chamber_window_back
  $detector{"color"}       = "CCCC33";
  $detector{"type"}        = "Tube";
  $detector{"dimensions"}  = "96*cm 265*cm 0.25*cm 0*deg 360*deg";
- $detector{"material"}    = "Aluminum";
+ $detector{"material"}    = "G4_Al";
  $detector{"mfield"}      = "no";
  $detector{"ncopy"}       = 1;
  $detector{"pMany"}       = 1;
@@ -129,7 +130,7 @@ sub make_hg_lightout
  my $Sphi  = 0;
  my $Dphi  = 360;
  $detector{"dimensions"}  = "$Rmin1*cm $Rmax1*cm $Rmin2*cm $Rmax2*cm $Dz*cm $Sphi*deg $Dphi*deg";
- $detector{"material"}    = "Vacuum";
+ $detector{"material"}    = "SL_Vacuum";
  $detector{"mfield"}      = "no";
  $detector{"ncopy"}       = 1;
  $detector{"pMany"}       = 1;

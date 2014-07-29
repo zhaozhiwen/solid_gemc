@@ -1,3 +1,4 @@
+#!/usr/bin/perl -w
 use strict;
 use warnings;
 our %detector;
@@ -42,8 +43,8 @@ sub make_mrpc_forwardangle
 
  my $Nlayer = 35;
  my @layer_thickness = (0.6,0.08,0.015,0.04,0.07,0.025,0.07,0.025,0.07,0.025,0.07,0.025,0.07,0.025,0.07,0.04,0.015,0.16,0.015,0.04,0.07,0.025,0.07,0.025,0.07,0.025,0.07,0.025,0.07,0.025,0.07,0.04,0.015,0.08,0.6);
- my @material = ("AlHoneycomb","PCBoardM","MMMylar","G4_GRAPHITE","G4_GLASS_PLATE","GEMgas","G4_GLASS_PLATE","GEMgas","G4_GLASS_PLATE","GEMgas","G4_GLASS_PLATE","GEMgas","G4_GLASS_PLATE","GEMgas","G4_GLASS_PLATE","G4_GRAPHITE","MMMylar","PCBoardM","MMMylar","G4_GRAPHITE","G4_GLASS_PLATE","GEMgas","G4_GLASS_PLATE","GEMgas","G4_GLASS_PLATE","GEMgas","G4_GLASS_PLATE","GEMgas","G4_GLASS_PLATE","GEMgas","G4_GLASS_PLATE","G4_GRAPHITE","MMMylar","PCBoardM","AlHoneycomb");
-# replace GEMgas with MRPCgas!!!!!!
+ my @material = ("AlHoneycomb","SL_PCBoardM","SL_MMMylar","G4_GRAPHITE","G4_GLASS_PLATE","SL_GEMgas","G4_GLASS_PLATE","SL_GEMgas","G4_GLASS_PLATE","SL_GEMgas","G4_GLASS_PLATE","SL_GEMgas","G4_GLASS_PLATE","SL_GEMgas","G4_GLASS_PLATE","G4_GRAPHITE","SL_MMMylar","SL_PCBoardM","SL_MMMylar","G4_GRAPHITE","G4_GLASS_PLATE","SL_GEMgas","G4_GLASS_PLATE","SL_GEMgas","G4_GLASS_PLATE","SL_GEMgas","G4_GLASS_PLATE","SL_GEMgas","G4_GLASS_PLATE","SL_GEMgas","G4_GLASS_PLATE","G4_GRAPHITE","SL_MMMylar","SL_PCBoardM","AlHoneycomb");
+# replace SL_GEMgas with MRPCgas!!!!!!
  my $color="ff0000";
 
     my %detector=init_det();
@@ -58,7 +59,7 @@ sub make_mrpc_forwardangle
     my $Rmax = 210;
     my $Dz   = 2.83/2; # total thickness
     $detector{"dimensions"}  = "$Rmin*cm $Rmax*cm $Dz*cm 0*deg 360*deg";
-    $detector{"material"}   = "Vacuum";
+    $detector{"material"}   = "SL_Vacuum";
     $detector{"mfield"}     = "no";
     $detector{"ncopy"}      = 1;
     $detector{"pMany"}       = 1;
@@ -100,7 +101,7 @@ sub make_mrpc_forwardangle
 	$detector{"exist"}       = 1;
 	$detector{"visible"}     = 1;
 	$detector{"style"}       = 1;
-	if ($detector{"material"} eq "GEMgas")
+	if ($detector{"material"} eq "SL_GEMgas")
 	{
 	  $detector{"sensitivity"} = "flux";
 	  $detector{"hit_type"}    = "flux";
