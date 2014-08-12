@@ -49,8 +49,8 @@ make_ec_forwardangle_shield();
 # HOD10POSZ       335.0
 
  my $color="0000ff";
- my $material="SL_Kryptonite";
- my $material_shield="SL_Kryptonite";
+ my $material="Kryptonite";
+ my $material_shield="Kryptonite";
 
 sub make_ec_forwardangle
 {

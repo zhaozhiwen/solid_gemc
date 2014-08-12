@@ -64,17 +64,6 @@ sub define_material
 	$mat{"components"}    = "G4_N 0.7 G4_O 0.3";
 	print_mat(\%configuration, \%mat);
 
-    #########################
-	#Kryptonite which will kills every track hitting on it
-	#
-	%mat = init_mat();
-	$mat{"name"}          = "SL_Kryptonite";
-	$mat{"description"}   = "Kryptonite to kill all tracks passing by";
-	$mat{"density"}       = "0.00000000000001";  #in g/cm3
-	$mat{"ncomponents"}   = "1";
-	$mat{"components"}    = "G4_Ar 1";
-	print_mat(\%configuration, \%mat);
-
    	#########################
 	#Lead Tungsten
 	#
@@ -192,6 +181,8 @@ sub define_material
 	$mat{"components"}    = "G4_SILICON_DIOXIDE 0.608 G4_ALUMINUM_OXIDE 0.143 G4_CALCIUM_OXIDE 0.065 SL_BaO 0.182 SL_SrO 0.002";
 	print_mat(\%configuration, \%mat);
 
+	#SIDIS NH3 target 
+	
 
 	##########
 	#JPsi LH2 target -- Not complished!!!	

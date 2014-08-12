@@ -1,6 +1,5 @@
            SL_Vacuum  |Vacuum in the beamline and target chamber  |0.00000000168  |         2  |                                 G4_N 0.7 G4_O 0.3  | none  | none  | none  | none  | none  
               SL_Air  |                   Regular Air  |  0.001290  |         2  |                                 G4_N 0.7 G4_O 0.3  | none  | none  | none  | none  | none  
-       SL_Kryptonite  |Kryptonite to kill all tracks passing by  |0.00000000000001  |         1  |                                           G4_Ar 1  | none  | none  | none  | none  | none  
            SL_Kapton  |                        Kapton  |     1.420  |         4  |G4_H 0.026362 G4_C 0.691133 G4_N 0.07327 G4_O 0.209235  | none  | none  | none  | none  | none  
          SL_He4_1atm  |               He4 gas at 1atm  | 0.0001786  |         1  |                                           G4_He 1  | none  | none  | none  | none  | none  
          SL_He4_2atm  |               He4 gas at 2atm  | 0.0003572  |         1  |                                           G4_He 1  | none  | none  | none  | none  | none  
