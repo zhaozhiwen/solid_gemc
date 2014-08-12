@@ -19,7 +19,7 @@ make_absorber_forwarangle_2();
 make_absorber_largeangle();
 }
 
- my $material="SL_Kryptonite";
+ my $material="Kryptonite";
 
 sub make_absorber_forwarangle_1
 {

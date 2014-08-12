@@ -18,7 +18,7 @@ make_upstream();
 make_downstream();
 }
 
-my $material="SL_Kryptonite";
+my $material="Kryptonite";
 
 sub make_upstream
 {

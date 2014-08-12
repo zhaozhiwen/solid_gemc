@@ -19,7 +19,7 @@ make_ec_forwardangle_block();
 
 my $color_baffle="00C0C0";
 
-my $material="SL_Kryptonite";
+my $material="Kryptonite";
 
 sub make_ec_forwardangle_block
 {

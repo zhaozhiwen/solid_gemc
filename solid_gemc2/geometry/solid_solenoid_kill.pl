@@ -24,8 +24,8 @@ sub make_coil_yoke
 {
  my $NUM  = 17;
  my @name = ("Coil","BarrelYokeInner","BarrelYokeOuter","SlabSpacerUpstream","SlabSpacerDownstream","CoilCollarUpstream","CoilCollarDownstream","EndcapDonut","EndcapBottomInner","EndcapBottomOuter","EndcapNose","FrontPiece","UpstreamShield1","UpstreamShield2","UpstreamShield3","UpstreamShield4","UpstreamShield5");
- my $material_coil = "SL_Kryptonite";
- my $material_yoke = "SL_Kryptonite";
+ my $material_coil = "Kryptonite";
+ my $material_yoke = "Kryptonite";
  my $color_coil = "ff8000";
  my $color_yoke = "F63BFF";
  
@@ -83,7 +83,7 @@ sub make_cryostat
  my @Rout = (144.00+0.10,176.60-0.01,176.60-0.01,176.60-0.01);
  my @Dz   = ((189*2-2-2)/2,(189*2-2-2)/2,2/2-0.005,2/2-0.005);
  my @name = ("CryostatInner","CryostatOuter","CryostatFlangeUpstream","CryostatFlangeDownstream");
- my $material="SL_Kryptonite";
+ my $material="Kryptonite";
  my $color="ffffff";
 
  for(my $n=1; $n<=$Nplate; $n++)

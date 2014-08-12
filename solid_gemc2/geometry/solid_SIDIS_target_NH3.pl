@@ -28,7 +28,7 @@ sub make_target_field
  my @Dz   = (65);
  my @name = ("field"); 
  my @mother = ("$DetectorMother");
- my @mat  = ("Air");
+ my @mat  = ("SL_Air");
  
  for(my $n=1; $n<=$NUM; $n++)
  {
@@ -71,7 +71,7 @@ sub make_scattering_chamber
  my @DPhi = (360.0,360.0,145.0,145.0);
  my @name = ("SC1","SC2","SC3","SC4");
  my @mother = ("$DetectorName\_field","$DetectorName\_field","$DetectorName\_field","$DetectorName\_field"); 
- my @mat  = ("Aluminum","Aluminum","Aluminum","Aluminum");
+ my @mat  = ("G4_Al","G4_Al","G4_Al","G4_Al");
 
  for(my $n=1; $n<=$NUM; $n++)
  {
@@ -114,7 +114,7 @@ sub make_scattering_windows
  my @DPhi = (10.0,60.0);
  my @name = ("Winentr","Winexit");
  my @mother = ("$DetectorName\_field","$DetectorName\_field"); 
- my @mat  = ("Aluminum","Aluminum");
+ my @mat  = ("G4_Al","G4_Al");
 
 
  for(my $n=1; $n<=$NUM; $n++)

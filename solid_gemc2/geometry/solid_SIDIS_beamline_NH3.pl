@@ -33,7 +33,7 @@ sub make_beam_entrance
  my @Dz   = (150.0,150.0,0.1,0.0125);
  my @name = ("BMP1","BMV1","BMD1","BMW1"); 
  my @mother = ("$DetectorMother","$DetectorName\_BMP1","$DetectorName\_BMV1","$DetectorName\_BMV1"); 
- my @mat  = ("Aluminum","Vacuum","Kryptonite","G4_Be");
+ my @mat  = ("G4_Al","SL_Vacuum","Kryptonite","G4_Be");
 
 # C           #       name              mat sen F Fmx Fan stmx  Elo epsi st(mu,lo)  user words
 #             #       name               A    Z    g/cm3        RLcm   Int.len cm
@@ -85,7 +85,7 @@ sub make_beam_exit
  my @Dz   = (290.,290.,1.,0.0125);
  my @name = ("B3PP","B3PV","B3DM","B3W1"); 
  my @mother=("$DetectorMother","$DetectorName\_B3PP","$DetectorName\_B3PV","$DetectorName\_B3PV");
- my @mat  = ("Aluminum","Vacuum","Kryptonite","G4_Be");
+ my @mat  = ("G4_Al","SL_Vacuum","Kryptonite","G4_Be");
 
  for(my $n=1; $n<=$NUM; $n++)
  {
