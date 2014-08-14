@@ -4,6 +4,8 @@ This is to build "solid_gemc" with GEMC library to add addtional functionality l
 source your set_solid
 run "scons OPT=1", this will create "solid_gemc" binary, you can use it with all feature of GEMC and addtional things we added here
 
+remember to recompile everytime GEMC gets updated
+
 == for expert users ===
 
 This package is to update and replace "solgemc" to make it work with GEMC 2
