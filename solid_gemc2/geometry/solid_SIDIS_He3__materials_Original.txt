@@ -5,11 +5,14 @@
          SL_He4_2atm  |               He4 gas at 2atm  | 0.0003572  |         1  |                                           G4_He 1  | none  | none  | none  | none  | none  
          SL_He4_3atm  |               He4 gas at 3atm  | 0.0005358  |         1  |                                           G4_He 1  | none  | none  | none  | none  | none  
          SL_He4_7atm  |               He4 gas at 7atm  | 0.0012502  |         1  |                                           G4_He 1  | none  | none  | none  | none  | none  
-              SL_LD2  |              PVDIS LD2 target  |  0.000169  |         1  |                                              LD 1  | none  | none  | none  | none  | none  
+              SL_LD2  |              PVDIS LD2 target  |     0.169  |         1  |                                              LD 1  | none  | none  | none  | none  | none  
         SL_He3_10amg  |     SIDIS He3 target at 10amg  |  0.001345  |         1  |                                      helium3Gas 1  | none  | none  | none  | none  | none  
               SL_BaO  |BariumOxide in SIDIS He3 target cell  |     5.720  |         2  |                                          Ba 1 O 1  | none  | none  | none  | none  | none  
               SL_SrO  |StrontiumOxide in SIDIS He3 target cell  |     4.700  |         2  |                                          Sr 1 O 1  | none  | none  | none  | none  | none  
       SL_Glass_GE180  |         SIDIS He3 target cell  |     2.760  |         5  |G4_SILICON_DIOXIDE 0.608 G4_ALUMINUM_OXIDE 0.143 G4_CALCIUM_OXIDE 0.065 SL_BaO 0.182 SL_SrO 0.002  | none  | none  | none  | none  | none  
+        SL_NH3_solid  |          NH3 target NH3_solid  |     0.817  |         2  |                                           H 3 N 1  | none  | none  | none  | none  | none  
+       SL_He4_liquid  |         NH3 target He4_liquid  |     0.145  |         1  |                                           G4_He 1  | none  | none  | none  | none  | none  
+            SL_NH3He  |              NH3 target NH3He  |     0.515  |         2  |          SL_NH3_solid 0.8732 SL_He4_liquid 0.1268  | none  | none  | none  | none  | none  
    SL_StainlessSteel  |    StainlessSteel in Solenoid  |     8.020  |         5  |G4_Si 0.01 G4_Fe 0.68 G4_Mn 0.02 G4_Cr 0.19 G4_Ni 0.10  | none  | none  | none  | none  | none  
               SL_CO2  |          CO2 mixed in GEM gas  |     1.977  |         2  |                                           C 1 O 2  | none  | none  | none  | none  | none  
             SL_Argon  |        Argon mixed in GEM gas  |    1.7823  |         1  |                                           G4_Ar 1  | none  | none  | none  | none  | none  

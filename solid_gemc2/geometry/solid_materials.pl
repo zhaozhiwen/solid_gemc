@@ -136,11 +136,11 @@ sub define_material
 	%mat = init_mat();
 	$mat{"name"}          = "SL_LD2";
 	$mat{"description"}   = "PVDIS LD2 target";
-	$mat{"density"}       = "0.000169";  # in g/cm3
+	$mat{"density"}       = "0.169";  # in g/cm3
 	$mat{"ncomponents"}   = "1";
-	$mat{"components"}    = "LD 1"; #FIX_HERE: GEMC2 still cannot handel Isotopes externally,still defined in cpp_materials.cc
+	$mat{"components"}    = "LD 1"; #FIX_HERE: GEMC2 still cannot handel Isotopes externally,still defined in material_factory.cc
 	print_mat(\%configuration, \%mat);
-
+	
 	##########
 	#SIDIS He3 target 
     # - He3 + Glass_GE180 + Vacuum   
@@ -149,9 +149,9 @@ sub define_material
 	%mat = init_mat();
 	$mat{"name"}          = "SL_He3_10amg";
 	$mat{"description"}   = "SIDIS He3 target at 10amg";
-	$mat{"density"}       = "0.001345";  #in g/cm3,10amg
+	$mat{"density"}       = "0.001345";  #in g/cm3,10amg, 10*44.6(amg=mol/m3)*3.016(g/mol)=1.345e-3g/cm3
 	$mat{"ncomponents"}   = "1";
-	$mat{"components"}    = "helium3Gas 1";#FIX_HERE: GEMC2 still cannot handel Isotopes externally,still defined in cpp_materials.cc
+	$mat{"components"}    = "helium3Gas 1";#FIX_HERE: GEMC2 still cannot handel Isotopes externally,still defined in material_factory.cc
 	print_mat(\%configuration, \%mat);
 
 	#--Glass_GE180
@@ -181,15 +181,32 @@ sub define_material
 	$mat{"components"}    = "G4_SILICON_DIOXIDE 0.608 G4_ALUMINUM_OXIDE 0.143 G4_CALCIUM_OXIDE 0.065 SL_BaO 0.182 SL_SrO 0.002";
 	print_mat(\%configuration, \%mat);
 
-	#SIDIS NH3 target 
+	#pol proton target 
+	# - NH3 + He4
+	%mat = init_mat();
+	$mat{"name"}          = "SL_NH3_solid";
+	$mat{"description"}   = "NH3 target NH3_solid";
+	$mat{"density"}       = "0.817";  #in g/cm3
+	$mat{"ncomponents"}   = "2";
+	$mat{"components"}    = "H 3 N 1";
+	print_mat(\%configuration, \%mat);
+
+	%mat = init_mat();
+	$mat{"name"}          = "SL_He4_liquid";
+	$mat{"description"}   = "NH3 target He4_liquid";
+	$mat{"density"}       = "0.145";  #in g/cm3
+	$mat{"ncomponents"}   = "1";
+	$mat{"components"}    = "G4_He 1";
+	print_mat(\%configuration, \%mat);
 	
-
-	##########
-	#JPsi LH2 target -- Not complished!!!	
-	# Air + Aluminum + LH2
-	#Except SL_Air, Al and LH2 are defined in G4
-
-
+	%mat = init_mat();
+	$mat{"name"}          = "SL_NH3He";
+	$mat{"description"}   = "NH3 target NH3He";
+	$mat{"density"}       = "0.515";  #in g/cm3,(0.817*0.55+0.145*0.45)=0.515 
+	$mat{"ncomponents"}   = "2";
+	$mat{"components"}    = "SL_NH3_solid 0.8732 SL_He4_liquid 0.1268";
+	print_mat(\%configuration, \%mat);	
+	
 ##########################
 # Solenoid Section 
 ##########################

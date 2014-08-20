@@ -35,12 +35,12 @@ sub make_beam_entrance
 #  my @Dz   = (150,150,0.1,0.0125);
 #  my @name = ("BMP1","BMV1","BMD1","BMW1"); 
 #  my @mother = ("$DetectorMother","$DetectorName\_BMP1","$DetectorName\_BMV1","$DetectorName\_BMV1"); 
-#  my @mat  = ("G4_Al","SL_Vacuum","SL_Vacuum","G4_Be");
+#  my @mat  = ("G4_Al","SL_Vacuum","SL_Vacuum","G4_BERYLLIUM_OXIDE");
  
  my $NUM  = 4;
  my @name = ("BMP1","BMV1","BMD1","BMW1"); 
  my @mother = ("$DetectorMother","$DetectorName\_BMP1","$DetectorName\_BMV1","$DetectorName\_BMV1"); 
- my @mat  = ("G4_Al","SL_Vacuum","SL_Vacuum","G4_Be");
+ my @mat  = ("G4_Al","SL_Vacuum","SL_Vacuum","G4_BERYLLIUM_OXIDE");
  my @color = ("0000ff","808080","808080","00FFFF");
 
 # C           #       name              mat sen F Fmx Fan stmx  Elo epsi st(mu,lo)  user words
@@ -108,7 +108,7 @@ sub make_beam_exit
 #  my @Dz   = (412.5,412.5,0.1,0.0125);
  my @name = ("B3PP","B3PV","B3DM","B3W1"); 
  my @mother=("$DetectorMother","$DetectorName\_B3PP","$DetectorName\_B3PV","$DetectorName\_B3PV");
- my @mat  = ("G4_Al","SL_Vacuum","SL_Vacuum","G4_Be");
+ my @mat  = ("G4_Al","SL_Vacuum","SL_Vacuum","G4_BERYLLIUM_OXIDE");
  my @color = ("0000ff","808080","808080","00FFFF");
 
  for(my $n=1; $n<=$NUM; $n++)
