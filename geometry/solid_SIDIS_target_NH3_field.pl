@@ -23,12 +23,15 @@ sub make_target_field
 {
  my $NUM  = 1;
  my @z    = (-350);
- my @Rin  = (0);
- my @Rout = (65);
- my @Dz   = (65);
+#  my @Rin  = (0);
+#  my @Rout = (65);
+#  my @Dz   = (65);
+  my @Dx = (65);
+  my @Dy = (65);
+  my @Dz = (65);
  my @name = ("field"); 
  my @mother = ("$DetectorMother");
- my @mat  = ("SL_Vacuum");
+ my @mat  = ("SL_Air");
  
  for(my $n=1; $n<=$NUM; $n++)
  {
@@ -38,10 +41,11 @@ sub make_target_field
     $detector{"mother"}      = "$mother[$n-1]" ;
     $detector{"description"} = "$DetectorName\_$name[$n-1]";
     $detector{"pos"}        = "0*cm 0*cm $z[$n-1]*cm";
-    $detector{"rotation"}   = "0*deg 90*deg 0*deg";
+    $detector{"rotation"}   = "0*deg 0*deg 0*deg";
     $detector{"color"}      = "ff0000";
-    $detector{"type"}       = "Tube";
-    $detector{"dimensions"} = "$Rin[$n-1]*cm $Rout[$n-1]*cm $Dz[$n-1]*cm 0*deg 360*deg";
+    $detector{"type"}       = "Box";
+    $detector{"dimensions"} = "$Dx[$n-1]*cm $Dy[$n-1]*cm $Dz[$n-1]*cm";    
+#     $detector{"dimensions"} = "$Rin[$n-1]*cm $Rout[$n-1]*cm $Dz[$n-1]*cm 0*deg 360*deg";
     $detector{"material"}   = $mat[$n-1];
     $detector{"mfield"}     = "solenoid_ptarget";
     $detector{"ncopy"}      = 1;

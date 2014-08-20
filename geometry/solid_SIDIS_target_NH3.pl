@@ -195,7 +195,7 @@ sub make_target
  my @Dz   = (1.423);
  my @name = ("target"); 
  my @mother = ("$DetectorName\_SC_in"); 
- my @mat  = ("NH3He");
+ my @mat  = ("SL_NH3He");
 
  for(my $n=1; $n<=$NUM; $n++)
  {
