@@ -1,0 +1,15 @@
+here are some scripts to submit farm job for solid simulation
+
+To use it, do the following
+login in ifarm
+copy all files into a dir 
+copy your gcard to this dir and name it "solid.gcard"
+edit "solid.gcard" to make the evio output file name "out.evio"
+run "LongRun_sim" and give start and end run numbers
+jobs will be submitted
+wait for output files, out.evio, out.root and out.log appear in the dir
+
+by default, it use the official solid simulation installation on ifarm, to change it edit the file "do_it_all"
+
+
+
