@@ -48,7 +48,7 @@ sub define_material
 	my %mat = init_mat();
 	$mat{"name"}          = "SL_Vacuum";
 	$mat{"description"}   = "Vacuum in the beamline and target chamber";
-	$mat{"density"}       = "0.00000000168";  # in g/cm3
+	$mat{"density"}       = "0.00000000000000168";  # in g/cm3
 	$mat{"ncomponents"}   = "2";
 	$mat{"components"}    = "G4_N 0.7 G4_O 0.3";
 	print_mat(\%configuration, \%mat);
@@ -231,7 +231,7 @@ sub define_material
 	%mat = init_mat();
 	$mat{"name"}          = "SL_CO2";
 	$mat{"description"}   = "CO2 mixed in GEM gas";
-	$mat{"density"}       = "1.977";  #in g/cm3
+	$mat{"density"}       = "0.001977";  #in g/cm3
 	$mat{"ncomponents"}   = "2";
 	$mat{"components"}    = "C 1 O 2";
 	print_mat(\%configuration, \%mat);
@@ -239,7 +239,7 @@ sub define_material
 	%mat = init_mat();
 	$mat{"name"}          = "SL_Argon";
 	$mat{"description"}   = "Argon mixed in GEM gas";
-	$mat{"density"}       = "1.7823";  #in g/cm3
+	$mat{"density"}       = "0.0017823";  #in g/cm3
 	$mat{"ncomponents"}   = "1";
 	$mat{"components"}    = "G4_Ar 1";
 	print_mat(\%configuration, \%mat);
@@ -247,7 +247,7 @@ sub define_material
 	%mat = init_mat();
 	$mat{"name"}          = "SL_GEMgas";
 	$mat{"description"}   = "GEM gas";
-	$mat{"density"}       = "1.700";  #in g/cm3
+	$mat{"density"}       = "0.0018407";  #in g/cm3
 	$mat{"ncomponents"}   = "2";
 	$mat{"components"}    = "SL_CO2 0.3 SL_Argon 0.7";
 	print_mat(\%configuration, \%mat);
