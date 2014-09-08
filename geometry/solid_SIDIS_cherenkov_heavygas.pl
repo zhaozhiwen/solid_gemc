@@ -17,7 +17,7 @@ sub solid_SIDIS_cherenkov_heavygas
 make_chamber();
 make_chamber_window_front();
 make_chamber_window_back();
-make_hg_lightout();
+# make_hg_lightout();
 }
 
 my $material_gas="SL_CCGas"; # currently CF gas used for clas12

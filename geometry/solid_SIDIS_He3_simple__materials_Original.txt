@@ -1,5 +1,4 @@
            SL_Vacuum  |Vacuum in the beamline and target chamber  |0.00000000000000168  |         2  |                                 G4_N 0.7 G4_O 0.3  | none  | none  | none  | none  | none  
-              SL_Air  |                   Regular Air  |  0.001290  |         2  |                                 G4_N 0.7 G4_O 0.3  | none  | none  | none  | none  | none  
            SL_Kapton  |                        Kapton  |     1.420  |         4  |G4_H 0.026362 G4_C 0.691133 G4_N 0.07327 G4_O 0.209235  | none  | none  | none  | none  | none  
          SL_He4_1atm  |               He4 gas at 1atm  | 0.0001786  |         1  |                                           G4_He 1  | none  | none  | none  | none  | none  
          SL_He4_2atm  |               He4 gas at 2atm  | 0.0003572  |         1  |                                           G4_He 1  | none  | none  | none  | none  | none  
@@ -16,10 +15,10 @@
    SL_StainlessSteel  |    StainlessSteel in Solenoid  |     8.020  |         5  |G4_Si 0.01 G4_Fe 0.68 G4_Mn 0.02 G4_Cr 0.19 G4_Ni 0.10  | none  | none  | none  | none  | none  
               SL_CO2  |          CO2 mixed in GEM gas  |  0.001977  |         2  |                                           C 1 O 2  | none  | none  | none  | none  | none  
             SL_Argon  |        Argon mixed in GEM gas  | 0.0017823  |         1  |                                           G4_Ar 1  | none  | none  | none  | none  | none  
-           SL_GEMgas  |                       GEM gas  | 0.0018407  |         2  |                           SL_CO2 0.3 SL_Argon 0.7  | none  | none  | none  | none  | none  
+           SL_GEMgas  |                       GEM gas  | 0.0018407  |         2  |                         SL_CO2 0.32 SL_Argon 0.68  | none  | none  | none  | none  | none  
           SL_NEMAG10  |               NEMA G10 in GEM  |     1.700  |         4  |                                  Si 1 O 2 C 3 H 3  | none  | none  | none  | none  | none  
        SL_NOMEX_pure  |                    pure NOMEX  |     1.380  |         5  |G4_H 0.04 G4_C 0.54 G4_N 0.09 G4_O 0.10 G4_Cl 0.23  | none  | none  | none  | none  | none  
-            SL_NOMEX  |   NOMEX mixed with air in GEM  |     0.040  |         2  |                    SL_Air 0.55 SL_NOMEX_pure 0.45  | none  | none  | none  | none  | none  
+            SL_NOMEX  |   NOMEX mixed with air in GEM  |     0.040  |         2  |                    G4_AIR 0.55 SL_NOMEX_pure 0.45  | none  | none  | none  | none  | none  
             SL_As2O3  |                   As2O3 in EC  |     3.738  |         2  |                                          As 2 O 3  | none  | none  | none  | none  | none  
             SL_LgTF1  |         LeadGlass LgTF1 in EC  |     3.860  |         5  |G4_LEAD_OXIDE 0.5120 G4_SILICON_DIOXIDE 0.4130 G4_POTASSIUM_OXIDE 0.0422 G4_SODIUM_MONOXIDE 0.0278 SL_As2O3 0.0050  | none  | none  | none  | none  | none  
             SL_CCGas  |                    Gas in LGC  |   0.01012  |         2  |                                 G4_F 0.7 G4_C 0.3  | none  | none  | none  | none  | none  

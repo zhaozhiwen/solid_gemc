@@ -20,7 +20,7 @@ make_frontchamber_window_back();
 make_backchamber();
 make_backchamber_window_front();
 make_backchamber_window_back();
-make_lg_lightout();
+# make_lg_lightout();
 }
 
 # C --- Gas Cherenkov

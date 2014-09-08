@@ -105,7 +105,7 @@ sub make_ec_largeangle_shield
  $detector{"pMany"}       = 1;
  $detector{"exist"}       = 1;
  $detector{"visible"}     = 1;
- $detector{"style"}       = 0;
+ $detector{"style"}       = 1;
  $detector{"sensitivity"} = "no";
  $detector{"hit_type"}    = "no";
  $detector{"identifiers"} = "no";

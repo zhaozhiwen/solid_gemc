@@ -39,11 +39,11 @@ sub make_target
  my @z    = (0.+$targetoff,0.,-7.5-0.0102/2,7.5+0.0102/2,0.);
  my @Rin  = (0.,3.81/2-0.0178,0.,0.,0.);
  my @Rout = (2,3.81/2,3.81/2-0.0178,3.81/2-0.0178,3.81/2-0.0178);
- my @Dz   = (8,7.5+0.0102,0.0102/2,0.0102/2,7.5);
+ my @Dz   = (7.5+0.0102,7.5+0.0102,0.0102/2,0.0102/2,7.5);
  my @name = ("$DetectorName\_TACH","$DetectorName\_TACL","$DetectorName\_TAW1","$DetectorName\_TAW2","$DetectorName\_TALH");
  my @mother=("$DetectorMother","$DetectorName\_TACH","$DetectorName\_TACH","$DetectorName\_TACH","$DetectorName\_TACH");
- my @mat  = ("SL_Air","G4_Al","G4_Al","G4_Al","G4_lH2");
- my @color  = ("ff0000","ff0000","ff0000","ff0000","00ff00");
+ my @mat  = ("G4_AIR","G4_Al","G4_Al","G4_Al","G4_lH2");
+ my @color  = ("ff0000","ff0000","ff0000","ff0000","ff0000");
 
  for(my $n=1; $n<=$NUM; $n++)
  {

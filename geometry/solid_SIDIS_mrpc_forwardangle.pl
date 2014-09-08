@@ -44,7 +44,7 @@ sub make_mrpc_forwardangle
  my $Nlayer = 35;
  my @layer_thickness = (0.6,0.08,0.015,0.04,0.07,0.025,0.07,0.025,0.07,0.025,0.07,0.025,0.07,0.025,0.07,0.04,0.015,0.16,0.015,0.04,0.07,0.025,0.07,0.025,0.07,0.025,0.07,0.025,0.07,0.025,0.07,0.04,0.015,0.08,0.6);
  my @material = ("SL_AlHoneycomb","SL_PCBoardM","SL_MMMylar","G4_GRAPHITE","G4_GLASS_PLATE","SL_MRPC_Gas","G4_GLASS_PLATE","SL_MRPC_Gas","G4_GLASS_PLATE","SL_MRPC_Gas","G4_GLASS_PLATE","SL_MRPC_Gas","G4_GLASS_PLATE","SL_MRPC_Gas","G4_GLASS_PLATE","G4_GRAPHITE","SL_MMMylar","SL_PCBoardM","SL_MMMylar","G4_GRAPHITE","G4_GLASS_PLATE","SL_MRPC_Gas","G4_GLASS_PLATE","SL_MRPC_Gas","G4_GLASS_PLATE","SL_MRPC_Gas","G4_GLASS_PLATE","SL_MRPC_Gas","G4_GLASS_PLATE","SL_MRPC_Gas","G4_GLASS_PLATE","G4_GRAPHITE","SL_MMMylar","SL_PCBoardM","SL_AlHoneycomb");
- my $color="ff0000";
+ my $color="00ff00";
 
     my %detector=init_det();
     $detector{"name"}        = "$DetectorName";
