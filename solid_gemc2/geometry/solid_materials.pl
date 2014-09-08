@@ -53,17 +53,6 @@ sub define_material
 	$mat{"components"}    = "G4_N 0.7 G4_O 0.3";
 	print_mat(\%configuration, \%mat);
 
-	#########################
-	#The air in the hall
-	#
-	%mat = init_mat();
-	$mat{"name"}          = "SL_Air";
-	$mat{"description"}   = "Regular Air";
-	$mat{"density"}       = "0.001290";  #in g/cm3
-	$mat{"ncomponents"}   = "2";
-	$mat{"components"}    = "G4_N 0.7 G4_O 0.3";
-	print_mat(\%configuration, \%mat);
-
    	#########################
 	#Lead Tungsten
 	#
@@ -244,12 +233,17 @@ sub define_material
 	$mat{"components"}    = "G4_Ar 1";
 	print_mat(\%configuration, \%mat);
 		
+#note		
+# 	G4double density_ArCO2 = .7*density_Ar + .3*density_CO2;
+# 	G4Material *ArCO2 = new G4Material("GEMgas", density_ArCO2, nel=2);
+# 	ArCO2->AddMaterial(Argon, 0.7*density_Ar/density_ArCO2) ;
+# 	ArCO2->AddMaterial(CO2, 0.3*density_CO2/density_ArCO2) ;		
 	%mat = init_mat();
 	$mat{"name"}          = "SL_GEMgas";
 	$mat{"description"}   = "GEM gas";
 	$mat{"density"}       = "0.0018407";  #in g/cm3
 	$mat{"ncomponents"}   = "2";
-	$mat{"components"}    = "SL_CO2 0.3 SL_Argon 0.7";
+	$mat{"components"}    = "SL_CO2 0.32 SL_Argon 0.68";
 	print_mat(\%configuration, \%mat);
 
  
@@ -280,7 +274,7 @@ sub define_material
 	$mat{"description"}   = "NOMEX mixed with air in GEM";
 	$mat{"density"}       = "0.040";  #in g/cm3
 	$mat{"ncomponents"}   = "2";
-	$mat{"components"}    = "SL_Air 0.55 SL_NOMEX_pure 0.45";
+	$mat{"components"}    = "G4_AIR 0.55 SL_NOMEX_pure 0.45";
 	print_mat(\%configuration, \%mat);
 	
 
