@@ -11,7 +11,7 @@
 <option name="HIT_PROCESS_LIST" value="solid"/>
 <option name="PHYSICS" value="QGSP_BERT"/>
 <option name="RECORD_PASSBY" value="1"/>
-<option name="HALL_MATERIAL" value="Air"/>
+<option name="HALL_MATERIAL" value="G4_AIR"/>
 
 <option name="MAX_X_POS" value="20000"/>
 <option name="MAX_Y_POS" value="20000"/>
