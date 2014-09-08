@@ -1,0 +1,89 @@
+#!/bin/sh
+
+# Usage: farm_list
+#
+# This script creates batch_krun and jscript_krun in batch_files directory
+# and submits the job to the farms
+#
+# Feb. 22, 2011 Zhihong Ye
+#
+
+#home=/work/halla/solid/yez/evgen/sidis_model
+home=/volatile/halla/solid/yez/sidis/gemc2
+# home=$(PWD)     
+# The directory where replay_script is
+# Event you want to start with,gtotal=-1 means to replay all
+username=${USER}@jlab.org    # email which will be notify when the job is done
+#
+# Check whether the raw data are in cache or not
+#
+
+if ! [ -d batch_files ]
+	then 
+	echo "----------------------------------------------------------------"
+	echo "I need batch_files directory. I am going to create it"
+	echo  
+	mkdir batch_files
+    fi
+    
+#
+
+tgt=$1
+pp=$2
+E0=$3
+fileno=$4
+#
+# Write file batch_krun
+#
+    rm -f batch_files/batch_${tgt}_${pp}_${E0}_${fileno}
+    echo '#!/bin/tcsh' > batch_files/batch_${tgt}_${pp}_${E0}_${fileno}
+    echo 'cd '${home}'/'${tgt}'_'${pp}'_'${E0} >>batch_files/batch_${tgt}_${pp}_${E0}_${fileno}
+    echo 'cp -f ./solid_SIDIS_3He_Temp.gcard solid_SIDIS_3He_'${fileno}'.gcard '>>batch_files/batch_${tgt}_${pp}_${E0}_${fileno}
+    
+    echo '' >>batch_files/batch_${tgt}_${pp}_${E0}_${fileno}
+    echo 'set variable=(\<option name=\"INPUT_GEN_FILE\" value=\"LUND,../Input_LUND/sidis_'${tgt}'_'${pp}'_'${E0}'_0_'${fileno}'.LUND\"/\>)'>>batch_files/batch_${tgt}_${pp}_${E0}_${fileno}
+    echo 'echo "$variable"  >> solid_SIDIS_3He_'${fileno}'.gcard '>>batch_files/batch_${tgt}_${pp}_${E0}_${fileno}
+    echo 'set variable=(\<option name=\"OUTPUT\" value=\"evio,SIDIS_'${tgt}'_'${pp}'_'${E0}'_'${fileno}'.evio\"/\>)'>>batch_files/batch_${tgt}_${pp}_${E0}_${fileno}
+    echo 'echo "$variable"  >> solid_SIDIS_3He_'${fileno}'.gcard '>>batch_files/batch_${tgt}_${pp}_${E0}_${fileno}
+    echo 'set variable=(\<option name=\"N\" value=\"1e5\"/\>)'>>batch_files/batch_${tgt}_${pp}_${E0}_${fileno}
+    echo 'echo "$variable"  >> solid_SIDIS_3He_'${fileno}'.gcard '>>batch_files/batch_${tgt}_${pp}_${E0}_${fileno}
+    echo 'echo "</gcard>" >> solid_SIDIS_3He_'${fileno}'.gcard ' >>batch_files/batch_${tgt}_${pp}_${E0}_${fileno}
+    
+    echo ' ' >>batch_files/batch_${tgt}_${pp}_${E0}_${fileno}
+    echo 'source /work/halla/solid/yez/GEMC_ifarm/set_GEMC_devel '>>batch_files/batch_${tgt}_${pp}_${E0}_${fileno}
+    echo 'gemc solid_SIDIS_3He_'${fileno}'.gcard '>>batch_files/batch_${tgt}_${pp}_${E0}_${fileno}
+#    echo 'gemc_evio2root SIDIS_'${tgt}'_'${pp}'_'${E0}'_'${fileno}'.evio SIDIS_'${tgt}'_'${pp}'_'${E0}'_'${fileno}'.root '>>batch_files/batch_${tgt}_${pp}_${E0}_${fileno}
+    echo ' ' >>batch_files/batch_${tgt}_${pp}_${E0}_${fileno}
+    echo 'rm -f solid_SIDIS_3He_'${fileno}'.gcard '>>batch_files/batch_${tgt}_${pp}_${E0}_${fileno}
+#    echo 'rm -f SIDIS_'${tgt}'_'${pp}'_'${E0}'_'${fileno}'.evio'>>batch_files/batch_${tgt}_${pp}_${E0}_${fileno}
+#  
+    chmod +x batch_files/batch_${tgt}_${pp}_${E0}_${fileno}
+    
+    echo "batch_files/batch_"${tgt}_${pp}_${E0}_${fileno}" has been created!"
+    echo " "
+    
+#
+# Write the jsub script
+#
+    rm -f batch_files/jscript_${tgt}_${pp}_${E0}_${fileno}
+    echo "PROJECT     solid" > batch_files/jscript_${tgt}_${pp}_${E0}_${fileno}
+    echo "COMMAND     "$home"/batch/batch_files/batch_"${tgt}_${pp}_${E0}_${fileno} >>batch_files/jscript_${tgt}_${pp}_${E0}_${fileno}
+    echo "JOBNAME     solid_sidis_"${tgt}_${pp}_${E0}_${fileno} >>batch_files/jscript_${tgt}_${pp}_${E0}_${fileno}
+    echo "TRACK       analysis" >> batch_files/jscript_${tgt}_${pp}_${E0}_${fileno}
+    echo "TIME        1200" >>batch_files/jscript_${tgt}_${pp}_${E0}_${fileno}
+    echo "MEMORY      800 MB" >>batch_files/jscript_${tgt}_${pp}_${E0}_${fileno}
+    echo "OS          linux" >>batch_files/jscript_${tgt}_${pp}_${E0}_${fileno}
+    
+    echo "batch_files/jscript_"${tgt}_${pp}_${E0}_${fileno}" has been created."
+    echo " " 
+    echo "Now, let us wait for the farms..."
+    echo " "
+#
+# Submit job to the farm
+    jsub batch_files/jscript_${tgt}_${pp}_${E0}_${fileno}
+#
+    echo "Job "${tgt}_${pp}_${E0}_${fileno} "has been submited!"
+    echo
+    echo
+#
+    sleep 1
