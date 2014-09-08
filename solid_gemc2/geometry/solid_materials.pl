@@ -373,7 +373,35 @@ sub define_material
 	$mat{"components"}    = "G4_C 0.4 G4_Si 0.3 G4_Fe 0.3";
 	print_mat(\%configuration, \%mat);
 				
+	##############
+	# MRPC_Gas 
+	# 90% Freon (C2H2F4, 4.25mg/cm3)
+	# 5% Iso-Butane (C4H10, 2.51mg/cm3)
+	# 5% SF6 (SF6, 10mg/cm3 )
+	%mat = init_mat();
+	$mat{"name"}          = "SL_Freon";
+	$mat{"description"}   = "TetraFluoroEthane";#use GEM gas temp
+	$mat{"density"}       = "0.00425";  #in g/cm3
+	$mat{"ncomponents"}   = "3";
+	$mat{"components"}    = "C 2 H 2 F 4";
+	print_mat(\%configuration, \%mat);
 
+	%mat = init_mat();
+	$mat{"name"}          = "SL_SF6";
+	$mat{"description"}   = "";#use GEM gas temp
+	$mat{"density"}       = "0.010";  #in g/cm3
+	$mat{"ncomponents"}   = "2";
+	$mat{"components"}    = "S 1 F 6";
+	print_mat(\%configuration, \%mat);
+		
+	%mat = init_mat();
+	$mat{"name"}          = "SL_MRPC_Gas";
+	$mat{"description"}   = "Gas in MRPC";#use GEM gas temp
+	$mat{"density"}       = "0.00445";  #in g/cm3
+	$mat{"ncomponents"}   = "3";
+	$mat{"components"}    = "SL_Freon 0.90 SL_SF6 0.05 G4_BUTANE 0.05";
+	print_mat(\%configuration, \%mat);
+	
 ##########################
 # SPD Section 
 ##########################
