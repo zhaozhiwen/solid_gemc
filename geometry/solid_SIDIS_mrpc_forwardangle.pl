@@ -43,8 +43,7 @@ sub make_mrpc_forwardangle
 
  my $Nlayer = 35;
  my @layer_thickness = (0.6,0.08,0.015,0.04,0.07,0.025,0.07,0.025,0.07,0.025,0.07,0.025,0.07,0.025,0.07,0.04,0.015,0.16,0.015,0.04,0.07,0.025,0.07,0.025,0.07,0.025,0.07,0.025,0.07,0.025,0.07,0.04,0.015,0.08,0.6);
- my @material = ("AlHoneycomb","SL_PCBoardM","SL_MMMylar","G4_GRAPHITE","G4_GLASS_PLATE","SL_GEMgas","G4_GLASS_PLATE","SL_GEMgas","G4_GLASS_PLATE","SL_GEMgas","G4_GLASS_PLATE","SL_GEMgas","G4_GLASS_PLATE","SL_GEMgas","G4_GLASS_PLATE","G4_GRAPHITE","SL_MMMylar","SL_PCBoardM","SL_MMMylar","G4_GRAPHITE","G4_GLASS_PLATE","SL_GEMgas","G4_GLASS_PLATE","SL_GEMgas","G4_GLASS_PLATE","SL_GEMgas","G4_GLASS_PLATE","SL_GEMgas","G4_GLASS_PLATE","SL_GEMgas","G4_GLASS_PLATE","G4_GRAPHITE","SL_MMMylar","SL_PCBoardM","AlHoneycomb");
-# replace SL_GEMgas with MRPCgas!!!!!!
+ my @material = ("SL_AlHoneycomb","SL_PCBoardM","SL_MMMylar","G4_GRAPHITE","G4_GLASS_PLATE","SL_MRPC_Gas","G4_GLASS_PLATE","SL_MRPC_Gas","G4_GLASS_PLATE","SL_MRPC_Gas","G4_GLASS_PLATE","SL_MRPC_Gas","G4_GLASS_PLATE","SL_MRPC_Gas","G4_GLASS_PLATE","G4_GRAPHITE","SL_MMMylar","SL_PCBoardM","SL_MMMylar","G4_GRAPHITE","G4_GLASS_PLATE","SL_MRPC_Gas","G4_GLASS_PLATE","SL_MRPC_Gas","G4_GLASS_PLATE","SL_MRPC_Gas","G4_GLASS_PLATE","SL_MRPC_Gas","G4_GLASS_PLATE","SL_MRPC_Gas","G4_GLASS_PLATE","G4_GRAPHITE","SL_MMMylar","SL_PCBoardM","SL_AlHoneycomb");
  my $color="ff0000";
 
     my %detector=init_det();
@@ -101,7 +100,7 @@ sub make_mrpc_forwardangle
 	$detector{"exist"}       = 1;
 	$detector{"visible"}     = 1;
 	$detector{"style"}       = 1;
-	if ($detector{"material"} eq "SL_GEMgas")
+	if ($detector{"material"} eq "SL_MRPC_Gas")
 	{
 	  $detector{"sensitivity"} = "flux";
 	  $detector{"hit_type"}    = "flux";
