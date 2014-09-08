@@ -8,18 +8,18 @@ our %parameters;
 use Getopt::Long;
 use Math::Trig;
 
-my $DetectorName = 'solid_SIDIS_absorber_kill';
+my $DetectorName = 'solid_SIDIS_absorber';
 
 my $DetectorMother="root";
 
-sub solid_SIDIS_absorber_kill
+sub solid_SIDIS_absorber
 {
 make_absorber_forwarangle_1();
 make_absorber_forwarangle_2();
 make_absorber_largeangle();
 }
 
- my $material="SL_Tungsten";
+ my $material="G4_W";
 
 sub make_absorber_forwarangle_1
 {

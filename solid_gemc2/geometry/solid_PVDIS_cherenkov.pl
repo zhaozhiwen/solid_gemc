@@ -17,7 +17,7 @@ sub solid_PVDIS_cherenkov
 make_backchamber();
 make_backchamber_window_front();
 make_backchamber_window_back();
-make_detector_lightout();
+# make_detector_lightout();
 }
 
 # C  ==== Gas Cherenkov definitions
@@ -139,7 +139,7 @@ sub make_detector_lightout
  $detector{"pMany"}       = 1;
  $detector{"exist"}       = 1;
  $detector{"visible"}     = 1;
- $detector{"style"}       = 1;
+ $detector{"style"}       = 0;
  $detector{"sensitivity"} = "flux";
  $detector{"hit_type"}    = "flux";
  $detector{"identifiers"} = "id manual 2100000";

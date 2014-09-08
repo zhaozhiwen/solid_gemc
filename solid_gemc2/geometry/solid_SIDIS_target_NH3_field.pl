@@ -31,7 +31,7 @@ sub make_target_field
   my @Dz = (65);
  my @name = ("field"); 
  my @mother = ("$DetectorMother");
- my @mat  = ("SL_Air");
+ my @mat  = ("G4_AIR");
  
  for(my $n=1; $n<=$NUM; $n++)
  {
