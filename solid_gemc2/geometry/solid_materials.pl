@@ -11,6 +11,26 @@
 #  -- Zhihong Ye, yez@jlab.org, 06/12/2014                        # 
 ###################################################################
 
+############
+#Note:
+# (0) Define your new material in the section it belongs to,
+#     DO-NOT just simply add it to the end of the file. 
+#     Put your name and date near where you define your new items.
+# (1) Pay attention to the density unit, which should be g/cm3
+# (2) For elements, they should be like "He","C", ...
+#     For materials, they should be like "G4_He", "G4_C"
+# (3) "SL_NewMaterial" is the newly defined material for SoLID    
+# (4) If the new material is composed of elements, 
+#     use "integer" to define the number of elements,
+#     e.g "H 2 O 1"
+# (5) If the new material is mixers of other materials,
+#     use "mass fraction" to define the components, 
+#     e.g. "G4_Si 0.70 G4_O 0.30"       
+# (6) When you define a new material mixed by other materials, 
+#     pay attention to how they are mixed,
+#     e.g. by "mass fraction" or by "mole fraction" or volumn etc.
+#
+ 
 use strict;
 use lib ("$ENV{GEMC}/io");
 use utils;
@@ -133,7 +153,6 @@ sub define_material
 	##########
 	#SIDIS He3 target 
     # - He3 + Glass_GE180 + Vacuum   
-	   	
     #--He3 Gas at 10amg
 	%mat = init_mat();
 	$mat{"name"}          = "SL_He3_10amg";
@@ -369,9 +388,9 @@ sub define_material
 				
 	##############
 	# MRPC_Gas 
-	# 90% Freon (C2H2F4, 4.25mg/cm3)
-	# 5% Iso-Butane (C4H10, 2.51mg/cm3)
-	# 5% SF6 (SF6, 10mg/cm3 )
+	# 90% Freon (C2H2F4, 4.25mg/cm3) --> 86.59% in mass fraction
+	# 5% Iso-Butane (C4H10, 2.51mg/cm3) --> 2.69% in mass fraction
+	# 5% SF6 (SF6, 10mg/cm3 ) --> 10.72% in mass fraction
 	%mat = init_mat();
 	$mat{"name"}          = "SL_Freon";
 	$mat{"description"}   = "TetraFluoroEthane";#use GEM gas temp
@@ -393,7 +412,7 @@ sub define_material
 	$mat{"description"}   = "Gas in MRPC";#use GEM gas temp
 	$mat{"density"}       = "0.00445";  #in g/cm3
 	$mat{"ncomponents"}   = "3";
-	$mat{"components"}    = "SL_Freon 0.90 SL_SF6 0.05 G4_BUTANE 0.05";
+	$mat{"components"}    = "SL_Freon 0.8659 SL_SF6 0.0269 G4_BUTANE 0.1072";
 	print_mat(\%configuration, \%mat);
 	
 ##########################
