@@ -393,7 +393,7 @@ sub define_material
 	# 5% SF6 (SF6, 10mg/cm3 ) --> 10.72% in mass fraction
 	%mat = init_mat();
 	$mat{"name"}          = "SL_Freon";
-	$mat{"description"}   = "TetraFluoroEthane";#use GEM gas temp
+	$mat{"description"}   = "TetraFluoroEthane";
 	$mat{"density"}       = "0.00425";  #in g/cm3
 	$mat{"ncomponents"}   = "3";
 	$mat{"components"}    = "C 2 H 2 F 4";
@@ -401,7 +401,7 @@ sub define_material
 
 	%mat = init_mat();
 	$mat{"name"}          = "SL_SF6";
-	$mat{"description"}   = "";#use GEM gas temp
+	$mat{"description"}   = "Sulfur hexafluoride";
 	$mat{"density"}       = "0.010";  #in g/cm3
 	$mat{"ncomponents"}   = "2";
 	$mat{"components"}    = "S 1 F 6";
@@ -409,7 +409,7 @@ sub define_material
 		
 	%mat = init_mat();
 	$mat{"name"}          = "SL_MRPC_Gas";
-	$mat{"description"}   = "Gas in MRPC";#use GEM gas temp
+	$mat{"description"}   = "Gas in MRPC";
 	$mat{"density"}       = "0.00445";  #in g/cm3
 	$mat{"ncomponents"}   = "3";
 	$mat{"components"}    = "SL_Freon 0.8659 SL_SF6 0.0269 G4_BUTANE 0.1072";
