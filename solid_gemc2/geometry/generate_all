@@ -1,0 +1,19 @@
+#!/bin/sh
+
+./solid_materials.pl config_solid_PVDIS_LD2.dat
+./solid_materials.pl config_solid_PVDIS_simple.dat
+./solid_materials.pl config_solid_SIDIS_He3.dat
+./solid_materials.pl config_solid_SIDIS_He3_simple.dat
+./solid_materials.pl config_solid_SIDIS_NH3.dat
+./solid_materials.pl config_solid_SIDIS_NH3_simple.dat
+./solid_materials.pl config_solid_JPsi_LH2.dat
+./solid_materials.pl config_solid_JPsi_simple.dat
+
+./solid_PVDIS_LD2.pl        config_solid_PVDIS_LD2.dat
+./solid_PVDIS_simple.pl     config_solid_PVDIS_simple.dat
+./solid_SIDIS_He3.pl        config_solid_SIDIS_He3.dat
+./solid_SIDIS_He3_simple.pl config_solid_SIDIS_He3_simple.dat
+./solid_SIDIS_NH3.pl        config_solid_SIDIS_NH3.dat
+./solid_SIDIS_NH3_simple.pl config_solid_SIDIS_NH3_simple.dat
+./solid_JPsi_LH2.pl         config_solid_JPsi_LH2.dat
+./solid_JPsi_simple.pl      config_solid_JPsi_simple.dat
