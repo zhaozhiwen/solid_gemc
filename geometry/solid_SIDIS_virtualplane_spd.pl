@@ -21,7 +21,7 @@ make_solid_SIDIS_virtualplane_spd_largeangle_front();
 sub make_solid_SIDIS_virtualplane_spd_forwardangle_front
 {
  my %detector=init_det();
- $detector{"name"}        = "$DetectorName\_front";
+ $detector{"name"}        = "$DetectorName\_forwardangle_front";
  $detector{"mother"}      = "root";
  $detector{"description"} = $detector{"name"};
  $detector{"pos"}         = "0*cm 0*cm 406.5*cm";
@@ -52,7 +52,7 @@ sub make_solid_SIDIS_virtualplane_spd_forwardangle_front
 sub make_solid_SIDIS_virtualplane_spd_largeangle_front
 {
  my %detector=init_det();
- $detector{"name"}        = "$DetectorName\_front";
+ $detector{"name"}        = "$DetectorName\_largeangle_front";
  $detector{"mother"}      = "root";
  $detector{"description"} = $detector{"name"};
  $detector{"pos"}         = "0*cm 0*cm -67.3*cm";
