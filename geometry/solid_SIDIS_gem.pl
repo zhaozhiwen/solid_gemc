@@ -210,11 +210,17 @@ sub make_gem
 	if ($i==6){
 	  $detector{"sensitivity"} = "flux";
 	  $detector{"hit_type"}    = "flux";
-	  my $id=1000000+$n*100000+$i;
+	  my $id=1000000+$n*100000+10000;
 	  $detector{"identifiers"} = "id manual $id";
 	}
+	else if ($i==10){
+	  $detector{"sensitivity"} = "flux";
+	  $detector{"hit_type"}    = "flux";
+	  my $id=1000000+$n*100000+20000;
+	  $detector{"identifiers"} = "id manual $id";
+	}	
 	else{
-		$detector{"sensitivity"} = "no";
+	  $detector{"sensitivity"} = "no";
 	  $detector{"hit_type"}    = "no";
 	  $detector{"identifiers"} = "no";
 	}
