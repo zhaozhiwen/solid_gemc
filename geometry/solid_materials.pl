@@ -325,56 +325,19 @@ sub define_material
 # LGC Section 
 ##########################
 	##############
-	#gas
+	#CCGas, Light Gas Cherenkov  
 	#
-	#1atm C4F8O,density is assumed !!!!!!!!!!!!!!! 
 	%mat = init_mat();
-	$mat{"name"}          = "SL_C4F8O";
-	$mat{"description"}   = "C4F8O";
-	$mat{"density"}       = "0.001";  #in g/cm3  
-	$mat{"ncomponents"}   = "3";
-	$mat{"components"}    = "G4_C 4 G4_F 8 G4_O 1";
-	print_mat(\%configuration, \%mat);
-	
-	#65% C4F8O, 35% N2
-	#density=0.65*0.001+0.35*0.0011652=0.001058
-	#fractionmass 0.6145 and 0.3855
-	%mat = init_mat();
-	$mat{"name"}          = "SL_LGCCgas_PVDIS";
-	$mat{"description"}   = "Gas in LGCC of PVDIS";
-	$mat{"density"}       = "0.001058";  #in g/cm3
-	$mat{"ncomponents"}   = "3";
-	$mat{"components"}    = "SL_C4F8O 0.6145 G4_N 0.3855";
-        $mat{"photonEnergy"}      = "2*eV 6*eV";
-        $mat{"indexOfRefraction"} = "1.001 1.001";	
-	print_mat(\%configuration, \%mat);
-
-	%mat = init_mat();
-	$mat{"name"}          = "SL_LGCCgas_SIDIS";
-	$mat{"description"}   = "Gas in LGCC of SIDIS";
-	$mat{"density"}       = "0.00184212";  #in g/cm3
-	$mat{"ncomponents"}   = "1";
-	$mat{"components"}    = "G4_CARBON_DIOXIDE";
-        $mat{"photonEnergy"}      = "2*eV 6*eV";
-        $mat{"indexOfRefraction"} = "1.004 1.004";	
+	$mat{"name"}          = "SL_CCGas";
+	$mat{"description"}   = "Gas in LGC";
+	$mat{"density"}       = "0.01012";  #in g/cm3
+	$mat{"ncomponents"}   = "2";
+	$mat{"components"}    = "G4_F 0.7 G4_C 0.3";
 	print_mat(\%configuration, \%mat);
 
 ##########################
 # HGC Section 
 ##########################
-	##############
-	#gas
-	#
-	#1.5atm C4F8O,density is assumed !!!!!!!!!!!!!!!
-	%mat = init_mat();
-	$mat{"name"}          = "SL_HGCCgas_SIDIS";
-	$mat{"description"}   = "Gas in HGCC of SIDIS";
-	$mat{"density"}       = "0.0015";  #in g/cm3
-	$mat{"ncomponents"}   = "1";
-	$mat{"components"}    = "SL_C4F8O";
-        $mat{"photonEnergy"}      = "2*eV 6*eV";
-        $mat{"indexOfRefraction"} = "1.001 1.001";	
-	print_mat(\%configuration, \%mat);
 
 
 ##########################
