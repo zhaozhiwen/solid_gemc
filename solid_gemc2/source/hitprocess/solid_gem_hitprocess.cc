@@ -90,7 +90,7 @@ map<string, double> solid_gem_HitProcess :: integrateDgt(MHit* aHit, int hitn)
 	dgtz["vx"] = aHit->GetVert().getX()/mm;
 	dgtz["vy"] = aHit->GetVert().getY()/mm;
 	dgtz["vz"] = aHit->GetVert().getZ()/mm;
-	dgtz["E"] = Ene/MeV;
+	dgtz["trE"] = Ene/MeV;
 	dgtz["trid"] = aHit->GetTId();
 	dgtz["weight"] = 0;	//not used
 	dgtz["px"] = p.x()/MeV;
