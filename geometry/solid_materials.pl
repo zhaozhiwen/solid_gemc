@@ -327,7 +327,7 @@ sub define_material
 	##############
 	#gas
 	#
-	#1atm C4F8O,density is assumed !!!!!!!!!!!!!!!
+	#1atm C4F8O,density is assumed !!!!!!!!!!!!!!! 
 	%mat = init_mat();
 	$mat{"name"}          = "SL_C4F8O";
 	$mat{"description"}   = "C4F8O";
