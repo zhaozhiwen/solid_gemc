@@ -1,4 +1,3 @@
-#!/usr/bin/perl -w
 use strict;
 use warnings;
 our %detector;
@@ -17,11 +16,14 @@ sub solid_SIDIS_cherenkov_heavygas
 make_chamber();
 make_chamber_window_front();
 make_chamber_window_back();
-# make_hg_lightout();
+make_hg_lightout();
 }
 
-my $material_gas="SL_CCGas"; # currently CF gas used for clas12
+my $hitype="flux";
 
+my $material_gas="SL_HGCCgas_SIDIS"; # currently CF gas used for clas12
+my $material_window="G4_Al";
+my $material_lightout="Kryptonite";
 #BaBar
 # Z(306,396)
 # Rin(96,104)
@@ -43,7 +45,7 @@ sub make_chamber
  $detector{"color"}       = "CCCC33";
  $detector{"type"}        = "Polycone";
  $detector{"dimensions"}  = "0*deg 360*deg 2*counts 83*cm 96*cm 265*cm 265*cm 306*cm 406*cm";
- $detector{"material"}    = $material_gas;
+ $detector{"material"}    = "$material_gas";
  $detector{"mfield"}      = "no";
  $detector{"ncopy"}       = 1;
  $detector{"pMany"}       = 1;
@@ -68,7 +70,7 @@ sub make_chamber_window_front
  $detector{"color"}       = "CCCC33";
  $detector{"type"}        = "Tube";
  $detector{"dimensions"}  = "83.1*cm 264.9*cm 0.025*cm 0*deg 360*deg";
- $detector{"material"}    = "G4_Al";
+ $detector{"material"}    = $material_window;
  $detector{"mfield"}      = "no";
  $detector{"ncopy"}       = 1;
  $detector{"pMany"}       = 1;
@@ -93,7 +95,7 @@ sub make_chamber_window_back
  $detector{"color"}       = "CCCC33";
  $detector{"type"}        = "Tube";
  $detector{"dimensions"}  = "96*cm 265*cm 0.25*cm 0*deg 360*deg";
- $detector{"material"}    = "G4_Al";
+ $detector{"material"}    = $material_window;
  $detector{"mfield"}      = "no";
  $detector{"ncopy"}       = 1;
  $detector{"pMany"}       = 1;
@@ -130,15 +132,15 @@ sub make_hg_lightout
  my $Sphi  = 0;
  my $Dphi  = 360;
  $detector{"dimensions"}  = "$Rmin1*cm $Rmax1*cm $Rmin2*cm $Rmax2*cm $Dz*cm $Sphi*deg $Dphi*deg";
- $detector{"material"}    = "SL_Vacuum";
+ $detector{"material"}    = $material_lightout;
  $detector{"mfield"}      = "no";
  $detector{"ncopy"}       = 1;
  $detector{"pMany"}       = 1;
  $detector{"exist"}       = 1;
  $detector{"visible"}     = 1;
  $detector{"style"}       = 1;
- $detector{"sensitivity"} = "flux";
- $detector{"hit_type"}    = "flux";
+ $detector{"sensitivity"} = "$hitype";
+ $detector{"hit_type"}    = "$hitype";
  $detector{"identifiers"} = "id manual 2200000";
  print_det(\%configuration, \%detector);
 }

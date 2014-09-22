@@ -21,7 +21,10 @@
             SL_NOMEX  |   NOMEX mixed with air in GEM  |     0.040  |         2  |                    G4_AIR 0.55 SL_NOMEX_pure 0.45  | none  | none  | none  | none  | none  
             SL_As2O3  |                   As2O3 in EC  |     3.738  |         2  |                                          As 2 O 3  | none  | none  | none  | none  | none  
             SL_LgTF1  |         LeadGlass LgTF1 in EC  |     3.860  |         5  |G4_LEAD_OXIDE 0.5120 G4_SILICON_DIOXIDE 0.4130 G4_POTASSIUM_OXIDE 0.0422 G4_SODIUM_MONOXIDE 0.0278 SL_As2O3 0.0050  | none  | none  | none  | none  | none  
-            SL_CCGas  |                    Gas in LGC  |   0.01012  |         2  |                                 G4_F 0.7 G4_C 0.3  | none  | none  | none  | none  | none  
+            SL_C4F8O  |                         C4F8O  |     0.001  |         3  |                                       C 4 F 8 O 1  | none  | none  | none  | none  | none  
+      SL_CCgas_PVDIS  |            Gas in CC of PVDIS  |  0.001058  |         2  |                       SL_C4F8O 0.6145 G4_N 0.3855  |2*eV 6*eV  |1.001 1.001  | none | none | none
+    SL_LGCCgas_SIDIS  |          Gas in LGCC of SIDIS  |0.00184212  |         1  |                               G4_CARBON_DIOXIDE 1  |2*eV 6*eV  |1.004 1.004  | none | none | none
+    SL_HGCCgas_SIDIS  |          Gas in HGCC of SIDIS  |    0.0015  |         1  |                                        SL_C4F8O 1  |2*eV 6*eV  |1.001 1.002  | none | none | none
           SL_MMMylar  |                 Mylar in MRPC  |     1.400  |         3  |         G4_H 0.041958 G4_C 0.625017 G4_O 0.333025  | none  | none  | none  | none  | none  
       SL_AlHoneycomb  |           AlHoneycomb in MRPC  |     0.130  |         1  |                                           G4_Al 1  | none  | none  | none  | none  | none  
      SL_AlHoneycomb2  |            denser AlHoneycomb  |     1.000  |         1  |                                           G4_Al 1  | none  | none  | none  | none  | none  

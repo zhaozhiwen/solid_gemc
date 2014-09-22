@@ -34,7 +34,11 @@ make_backchamber_window_back();
 
 # comgeant use C4F10
 
-my $material_gas="SL_CCGas"; # currently CF gas used for clas12
+my $hitype="flux";
+
+my $material_window="G4_POLYVINYL_CHLORIDE"; #should be POLYVINYL fluride 1.45g/cm3
+my $material_lightout="Kryptonite";
+my $material_gas="SL_CCgas_PVDIS";
 
 sub make_backchamber
 {
@@ -71,7 +75,7 @@ sub make_backchamber_window_front
  $detector{"color"}       = "33FFFF";
  $detector{"type"}        = "Tube";
  $detector{"dimensions"}  = "65.1*cm 143.9*cm 0.0025*cm 0*deg 360*deg";
- $detector{"material"}    = "G4_POLYVINYL_CHLORIDE"; #should be POLYVINYL fluride 1.45g/cm3
+ $detector{"material"}    = $material_window;
  $detector{"mfield"}      = "no";
  $detector{"ncopy"}       = 1;
  $detector{"pMany"}       = 1;
@@ -96,7 +100,7 @@ sub make_backchamber_window_back
  $detector{"color"}       = "33FFFF";
  $detector{"type"}        = "Tube";
  $detector{"dimensions"}  = "85.1*cm 264.9*cm 0.005*cm 0*deg 360*deg";
- $detector{"material"}    = "G4_POLYVINYL_CHLORIDE"; #should be POLYVINYL fluride 1.45g/cm3
+ $detector{"material"}    = $material_window;
  $detector{"mfield"}      = "no";
  $detector{"ncopy"}       = 1;
  $detector{"pMany"}       = 1;
@@ -133,15 +137,15 @@ sub make_detector_lightout
  my $Sphi  = 0;
  my $Dphi  = 360;
  $detector{"dimensions"}  = "$Rmin1*cm $Rmax1*cm $Rmin2*cm $Rmax2*cm $Dz*cm $Sphi*deg $Dphi*deg";
- $detector{"material"}    = "SL_Vacuum";
+ $detector{"material"}    = $material_lightout;
  $detector{"mfield"}      = "no";
  $detector{"ncopy"}       = 1;
  $detector{"pMany"}       = 1;
  $detector{"exist"}       = 1;
  $detector{"visible"}     = 1;
  $detector{"style"}       = 0;
- $detector{"sensitivity"} = "flux";
- $detector{"hit_type"}    = "flux";
+ $detector{"sensitivity"} = "$hitype";
+ $detector{"hit_type"}    = "$hitype";
  $detector{"identifiers"} = "id manual 2100000";
  print_det(\%configuration, \%detector);
 }
