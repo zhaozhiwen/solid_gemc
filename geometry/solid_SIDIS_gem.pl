@@ -207,22 +207,20 @@ sub make_gem
 	$detector{"exist"}       = 1;
 	$detector{"visible"}     = 1;
 	$detector{"style"}       = 1;
+	$detector{"sensitivity"} = "no";
+	$detector{"hit_type"}    = "no";
+	$detector{"identifiers"} = "no";	
 	if ($i==6){
 	  $detector{"sensitivity"} = "flux";
 	  $detector{"hit_type"}    = "flux";
 	  my $id=1000000+$n*100000+10000;
 	  $detector{"identifiers"} = "id manual $id";
 	}
-	else if ($i==10){
+	if ($i==10){
 	  $detector{"sensitivity"} = "flux";
 	  $detector{"hit_type"}    = "flux";
 	  my $id=1000000+$n*100000+20000;
 	  $detector{"identifiers"} = "id manual $id";
-	}	
-	else{
-	  $detector{"sensitivity"} = "no";
-	  $detector{"hit_type"}    = "no";
-	  $detector{"identifiers"} = "no";
 	}
 	print_det(\%configuration, \%detector);
     }
