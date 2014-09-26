@@ -17,7 +17,7 @@ sub solid_SIDIS_spd_largeangle
 make_spd_largeangle();
 }
 
- my $z=-67;
+ my $z=-67.15;
 
 sub make_spd_largeangle
 {
@@ -33,7 +33,7 @@ sub make_spd_largeangle
   my $Rmax1 = 135;
   my $Rmin2 = 80;
   my $Rmax2 = 135;
-  my $Dz    = 0.3/2;
+  my $Dz    = 0.5/2;
   my $Sphi  = 0;
   my $Dphi  = 360;
  $detector{"dimensions"}  = "$Rmin1*cm $Rmax1*cm $Rmin2*cm $Rmax2*cm $Dz*cm $Sphi*deg $Dphi*deg";

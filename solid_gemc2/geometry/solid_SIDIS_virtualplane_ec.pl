@@ -154,7 +154,7 @@ sub make_solid_SIDIS_virtualplane_ec_largeangle_front
  $detector{"name"}        = "$DetectorName\_largeangle_front";
  $detector{"mother"}      = $DetectorMother;
  $detector{"description"} = $detector{"name"};
- $detector{"pos"}         = "0*cm 0*cm -67*cm";
+ $detector{"pos"}         = "0*cm 0*cm -66.8*cm";
  $detector{"rotation"}    = "0*deg 0*deg 0*deg";
  $detector{"color"}       = "CC6633";
  $detector{"type"}        = "Cons";
