@@ -57,6 +57,8 @@ require "solid_solenoid_kill.pl";
 solid_solenoid_kill();
 require "solid_SIDIS_target_NH3_field.pl";
 solid_SIDIS_target_NH3_field();
+require "solid_SIDIS_absorber_kill.pl";
+solid_SIDIS_absorber_kill();
 require "solid_SIDIS_ec_forwardangle_kill.pl";
 solid_SIDIS_ec_forwardangle_kill();
 require "solid_SIDIS_ec_largeangle_kill.pl";
