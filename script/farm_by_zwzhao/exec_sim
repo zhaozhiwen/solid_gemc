@@ -56,6 +56,7 @@ foreach (@runs) {
         printf SCRIPT_FILE "OUTPUT_TEMPLATE: $cdir/$outlog\n";
         close(SCRIPT_FILE);
         $sbj=`jsub $S_script_name`;
+        print "$sbj";
         print "Job jsc$rnum is launched \n";
 }
 
