@@ -36,8 +36,10 @@ sub make_virtualplane_gem
 #cover 40cm long full target with center at 10cm from 21 to 36 degree
 #  my @Rin = (48,59,105,109);
 #  my @Rout = (122,143,230,237);
- my @Rin = (45,55,63,90,90);
- my @Rout = (144,144,144,270,270);
+#  my @Rin = (45,55,63,90,90);
+#  my @Rout = (144,144,144,270,270);
+ my @Rin = (48,59,65,105,109);
+ my @Rout = (122,143,143,230,237);
  my $Dz   = 0.001/2; 
 #  my $color="44ee11";
 
