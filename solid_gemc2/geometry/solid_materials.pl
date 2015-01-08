@@ -472,6 +472,17 @@ sub define_material
 # Baffle Section 
 ##########################
 
+##########################
+# neutron shielding Section 
+##########################
+        
+	%mat = init_mat();
+	$mat{"name"}          = "SL_BorPoly";
+	$mat{"description"}   = "Borated_Polyethylene";
+	$mat{"density"}       = "1.19";  #in g/cm3
+	$mat{"ncomponents"}   = "2";
+	$mat{"components"}    = "G4_POLYETHYLENE 0.7 G4_B 0.3";
+	print_mat(\%configuration, \%mat);
 
 
 ##################
