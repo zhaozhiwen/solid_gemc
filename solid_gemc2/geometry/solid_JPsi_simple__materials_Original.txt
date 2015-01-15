@@ -33,3 +33,4 @@
               SL_SF6  |           Sulfur hexafluoride  |     0.010  |         2  |                                           S 1 F 6  | none  | none  | none  | none  | none  
          SL_MRPC_Gas  |                   Gas in MRPC  |   0.00445  |         3  |    SL_Freon 0.8659 SL_SF6 0.0269 G4_BUTANE 0.1072  | none  | none  | none  | none  | none  
     SL_ScintillatorB  |          Scintillator for SPD  |     1.032  |         2  |                                          H 10 C 9  | none  | none  | none  | none  | none  
+          SL_BorPoly  |          Borated_Polyethylene  |      1.19  |         2  |                      G4_POLYETHYLENE 0.7 G4_B 0.3  | none  | none  | none  | none  | none  
