@@ -165,7 +165,7 @@ env.Library(source = hitp_sources, target = "lib/hitprocess")
 #gemc
 env.Append(CPPPATH = 'src')
 gemc_sources = Split("""
-	gemc.cc""")
+	solid_gemc.cc""")
 
 # Get GEMC path
 import os
