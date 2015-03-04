@@ -1,22 +1,21 @@
 == for general users ===
 This is to build "solid_gemc" with GEMC library to add addtional functionality like hitprocess etc
 
-source your set_solid
-run "scons OPT=1", this will create "solid_gemc" binary, you can use it with all feature of GEMC and addtional things we added here
+eic_gemc follow same version number of gemc to be 100% compatiable
 
-remember to recompile everytime GEMC gets updated
+source your set_eic
+cd $GEMC_VERSION
+run "scons OPT=1", this will create "eic_gemc" binary, you can use it with all feature of GEMC and addtional things we added here
 
 == for expert users ===
 
-This package is to update and replace "solgemc" to make it work with GEMC 2
+This package is replace "solgemc" to make it work with GEMC 2
 
-hitprocess/solid_hitprocess.h and gemc.cc are needed for now.
-They could be removed once GEMC change to make hitprocess like real plugin
+The GEMC lib libgemc.so is produced by default when it is installed. here is its actual command
 
-Produce libgemc.so
 cd $GEMC/source
 scons OTP=1 LIBRARY="shared"
 
-
 *******
+Zhiwen Zhao, updated 3/4/2014
 Zhiwen Zhao, created 7/17/2014
