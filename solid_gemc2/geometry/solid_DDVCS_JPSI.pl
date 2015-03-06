@@ -69,6 +69,8 @@ require "solid_SIDIS_cherenkov_lightgas.pl";
 solid_SIDIS_cherenkov_lightgas();
 require "solid_SIDIS_ec_forwardangle.pl";
 solid_SIDIS_ec_forwardangle();
+require "solid_PVDIS_muon_forwardangle.pl";
+solid_PVDIS_muon_forwardangle();
 require "solid_SIDIS_ec_largeangle.pl";
 solid_SIDIS_ec_largeangle();
 require "solid_SIDIS_spd_forwardangle.pl";
