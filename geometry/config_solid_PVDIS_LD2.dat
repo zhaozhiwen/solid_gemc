@@ -1,7 +1,7 @@
 # Configuration file for new_detector
 
 # Detector name and variation
-detector_name: solid_PVDIS_LD2
+detector_name: solid_DDVCS_PVDIS_LD2
 variation:     Original
 
 # Factory can be MYQL or TEXT
@@ -15,7 +15,7 @@ rmax:       10000
 dbhost: localhost
 
 # Comments/Description
-comment:       solid_PVDIS_LD2
+comment:       solid_DDVCS_PVDIS_LD2
 
 # Verbosity controls the perl script output
 verbosity: 1
