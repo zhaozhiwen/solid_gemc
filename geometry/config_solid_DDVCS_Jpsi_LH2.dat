@@ -1,7 +1,7 @@
 # Configuration file for new_detector
 
 # Detector name and variation
-detector_name: solid_JPSI_DDVCS_LH2
+detector_name: solid_DDVCS_Jpsi_LH2
 variation:     Original
 
 # Factory can be MYQL or TEXT

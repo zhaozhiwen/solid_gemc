@@ -45,7 +45,7 @@ our %configuration = load_configuration($config_file);
 #}
 
 # One can change the "variation" here if one is desired different from the config.dat
-$configuration{"detector_name"} = "solid_JPsi_LH2";
+$configuration{"detector_name"} = "solid_DDVCS_JPsi_LH2";
 $configuration{"variation"} = "Original";
 
 # To get the parameters proper authentication is needed.
