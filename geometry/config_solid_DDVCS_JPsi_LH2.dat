@@ -1,7 +1,7 @@
 # Configuration file for new_detector
 
 # Detector name and variation
-detector_name: solid_DDVCS_Jpsi_LH2
+detector_name: solid_DDVCS_JPsi_LH2
 variation:     Original
 
 # Factory can be MYQL or TEXT
@@ -15,7 +15,7 @@ rmax:       10000
 dbhost: localhost
 
 # Comments/Description
-comment:       solid_JPsi_DDVCS_LH2
+comment:       solid_DDVCS_JPsi_LH2
 
 # Verbosity controls the perl script output
 verbosity: 1
