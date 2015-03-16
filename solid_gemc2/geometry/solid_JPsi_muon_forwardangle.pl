@@ -18,7 +18,7 @@ make_muon_forwardangle();
 }
 
  my $color="0000ff";
- my $material="SL_LgTF1";
+ my $material="G4_STAINLESS-STEEL";
  my $material_shield="G4_Pb";#"Lead";
 
 sub make_muon_forwardangle
