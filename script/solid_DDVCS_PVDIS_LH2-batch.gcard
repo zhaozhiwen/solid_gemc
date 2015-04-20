@@ -1,0 +1,43 @@
+<gcard>
+<option name="DBHOST" value="soliddb"/>
+<option name="DATABASE" value="test"/>
+<option name="DBUSER" value="soliduser"/>
+<option name="DBPSWD" value="ilovesolid"/>
+
+<detector name="../geometry/solid_DDVCS_PVDIS_LH2" factory="TEXT" variation="Original"/>
+
+<option name="INTEGRATEDRAW" value="flux"/>
+
+<option name="HIT_PROCESS_LIST" value="solid"/>
+<option name="PHYSICS" value="QGSP_BERT"/>
+<option name="RECORD_PASSBY" value="1"/>
+<option name="HALL_MATERIAL" value="G4_AIR"/>
+
+<option name="MAX_X_POS" value="20000"/>
+<option name="MAX_Y_POS" value="20000"/>
+<option name="MAX_Z_POS" value="20000"/>
+<option name="HALL_DIMENSIONS" value="20*m,20*m,20*m"/>
+
+<option name="FIELD_DIR" value="../field"/>
+<option name="HALL_FIELD" value="solenoid_CLEOv8"/>
+
+<option name="BEAM_P"   value="e-,3*GeV,17*deg,0*deg"/>
+<option name="SPREAD_P" value="3*GeV,6*deg,0*deg"/>
+<option name="BEAM_V"   value="(0,0,-150)cm"/>
+<option name="SPREAD_V" value="(0.0,0.0)cm"/>
+
+<option name="USE_GUI"  value="0"/>
+<option name="N" value="100000"/>
+<option name="OUTPUT" value="evio,Q2-PVDIS.evio"/>
+
+</gcard>
+
+<!--  comment out
+<option name="FIELD_VERBOSITY"  value="100"/>
+<option name="GEO_VERBOSITY"  value="100"/>
+
+<option name="CHECK_OVERLAPS"  value="1"/>
+<option name="USE_GUI"  value="0"/>
+
+
+-->
