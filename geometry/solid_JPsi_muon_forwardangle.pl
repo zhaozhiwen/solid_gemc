@@ -14,7 +14,9 @@ my $DetectorMother="root";
 
 sub solid_JPsi_muon_forwardangle
 {
-make_muon_forwardangle();
+make_muon_forwardangle(575);
+make_muon_forwardangle(655);
+make_muon_forwardangle(735);
 }
 
  my $color="0000ff";
@@ -24,9 +26,10 @@ make_muon_forwardangle();
 sub make_muon_forwardangle
 {
 #  my $z=350;
-  my $z=575;
+#  my $z=575;
+  my $z=$_[0];
     my %detector=init_det();
-    $detector{"name"}        = "$DetectorName";
+    $detector{"name"}        = "$DetectorName".$z;
     $detector{"mother"}      = "$DetectorMother" ;
     $detector{"description"} = $detector{"name"};
     $detector{"pos"}        = "0*cm 0*cm $z*cm";
@@ -37,7 +40,7 @@ sub make_muon_forwardangle
     my $Rmax1 = 290;
     my $Rmin2 = 100;
     my $Rmax2 = 290;
-    my $Dz    = 50;
+    my $Dz    = 18;
     my $Sphi  = 0;
     my $Dphi  = 360;
     $detector{"dimensions"}  = "$Rmin1*cm $Rmax1*cm $Rmin2*cm $Rmax2*cm $Dz*cm $Sphi*deg $Dphi*deg";
