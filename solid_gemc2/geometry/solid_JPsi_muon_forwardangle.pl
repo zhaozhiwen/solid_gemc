@@ -14,9 +14,14 @@ my $DetectorMother="root";
 
 sub solid_JPsi_muon_forwardangle
 {
-make_muon_forwardangle(575);
-make_muon_forwardangle(655);
-make_muon_forwardangle(735);
+   # behind detector 
+#make_muon_forwardangle(575);
+#make_muon_forwardangle(655);
+#make_muon_forwardangle(735);
+##
+make_muon_forwardangle(405);
+make_muon_forwardangle(455);
+make_muon_forwardangle(535);
 }
 
  my $color="0000ff";
@@ -37,9 +42,9 @@ sub make_muon_forwardangle
     $detector{"color"}      = $color;
     $detector{"type"}       = "Cons";
     my $Rmin1 = 100;
-    my $Rmax1 = 290;
+    my $Rmax1 = 265;
     my $Rmin2 = 100;
-    my $Rmax2 = 290;
+    my $Rmax2 = 265;
     my $Dz    = 18;
     my $Sphi  = 0;
     my $Dphi  = 360;
