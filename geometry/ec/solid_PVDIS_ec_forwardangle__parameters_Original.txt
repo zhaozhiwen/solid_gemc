@@ -1,0 +1,15 @@
+Nlayer			| 194	               |      | Nlayer	        	| - |  - | - | - | - | -
+Thickness_lead		| 0.05                 | cm   | Thickness_lead 		| - |  - | - | - | - | -
+Thickness_scint		| 0.15                 | cm   | Thickness_scint     	| - |  - | - | - | - | -
+Thickness_gap		| 0.024                | cm   | Thickness_gap 		| - |  - | - | - | - | -
+Thickness_shield	| 1.0274               | cm   | Thickness_shield  	| - |  - | - | - | - | -
+Thickness_prescint	| 2	               | cm   | Thickness_prescint      | - |  - | - | - | - | -
+Thickness_support	| 2	               | cm   | Thickness_support       | - |  - | - | - | - | -
+z_shower		| 350                  | cm   | z_shower       		| - |  - | - | - | - | -
+Rmin			| 110   	       | cm   | Rmin       		| - |  - | - | - | - | -
+Rmax			| 265	               | cm   | Rmax      		| - |  - | - | - | - | -
+Sphi			| 0  	               | deg  | Sphi       		| - |  - | - | - | - | -
+Dphi			| 360                  | deg  | Dphi       		| - |  - | - | - | - | -
+
+
+
