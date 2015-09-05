@@ -84,6 +84,17 @@ sub define_material
 #	$mat{"components"}    = "G4_Pb 1 G4_W 1 G4_O 4";
 #	print_mat(\%configuration, \%mat);
 
+   	#########################
+	#Tungsten Powder
+	
+	%mat = init_mat();
+	$mat{"name"}          = "SL_TungstenPowder";
+	$mat{"description"}   = "Tungsten Powder";
+	$mat{"density"}       = "11.25";  #in g/cm3
+	$mat{"ncomponents"}   = "1";
+	$mat{"components"}    = "G4_W 1";
+	print_mat(\%configuration, \%mat);
+
 	##############
 	#Kapton
 	#
