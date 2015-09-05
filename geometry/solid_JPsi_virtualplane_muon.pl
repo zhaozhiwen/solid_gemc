@@ -31,9 +31,9 @@ sub make_solid_JPsi_virtualplane_muon_forwardangle_front
  $detector{"rotation"}    = "0*deg 0*deg 0*deg";
  $detector{"color"}       = "CC6633";
  $detector{"type"}        = "Cons";
-  my $Rmin1 = 100;
+  my $Rmin1 = 50;
   my $Rmax1 = 290;
-  my $Rmin2 = 100;
+  my $Rmin2 = 50;
   my $Rmax2 = 290;
   my $Dz    = 0.001/2;
   my $Sphi  = 0;
@@ -62,9 +62,9 @@ sub make_solid_JPsi_virtualplane_muon_forwardangle_back
  $detector{"rotation"}    = "0*deg 0*deg 0*deg";
  $detector{"color"}       = "CC6633";
  $detector{"type"}        = "Cons";
-  my $Rmin1 = 100;
+  my $Rmin1 = 50;
   my $Rmax1 = 290;
-  my $Rmin2 = 100;
+  my $Rmin2 = 50;
   my $Rmax2 = 290;
   my $Dz    = 0.001/2;
   my $Sphi  = 0;
