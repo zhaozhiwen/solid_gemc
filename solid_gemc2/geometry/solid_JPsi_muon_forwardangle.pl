@@ -41,9 +41,9 @@ sub make_muon_forwardangle
     $detector{"rotation"}   = "0*deg 0*deg 0*deg";
     $detector{"color"}      = $color;
     $detector{"type"}       = "Cons";
-    my $Rmin1 = 100;
+    my $Rmin1 = 50;
     my $Rmax1 = 265;
-    my $Rmin2 = 100;
+    my $Rmin2 = 50;
     my $Rmax2 = 265;
     my $Dz    = 18;
     my $Sphi  = 0;
