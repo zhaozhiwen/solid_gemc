@@ -1,13 +1,13 @@
 <mfield>
        <description name="solenoid_ptarget" factory="ASCII" comment="solenoid_ptarget"/>
-       <symmetry type="cylindrical-x" format="map" integration="RungeKutta" minStep="1*mm"/>
+       <symmetry type="cylindrical-x" format="map" integration="ClassicalRK4" minStep="0.01*mm"/>
        <map>
                <coordinate>
                        <first  name="transverse" npoints="200"   min="0"  max="199"  units="cm"/>
                        <second name="longitudinal"   npoints="401"  min="-200" max="200"  units="cm"/>
                </coordinate>
                <field unit="gauss"/>
-               <interpolation type="none"/>
+               <interpolation type="linear"/>
                <shift z="-350" units="cm"/>
        </map>
 </mfield>
