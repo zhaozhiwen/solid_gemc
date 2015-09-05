@@ -1,0 +1,3 @@
+     solid_SIDIS_lgc  |              bankid  |                           solid_SIDIS_lgc bank ID  |  200   |                  Di  
+     solid_SIDIS_lgc  |                  id  |                                         id number  |    1   |                  Di  
+     solid_SIDIS_lgc  |                hitn  |                                        hit number  |   99   |                  Di  

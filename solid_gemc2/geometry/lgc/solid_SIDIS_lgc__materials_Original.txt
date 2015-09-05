@@ -1,0 +1,1 @@
+    SL_lgc_gas_SIDIS  |          Gas in LGCC of SIDIS  |0.00184212  |         1  |                               G4_CARBON_DIOXIDE 1  | none  | none  | none  | none  | none  

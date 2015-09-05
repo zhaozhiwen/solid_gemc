@@ -6,6 +6,7 @@
 
 #include "solid_ec_hitprocess.h"
 #include "solid_gem_hitprocess.h"
+#include "solid_hgc_hitprocess.h"
 #include "solid_cc_hitprocess.h"
 #include "solid_mrpc_hitprocess.h"
 
@@ -14,6 +15,7 @@
 void solid_hitprocess( map<string, HitProcess_Factory> &hitMap ){
     hitMap["solid_ec"]  = &solid_ec_HitProcess::createHitClass;    
     hitMap["solid_gem"] = &solid_gem_HitProcess::createHitClass;
+    hitMap["solid_hgc"]  = &solid_hgc_HitProcess::createHitClass;        
     hitMap["solid_cc"]  = &solid_cc_HitProcess::createHitClass;    
     hitMap["solid_mrpc"]= &solid_mrpc_HitProcess::createHitClass;        
 //     hitMap["solid_gem_trace"]  = &solid_gem_trace_HitProcess::createHitClass;    

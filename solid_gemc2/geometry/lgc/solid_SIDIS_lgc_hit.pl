@@ -8,13 +8,13 @@ sub define_hit
 {
 	# uploading the hit definition
 	my %hit = init_hit();
-	$hit{"name"}            = "solid_ec";
-	$hit{"description"}     = "solid ec hit definition";
+	$hit{"name"}            = "solid_SIDIS_lgc";
+	$hit{"description"}     = "solid SIDIS lgc hit definition";
 	$hit{"identifiers"}     = "id";
-	$hit{"signalThreshold"} = "0*MeV";
-	$hit{"timeWindow"}      = "400*ns";
-	$hit{"prodThreshold"}   = "1*mm";
-	$hit{"maxStep"}         = "1*cm";
+	$hit{"signalThreshold"} = "0.*MeV";
+	$hit{"timeWindow"}      = "0*ns";
+	$hit{"prodThreshold"}   = "0*mm";
+	$hit{"maxStep"}         = "0*cm";
 	$hit{"delay"}           = "10*ns";
 	$hit{"riseTime"}        = "1*ns";
 	$hit{"fallTime"}        = "1*ns";
@@ -23,3 +23,4 @@ sub define_hit
 	print_hit(\%configuration, \%hit);
 }
 define_hit();
+1;

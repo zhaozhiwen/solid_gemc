@@ -1,0 +1,4 @@
+z_target		| -350	               | cm   | 	        	| - |  - | - | - | - | -
+z_collimator_upstream		| -355	               | cm   | 	        	| - |  - | - | - | - | -
+z_collimator_downstream		| -315	               | cm   | 	        	| - |  - | - | - | - | -
+
