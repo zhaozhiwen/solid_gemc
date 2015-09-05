@@ -8,8 +8,8 @@ sub define_hit
 {
 	# uploading the hit definition
 	my %hit = init_hit();
-	$hit{"name"}            = "solid_ec";
-	$hit{"description"}     = "solid ec hit definition";
+	$hit{"name"}            = "solid_spd";
+	$hit{"description"}     = "solid spd hit definition";
 	$hit{"identifiers"}     = "id";
 	$hit{"signalThreshold"} = "0*MeV";
 	$hit{"timeWindow"}      = "400*ns";

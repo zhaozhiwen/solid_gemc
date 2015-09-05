@@ -18,10 +18,12 @@ our %configuration;
 sub define_bank
 {
 	# uploading the hit definition
-	my $bankId = 300;
-	my $bankname = "solid_ec";
+	my $bankId = 200;
+	my $bankname = "solid_hgc";
 	
 	insert_bank_variable(\%configuration, $bankname, "bankid", $bankId, "Di", "$bankname bank ID");
+	insert_bank_variable(\%configuration, $bankname, "hitn",   99,   "Di", "Hit Number");	
+	
 	insert_bank_variable(\%configuration, $bankname, "pid",     1,   "Di", "ID of the first particle entering the sensitive volume");
 	insert_bank_variable(\%configuration, $bankname, "mpid",    2,   "Di", "ID of the mother of the first particle entering the sensitive volume");
 	insert_bank_variable(\%configuration, $bankname, "tid",     3,   "Di", "Track ID of the first particle entering the sensitive volume");
@@ -46,10 +48,10 @@ sub define_bank
 	insert_bank_variable(\%configuration, $bankname, "mvz",    22,   "Dd", "z component of primary vertex of the mother of the particle entering the sensitive volume");
 	insert_bank_variable(\%configuration, $bankname, "avg_t",  23,   "Dd", "Average time");
 	insert_bank_variable(\%configuration, $bankname, "id",     24,   "Di", "id number");		
-	insert_bank_variable(\%configuration, $bankname, "hitn",   99,   "Di", "Hit Number");
+
 }
 define_bank();
-
+1;
 
 
 

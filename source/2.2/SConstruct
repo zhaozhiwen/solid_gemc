@@ -9,7 +9,7 @@ env.Append(CPPPATH = ['hitprocess'])
 hitp_sources = Split("""
 	hitprocess/solid_ec_hitprocess.cc
 	hitprocess/solid_gem_hitprocess.cc
-	hitprocess/solid_cc_hitprocess.cc
+	hitprocess/solid_hgc_hitprocess.cc
 	hitprocess/solid_mrpc_hitprocess.cc""")
 env.Library(source = hitp_sources, target = "lib/hitprocess")
 

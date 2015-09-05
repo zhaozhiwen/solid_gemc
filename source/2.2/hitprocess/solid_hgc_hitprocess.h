@@ -6,11 +6,11 @@
 
 
 // Class definition
-class solid_cc_HitProcess : public HitProcess
+class solid_hgc_HitProcess : public HitProcess
 {
 	public:
 	
-		~solid_cc_HitProcess(){;}
+		~solid_hgc_HitProcess(){;}
 	
 		// - integrateDgt: returns digitized information integrated over the hit
 		map<string, double> integrateDgt(MHit*, int);
@@ -23,7 +23,7 @@ class solid_cc_HitProcess : public HitProcess
 		vector<identifier> processID(vector<identifier>, G4Step*, detector);
 	
 		// creates the HitProcess
-		static HitProcess *createHitClass() {return new solid_cc_HitProcess;}
+		static HitProcess *createHitClass() {return new solid_hgc_HitProcess;}
 };
 
 #endif

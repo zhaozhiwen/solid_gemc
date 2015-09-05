@@ -1,0 +1,4 @@
+SL_target_He3_He3_10amg  | SIDIS He3 gas target at 10amg  |  0.001345  |         1  |                                      helium3Gas 1  | none  | none  | none  | none  | none  
+   SL_target_He3_BaO  |BariumOxide in SIDIS He3 target cell  |     5.720  |         2  |                                          Ba 1 O 1  | none  | none  | none  | none  | none  
+   SL_target_He3_SrO  |StrontiumOxide in SIDIS He3 target cell  |     4.700  |         2  |                                          Sr 1 O 1  | none  | none  | none  | none  | none  
+SL_target_He3_Glass_GE180  |         SIDIS He3 target cell  |     2.760  |         5  |G4_SILICON_DIOXIDE 0.608 G4_ALUMINUM_OXIDE 0.143 G4_CALCIUM_OXIDE 0.065 SL_target_He3_BaO 0.182 SL_target_He3_SrO 0.002  | none  | none  | none  | none  | none  

@@ -19,7 +19,7 @@ sub define_bank
 {
 	# uploading the hit definition
 	my $bankId = 300;
-	my $bankname = "solid_ec";
+	my $bankname = "solid_spd";
 	
 	insert_bank_variable(\%configuration, $bankname, "bankid", $bankId, "Di", "$bankname bank ID");
 	insert_bank_variable(\%configuration, $bankname, "pid",     1,   "Di", "ID of the first particle entering the sensitive volume");
