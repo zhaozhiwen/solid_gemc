@@ -55,6 +55,8 @@ $configuration{"variation"} = "Original";
 #Geometry definition
 require "solid_SIDIS_hgc_geometry.pl";
 solid_SIDIS_hgc_geometry();
+require "solid_SIDIS_hgc_virtualplane.pl";
+solid_SIDIS_hgc_virtualplane();
 
 #materials
 require "solid_SIDIS_hgc_materials.pl";

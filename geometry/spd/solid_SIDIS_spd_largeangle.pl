@@ -53,6 +53,8 @@ our %parameters    = get_parameters(%configuration);
 #Geometry definition
 require "solid_SIDIS_spd_largeangle_geometry.pl";
 solid_SIDIS_spd_largeangle();
+require "solid_SIDIS_spd_virtualplane_largeangle";
+solid_SIDIS_spd_virtualplane_largeangle();
 
 #materials definition 
 require "./solid_spd_materials.pl";
