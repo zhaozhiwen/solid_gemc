@@ -52,6 +52,8 @@ our %parameters    = get_parameters(%configuration);
 #Geometry definition
 require "solid_SIDIS_lgc_geometry.pl";
 solid_SIDIS_lgc();
+require "solid_SIDIS_lgc_virtualplane.pl";
+solid_SIDIS_lgc_virtualplane();
 
 #materials definition 
 require "./solid_lgc_materials.pl";

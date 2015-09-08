@@ -37,6 +37,7 @@
 <option name="BEAM_V"   value="(0,0,-350)cm"/>
 <option name="SPREAD_V" value="(0.3,20)cm"/>
 
+
 <option name="EXEC_MACRO" value="solid_slice.vis"/>
 <option name="geometry" value="1000x1000"/>
 <option name="HIGH_RES" value="1"/>
@@ -52,4 +53,8 @@
 <option name="USE_GUI"  value="0"/>
 
 
+<option name="EXEC_MACRO" value="solid_slice.vis"/>
+<option name="geometry" value="1000x1000"/>
+<option name="HIGH_RES" value="1"/>
+<option name="USE_GUI"  value="1"/>
 -->

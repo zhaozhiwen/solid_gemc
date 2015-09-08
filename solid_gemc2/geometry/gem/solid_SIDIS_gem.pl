@@ -55,6 +55,8 @@ our %parameters    = get_parameters(%configuration);
 #Geometry definition
 require "solid_SIDIS_gem_geometry.pl";
 solid_SIDIS_gem_geometry();
+require "solid_SIDIS_gem_virtualplane";
+solid_SIDIS_gem_virtualplane();
 
 #materials definition 
 require "./solid_gem_materials.pl";
