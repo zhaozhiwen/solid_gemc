@@ -20,7 +20,7 @@
 <option name="INTEGRATEDRAW" value="flux"/>
 
 <option name="HIT_PROCESS_LIST" value="solid"/>
-<option name="PHYSICS" value="QGSP_BERT"/>
+<option name="PHYSICS" value="QGSP_BERT+STD+Optical"/>
 <option name="RECORD_PASSBY" value="1"/>
 <option name="HALL_MATERIAL" value="G4_AIR"/>
 

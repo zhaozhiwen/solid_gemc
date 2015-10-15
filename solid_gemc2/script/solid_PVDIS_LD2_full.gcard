@@ -6,6 +6,10 @@
 
 <detector name="../geometry/magnet/solid_solenoid" factory="TEXT" variation="Original"/>
 <detector name="../geometry/ec/solid_PVDIS_ec_forwardangle" factory="TEXT" variation="Original"/>
+<detector name="../geometry/lgc/solid_PVDIS_lgc" factory="TEXT" variation="Original"/>
+<detector name="../geometry/gem/solid_PVDIS_gem" factory="TEXT" variation="Original"/>
+<detector name="../geometry/target/./solid_PVDIS_target_LD2_enclosure" factory="TEXT" variation="Original"/>
+<detector name="../geometry/beamline/solid_PVDIS_beamline" factory="TEXT" variation="Original"/>
 
 <option name="INTEGRATEDRAW" value="flux"/>
 

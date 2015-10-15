@@ -7,11 +7,11 @@ our %parameters;
 use Getopt::Long;
 use Math::Trig;
 
-my $DetectorName = 'solid_PVDIS_ec_forwardangle_real';
+my $DetectorName = 'solid_PVDIS_ec_forwardangle';
 
 my $DetectorMother="root";
 
-sub solid_PVDIS_ec_forwardangle_real
+sub solid_PVDIS_ec_forwardangle
 {
 make_ec_forwardangle_shower();
 make_ec_forwardangle_shield();

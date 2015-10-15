@@ -7,11 +7,11 @@ our %parameters;
 use Getopt::Long;
 use Math::Trig;
 
-my $DetectorName = 'solid_SIDIS_gem';
+my $DetectorName = 'solid_PVDIS_gem';
 
 my $DetectorMother="root";
 
-sub solid_SIDIS_gem_geometry
+sub solid_PVDIS_gem
 {
 make_gem();
 }
@@ -22,26 +22,22 @@ my $PlateZ2	= $parameters{"PlateZ2"};
 my $PlateZ3	= $parameters{"PlateZ3"};
 my $PlateZ4	= $parameters{"PlateZ4"};
 my $PlateZ5	= $parameters{"PlateZ5"};
-my $PlateZ6	= $parameters{"PlateZ6"};
 my $Rin1	= $parameters{"Rin1"};
 my $Rin2	= $parameters{"Rin2"};
 my $Rin3	= $parameters{"Rin3"};
 my $Rin4	= $parameters{"Rin4"};
 my $Rin5	= $parameters{"Rin5"};
-my $Rin6	= $parameters{"Rin6"};
 my $Rout1	= $parameters{"Rout1"};
 my $Rout2	= $parameters{"Rout2"};
 my $Rout3	= $parameters{"Rout3"};
 my $Rout4	= $parameters{"Rout4"};
 my $Rout5	= $parameters{"Rout5"};
-my $Rout6	= $parameters{"Rout6"};
 
- my @PlateZ = ($PlateZ1,$PlateZ2,$PlateZ3,$PlateZ4,$PlateZ5,$PlateZ6);
- my @Rin    = ($Rin1,$Rin2,$Rin3,$Rin4,$Rin5,$Rin6);
- my @Rout   = ($Rout1,$Rout2,$Rout3,$Rout4,$Rout5,$Rout6);
+ my @PlateZ = ($PlateZ1,$PlateZ2,$PlateZ3,$PlateZ4,$PlateZ5);
+ my @Rin    = ($Rin1,$Rin2,$Rin3,$Rin4,$Rin5);
+ my @Rout   = ($Rout1,$Rout2,$Rout3,$Rout4,$Rout5);
  
 my $hittype = "solid_gem";
-# my $hittype = "flux";
 
 #  * Describe the single GEM Chamber module (similar to COMPASS)
 #  * see: "Construction Of GEM Detectors for the COMPASS experiment", CERN Tech Note TA1/00-03

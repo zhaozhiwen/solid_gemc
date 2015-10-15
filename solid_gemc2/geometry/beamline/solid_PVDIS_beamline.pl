@@ -14,8 +14,6 @@ use Math::Trig;
 # use Math::MatrixReal;
 # use Math::VectorReal;
 
-# system("rm meic_det1_simple__*txt");
-
 # Help Message
 sub help()
 {
@@ -45,25 +43,21 @@ our %configuration = load_configuration($config_file);
 #}
 
 # One can change the "variation" here if one is desired different from the config.dat
-$configuration{"detector_name"} = "solid_SIDIS_gem";
+$configuration{"detector_name"} = "solid_PVDIS_beamline";
 $configuration{"variation"} = "Original";
 
 # To get the parameters proper authentication is needed.
 our %parameters    = get_parameters(%configuration);
-# $configuration{"detector_name"} = "solid_PVDIS";
 
 #Geometry definition
-require "solid_SIDIS_gem_geometry.pl";
-solid_SIDIS_gem_geometry();
-require "solid_SIDIS_gem_virtualplane.pl";
-solid_SIDIS_gem_virtualplane();
+require "solid_PVDIS_beamline_geometry.pl";
+solid_PVDIS_beamline();
 
 #materials definition 
-require "./solid_gem_materials.pl";
+require "./solid_beamline_materials.pl";
 
-#hit definition
-require "./solid_gem_hit.pl";
+#hit definition 
 
-#bank definition
-require "./solid_gem_bank.pl";
+
+# bank definition
 
