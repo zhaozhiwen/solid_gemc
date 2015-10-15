@@ -87,6 +87,14 @@ sub define_material
 # 	print_mat(\%configuration, \%mat);
 
 	%mat = init_mat();
+	$mat{"name"}          = "SL_lgc_gas_PVDIS";
+	$mat{"description"}   = "Gas in LGCC of PVDIS";
+	$mat{"density"}       = "0.00184212";  #in g/cm3
+	$mat{"ncomponents"}   = "1";
+	$mat{"components"}    = "G4_CARBON_DIOXIDE 1";
+	print_mat(\%configuration, \%mat);
+
+	%mat = init_mat();
 	$mat{"name"}          = "SL_lgc_gas_SIDIS";
 	$mat{"description"}   = "Gas in LGCC of SIDIS";
 	$mat{"density"}       = "0.00184212";  #in g/cm3

@@ -53,39 +53,15 @@ our %parameters    = get_parameters(%configuration);
 # $configuration{"detector_name"} = "solid_PVDIS";
 
 #Geometry definition
-# require "solid_solenoid.pl";
-# solid_solenoid();
-# require "solid_PVDIS_baffle_babarbafflemore1.pl";
-# solid_PVDIS_baffle_babarbafflemore1();
-# require "solid_PVDIS_target_LD2.pl";
-# solid_PVDIS_target_LD2();
-# require "solid_PVDIS_baffle_babarbafflemore1_enclosure.pl";
-# solid_PVDIS_baffle_babarbafflemore1_enclosure();
-# require "solid_PVDIS_target_LD2_enclosure.pl";
-# solid_PVDIS_target_LD2_enclosure();
-# require "solid_PVDIS_beamline.pl";
-# solid_PVDIS_beamline();
-# require "solid_PVDIS_cherenkov.pl";
-# solid_PVDIS_cherenkov();
-# require "solid_PVDIS_ec_forwardangle_block.pl";
-# solid_PVDIS_ec_forwardangle_block();
-require "solid_PVDIS_ec_forwardangle_real.pl";
-solid_PVDIS_ec_forwardangle_real();
-# require "solid_PVDIS_gem.pl";
-# solid_PVDIS_gem();
-# require "solid_PVDIS_virtualplane_cher.pl";
-# solid_PVDIS_virtualplane_cher();
-# require "solid_PVDIS_virtualplane_ec.pl";
-# solid_PVDIS_virtualplane_ec();
-# require "solid_PVDIS_virtualplane_gem.pl";
-# solid_PVDIS_virtualplane_gem();
+require "solid_PVDIS_ec_forwardangle_geometry.pl";
+solid_PVDIS_ec_forwardangle();
+require "solid_PVDIS_ec_forwardangle_virtualplane.pl";
+solid_PVDIS_ec_forwardangle_virtualplane();
 
 
 #hit and bank definition Execute only when there are changes
 #hit
 require "./solid_ec_hit.pl";
-define_solid_ec_hit();
 
 # banks
 require "./solid_ec_bank.pl";
-define_solid_ec_bank();

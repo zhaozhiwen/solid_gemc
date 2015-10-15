@@ -53,8 +53,8 @@ our %parameters    = get_parameters(%configuration);
 #Geometry definition
 require "solid_SIDIS_ec_forwardangle_geometry.pl";
 solid_SIDIS_ec_forwardangle();
-require "solid_SIDIS_ec_virtualplane_forwardangle";
-solid_SIDIS_ec_virtualplane_forwardangle();
+require "solid_SIDIS_ec_forwardangle_virtualplane";
+solid_SIDIS_ec_forwardangle_virtualplane();
 
 #materials definition 
 require "./solid_ec_materials.pl";
