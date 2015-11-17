@@ -12,7 +12,7 @@ sub define_hit
 	$hit{"description"}     = "solid spd hit definition";
 	$hit{"identifiers"}     = "id";
 	$hit{"signalThreshold"} = "0*MeV";
-	$hit{"timeWindow"}      = "400*ns";
+	$hit{"timeWindow"}      = "0*ns";
 	$hit{"prodThreshold"}   = "1*mm";
 	$hit{"maxStep"}         = "1*cm";
 	$hit{"delay"}           = "10*ns";
