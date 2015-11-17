@@ -8,11 +8,11 @@
 
 map<string, double> solid_hgc_HitProcess :: integrateDgt(MHit* aHit, int hitn)
 {
-	map<string, double> dgtz;
+	map<string, double> dgtz;	
 	vector<identifier> identity = aHit->GetId();
 
 	trueInfos tInfos(aHit);
-	
+
 	int id = identity[0].id;
 	
 	dgtz["hitn"] = hitn;
@@ -40,8 +40,8 @@ map<string, double> solid_hgc_HitProcess :: integrateDgt(MHit* aHit, int hitn)
 	dgtz["vz"]      = aHit->GetVert().getZ();
 	dgtz["mvx"]     = aHit->GetmVert().getX();
 	dgtz["mvy"]     = aHit->GetmVert().getY();
-	dgtz["mvz"]     = aHit->GetmVert().getZ();
-	
+	dgtz["mvz"]     = aHit->GetmVert().getZ();		
+		
 	return dgtz;
 }
 
