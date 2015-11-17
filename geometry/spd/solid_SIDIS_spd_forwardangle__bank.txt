@@ -1,4 +1,4 @@
-           solid_spd  |              bankid  |                                 solid_spd bank ID  |  300   |                  Di  
+           solid_spd  |              bankid  |                                 solid_spd bank ID  |  500   |                  Di  
            solid_spd  |                 pid  |ID of the first particle entering the sensitive volume  |    1   |                  Di  
            solid_spd  |                mpid  |ID of the mother of the first particle entering the sensitive volume  |    2   |                  Di  
            solid_spd  |                 tid  |Track ID of the first particle entering the sensitive volume  |    3   |                  Di  

@@ -16,7 +16,7 @@ my $Rmin	= $parameters{"Rmin"};
 my $Rmax	= $parameters{"Rmax"};
 my $Dz   	= $parameters{"Dz"}; # half thickness
 
-my $hittype="flux";
+my $hittype="solid_spd";
 
 sub solid_SIDIS_spd_forwardangle
 {

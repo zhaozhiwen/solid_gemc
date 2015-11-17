@@ -8,16 +8,16 @@ our %parameters;
 use Getopt::Long;
 use Math::Trig;
 
-my $DetectorName = 'solid_SIDIS_spd_virtualplane';
+my $DetectorName = 'solid_SIDIS_spd_forwardangle_virtualplane';
 
 my $DetectorMother="root";
 
-sub solid_SIDIS_spd_virtualplane_forwardangle
+sub solid_SIDIS_spd_forwardangle_virtualplane
 {
-make_solid_SIDIS_spd_virtualplane_forwardangle_front();
+make_solid_SIDIS_spd_forwardangle_virtualplane_front();
 }
 
-sub make_solid_SIDIS_spd_virtualplane_forwardangle_front
+sub make_solid_SIDIS_spd_forwardangle_virtualplane_front
 {
  my %detector=init_det();
  $detector{"name"}        = "$DetectorName\_front";
