@@ -19,7 +19,7 @@ make_ec_forwardangle_prescint();
 make_ec_forwardangle_support();
 }
 
-my $ec_sen="no";
+my $ec_sen="solid_ec";
 
 my $color_abs="0000ff";
 my $color_scint="f1ffe1";
