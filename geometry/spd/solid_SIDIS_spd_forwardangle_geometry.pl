@@ -16,7 +16,7 @@ my $Rmin	= $parameters{"Rmin"};
 my $Rmax	= $parameters{"Rmax"};
 my $Dz   	= $parameters{"Dz"}; # half thickness
 
-my $hittype="solid_spd";
+my $sen="solid_spd";
 
 sub solid_SIDIS_spd_forwardangle
 {
@@ -41,8 +41,8 @@ sub spd
  $detector{"exist"}       = 1;
  $detector{"visible"}     = 1;
  $detector{"style"}       = 1;
- $detector{"sensitivity"} = "flux";
- $detector{"hit_type"}    = "flux";
+ $detector{"sensitivity"} = "$sen";
+ $detector{"hit_type"}    = "$sen";
  $detector{"identifiers"} = "id manual 5100000";
  print_det(\%configuration, \%detector);
 }

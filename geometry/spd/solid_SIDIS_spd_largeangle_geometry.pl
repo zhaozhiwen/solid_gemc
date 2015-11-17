@@ -41,8 +41,8 @@ sub spd
  $detector{"exist"}       = 1;
  $detector{"visible"}     = 1;
  $detector{"style"}       = 1;
- $detector{"sensitivity"} = "flux";
- $detector{"hit_type"}    = "flux";
+ $detector{"sensitivity"} = "$sen";
+ $detector{"hit_type"}    = "$sen";
  $detector{"identifiers"} = "id manual 5200000";
  print_det(\%configuration, \%detector);
 }
