@@ -37,7 +37,7 @@
 /// \author \n &copy; Maurizio Ungaro
 /// \author e-mail: ungaro@jlab.org\n\n\n
 
-const char *GEMC_VERSION = "gemc 2.0";
+const char *GEMC_VERSION = "gemc 2.1";
 
 // G4 headers
 #include "G4RunManager.hh"
@@ -76,11 +76,11 @@ const char *GEMC_VERSION = "gemc 2.0";
 #include "string_utilities.h"
 #include "utils.h"
 
-//header for solid hitprocess
-#include "solid_hitprocess.h"
-
 // c++ headers
 #include <unistd.h>  // needed for get_pid
+
+//header for addtional hitprocess
+#include "solid_hitprocess.h"
 
 /////////////////////////
 /// <b> Main Program </b>
@@ -114,6 +114,7 @@ const char *GEMC_VERSION = "gemc 2.0";
 
 int main( int argc, char **argv )
 {
+	clock_t startTime = clock();
 	cout << endl;
 	goptions gemcOpt;
 	gemcOpt.setGoptions();
@@ -205,7 +206,9 @@ int main( int argc, char **argv )
 	// Process Hit Map
 	gemc_splash.message(" Building gemc Process Hit Factory...");
 	map<string, HitProcess_Factory> hitProcessMap = HitProcess_Map(gemcOpt.optMap["HIT_PROCESS_LIST"].args);
-	solid_hitprocess(hitProcessMap);
+
+	//addtional hit process
+	solid_hitprocess(hitProcessMap);	
 	
 	///< magnetic Field Map
 	gemc_splash.message(" Creating fields Map...");
@@ -316,7 +319,8 @@ int main( int argc, char **argv )
 		UImanager->ApplyCommand(init_commands[i].c_str());
 	string exec_macro = "/control/execute " + gemcOpt.optMap["EXEC_MACRO"].args;
 	
-	
+	clock_t start_events;
+
 	if(use_gui)
 	{
 		gemc_splash.message("Starting GUI...");
@@ -346,6 +350,7 @@ int main( int argc, char **argv )
 			UImanager->ApplyCommand(command);
 		}
 		
+		start_events = clock();
 		return gemc_gui.exec();
 		// deleting and runManager is now taken care
 		// in the gemc_quit slot
@@ -354,6 +359,7 @@ int main( int argc, char **argv )
 	}
 	else
 	{
+		start_events = clock();
 		if(gemcOpt.optMap["N"].arg>0)
 		{
 			char command[100];
@@ -362,6 +368,14 @@ int main( int argc, char **argv )
 		}
 		if(exec_macro != "/control/execute no") UImanager->ApplyCommand(exec_macro.c_str());
 	}
+
+	clock_t endTime = clock();
+	clock_t clockAllTaken   = endTime - startTime;
+	clock_t clockEventTaken = endTime - start_events;
+
+	cout << " > Total gemc time: " <<  clockAllTaken / (double) CLOCKS_PER_SEC << " seconds. "
+	     << " Events only time: " << clockEventTaken / (double) CLOCKS_PER_SEC << " seconds. " << endl;
+
 	
 	delete runManager;
 	return 1;

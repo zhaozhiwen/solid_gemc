@@ -1,16 +1,16 @@
-#ifndef SOLID_CC_HITPROCESS_H
-#define SOLID_CC_HITPROCESS_H 1
+#ifndef SOLID_SPD_HITPROCESS_H
+#define SOLID_SPD_HITPROCESS_H 1
 
 // gemc headers
 #include "HitProcess.h"
 
 
 // Class definition
-class solid_cc_HitProcess : public HitProcess
+class solid_spd_HitProcess : public HitProcess
 {
 	public:
 	
-		~solid_cc_HitProcess(){;}
+		~solid_spd_HitProcess(){;}
 	
 		// - integrateDgt: returns digitized information integrated over the hit
 		map<string, double> integrateDgt(MHit*, int);
@@ -23,7 +23,7 @@ class solid_cc_HitProcess : public HitProcess
 		vector<identifier> processID(vector<identifier>, G4Step*, detector);
 	
 		// creates the HitProcess
-		static HitProcess *createHitClass() {return new solid_cc_HitProcess;}
+		static HitProcess *createHitClass() {return new solid_spd_HitProcess;}
 };
 
 #endif
