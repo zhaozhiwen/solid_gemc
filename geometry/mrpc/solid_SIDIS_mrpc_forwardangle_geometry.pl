@@ -16,7 +16,7 @@ my $Rmin	= $parameters{"Rmin"};
 my $Rmax	= $parameters{"Rmax"};
 my $Dz   	= $parameters{"Dz"}; # half thickness
 
-my $sen="no";
+my $sen="solid_mrpc";
 
 sub solid_SIDIS_mrpc_forwardangle
 {
