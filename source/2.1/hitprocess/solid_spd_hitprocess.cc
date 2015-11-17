@@ -4,9 +4,9 @@
 #include "Randomize.hh"
 
 // gemc headers
-#include "solid_mrpc_hitprocess.h"
+#include "solid_spd_hitprocess.h"
 
-map<string, double> solid_mrpc_HitProcess :: integrateDgt(MHit* aHit, int hitn)
+map<string, double> solid_spd_HitProcess :: integrateDgt(MHit* aHit, int hitn)
 {
 	map<string, double> dgtz;	
 	vector<identifier> identity = aHit->GetId();
@@ -45,14 +45,14 @@ map<string, double> solid_mrpc_HitProcess :: integrateDgt(MHit* aHit, int hitn)
 	return dgtz;
 }
 
-vector<identifier>  solid_mrpc_HitProcess :: processID(vector<identifier> id, G4Step* aStep, detector Detector)
+vector<identifier>  solid_spd_HitProcess :: processID(vector<identifier> id, G4Step* aStep, detector Detector)
 {
 	id[id.size()-1].id_sharing = 1;
 	return id;
 }
 
 
-map< string, vector <int> >  solid_mrpc_HitProcess :: multiDgt(MHit* aHit, int hitn)
+map< string, vector <int> >  solid_spd_HitProcess :: multiDgt(MHit* aHit, int hitn)
 {
 	map< string, vector <int> > MH;
 	
