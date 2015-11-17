@@ -18,7 +18,7 @@ our %configuration;
 sub define_bank
 {
 	# uploading the hit definition
-	my $bankId = 300;
+	my $bankId = 400;
 	my $bankname = "solid_mrpc";
 	
 	insert_bank_variable(\%configuration, $bankname, "bankid", $bankId, "Di", "$bankname bank ID");
