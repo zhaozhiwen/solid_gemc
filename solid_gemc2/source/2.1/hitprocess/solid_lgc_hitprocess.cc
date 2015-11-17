@@ -2,6 +2,8 @@
 #include "G4UnitsTable.hh"
 #include "G4Poisson.hh"
 #include "Randomize.hh"
+#include "G4SystemOfUnits.hh"
+#include "G4PhysicalConstants.hh"
 
 // gemc headers
 #include "solid_lgc_hitprocess.h"
