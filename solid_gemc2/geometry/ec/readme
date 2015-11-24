@@ -22,8 +22,8 @@ Except the parameter text file has all external parameter, it is edit by hand.
 A perl script will call other perl scripts and use parameter file to produce all other texts by running command below
 source your set_solid
 ./solid_PVDIS_ec_forwardangle.pl config_solid_PVDIS_ec_forwardangle.dat
-./solid_SIDIS_forwardangle.pl config_solid_SIDIS_ec_forwardangle.dat
-./solid_SIDIS_largeangle.pl config_solid_SIDIS_ec_largeangle.dat
+./solid_SIDIS_ec_forwardangle.pl config_solid_SIDIS_ec_forwardangle.dat
+./solid_SIDIS_ec_largeangle.pl config_solid_SIDIS_ec_largeangle.dat
 
 The hit defination, bank definations and corresponding hit processing rouine "solid_ec" of "solid_gemc" have to match producde meaningful result.
 Any change in hit defination and bank defination, you need to modify the source code "solid_ec" accordingly and recompile "solid_gemc" by following instruction there
@@ -32,4 +32,4 @@ Any change in hit defination and bank defination, you need to modify the source 
 
 initial checkin  2015/11/13 by Zhiwen Zhao
 EC have all scintlator layers sensitive as solid_ec hit process type
-EC as a whole detectort has no segmnetation into hexagon yet
+EC as a whole detectort has no segmentation into hexagon yet

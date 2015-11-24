@@ -1,4 +1,4 @@
-Nlayer			| 194	               |      | Nlayer	        	| - |  - | - | - | - | -
+Nlayer			| 194	               | counts | Nlayer	        	| - |  - | - | - | - | -
 Thickness_lead		| 0.05                 | cm   | Thickness_lead 		| - |  - | - | - | - | -
 Thickness_scint		| 0.15                 | cm   | Thickness_scint     	| - |  - | - | - | - | -
 Thickness_gap		| 0.024                | cm   | Thickness_gap 		| - |  - | - | - | - | -
@@ -10,6 +10,3 @@ Rmin			| 110   	       | cm   | Rmin       		| - |  - | - | - | - | -
 Rmax			| 265	               | cm   | Rmax      		| - |  - | - | - | - | -
 Sphi			| 0  	               | deg  | Sphi       		| - |  - | - | - | - | -
 Dphi			| 360                  | deg  | Dphi       		| - |  - | - | - | - | -
-
-
-
