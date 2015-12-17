@@ -44,11 +44,7 @@ sub make_target
 #somehow SL_target_He3_He3_10amg doesn't work for GEMC 2.2, but work for GEMC 2.1, it could be related to isotope helium3 and helium3Gas in GEMC source code materials/material_factory.cc, I don't see what's difference between 2.1 and 2.2
 my @mat  = ("G4_Galactic","SL_target_He3_Glass_GE180","He3_10amg","SL_target_He3_Glass_GE180","SL_target_He3_Glass_GE180");
 
-# GPARMED58  233 '3He 10 atm$         '  33  0  1  1. -1. -1.   -1.   0.1    -1. 
-# GPARMXT05   33 '3He 10 atm $        ' 1.33E-3  -1      3.  2.  1.
-# GPARMED62  264 'Glass GE 180 mf    $'  64  0  1 30. -1. -1.   -1.   0.01   -1.
-# GPARMXT08   64 'Glass al-sil  GE180$' 2.76      7     16.  8. 0.524  28.1 14. 0.266   27. 13. 0.072  24.3 12. 0.072 
-#                                                       40. 20. 0.036  11.   5. 0.013   23. 11. 0.007   
+http://galileo.phys.virginia.edu/research/groups/spinphysics/glass_properties.html
 
  for(my $n=1; $n<=$NUM; $n++)
  {

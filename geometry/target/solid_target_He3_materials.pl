@@ -65,6 +65,18 @@ sub define_material
 	#SIDIS He3 target 
     # - He3 + Glass_GE180 + Vacuum   
     #--He3 Gas at 10amg
+
+# here is how it was implemented in geant3    
+# GPARMED58  233 '3He 10 atm$         '  33  0  1  1. -1. -1.   -1.   0.1    -1. 
+# GPARMXT05   33 '3He 10 atm $        ' 1.33E-3  -1      3.  2.  1.
+
+# name mat sen F Fmx Fan stmx Elo epsi st(mu,lo) user words
+# GPARMED62 264 'Glass GE 180 mf $' 64 0 1 30. -1. -1. -1. 0.01 -1.
+# name g/cm3 Nmat A1 Z1 W1 A2 Z2 W2
+# C Aluminosilicate glass SiO2 57%, Al2O3 20%, MgO 12%, CaO 5%, B2O3 4%, Na2O 1%
+# GPARMXT08 64 'Glass al-sil GE180$' 2.76 7 16. 8. 0.524 28.1 14. 0.266 27. 13. 0.072 24.3 12. 0.072 
+#                                             40. 20. 0.036 11. 5. 0.013 23. 11. 0.007
+    
 	%mat = init_mat();
 	$mat{"name"}          = "SL_target_He3_He3_10amg";
 	$mat{"description"}   = "SIDIS He3 gas target at 10amg";
@@ -77,6 +89,7 @@ sub define_material
 	#--Glass_GE180
 	# SilicOxide-60.8%,BariumOxide-18.2%,AluminiumOxide,14.3%,
 	# CalciumOxide 6.5%,StrontiumOxide 0.25%
+	# refer to http://galileo.phys.virginia.edu/research/groups/spinphysics/glass_properties.html
 	%mat = init_mat();
 	$mat{"name"}          = "SL_target_He3_BaO";
 	$mat{"description"}   = "BariumOxide in SIDIS He3 target cell";
