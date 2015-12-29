@@ -15,8 +15,8 @@ my $DetectorMother="root";
 sub solid_PVDIS_ec_forwardangle_virtualplane
 {
 make_front();
-make_middle();
-# make_inner();
+# make_middle();
+make_inner();
 make_rear();
 }
 

@@ -15,7 +15,7 @@ my $DetectorMother="root";
 sub solid_SIDIS_ec_largeangle_virtualplane
 {
 make_solid_SIDIS_ec_largeangle_virtualplane_front();
-make_solid_SIDIS_ec_largeangle_virtualplane_middle();
+# make_solid_SIDIS_ec_largeangle_virtualplane_middle();
 make_solid_SIDIS_ec_largeangle_virtualplane_inner();
 make_solid_SIDIS_ec_largeangle_virtualplane_rear();
 }
