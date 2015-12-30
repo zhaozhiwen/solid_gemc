@@ -14,8 +14,6 @@ use Math::Trig;
 # use Math::MatrixReal;
 # use Math::VectorReal;
 
-# system("rm meic_det1_simple__*txt");
-
 # Help Message
 sub help()
 {
@@ -54,7 +52,7 @@ our %parameters    = get_parameters(%configuration);
 
 #Geometry definition
 require "solid_PVDIS_gem_geometry.pl";
-solid_PVDIS_gem();
+solid_PVDIS_gem_geometry();
 require "solid_PVDIS_gem_virtualplane.pl";
 solid_PVDIS_gem_virtualplane();
 

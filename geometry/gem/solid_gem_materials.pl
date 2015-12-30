@@ -137,6 +137,14 @@ sub define_material
 	$mat{"ncomponents"}   = "4";
 	$mat{"components"}    = "G4_H 0.026362 G4_C 0.691133 G4_N 0.07327 G4_O 0.209235";
 	print_mat(\%configuration, \%mat);	
+	
+	%mat = init_mat();
+	$mat{"name"}          = "SL_gem_mylar";
+	$mat{"description"}   = "SL_gem_mylar";
+	$mat{"density"}       = "1.397";  # in g/cm3
+	$mat{"ncomponents"}   = "3";
+	$mat{"components"}    = "G4_H 0.042 G4_C 0.625 G4_O 0.333";
+	print_mat(\%configuration, \%mat);		
 }
 define_material();
 
