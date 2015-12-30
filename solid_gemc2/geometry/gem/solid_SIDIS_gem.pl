@@ -14,8 +14,6 @@ use Math::Trig;
 # use Math::MatrixReal;
 # use Math::VectorReal;
 
-# system("rm meic_det1_simple__*txt");
-
 # Help Message
 sub help()
 {
