@@ -43,9 +43,6 @@ my @Rout   = ($Rout1,$Rout2,$Rout3,$Rout4,$Rout5,$Rout6);
 my @offrot = (0,0,0,0,0,0);  # angular offsets in degrees (w.r.t. center on 12*$n for $n-th sector) 
 my $angle_start=-6;
 my $angle_width=12;
- 
-my $hittype = "solid_gem";
-# my $hittype = "flux";
 
 sub make_gem
 {
@@ -124,6 +121,7 @@ my $color_Copper = "ffe731";
 my $color_Kapton = "1a4fff";
 my $color_gas = "ff33fc"; 
 my @color = ($color_Al,$color_mylar,$color_gas,$color_Kapton,$color_Copper,$color_gas,$color_Copper,$color_Kapton,$color_Copper,$color_gas,$color_Copper,$color_Kapton,$color_Copper,$color_gas,$color_Copper,$color_Kapton,$color_Copper,$color_gas,$color_Copper,$color_Kapton,$color_NEMAG10,$color_gas,$color_mylar,$color_Al);
+my @hittype = ("no","no","no","no","solid_gem","solid_gem","solid_gem","no","solid_gem","solid_gem","solid_gem","no","no","no","no","no","no","no","solid_gem","no","no","no","no","no");
 
  for(my $n=1; $n<=$Nplate; $n++)
  {
@@ -177,8 +175,8 @@ my @color = ($color_Al,$color_mylar,$color_gas,$color_Kapton,$color_Copper,$colo
 	    $detector{"pMany"}       = 1;
 	    $detector{"exist"}       = 1;
 	    $detector{"style"}       = 1;
-	    $detector{"sensitivity"} = "$hittype";
-	    $detector{"hit_type"}    = "$hittype";
+	    $detector{"sensitivity"} = "$hittype[$i-1]";
+	    $detector{"hit_type"}    = "$hittype[$i-1]";
 	    my $id=1000000+$n*100000+$sec*1000+$i;
 	    $detector{"identifiers"} = "id manual $id";
 	    print_det(\%configuration, \%detector);
