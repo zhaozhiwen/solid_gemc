@@ -110,6 +110,13 @@ const char *GEMC_VERSION = "gemc 2.2";
 	int get_pid(){return 0;}
 #endif
 
+// distinguishing between graphical and batch mode
+QCoreApplication* createApplication(int &argc, char *argv[], double use_gui)
+{
+	if(!use_gui)
+			return new QCoreApplication(argc, argv);
+	return new QApplication(argc, argv);
+}
 
 
 int main( int argc, char **argv )
@@ -122,21 +129,8 @@ int main( int argc, char **argv )
 	
 	double use_gui   = gemcOpt.optMap["USE_GUI"].arg;
 
-  char **myargv = argv;
-  int myargc = argc;
-
-  
-  // to run in batch mode the -platform offscreen option is passed
-  // to QApplication
-  if(use_gui == 0)
-  {
-    myargc = 2;
-    sprintf(myargv[0], "-platform offscreen");
-  //  QApplication gemc_gui( myargc, myargv);
-  }
-  
-	// Initializing QT application
-	QApplication gemc_gui( myargc, myargv);
+//	QCoreApplication* app(createApplication(argc, argv, use_gui));
+	QScopedPointer<QCoreApplication> app(createApplication(argc, argv, use_gui));
 
 	// Initializing gemc splash class
 	// This class will log initialization messages
@@ -206,16 +200,6 @@ int main( int argc, char **argv )
 	map<string, double> gParameters = loadAllParameters(parameterFactoriesMap, gemcOpt, runConds);
 	
 	
-	// Creating the sim_condition map to save to the output
-	gemc_splash.message(" Writing simulation parameters in the output...");
-	
-	// filling gcard option content
-	map<string, string> sim_condition = gemcOpt.getOptMap();
-	// adding detectors conditions to sim_condition
-	mergeMaps(sim_condition, runConds.getDetectorConditionsMap());
-	// adding parameters value to sim_condition
-	mergeMaps(sim_condition, getParametersMap(gParameters));
-	
 	// Process Hit Map
 	gemc_splash.message(" Building gemc Process Hit Factory...");
 	map<string, HitProcess_Factory> hitProcessMap = HitProcess_Map(gemcOpt.optMap["HIT_PROCESS_LIST"].args);
@@ -238,12 +222,12 @@ int main( int argc, char **argv )
 	// this is what calls Construct inside MDetectorConstruction
 	runManager->SetUserInitialization(ExpHall);
 	
+	
 	///< Physics List
 	string phys_list = gemcOpt.optMap["PHYSICS"].args  ;
 	gemc_splash.message(" Initializing Physics List " + phys_list + "...");
 	runManager->SetUserInitialization(new PhysicsList(gemcOpt));
 
-	
 	// Setting Max step for all the simulation. This is historically needed to limit
 	// the step in magnetic field in vacuum
 	double max_step = gemcOpt.optMap["MAX_FIELD_STEP"].arg;
@@ -282,6 +266,8 @@ int main( int argc, char **argv )
 	if(use_gui)
 		session = new G4UIQt(1, argv);
 
+	
+	
 	// Output File: registering output type, output process factory,
 	// sensitive detectors into Event Action
 	gemc_splash.message(" Initializing Output Action...");
@@ -293,6 +279,27 @@ int main( int argc, char **argv )
 	// physical volumes, sensitive detectors are built here
 	runManager->Initialize();
 
+	
+	
+	// registering activated field in the option so they're written out
+	if(ExpHall->activeFields.size())
+	gemcOpt.optMap["ACTIVEFIELDS"].args = "";
+	
+	for(set<string>::iterator fit = ExpHall->activeFields.begin(); fit != ExpHall->activeFields.end(); fit++)
+		gemcOpt.optMap["ACTIVEFIELDS"].args = gemcOpt.optMap["ACTIVEFIELDS"].args + *fit + " ";
+	
+	
+	// Creating the sim_condition map to save to the output
+	gemc_splash.message(" Writing simulation parameters in the output...");
+	
+	// filling gcard option content
+	map<string, string> sim_condition = gemcOpt.getOptMap();
+	// adding detectors conditions to sim_condition
+	mergeMaps(sim_condition, runConds.getDetectorConditionsMap());
+	// adding parameters value to sim_condition
+	mergeMaps(sim_condition, getParametersMap(gParameters));
+
+	
 	// Bank Map, derived from sensitive detector map
 	gemc_splash.message(" Creating gemc Banks Map...");
 	map<string, gBank> banksMap = read_banks(gemcOpt, runConds.get_systems());
@@ -300,7 +307,7 @@ int main( int argc, char **argv )
 	// Getting UI manager, restoring G4Out to cout
 	G4UImanager* UImanager = G4UImanager::GetUIpointer();
 	UImanager->SetCoutDestination(NULL);
-	
+
 
 	// saving simulation condition in the output file
 	if(outContainer.outType != "no")
@@ -338,7 +345,7 @@ int main( int argc, char **argv )
 	if(use_gui)
 	{
 		gemc_splash.message("Starting GUI...");
-		gemc_gui.processEvents();
+		qApp->processEvents();
 		
 		gemcMainWidget gemcW(&gemcOpt, runManager, ExpHall->SeDe_Map, &hallMap, mats);
 		gemcW.setWindowTitle(GEMC_VERSION);
@@ -368,7 +375,7 @@ int main( int argc, char **argv )
 		}
 		
 		start_events = clock();
-		return gemc_gui.exec();
+		return qApp->exec();
 		// deleting and runManager is now taken care
 		// in the gemc_quit slot
 		delete visManager;
@@ -376,6 +383,7 @@ int main( int argc, char **argv )
 	}
 	else
 	{
+		
 		if(exec_macro != "/control/execute no") UImanager->ApplyCommand(exec_macro.c_str());
 		start_events = clock();
 		if(gemcOpt.optMap["N"].arg>0)
