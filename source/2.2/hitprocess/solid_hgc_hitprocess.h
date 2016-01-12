@@ -1,5 +1,5 @@
-#ifndef SOLID_CC_HITPROCESS_H
-#define SOLID_CC_HITPROCESS_H 1
+#ifndef SOLID_HGC_HITPROCESS_H
+#define SOLID_HGC_HITPROCESS_H 1
 
 // gemc headers
 #include "HitProcess.h"
