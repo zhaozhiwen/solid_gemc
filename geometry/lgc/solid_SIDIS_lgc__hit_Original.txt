@@ -1,1 +1,0 @@
-     solid_SIDIS_lgc  |solid SIDIS lgc hit definition  |                                      id  |  0.*MeV   |    0*ns   |    0*mm   |    0*cm   |    1*ns   |    1*ns   |     100   |     -20   |   10*ns  
