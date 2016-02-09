@@ -1,0 +1,7 @@
+           solid_lgc  |              bankid  |                                 solid_lgc bank ID  |  250   |                  Di  
+           solid_lgc  |                hitn  |                                        Hit Number  |   99   |                  Di  
+           solid_lgc  |              sector  |                                     Sector number  |    1   |                  Di  
+           solid_lgc  |                 pmt  |                                        pmt number  |    2   |                  Di  
+           solid_lgc  |               pixel  |                                      pixel number  |    3   |                  Di  
+           solid_lgc  |                nphe  |                          number of photoelectrons  |    4   |                  Di  
+           solid_lgc  |               avg_t  |                                      Average time  |    5   |                  Dd  

@@ -1,0 +1,17 @@
+Script runs slightly differently than typical gemc detector construction.  INSTEAD of loading a standard config-file, instead one needs to load a config file specified in the "configs" directory.
+
+For example: 
+"./solid_lgc.pl configs/pvdis_CLEO_hybrid2.pl"  should load a version of the PVDIS
+"./solid_lgc.pl configs/sidis_CLEO_hybrid2.pl"  should load a version of the SIDIS
+
+The typical config file (lg_cherenkov.config) is loaded by default where the variables are defined.
+
+You will need the Math::MatrixReal and Math::VectorReal perl packages to run the geometry construction.  You can install them by using cpan, which is typically painless.  See http://www.cpan.org/modules/INSTALL.html for more info.
+
+If you have further questions, you can contact me at mpaolone@jlab.org .
+
+== log =======
+
+initial check in 01/20/16 Michael Paolone
+
+update by 2/9/2016 Zhiwen Zhao
