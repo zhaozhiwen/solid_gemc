@@ -1,3 +1,0 @@
-     solid_PVDIS_lgc  |              bankid  |                           solid_PVDIS_lgc bank ID  |  200   |                  Di  
-     solid_PVDIS_lgc  |                  id  |                                         id number  |    1   |                  Di  
-     solid_PVDIS_lgc  |                hitn  |                                        hit number  |   99   |                  Di  
