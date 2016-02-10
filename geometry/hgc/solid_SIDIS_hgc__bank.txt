@@ -1,4 +1,4 @@
-           solid_hgc  |              bankid  |                                 solid_hgc bank ID  |  200   |                  Di  
+           solid_hgc  |              bankid  |                                 solid_hgc bank ID  |  220   |                  Di  
            solid_hgc  |                hitn  |                                        Hit Number  |   99   |                  Di  
            solid_hgc  |                 pid  |ID of the first particle entering the sensitive volume  |    1   |                  Di  
            solid_hgc  |                mpid  |ID of the mother of the first particle entering the sensitive volume  |    2   |                  Di  

@@ -8,13 +8,13 @@ sub define_hit
 {
 	# uploading the hit definition
 	my %hit = init_hit();
-	$hit{"name"}            = "solid_SIDIS_hgc";
-	$hit{"description"}     = "solid SIDIS hgc hit definition";
+	$hit{"name"}            = "solid_hgc";
+	$hit{"description"}     = "solid hgc hit definition";
 	$hit{"identifiers"}     = "id";
 	$hit{"signalThreshold"} = "0.*MeV";
 	$hit{"timeWindow"}      = "0*ns";
-	$hit{"prodThreshold"}   = "0*mm";
-	$hit{"maxStep"}         = "0*cm";
+	$hit{"prodThreshold"}   = "1*mm";
+	$hit{"maxStep"}         = "1*mm";
 	$hit{"delay"}           = "10*ns";
 	$hit{"riseTime"}        = "1*ns";
 	$hit{"fallTime"}        = "1*ns";
