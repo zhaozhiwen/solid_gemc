@@ -65,7 +65,7 @@ require "solid_SIDIS_hgc_materials.pl";
 require "solid_SIDIS_hgc_mirror.pl";
 
 #hit definition
-require "solid_SIDIS_hgc_hit.pl";
+require "solid_hgc_hit.pl";
 
 # bank definition
-require "solid_SIDIS_hgc_bank.pl";
+require "solid_hgc_bank.pl";
