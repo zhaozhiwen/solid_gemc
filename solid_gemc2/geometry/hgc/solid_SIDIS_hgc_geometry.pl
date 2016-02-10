@@ -36,8 +36,8 @@ make_mirror();
 
 my $DEG=180/3.1415916;
 
-# my $hitype="solid_SIDIS_hgc";
-my $hitype="flux";
+my $hitype="solid_hgc";
+# my $hitype="flux";
 
 my $material_chamber="G4_Al";
 # my $material_gas="G4_Al";
@@ -51,7 +51,8 @@ my $material_window_back = "G4_Al";
 # my $material_window_front_2 = "G4_Al";
 my $material_cone= "G4_GLASS_PLATE";
 # my $material_pmt_surface = "SL_HGC_pmt_surface";
-my $material_pmt_surface = "G4_GLASS_PLATE";
+# my $material_pmt_surface = "G4_GLASS_PLATE";
+my $material_pmt_surface = "SL_HGC_C4F8O";
 my $material_pmt_backend= "Kryptonite";
 my $material_mirror= "G4_GLASS_PLATE";
 
@@ -110,7 +111,7 @@ sub make_chamber
  $detector{"pMany"}       = 1;
  $detector{"exist"}       = 1;
  $detector{"visible"}     = 1;
- $detector{"style"}       = 0;
+ $detector{"style"}       = 1;
  $detector{"sensitivity"} = "no";
  $detector{"hit_type"}    = "no";
  $detector{"identifiers"} = "no";
@@ -230,7 +231,7 @@ sub make_block
       $detector{"ncopy"}       = 1;
       $detector{"pMany"}       = 1;
       $detector{"exist"}       = 1;
-      $detector{"visible"}     = 1;
+      $detector{"visible"}     = 0;
       $detector{"style"}       = 0;
       print_det(\%configuration, \%detector);
     }
@@ -249,7 +250,7 @@ sub make_cone
   
   my $pos_r = $image_y-sin($ang_tilt/$DEG)*$z_w_half;  
   my $pos_z = $image_z+cos($ang_tilt/$DEG)*$z_w_half;
-print "$pos_r $pos_z\n";
+print "cone $pos_r $pos_z\n";
      for(my $i=1; $i<=$N; $i++){
       my $pos_x = $pos_r*cos(($i-1)*$ang_width/$DEG);
       my $pos_y = $pos_r*sin(($i-1)*$ang_width/$DEG);    
@@ -283,6 +284,9 @@ print "$pos_r $pos_z\n";
 
 sub make_pmt
 { 
+#  my $z_w_half = 18.5;
+#  my $pos_z = -($z_w_half-0.5);
+ 
  my $half_width = 10.16; 
 #  my $windowhalf_z = 0.254;
  my $windowhalf_z = 0.001;
@@ -291,7 +295,7 @@ sub make_pmt
  
   my $pos_r = $image_y+sin($ang_tilt/$DEG)*$half_z;  
   my $pos_z = $image_z-cos($ang_tilt/$DEG)*$half_z;
-  print "$pos_r $pos_z\n";
+  print "pmt $pos_r $pos_z\n";
      for(my $i=1; $i<=$N; $i++){
       my $pos_x = $pos_r*cos(($i-1)*$ang_width/$DEG);
       my $pos_y = $pos_r*sin(($i-1)*$ang_width/$DEG);    
@@ -305,17 +309,16 @@ sub make_pmt
       $detector{"description"} = $detector{"name"};
       $detector{"pos"}         = "$pos_x*cm $pos_y*cm $pos_z*cm";
       $detector{"rotation"}    = "$ang_xrot*deg $ang_yrot*deg 0*deg";
-#       $detector{"rotation"}    = "0*deg 0*deg 0*deg";
       $detector{"color"}       = "000000";  #cyan
       $detector{"type"}        = "Box";
       $detector{"dimensions"}  = "$half_width*cm $half_width*cm $half_z*cm";
-      $detector{"material"}    = "Vacuum";
+      $detector{"material"}    = $material_pmt_surface;
       $detector{"mfield"}      = "no";
       $detector{"ncopy"}       = 1;
       $detector{"pMany"}       = 1;
       $detector{"exist"}       = 1;
       $detector{"visible"}     = 1;
-      $detector{"style"}       = 1;
+      $detector{"style"}       = 0;
 #       $detector{"sensitivity"} = "mirror: SL_HGC_mirror_pmt";
 #       $detector{"hit_type"}    = "mirror";
 #       $detector{"identifiers"} = "no";      
@@ -328,13 +331,12 @@ sub make_pmt
       $detector{"description"} = $detector{"name"};
 #       $detector{"pos"}         = "$pos_x*cm $pos_y*cm $pos_z*cm";
 #       $detector{"rotation"}    = "$ang_xrot*deg $ang_yrot*deg 0*deg";
-      $detector{"pos"}         = "0*cm 0*cm $backendhalf_z*cm";
+      $detector{"pos"}         = "0*cm 0*cm $windowhalf_z*cm";
       $detector{"rotation"}    = "0*deg 0*deg 0*deg";
       $detector{"color"}       = "009999";  #cyan
       $detector{"type"}        = "Box";
       $detector{"dimensions"}  = "$half_width*cm $half_width*cm $windowhalf_z*cm";
-#       $detector{"material"}    = $material_pmt_surface;
-      $detector{"material"}    = "Air_Opt";
+      $detector{"material"}    = $material_pmt_surface;
       $detector{"mfield"}      = "no";
       $detector{"ncopy"}       = 1;
       $detector{"pMany"}       = 1;
@@ -382,7 +384,7 @@ sub make_pmt
       $detector{"description"} = $detector{"name"};
 #       $detector{"pos"}         = "$pos_x*cm $pos_y*cm $pos_z*cm";
 #       $detector{"rotation"}    = "$ang_xrot*deg $ang_yrot*deg 0*deg";
-      $detector{"pos"}         = "0*cm 0*cm -$windowhalf_z*cm";
+      $detector{"pos"}         = "0*cm 0*cm -$backendhalf_z*cm";
       $detector{"rotation"}    = "0*deg 0*deg 0*deg";
       $detector{"color"}       = "000000";  #cyan
       $detector{"type"}        = "Box";
@@ -557,9 +559,11 @@ print "$ang\n";   #33.19
       $detector{"exist"}       = 1;
       $detector{"visible"}     = 1;
       $detector{"style"}       = 1;        
+#       $detector{"sensitivity"} = "mirror: SL_HGC_mirror";
+#       $detector{"hit_type"}    = "mirror";
       $detector{"sensitivity"} = "mirror: SL_HGC_mirror";
       $detector{"hit_type"}    = "mirror";
-      $detector{"identifiers"} = "no";      
+      $detector{"identifiers"} = "id manual 888888";      
       print_det(\%configuration, \%detector);           
     }
 }
