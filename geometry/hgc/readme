@@ -1,0 +1,31 @@
+= Intro ===================
+
+Here is HGC simulation setup using "solid_gemc" which is the SoLID simulation program based on GEMC
+
+The setup gives a complete definition of the detector.
+How to run the simulation and analysis result is not here, they are at "subsystem/hgc/analysis"
+
+It's devel version is at "subsystem/hgc/hgc_solid_gemc"
+
+Once it's verified working well itself and with other subsystems, its devel version is copied
+to the production version location at "solid_gemc2/geometry/hgc" with no modification needed
+
+This is to ensure the same setup works as standalone and as part of the whole SoLID simulation
+
+= detail ===================
+
+detector definition are in text files.
+It include geometry and sensitivity,material,mirror,hit,bank defination.
+The perl scripts is are producde these text files
+Except the parameter text file has all external parameter, it is edit by hand.
+
+A perl script will call other perl scripts and use parameter file to produce all other texts by running command below
+source your set_solid
+./solid_SIDIS_hgc.pl config_solid_SIDIS_hgc.dat
+
+The hit defination, bank definations and corresponding hit processing rouine "solid_hgc" of "solid_gemc" have to match producde meaningful result.
+Any change in hit defination and bank defination, you need to modify the source code "solid_hgc" accordingly and recompile "solid_gemc" by following instruction there
+
+= log =========================
+
+initial checkin  2015/12/30 by Zhiwen Zhao

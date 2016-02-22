@@ -196,6 +196,15 @@ sub define_materials
 	$mat{"ncomponents"}   = "2";
 	$mat{"components"}    = "G4_C 0.91533 G4_H 0.08467";
 	print_mat(\%configuration, \%mat);	
+	
+    #Carbon-fiber¨Reinforced polymer composition for mirrors
+    %mat = init_mat();
+    $mat{"name"}          = "SL_HGC_CFRP";
+    $mat{"description"}   = "Carbon-fiber¨Reinforced polymer";
+    $mat{"density"}       = "1.8";  #in g/cm3
+    $mat{"ncomponents"}   = "4";
+    $mat{"components"}    = "G4_C 0.42 G4_N 0.17 G4_O 0.08 G4_H 0.33";	
+    print_mat(\%configuration, \%mat);	
 
 }
 

@@ -54,12 +54,12 @@ my $material_cone= "G4_GLASS_PLATE";
 # my $material_pmt_surface = "G4_GLASS_PLATE";
 my $material_pmt_surface = "SL_HGC_C4F8O";
 my $material_pmt_backend= "Kryptonite";
-my $material_mirror= "G4_GLASS_PLATE";
+my $material_mirror= "SL_HGC_CFRP";
 
 my $N=30; # number of sectors
 my $ang_width=360/$N;  #in degree
-my $ang_tilt = 44.; #degree  #  this is tilt angle of cone and PMTs around the focus axis
-# my $ang_tilt = 55.; #degree  #  this is tilt angle of cone and PMTs around the focus axis
+# my $ang_tilt = 44.; #degree  #  this is tilt angle of cone and PMTs around the focus axis
+my $ang_tilt = 65; #degree  #  this is tilt angle of cone and PMTs around the focus axis
 
 #  all in cm
 my $image_x = 0.;
@@ -70,9 +70,11 @@ my $halfthickness_window_front_1=0.0215;
 my $halfthickness_window_front_2=0.0065;
 my $halfthickness_window_back=0.05;
 
-my $Rmin1_chamber=86;
+# my $Rmin1_chamber=86;
+my $Rmin1_chamber=80;
 my $Rmax1_chamber=265;
-my $Rmin2_chamber=98;
+# my $Rmin2_chamber=98;
+my $Rmin2_chamber=94;
 my $Rmax2_chamber=265;
 my $Rmin1_gas=$Rmin1_chamber+0.5;
 my $Rmax1_gas=$Rmax1_chamber-0.5;
@@ -215,7 +217,7 @@ sub make_window_back
 sub make_block
 {
      for(my $i=1; $i<=$N; $i++){
-      my $sector_start=0.5*$ang_width+$ang_width*($i-1)-0.0005;
+      my $sector_start=0.5*$ang_width+$ang_width*($i-1);
       
       my %detector=init_det();
       $detector{"name"}        = "$DetectorName\_block_$i";
@@ -225,7 +227,7 @@ sub make_block
       $detector{"rotation"}    = "0*deg 0*deg 0*deg";
       $detector{"color"}       = "22CC33";  
       $detector{"type"}        = "Polycone";
-      $detector{"dimensions"}  = "$sector_start*deg 0.0005*deg 2*counts $Rmin1_gas*cm $Rmin2_gas*cm $Rmax1_gas*cm $Rmax2_gas*cm $Zmin_gas*cm $Zmax_gas*cm";      
+      $detector{"dimensions"}  = "$sector_start*deg 0.000005*deg 2*counts $Rmin1_gas*cm $Rmin2_gas*cm $Rmax1_gas*cm $Rmax2_gas*cm $Zmin_gas*cm $Zmax_gas*cm";      
       $detector{"material"}    = $material_block;
       $detector{"mfield"}      = "no";
       $detector{"ncopy"}       = 1;
@@ -248,26 +250,35 @@ sub make_cone
 
 #   my $Dz = 18.;
   
-  my $pos_r = $image_y-sin($ang_tilt/$DEG)*$z_w_half;  
-  my $pos_z = $image_z+cos($ang_tilt/$DEG)*$z_w_half;
+  my $pos_r = $image_y-sin($ang_tilt/$DEG)*$z_w_half+10;  
+  my $pos_z = $image_z+cos($ang_tilt/$DEG)*$z_w_half+10;
 print "cone $pos_r $pos_z\n";
      for(my $i=1; $i<=$N; $i++){
       my $pos_x = $pos_r*cos(($i-1)*$ang_width/$DEG);
       my $pos_y = $pos_r*sin(($i-1)*$ang_width/$DEG);    
-      my $ang_xrot=-($ang_tilt*sin(($i-1)*$ang_width/$DEG));
-      my $ang_yrot=($ang_tilt*cos(($i-1)*$ang_width/$DEG));
+#       my $ang_xrot=-($ang_tilt*sin(($i-1)*$ang_width/$DEG));
+#       my $ang_yrot=($ang_tilt*cos(($i-1)*$ang_width/$DEG));
+      my $ang_zrot=-($i-1)*$ang_width;
+      my $ang_xrot=0;
+      my $ang_yrot=$ang_tilt; 
+
+#       my $z1=$pos_z-$z_w_half-0.002;
+#       my $z2=$pos_z-$z_w_half-0.001;
+#       my $z3=$pos_z-$z_w_half;
+#       my $z4=$pos_z+$z_w_half;      
+      
       
       my %detector=init_det();
       $detector{"name"}        = "$DetectorName\_cone_$i";
       $detector{"mother"}      = "$DetectorName\_gas";
       $detector{"description"} = $detector{"name"};
-      $detector{"pos"}         = "$pos_x*cm $pos_y*cm $pos_z*cm";
-      $detector{"rotation"}    = "$ang_xrot*deg $ang_yrot*deg 0*deg";
-#       $detector{"rotation"}    = "0*deg 0*deg 0*deg";
-      $detector{"color"}       = "FFFF00";  #yellow
+      $detector{"pos"}         = "$pos_x*cm $pos_y*cm $pos_z*cm";  
+      $detector{"rotation"}    =  "ordered: zxy $ang_zrot*deg $ang_xrot*deg $ang_yrot*deg";
+      $detector{"color"}       = "3dff84";  
       $detector{"type"}        = "Cons";
-      $detector{"dimensions"}  = "$rmin_w_front_cone*cm $rmax_w_front_cone*cm $rmin_w_end*cm $rmax_w_end*cm $z_w_half*cm 0*deg 360*deg";
-#       $detector{"dimensions"}  = "$rmin_w_front_cone*cm $rmax_w_front_cone*cm $rmin_w_end*cm $rmax_w_end*cm $Dz*cm 0*deg 360*deg";      
+      $detector{"dimensions"}  = "$rmin_w_front_cone*cm $rmax_w_front_cone*cm $rmin_w_end*cm $rmax_w_end*cm $z_w_half*cm 0*deg 360*deg";   
+#       $detector{"type"}        = "Polycone";
+#       $detector{"dimensions"}  = "0*deg 360*deg 4*counts 0*cm 0*cm $rmin_w_front_cone*cm $rmin_w_end*cm $rmin_w_front_cone*cm $rmin_w_front_cone*cm $rmax_w_front_cone*cm $rmin_w_end*cm $z1*cm $z2*cm $z3*cm $z4*cm";
       $detector{"material"}    = $material_cone;
       $detector{"mfield"}      = "no";
       $detector{"ncopy"}       = 1;
@@ -278,7 +289,7 @@ print "cone $pos_r $pos_z\n";
       $detector{"sensitivity"} = "mirror: SL_HGC_mirror";
       $detector{"hit_type"}    = "mirror";
       $detector{"identifiers"} = "no";      
-      print_det(\%configuration, \%detector);
+      print_det(\%configuration, \%detector);      
     }
 }
 
@@ -293,22 +304,31 @@ sub make_pmt
  my $backendhalf_z = 0.001; 
  my $half_z = $windowhalf_z + $backendhalf_z; 
  
-  my $pos_r = $image_y+sin($ang_tilt/$DEG)*$half_z;  
-  my $pos_z = $image_z-cos($ang_tilt/$DEG)*$half_z;
+  my $pos_r = $image_y+sin($ang_tilt/$DEG)*$half_z+10;  
+  my $pos_z = $image_z-cos($ang_tilt/$DEG)*$half_z+10;
   print "pmt $pos_r $pos_z\n";
      for(my $i=1; $i<=$N; $i++){
       my $pos_x = $pos_r*cos(($i-1)*$ang_width/$DEG);
       my $pos_y = $pos_r*sin(($i-1)*$ang_width/$DEG);    
-      my $ang_xrot=-($ang_tilt*sin(($i-1)*$ang_width/$DEG));
-      my $ang_yrot=($ang_tilt*cos(($i-1)*$ang_width/$DEG));
+#       my $ang_xrot=-($ang_tilt*sin(($i-1)*$ang_width/$DEG));
+#       my $ang_yrot=($ang_tilt*cos(($i-1)*$ang_width/$DEG));
+#       my $ang_zrot=-($i-1)*$ang_width;
+      my $ang_zrot=-($i-1)*$ang_width;
+      my $ang_xrot=0;
+      my $ang_yrot=$ang_tilt; 
+
+#       my $posz=-(18.5-$half_z);
 
       my %detector;      
       %detector=init_det();      
       $detector{"name"}        = "$DetectorName\_pmt_$i";
+#       $detector{"mother"}      = "$DetectorName\_cone_$i";
       $detector{"mother"}      = "$DetectorName\_gas";
       $detector{"description"} = $detector{"name"};
       $detector{"pos"}         = "$pos_x*cm $pos_y*cm $pos_z*cm";
-      $detector{"rotation"}    = "$ang_xrot*deg $ang_yrot*deg 0*deg";
+      $detector{"rotation"}    =  "ordered: zxy $ang_zrot*deg $ang_xrot*deg $ang_yrot*deg";
+#       $detector{"pos"}         = "0*cm 0*cm $posz*cm";
+#       $detector{"rotation"}    = "0*deg 0*deg 0*deg";
       $detector{"color"}       = "000000";  #cyan
       $detector{"type"}        = "Box";
       $detector{"dimensions"}  = "$half_width*cm $half_width*cm $half_z*cm";
@@ -404,7 +424,8 @@ sub make_mirror
 {
 #=== cons of mirror ========================================  
 #   // max and min polar angles in SIDIS in degree
-  my $Angle_in = 7.5;
+#   my $Angle_in = 7.5;
+  my $Angle_in = 7.3;
   my $Angle_out = 15.5; 
 
 #   // z dist. between the target and front/back walls of the tank: 350 + 306 & 350 + 396
@@ -506,7 +527,7 @@ print "$ang\n";   #33.19
       $detector{"type"}        = "Cons";
       $detector{"dimensions"}  = "$R_front_in*cm $R_front_out*cm $R_end_in*cm $R_end_out*cm $Z_half_w*cm $ang_start*deg $ang_width*deg";
       $detector{"material"}    = "Component";
-#       $detector{"material"}    = "$material_pmt";
+#       $detector{"material"}    = "$material_pmt_backend";
 #       $detector{"mfield"}      = "no";
 #       $detector{"ncopy"}       = 1;
 #       $detector{"pMany"}       = 1;
@@ -529,7 +550,7 @@ print "$ang\n";   #33.19
       $detector{"type"}        = "Sphere";
       $detector{"dimensions"}  = "$R_in*cm $R_out*cm 0*deg 360*deg 0*deg 90*deg";
       $detector{"material"}    = "Component";
-#       $detector{"material"}    = "$material_pmt";      
+#       $detector{"material"}    = "$material_pmt_backend";      
 #       $detector{"ncopy"}       = 1;
 #       $detector{"pMany"}       = 1;
 #       $detector{"exist"}       = 1;
