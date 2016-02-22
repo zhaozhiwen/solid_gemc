@@ -4,3 +4,4 @@
         SL_HGC_mylar  |                  SL_HGC_mylar  |     1.397  |         3  |                  G4_H 0.042 G4_C 0.625 G4_O 0.333  | none  | none  | none  | none  | none  
        SL_HGC_kevlar  |                 SL_HGC_kevlar  |      1.44  |         4  |           G4_H 0.04 G4_C 0.71 G4_O 0.12 G4_N 0.13  | none  | none  | none  | none  | none  
   SL_HGC_pmt_surface  |            SL_HGC_pmt_surface  |     1.032  |         2  |                         G4_C 0.91533 G4_H 0.08467  | none  | none  | none  | none  | none  
+         SL_HGC_CFRP  |Carbon-fiber¨Reinforced polymer  |       1.8  |         4  |           G4_C 0.42 G4_N 0.17 G4_O 0.08 G4_H 0.33  | none  | none  | none  | none  | none  
