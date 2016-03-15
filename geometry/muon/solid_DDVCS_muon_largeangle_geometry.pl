@@ -22,7 +22,7 @@ make_solid_DDVCS_muon_largeangle();
 
 sub make_solid_DDVCS_muon_largeangle
 {
-    my $z=420;
+    my $z=415;
     my %detector=init_det();
     $detector{"name"}        = "$DetectorName";
     $detector{"mother"}      = "$DetectorMother";
@@ -32,10 +32,10 @@ sub make_solid_DDVCS_muon_largeangle
     $detector{"color"}      = $color;
     $detector{"type"}       = "Cons";
     my $Rmin1 = 290;
-    my $Rmax1 = 330;
+    my $Rmax1 = 326;
     my $Rmin2 = 290;
-    my $Rmax2 = 330;
-    my $Dz    = 220;
+    my $Rmax2 = 326;
+    my $Dz    = 225;
     my $Sphi  = 0;
     my $Dphi  = 360;
     $detector{"dimensions"}  = "$Rmin1*cm $Rmax1*cm $Rmin2*cm $Rmax2*cm $Dz*cm $Sphi*deg $Dphi*deg";
