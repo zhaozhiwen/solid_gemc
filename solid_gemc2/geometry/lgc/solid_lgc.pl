@@ -121,6 +121,14 @@ if($buildBlinders){
 	make_blinder();
 }
 
+if($use_pvdis){
+require "solid_PVDIS_lgc_virtualplane.pl";
+solid_PVDIS_lgc_virtualplane();
+}
+else {
+require "solid_SIDIS_lgc_virtualplane.pl";
+solid_SIDIS_lgc_virtualplane();
+}
 require 'solid_lgc_mirror.pl';
 require 'solid_lgc_OptMats.pl';
 require 'solid_lgc_bank.pl';
