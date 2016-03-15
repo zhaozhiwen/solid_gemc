@@ -40,7 +40,7 @@ sub make_tank_BaBar_pvdis
     $detector{"rotation"}   = "0*deg 0*deg 0*deg";
     $detector{"color"}      = "FF9900";
     $detector{"type"}       = "Polycone";
-    $detector{"dimensions"} = "0.0*deg 360.0*deg 2 65.25*cm 70.65*cm 150.54*cm 169.57*cm 200.00*cm 225.0*cm";
+    $detector{"dimensions"} = "0.0*deg 360.0*deg 2*counts 65.25*cm 70.65*cm 150.54*cm 169.57*cm 200.00*cm 225.0*cm";
     $detector{"material"}   = "Component";
     $detector{"mfield"}     = "no";
     $detector{"ncopy"}      = 1;
@@ -61,7 +61,7 @@ sub make_tank_BaBar_pvdis
     $detector{"rotation"}   = "0*deg 0*deg 0*deg";
     $detector{"color"}      = "FF9900";
     $detector{"type"}       = "Polycone";
-    $detector{"dimensions"} = "0.0*deg 360.0*deg 4  240.0*cm  190.0*cm  70.65*cm  87.05*cm 257.0*cm  265.0*cm  265.0*cm  265.0*cm 209.0*cm  225.0*cm  225.0*cm  301.0*cm";
+    $detector{"dimensions"} = "0.0*deg 360.0*deg 4*counts  240.0*cm  190.0*cm  70.65*cm  87.05*cm 257.0*cm  265.0*cm  265.0*cm  265.0*cm 209.0*cm  225.0*cm  225.0*cm  301.0*cm";
     $detector{"material"}   = "Component";
     $detector{"mfield"}     = "no";
     $detector{"ncopy"}      = 1;
@@ -110,7 +110,7 @@ sub make_tank_CLEO_pvdis
  #   $detector{"dimensions"}  = "0*deg 180*deg 4 65*cm 67*cm 85*cm 85*cm 144*cm 155*cm 265*cm 265*cm 194*cm 209.01*cm 209.01*cm 301*cm";
  #   $detector{"dimensions"}  = "0*deg 180*deg 4 71*cm 73*cm 73*cm 85*cm 144*cm 155*cm 265*cm 265*cm 194*cm 209.01*cm 209.01*cm 301*cm"; #for cross-section of tank
 
-    $detector{"dimensions"}  = "0*deg 360*deg 4 65*cm 67*cm 67*cm 85*cm 144*cm 155*cm 265*cm 265*cm 194*cm 209.01*cm 209.01*cm 301*cm";
+    $detector{"dimensions"}  = "0*deg 360*deg 4*counts 65*cm 67*cm 67*cm 85*cm 144*cm 155*cm 265*cm 265*cm 194*cm 209.01*cm 209.01*cm 301*cm";
 #    $detector{"dimensions"}  = "0*deg 180*deg 4 65*cm 67*cm 67*cm 85*cm 144*cm 155*cm 265*cm 265*cm 194*cm 209.01*cm 209.01*cm 301*cm";
 
 
@@ -165,7 +165,7 @@ sub make_tank_CLEO_pvdis
     $detector{"rotation"}    = "0*deg 0*deg 0*deg";
     $detector{"color"}       = "FF9900";
     $detector{"type"}        = "Polycone";
-    $detector{"dimensions"}  = "0*deg 360*deg 4 71*cm 73*cm 73*cm 85*cm 144*cm 155*cm 265*cm 265*cm 194*cm 209.01*cm 209.01*cm 301*cm";
+    $detector{"dimensions"}  = "0*deg 360*deg 4*counts 71*cm 73*cm 73*cm 85*cm 144*cm 155*cm 265*cm 265*cm 194*cm 209.01*cm 209.01*cm 301*cm";
     $detector{"mfield"}      = "no";
     $detector{"material"}   = "Component";
     $detector{"ncopy"}       = 1;
@@ -291,7 +291,7 @@ sub make_tank_CLEO_sidis
     $detector{"color"}       = "FF9900";
     $detector{"type"}        = "Polycone";
     #$detector{"dimensions"}  = "0*deg 360*deg 2 58*cm 71*cm 127*cm 144*cm 97*cm 194*cm";
-    $detector{"dimensions"}  = "0*deg 360*deg 2 58*cm 65*cm 127*cm 144*cm 97*cm 194*cm";
+    $detector{"dimensions"}  = "0*deg 360*deg 2*counts 58*cm 65*cm 127*cm 144*cm 97*cm 194*cm";
     #$detector{"material"}    = "SIDIS_CO2_gas";
     $detector{"material"}   = "SL_LGCCgas_SIDIS";
     $detector{"mfield"}      = "no";
@@ -338,7 +338,7 @@ sub make_snout
     $detector{"color"}       = "FF9900";
     $detector{"type"}        = "Polycone";
     #$detector{"dimensions"}  = "0*deg 360*deg 4 71*cm 73*cm 73*cm 85*cm 144*cm 155*cm 265*cm 265*cm 194*cm 209.01*cm 209.01*cm 301*cm";
-    $detector{"dimensions"}  = "0*deg 360*deg 4 65*cm 67*cm 85*cm 85*cm 144*cm 155*cm 265*cm 265*cm 194*cm 209.01*cm 209.01*cm 301*cm";
+    $detector{"dimensions"}  = "0*deg 360*deg 4*counts 65*cm 67*cm 85*cm 85*cm 144*cm 155*cm 265*cm 265*cm 194*cm 209.01*cm 209.01*cm 301*cm";
 #    $detector{"dimensions"}  = "0*deg 180*deg 4 71*cm 73*cm 73*cm 85*cm 144*cm 155*cm 265*cm 265*cm 194*cm 209.01*cm 209.01*cm 301*cm"; #for cross-section of tank
     $detector{"material"}    = "Lead";
     $detector{"mfield"}      = "no";
