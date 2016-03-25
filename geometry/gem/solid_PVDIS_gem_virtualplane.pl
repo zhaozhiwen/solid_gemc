@@ -33,7 +33,7 @@ my $Rout3	= $parameters{"Rout3"};
 my $Rout4	= $parameters{"Rout4"};
 my $Rout5	= $parameters{"Rout5"};
 
- my @PlateZ = ($PlateZ1-1,$PlateZ2-1,$PlateZ3-1,$PlateZ4-1,$PlateZ5-1);
+ my @PlateZ = ($PlateZ1-0.9,$PlateZ2-0.9,$PlateZ3-0.9,$PlateZ4-0.9,$PlateZ5-0.9);
  my @Rin    = ($Rin1,$Rin2,$Rin3,$Rin4,$Rin5);
  my @Rout   = ($Rout1,$Rout2,$Rout3,$Rout4,$Rout5);
  
