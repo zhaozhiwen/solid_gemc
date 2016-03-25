@@ -52,9 +52,13 @@ $configuration{"variation"} = "Original";
 #Geometry definition
 require "solid_PVDIS_baffle_babarbafflemore1_enclosure_geometry.pl";
 solid_PVDIS_baffle_babarbafflemore1_enclosure();
+require "solid_PVDIS_baffle_babarbafflemore1_photonblock.pl";
+solid_PVDIS_baffle_babarbafflemore1_photonblock();
+require "solid_PVDIS_baffle_babarbafflemore1_shldPOLY.pl";
+solid_PVDIS_baffle_babarbafflemore1_shldPOLY();
 
 #materials definition 
-# require "./solid_target_He3_materials.pl";
+require "solid_PVDIS_baffle_materials.pl";
 
 #hit definition 
 
