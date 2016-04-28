@@ -8,7 +8,8 @@ our %parameters;
 use Getopt::Long;
 use Math::Trig;
 
-my $DetectorName = 'solid_PVDIS_target_LD2_enclosure';
+# my $DetectorName = 'solid_PVDIS_target_LD2_enclosure';
+my $DetectorName = 'solid_PVDIS_target_enclosure';
 
 my $DetectorMother="root";
 
