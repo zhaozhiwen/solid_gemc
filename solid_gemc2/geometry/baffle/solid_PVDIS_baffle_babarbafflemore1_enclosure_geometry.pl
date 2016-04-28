@@ -53,7 +53,7 @@ sub make_baffle_plate_inner
     my %detector=init_det();
     $detector{"name"}        = "$DetectorName\_plateinner$n_c";
     $detector{"mother"}      = "$DetectorMother" ;
-    if ($n==1) {$detector{"mother"}    = "solid_PVDIS_target_LD2_enclosure_TACV";}
+    if ($n==1) {$detector{"mother"}    = "solid_PVDIS_target_enclosure_TACV";}
     $detector{"description"} = $detector{"name"};
     $detector{"pos"}        = "0*cm 0*cm $PlateZ[$n-1]*cm";
     if ($n==1) {$detector{"pos"}        = "0*cm 0*cm 30*cm";}
@@ -91,7 +91,7 @@ sub make_baffle_plate_outer
     my %detector=init_det();
     $detector{"name"}        = "$DetectorName\_plateouter$n_c";
     $detector{"mother"}      = "$DetectorMother" ;
-    if ($n==1) {$detector{"mother"}    = "solid_PVDIS_target_LD2_enclosure_TACV";}
+    if ($n==1) {$detector{"mother"}    = "solid_PVDIS_target_enclosure_TACV";}
     $detector{"description"} = $detector{"name"};
     $detector{"pos"}        = "0*cm 0*cm $PlateZ[$n-1]*cm";
     if ($n==1) {$detector{"pos"}        = "0*cm 0*cm 30*cm";}
@@ -128,7 +128,7 @@ sub make_baffle_plate   #viutral container for baffle plate
     my %detector=init_det();
     $detector{"name"}        = "$DetectorName\_plate$n_c";
     $detector{"mother"}      = "$DetectorMother";
-    if ($n==1) {$detector{"mother"}    = "solid_PVDIS_target_LD2_enclosure_TACV";}
+    if ($n==1) {$detector{"mother"}    = "solid_PVDIS_target_enclosure_TACV";}
     $detector{"description"} = $detector{"name"};
     $detector{"pos"}        = "0*cm 0*cm $PlateZ[$n-1]*cm";
     if ($n==1) {$detector{"pos"}        = "0*cm 0*cm 30*cm";}
