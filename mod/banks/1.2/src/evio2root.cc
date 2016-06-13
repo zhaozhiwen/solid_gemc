@@ -102,7 +102,8 @@ int main(int argc, char **argv)
 					// Using Nd for all variables.
 					rTrees[it->first].addVariable(banksMap[it->first].name[i], "Nd");
 				}
-				if(WRAW == "yes")
+				if(WRAW == "yes" && it->first == "flux")
+// 				if(WRAW == "yes")
 				{
 					// adding raws infos to bank
 					for(unsigned i=0; i<banksMap["raws"].name.size(); i++)
