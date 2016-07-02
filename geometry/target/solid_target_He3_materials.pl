@@ -82,8 +82,8 @@ sub define_material
 	$mat{"description"}   = "SIDIS He3 gas target at 10amg";
 	$mat{"density"}       = "0.001345";  #in g/cm3,10amg, 10*44.6(amg=mol/m3)*3.016(g/mol)=1.345e-3g/cm3
 	$mat{"ncomponents"}   = "1";
-	$mat{"components"}    = "helium3Gas 1";#FIX_HERE: GEMC2 still cannot handel Isotopes externally,still defined in material_factory.cc
-	#somehow SL_target_He3_He3_10amg doesn't work for GEMC 2.2, but work for GEMC 2.1, it could be related to isotope helium3 and helium3Gas in GEMC source code materials/material_factory.cc, I don't see what's difference between 2.1 and 2.2	
+	$mat{"components"}    = "helium3Gas 1";
+	#GEMC2 still cannot handel Isotopes externally, element helium3 defined in material_factory.cc can't be used here directly, material helium3Gas is defined there even though with wrong density. we use helium3Gas here,but replace it with right density
 	print_mat(\%configuration, \%mat);
 
 	#--Glass_GE180
@@ -113,6 +113,15 @@ sub define_material
 	$mat{"ncomponents"}   = "5";
 	$mat{"components"}    = "G4_SILICON_DIOXIDE 0.608 G4_ALUMINUM_OXIDE 0.143 G4_CALCIUM_OXIDE 0.065 SL_target_He3_BaO 0.182 SL_target_He3_SrO 0.002";
 	print_mat(\%configuration, \%mat);
+	
+	#Tungsten Powder	
+	%mat = init_mat();
+	$mat{"name"}          = "SL_target_He3_TungstenPowder";
+	$mat{"description"}   = "Tungsten Powder";
+	$mat{"density"}       = "11.25";  #in g/cm3
+	$mat{"ncomponents"}   = "1";
+	$mat{"components"}    = "G4_W 1";
+	print_mat(\%configuration, \%mat);	
 	
 }
 define_material();

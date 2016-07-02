@@ -15,7 +15,7 @@ my $z_target			= $parameters{"z_target"};
 my $z_collimator_upstream	= $parameters{"z_collimator_upstream"};
 my $z_collimator_downstream	= $parameters{"z_collimator_downstream"};
 
-my $material_collimator = "G4_W";
+my $material_collimator = "SL_target_He3_TungstenPowder";
 
 sub solid_SIDIS_target_He3
 {
@@ -40,11 +40,11 @@ sub make_target
  my @Dz   = (20.012,20.0,20.0,0.006,0.006);
  my @name = ("TRGB","TCEL","TLHE","TLW1","TLW2"); 
  my @mother = ("$DetectorMother","$DetectorName\_TRGB","$DetectorName\_TRGB","$DetectorName\_TRGB","$DetectorName\_TRGB");
-#  my @mat  = ("G4_Galactic","SL_target_He3_Glass_GE180","SL_target_He3_He3_10amg","SL_target_He3_Glass_GE180","SL_target_He3_Glass_GE180"); 
+ my @mat  = ("G4_Galactic","SL_target_He3_Glass_GE180","SL_target_He3_He3_10amg","SL_target_He3_Glass_GE180","SL_target_He3_Glass_GE180"); 
 #somehow SL_target_He3_He3_10amg doesn't work for GEMC 2.2, but work for GEMC 2.1, it could be related to isotope helium3 and helium3Gas in GEMC source code materials/material_factory.cc, I don't see what's difference between 2.1 and 2.2
-my @mat  = ("G4_Galactic","SL_target_He3_Glass_GE180","He3_10amg","SL_target_He3_Glass_GE180","SL_target_He3_Glass_GE180");
+# my @mat  = ("G4_Galactic","SL_target_He3_Glass_GE180","He3_10amg","SL_target_He3_Glass_GE180","SL_target_He3_Glass_GE180");
 
-http://galileo.phys.virginia.edu/research/groups/spinphysics/glass_properties.html
+# http://galileo.phys.virginia.edu/research/groups/spinphysics/glass_properties.html
 
  for(my $n=1; $n<=$NUM; $n++)
  {
