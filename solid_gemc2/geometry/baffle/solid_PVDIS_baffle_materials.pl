@@ -58,7 +58,7 @@ our %configuration = load_configuration($ARGV[0]);
 
 sub define_material
 {
-
+    $configuration{"variation"} = shift;
 	my %mat;
 	
 ##########################
@@ -78,6 +78,6 @@ sub define_material
 	print_mat(\%configuration, \%mat);
 
 }
-define_material();
+# define_material();
 
 
