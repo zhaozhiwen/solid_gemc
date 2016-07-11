@@ -59,6 +59,7 @@ solid_PVDIS_baffle_babarbafflemore1_shldPOLY();
 
 #materials definition 
 require "solid_PVDIS_baffle_materials.pl";
+define_material("Original");
 
 #hit definition 
 
