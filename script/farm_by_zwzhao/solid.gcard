@@ -1,0 +1,63 @@
+<gcard>
+<option name="DBHOST" value="soliddb"/>
+<option name="DATABASE" value="test"/>
+<option name="DBUSER" value="soliduser"/>
+<option name="DBPSWD" value="ilovesolid"/>
+
+<detector name="/home/zwzhao/solid/solid_svn/solid/solid_gemc2/geometry/magnet/solid_solenoid" factory="TEXT" variation="Original"/>
+<detector name="/home/zwzhao/solid/solid_svn/solid/solid_gemc2/geometry/ec/solid_SIDIS_ec_largeangle" factory="TEXT" variation="Original"/>
+<detector name="/home/zwzhao/solid/solid_svn/solid/solid_gemc2/geometry/ec/solid_SIDIS_ec_forwardangle" factory="TEXT" variation="Original"/>
+<detector name="/home/zwzhao/solid/solid_svn/solid/solid_gemc2/geometry/hgc/solid_SIDIS_hgc" factory="TEXT" variation="Original"/>
+<detector name="/home/zwzhao/solid/solid_svn/solid/solid_gemc2/geometry/lgc/lg_cherenkov" factory="TEXT" variation="SIDIS"/>
+<detector name="/home/zwzhao/solid/solid_svn/solid/solid_gemc2/geometry/mrpc/solid_SIDIS_mrpc_forwardangle" factory="TEXT" variation="Original"/>
+<detector name="/home/zwzhao/solid/solid_svn/solid/solid_gemc2/geometry/spd/solid_SIDIS_spd_forwardangle" factory="TEXT" variation="Original"/>
+<detector name="/home/zwzhao/solid/solid_svn/solid/solid_gemc2/geometry/spd/solid_SIDIS_spd_largeangle" factory="TEXT" variation="Original"/>
+<detector name="/home/zwzhao/solid/solid_svn/solid/solid_gemc2/geometry/gem/solid_SIDIS_gem" factory="TEXT" variation="Original"/>
+<detector name="/home/zwzhao/solid/solid_svn/solid/solid_gemc2/geometry/target/solid_SIDIS_target_He3" factory="TEXT" variation="Original"/>
+<detector name="/home/zwzhao/solid/solid_svn/solid/solid_gemc2/geometry/beamline/solid_SIDIS_beamline_He3" factory="TEXT" variation="Original"/>
+
+<option name="INTEGRATEDRAW" value="flux"/>
+
+<option name="RECORD_PASSBY" value="1"/>
+<option name="SAVE_ALL_MOTHERS" value="1"/>
+
+<option name="HIT_PROCESS_LIST" value="solid"/>
+<option name="PHYSICS" value="QGSP_BERT_HP+STD+Optical"/>
+<option name="HALL_MATERIAL" value="G4_AIR"/>
+
+<option name="MAX_X_POS" value="20000"/>
+<option name="MAX_Y_POS" value="20000"/>
+<option name="MAX_Z_POS" value="20000"/>
+<option name="HALL_DIMENSIONS" value="20*m,20*m,20*m"/>
+
+<option name="FIELD_DIR" value="/home/zwzhao/solid/solid_svn/solid/solid_gemc2/field"/>
+<option name="HALL_FIELD" value="solenoid_CLEOv8"/>
+
+<option name="OUTPUT" value="evio,out.evio"/>
+<option name="USE_GUI"  value="0"/>
+
+</gcard>
+
+<!--  comment out
+<option name="FIELD_VERBOSITY"  value="100"/>
+<option name="GEO_VERBOSITY"  value="100"/>
+
+use this to check overlap
+<option name="CHECK_OVERLAPS"  value="1"/>
+<option name="USE_GUI"  value="0"/>
+
+use this to run batch mode for txt or evio output
+<option name="N" value="1"/>
+<option name="OUTPUT" value="txt,output.txt"/>
+<option name="OUTPUT" value="evio,output.evio"/>
+<option name="USE_GUI"  value="0"/>
+
+use this for interactive mode
+<option name="EXEC_MACRO" value="../../solid_gemc2/script/solid_slice.vis"/>
+<option name="geometry" value="1000x1000"/>
+<option name="HIGH_RES" value="1"/>
+<option name="USE_GUI"  value="1"/>
+
+use "gemc -help" to see all options
+
+-->
