@@ -12,7 +12,7 @@ wait for output files, out.*.evio, out.*.root and out.*.log will appear in the d
 If any job fails, you may only see out.*.log files, check files at ~/.farm_out for detailed reason
 ====================================================
 
-You may use TChain to read all root files at once or use "hadd" to add all root files into a single one.
+You may use "hadd" to add all root files into a single one.
 
 by default, it use the official solid simulation installation on ifarm, to change it edit the file "do_it_all.sh"
 
