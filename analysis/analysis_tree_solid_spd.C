@@ -26,7 +26,7 @@ vector<int> *solid_spd_id=0,*solid_spd_hitn=0;
 vector<int> *solid_spd_pid=0,*solid_spd_mpid=0,*solid_spd_tid=0,*solid_spd_mtid=0,*solid_spd_otid=0;
 vector<double> *solid_spd_trackE=0,*solid_spd_totEdep=0,*solid_spd_avg_x=0,*solid_spd_avg_y=0,*solid_spd_avg_z=0,*solid_spd_avg_lx=0,*solid_spd_avg_ly=0,*solid_spd_avg_lz=0,*solid_spd_px=0,*solid_spd_py=0,*solid_spd_pz=0,*solid_spd_vx=0,*solid_spd_vy=0,*solid_spd_vz=0,*solid_spd_mvx=0,*solid_spd_mvy=0,*solid_spd_mvz=0,*solid_spd_avg_t=0;
 
-void setup_tree_solid_spd(TTree *tree_solid_spd)
+void setup_tree_solid_spd(TTree *tree_solid_spd,bool debug=false)
 {  
 tree_solid_spd->SetBranchAddress("hitn",&solid_spd_hitn);
 tree_solid_spd->SetBranchAddress("id",&solid_spd_id);
@@ -53,6 +53,14 @@ tree_solid_spd->SetBranchAddress("mvx",&solid_spd_mvx);
 tree_solid_spd->SetBranchAddress("mvy",&solid_spd_mvy);
 tree_solid_spd->SetBranchAddress("mvz",&solid_spd_mvz);
 tree_solid_spd->SetBranchAddress("avg_t",&solid_spd_avg_t);
+
+if(debug){
+char *branchname_spd[26]={"hitn","id","pid","mpid","tid","mtid","otid","trackE","totEdep","trackE","avg_x","avg_y","avg_z","avg_lx","avg_ly","avg_lz","px","py","pz","vx","vy","vz","mvx","mvy","mvz","avg_t"};
+cout << endl << "tree_solid_spd" << endl;
+for (Int_t i=0;i<26;i++) { 
+cout << branchname_spd[i] << " " <<  tree_solid_spd->GetBranch(branchname_spd[i])->GetLeaf(branchname_spd[i])->GetTypeName() << ",";
+}
+}
 
 return ;
 
