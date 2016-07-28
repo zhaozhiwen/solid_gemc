@@ -5,6 +5,8 @@
 #include <TCanvas.h>
 #include <TFile.h>
 #include <TTree.h>
+#include <TBranch.h>
+#include <TLeaf.h>
 #include <TChain.h>
 #include <TH1.h>
 #include <TH2.h>
@@ -26,12 +28,12 @@
 
 using namespace std;
 
-void analysis(string input_filename)
+void analysis(string input_filename,bool debug=false)
 {
 gROOT->Reset();
 gStyle->SetPalette(1);
-gStyle->SetOptStat(111111);
-gStyle->SetOptFit(111111);
+gStyle->SetOptStat(0);
+gStyle->SetOptFit(0);
 
 const double DEG=180./3.1415926;
 
@@ -41,6 +43,13 @@ sprintf(the_filename, "%s",input_filename.substr(0,input_filename.rfind(".")).c_
 // char output_filename[200];
 // sprintf(output_filename, "%s_output.root",the_filename);
 // TFile *outputfile=new TFile(output_filename, "recreate");
+
+const int m=12;
+char *detector_name[m]={"GEM 1","GEM 2","GEM 3","GEM 4","GEM 5","GEM 6","LGC","HGC","FASPD","LASPD","FAEC","LAEC"};
+TH2F *hflux_hitxy[m];
+for (Int_t i=0;i<m;i++) {
+hflux_hitxy[i]=new TH2F(Form("hflux_hitxy_%i",i),Form("flux_hitxy %s;x(cm);y(cm)",detector_name[i]),600,-300,300,600,-300,300);
+}
 
 TH1F *htotEdep_spd=new TH1F("htotEdep_spd","htotEdep_spd",100,0,5);
 TH1F *htotEdep_mrpc=new TH1F("htotEdep_mrpc","htotEdep_mrpc",100,0,0.1);
@@ -59,20 +68,29 @@ if (file->IsZombie()) {
 else cout << "open file " << input_filename << endl;    
 
 TTree *tree_header = (TTree*) file->Get("header");
-vector <int> *evn=0,*evn_type=0;
-vector <double> *beamPol=0;
-vector <int> *var1=0,*var2=0,*var3=0,*var4=0,*var5=0,*var6=0,*var7=0,*var8=0;
-tree_header->SetBranchAddress("evn",&evn);
-tree_header->SetBranchAddress("evn_type",&evn_type);
-tree_header->SetBranchAddress("beamPol",&beamPol);
-tree_header->SetBranchAddress("var1",&var1);
-tree_header->SetBranchAddress("var2",&var2);
-tree_header->SetBranchAddress("var3",&var3);
-tree_header->SetBranchAddress("var4",&var4);
-tree_header->SetBranchAddress("var5",&var5);
-tree_header->SetBranchAddress("var6",&var6);
-tree_header->SetBranchAddress("var7",&var7);
-tree_header->SetBranchAddress("var8",&var8);
+vector <string> *header_time=0;
+vector <int> *header_evn=0,*header_evn_type=0;
+vector <double> *header_beamPol=0;
+vector <int> *header_var1=0,*header_var2=0,*header_var3=0,*header_var4=0,*header_var5=0,*header_var6=0,*header_var7=0,*header_var8=0;
+tree_header->SetBranchAddress("time",&header_time);
+tree_header->SetBranchAddress("evn",&header_evn);
+tree_header->SetBranchAddress("evn_type",&header_evn_type);
+tree_header->SetBranchAddress("beamPol",&header_beamPol);
+tree_header->SetBranchAddress("var1",&header_var1);
+tree_header->SetBranchAddress("var2",&header_var2);
+tree_header->SetBranchAddress("var3",&header_var3);
+tree_header->SetBranchAddress("var4",&header_var4);
+tree_header->SetBranchAddress("var5",&header_var5);
+tree_header->SetBranchAddress("var6",&header_var6);
+tree_header->SetBranchAddress("var7",&header_var7);
+tree_header->SetBranchAddress("var8",&header_var8);
+if(debug){
+char *branchname_header[12]={"time","evn","evn_type","beamPol","var1","var2","var3","var4","var5","var6","var7","var8"};
+cout << endl << "tree_header" << endl;
+for (Int_t i=0;i<12;i++) { 
+cout << branchname_header[i] << " " <<  tree_header->GetBranch(branchname_header[i])->GetLeaf(branchname_header[i])->GetTypeName() << ",";
+}
+}
 
 TTree *tree_generated = (TTree*) file->Get("generated");
 vector <int> *gen_pid=0;
@@ -84,6 +102,13 @@ tree_generated->SetBranchAddress("pz",&gen_pz);
 tree_generated->SetBranchAddress("vx",&gen_vx);
 tree_generated->SetBranchAddress("vy",&gen_vy);
 tree_generated->SetBranchAddress("vz",&gen_vz);
+if(debug){
+char *branchname_generated[7]={"pid","px","py","pz","vx","vy","vz"};
+cout << endl << "tree_generated" << endl;
+for (Int_t i=0;i<7;i++) { 
+cout << branchname_generated[i] << " " <<  tree_generated->GetBranch(branchname_generated[i])->GetLeaf(branchname_generated[i])->GetTypeName() << ",";
+}
+}
 
 TTree *tree_flux = (TTree*) file->Get("flux");
 vector<int> *flux_id=0,*flux_hitn=0;
@@ -114,15 +139,22 @@ tree_flux->SetBranchAddress("mvx",&flux_mvx);
 tree_flux->SetBranchAddress("mvy",&flux_mvy);
 tree_flux->SetBranchAddress("mvz",&flux_mvz);
 tree_flux->SetBranchAddress("avg_t",&flux_avg_t);
+if(debug){
+char *branchname_flux[26]={"hitn","id","pid","mpid","tid","mtid","otid","trackE","totEdep","trackE","avg_x","avg_y","avg_z","avg_lx","avg_ly","avg_lz","px","py","pz","vx","vy","vz","mvx","mvy","mvz","avg_t"};
+cout << endl << "tree_flux" << endl;
+for (Int_t i=0;i<26;i++) { 
+cout << branchname_flux[i] << " " <<  tree_flux->GetBranch(branchname_flux[i])->GetLeaf(branchname_flux[i])->GetTypeName() << ",";
+}
+}
 
 TTree *tree_solid_spd = (TTree*) file->Get("solid_spd");
 setup_tree_solid_spd(tree_solid_spd);
-
-TTree *tree_solid_mrpc = (TTree*) file->Get("solid_mrpc");
-setup_tree_solid_mrpc(tree_solid_mrpc);
-
-TTree *tree_solid_ec = (TTree*) file->Get("solid_ec");
-setup_tree_solid_ec(tree_solid_ec);
+// 
+// TTree *tree_solid_mrpc = (TTree*) file->Get("solid_mrpc");
+// setup_tree_solid_mrpc(tree_solid_mrpc);
+// 
+// TTree *tree_solid_ec = (TTree*) file->Get("solid_ec");
+// setup_tree_solid_ec(tree_solid_ec);
 
 int nevent = (int)tree_generated->GetEntries();
 int nselected = 0;
@@ -130,29 +162,30 @@ cout << "nevent " << nevent << endl;
 
 for (Int_t i=0;i<nevent;i++) { 
 // for (Int_t i=0;i<2;i++) { 
-//   cout << i << "\r";
+  cout << i << "\r";
 //   cout << i << "\n";
 
   tree_header->GetEntry(i);
   
-  tree_generated->GetEntry(i);  
-  int pid_gen=0;
-  double theta_gen=0,phi_gen=0,p_gen=0,px_gen=0,py_gen=0,pz_gen=0,vx_gen=0,vy_gen=0,vz_gen=0;      
-  for (int j=0;j<gen_pid->size();j++) {
-//       cout << gen_pid->at(j) << " " << gen_px->at(j) << " " << gen_py->at(j) << " " << gen_pz->at(j) << " " << gen_vx->at(j) << " " << gen_vy->at(j) << " " << gen_vz->at(j) << endl; 
-      pid_gen=gen_pid->at(j);
-      px_gen=gen_px->at(j);
-      py_gen=gen_py->at(j);
-      pz_gen=gen_pz->at(j);
-      vx_gen=gen_vx->at(j);
-      vy_gen=gen_vy->at(j);
-      vz_gen=gen_vz->at(j);
-      p_gen=sqrt(px_gen*px_gen+py_gen*py_gen+pz_gen*pz_gen);
-      theta_gen=acos(pz_gen/p_gen);
-      phi_gen=atan2(py_gen,px_gen);
+//   tree_generated->GetEntry(i);  
+//   int pid_gen=0;
+//   double theta_gen=0,phi_gen=0,p_gen=0,px_gen=0,py_gen=0,pz_gen=0,vx_gen=0,vy_gen=0,vz_gen=0;      
+// //       cout << "gen_pid->size() " << gen_pid->size() << endl;        
+//   for (int j=0;j<gen_pid->size();j++) {
+//       cout << gen_pid->at(j) << " " << gen_px->at(j) << endl;//<< " " << gen_py->at(j) << " " << gen_pz->at(j) << " " << gen_vx->at(j) << " " << gen_vy->at(j) << " " << gen_vz->at(j) << endl; 
+//       pid_gen=gen_pid->at(j);
+//       px_gen=gen_px->at(j);
+//       py_gen=gen_py->at(j);
+//       pz_gen=gen_pz->at(j);
+//       vx_gen=gen_vx->at(j);
+//       vy_gen=gen_vy->at(j);
+//       vz_gen=gen_vz->at(j);
+//       p_gen=sqrt(px_gen*px_gen+py_gen*py_gen+pz_gen*pz_gen);
+//       theta_gen=acos(pz_gen/p_gen);
+//       phi_gen=atan2(py_gen,px_gen);
       
-      cout << "p_gen " << p_gen << endl;
-  }
+//       cout << "p_gen " << p_gen << endl;      
+//   }
 
     tree_flux->GetEntry(i);  
     
@@ -162,18 +195,34 @@ for (Int_t i=0;i<nevent;i++) {
       int detector_ID=flux_id->at(j)/1000000;
       int subdetector_ID=(flux_id->at(j)%1000000)/100000;
       int subsubdetector_ID=((flux_id->at(j)%1000000)%100000)/10000;
-      int component_ID=flux_id->at(j)%10000;
-      
+      int component_ID=flux_id->at(j)%10000;      
      
-      if (detector_ID==5 && subdetector_ID == 1 && subsubdetector_ID == 1)   cout << "particle mom entering SPD " << flux_trackE->at(j) << endl;   
+//       if (detector_ID==5 && subdetector_ID == 1 && subsubdetector_ID == 1)   cout << "particle mom entering SPD " << flux_trackE->at(j) << endl;   
 
-      if (detector_ID==4 && subdetector_ID == 1 && subsubdetector_ID == 1)   cout << "particle mom entering MRPC " << flux_trackE->at(j) << endl;   
+//       if (detector_ID==4 && subdetector_ID == 1 && subsubdetector_ID == 1)   cout << "particle mom entering MRPC " << flux_trackE->at(j) << endl;   
       
-      if (detector_ID==3 && subdetector_ID == 1 && subsubdetector_ID == 1)   cout << "particle mom entering EC " << flux_trackE->at(j) << endl;         
+//       if (detector_ID==3 && subdetector_ID == 1 && subsubdetector_ID == 1)   cout << "particle mom entering EC " << flux_trackE->at(j) << endl;         
       
+      
+      int hit_id=-1;
+      if (detector_ID==1 && subdetector_ID == 1 && subsubdetector_ID == 1) hit_id=0;
+      if (detector_ID==1 && subdetector_ID == 2 && subsubdetector_ID == 1) hit_id=1;	  
+      if (detector_ID==1 && subdetector_ID == 3 && subsubdetector_ID == 1) hit_id=2;	  
+      if (detector_ID==1 && subdetector_ID == 4 && subsubdetector_ID == 1) hit_id=3;	  
+      if (detector_ID==1 && subdetector_ID == 5 && subsubdetector_ID == 1) hit_id=4;	  
+      if (detector_ID==1 && subdetector_ID == 6 && subsubdetector_ID == 1) hit_id=5;	        
+      if (detector_ID==2 && subdetector_ID == 1 && subsubdetector_ID == 1) hit_id=6;
+      if (detector_ID==2 && subdetector_ID == 2 && subsubdetector_ID == 1) hit_id=7;	              
+      if (detector_ID==5 && subdetector_ID == 1 && subsubdetector_ID == 1) hit_id=8;
+      if (detector_ID==5 && subdetector_ID == 2 && subsubdetector_ID == 1) hit_id=9;	                          
+      if (detector_ID==3 && subdetector_ID == 1 && subsubdetector_ID == 1) hit_id=10;
+      if (detector_ID==3 && subdetector_ID == 2 && subsubdetector_ID == 1) hit_id=11;	                    
+      
+      if (0<=hit_id && hit_id<=11) hflux_hitxy[hit_id]->Fill(flux_avg_x->at(j)/10.,flux_avg_y->at(j)/10.);
+//       else cout << "flux_id->at(j) " << flux_id->at(j) << endl;
     }
 
-  tree_solid_spd->GetEntry(i);  
+/*  tree_solid_spd->GetEntry(i);  
   
   double totEdep_spd=process_tree_solid_spd(tree_solid_spd);
   cout << "totEdep_spd " << totEdep_spd << endl;  
@@ -200,7 +249,7 @@ for (Int_t i=0;i<nevent;i++) {
   htotEdep_ec_gen->Fill(totEdep_ec,p_gen);  
   htotEdep_ec_spd->Fill(totEdep_ec,totEdep_spd);
   htotEdep_ec_mrpc->Fill(totEdep_ec,totEdep_mrpc);    
-  htotEdep_spd_mrpc->Fill(totEdep_spd,totEdep_mrpc);      
+  htotEdep_spd_mrpc->Fill(totEdep_spd,totEdep_mrpc);   */   
     
 }
 file->Close();
@@ -208,22 +257,30 @@ file->Close();
 // outputfile->Write();
 // outputfile->Flush();
 
-TCanvas *c = new TCanvas("totEdep","totEdep",1600,900);
-c->Divide(3,1);
-c->cd(1);
+TCanvas *c_totEdep = new TCanvas("totEdep","totEdep",1600,900);
+c_totEdep->Divide(3,1);
+c_totEdep->cd(1);
 htotEdep_spd->Draw();
-c->cd(2);
+c_totEdep->cd(2);
 htotEdep_mrpc->Draw();
-c->cd(3);
+c_totEdep->cd(3);
 htotEdep_ec->Draw();
 
-TCanvas *cc = new TCanvas("totEdep compare","totEdep compare",1600,900);
-cc->Divide(3,1);
-cc->cd(1);
+TCanvas *c_totEdep_compare = new TCanvas("totEdep_compare","totEdep_compare",1600,900);
+c_totEdep_compare->Divide(3,1);
+c_totEdep_compare->cd(1);
 htotEdep_ec_spd->Draw("colz");
-cc->cd(2);
+c_totEdep_compare->cd(2);
 htotEdep_ec_mrpc->Draw("colz");
-cc->cd(3);
+c_totEdep_compare->cd(3);
 htotEdep_spd_mrpc->Draw("colz");
+
+TCanvas *c_flux_hitxy = new TCanvas("flux_hitxy","flux_hitxy",1800,900);
+c_flux_hitxy->Divide(5,2);
+for (Int_t i=0;i<m;i++) {
+c_flux_hitxy->cd(i+1);
+gPad->SetLogz();
+hflux_hitxy[i]->Draw("colz");
+}
 
 }
