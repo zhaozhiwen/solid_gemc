@@ -12,6 +12,13 @@ my $DetectorName = 'solid_SIDIS_spd_forwardangle_virtualplane';
 
 my $DetectorMother="root";
 
+my $z		= $parameters{"z"};
+my $Rmin	= $parameters{"Rmin"};
+my $Rmax	= $parameters{"Rmax"};
+my $Dz   	= $parameters{"Dz"}; # half thickness
+
+my $z_vp = $z-$Dz-0.1;
+
 sub solid_SIDIS_spd_forwardangle_virtualplane
 {
 make_solid_SIDIS_spd_forwardangle_virtualplane_front();
@@ -23,18 +30,11 @@ sub make_solid_SIDIS_spd_forwardangle_virtualplane_front
  $detector{"name"}        = "$DetectorName\_front";
  $detector{"mother"}      = "root";
  $detector{"description"} = $detector{"name"};
- $detector{"pos"}         = "0*cm 0*cm 406.5*cm";
+ $detector{"pos"}         = "0*cm 0*cm $z_vp*cm";
  $detector{"rotation"}    = "0*deg 0*deg 0*deg";
  $detector{"color"}       = "CC6633";
- $detector{"type"}        = "Cons";
-  my $Rmin1 = 96;
-  my $Rmax1 = 210;
-  my $Rmin2 = 96;
-  my $Rmax2 = 210;
-  my $Dz    = 0.001/2;
-  my $Sphi  = 0;
-  my $Dphi  = 360;
- $detector{"dimensions"}  = "$Rmin1*cm $Rmax1*cm $Rmin2*cm $Rmax2*cm $Dz*cm $Sphi*deg $Dphi*deg";
+ $detector{"type"}        = "Tube";
+ $detector{"dimensions"}  = "$Rmin*cm $Rmax*cm 0.001*cm 0*deg 360*deg";
  $detector{"material"}    = "G4_Galactic";
  $detector{"mfield"}      = "no";
  $detector{"ncopy"}       = 1;
