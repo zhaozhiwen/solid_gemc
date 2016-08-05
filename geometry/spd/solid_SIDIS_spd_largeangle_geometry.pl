@@ -34,7 +34,7 @@ sub spd
  $detector{"color"}       = "ff0000";
  $detector{"type"}        = "Tube";
  $detector{"dimensions"}  = "$Rmin*cm $Rmax*cm $Dz*cm 0*deg 360*deg";
- $detector{"material"}    = "G4_POLYSTYRENE";
+ $detector{"material"}    = "G4_PLASTIC_SC_VINYLTOLUENE";
  $detector{"mfield"}      = "no";
  $detector{"ncopy"}       = 1;
  $detector{"pMany"}       = 1;
