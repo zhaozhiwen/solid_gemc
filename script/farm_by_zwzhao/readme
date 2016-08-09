@@ -4,17 +4,14 @@ To use it, do the following
 ====================================================
 login in ifarm
 copy all files into a dir 
-copy your gcard to this dir and name it "solid.gcard"
-edit "solid.gcard" to make the evio output file name "out.evio"
+edit "solid.gcard" and "do_it_all.sh" for your simulation need
 run "LongRun_sim" and give start and end run numbers
-job submission scripts will be created according to "exec_sim", "do_it_all.sh" will be copied to farm, and all jobs will be submitted.
+job submission scripts like "jsc2000" will be created according to "exec_sim", "do_it_all.sh" and "solid.gcard" will be copied to farm, and all jobs will be submitted.
 wait for output files, out.*.evio, out.*.root and out.*.log will appear in the dir
 If any job fails, you may only see out.*.log files, check files at ~/.farm_out for detailed reason
 ====================================================
 
-You may use "hadd" to add all root files into a single one.
-
-by default, it use the official solid simulation installation on ifarm, to change it edit the file "do_it_all.sh"
+You may use "hadd" to add all resulting root files into a single one.
 
 
 
