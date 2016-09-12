@@ -1,5 +1,5 @@
 the tool here is a very simple example to process different tree from different hit process from different ditector.
-each tree is processed by different file and can be kept independent, they are called by the analysis.C which process event by event and combine the result from different detector.
+each tree is processed by different file and can be kept independent, they are called by the main analysis which process event by event and combine the result from different detector.
 
 
 

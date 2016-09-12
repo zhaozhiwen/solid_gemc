@@ -21,16 +21,12 @@
 #include <TSystem.h>
 #include <TArc.h>
 
-#include "analysis_tree_solid_spd.C"
-#include "analysis_tree_solid_mrpc.C"
 #include "analysis_tree_solid_ec.C"
 #include "analysis_tree_solid_lgc.C"
-#include "analysis_tree_solid_hgc.C"
-
 
 using namespace std;
 
-void analysis(string input_filename,bool debug=false)
+void analysis_PVDIS(string input_filename,bool debug=false)
 {
 gROOT->Reset();
 gStyle->SetPalette(1);
@@ -54,15 +50,14 @@ for (Int_t i=0;i<m;i++) {
 hflux_hitxy[i]=new TH2F(Form("hflux_hitxy_%i",i),Form("flux_hitxy %s;x(cm);y(cm)",detector_name[i]),600,-300,300,600,-300,300);
 }
 
-TH1F *htotEdep_spd=new TH1F("htotEdep_spd","htotEdep_spd",100,0,5);
-TH1F *htotEdep_mrpc=new TH1F("htotEdep_mrpc","htotEdep_mrpc",100,0,0.1);
-TH1F *htotEdep_ec=new TH1F("htotEdep_ec","htotEdep_ec",100,0,2000);
-TH1F *hNpe_hgc=new TH1F("hNpe_hgc","hNpe_hgc",1000,0,10);
+TH2F *hgen_ThetaP=new TH2F("gen_ThetaP","gen_ThetaP",40,10,50,110,0,11);     
+TH2F *hacceptance_ThetaP[2];
+hacceptance_ThetaP[0]=new TH2F("acceptance_ThetaP_FA","acceptance by FA;vertex Theta (deg);P (GeV)",40,10,50,110,0,11);     
+hacceptance_ThetaP[1]=new TH2F("acceptance_ThetaP_LA","acceptance by LA;vertex Theta (deg);P (GeV)",40,10,50,110,0,11);
 
-TH2F *htotEdep_ec_gen=new TH2F("htotEdep_ec_gen","htotEdep_ec_gen",100,0,2000,110,0,11000);
-TH2F *htotEdep_ec_spd=new TH2F("htotEdep_ec_spd","htotEdep_ec_spd",100,0,2000,100,0,5);
-TH2F *htotEdep_ec_mrpc=new TH2F("htotEdep_ec_mrpc","htotEdep_ec_mrpc",100,0,2000,100,0,0.1);
-TH2F *htotEdep_spd_mrpc=new TH2F("htotEdep_spd_mrpc","htotEdep_spd_mrpc",100,0,5,100,0,0.1);
+// TH1F *htotEdep_ec=new TH1F("htotEdep_ec","htotEdep_ec",100,0,2000);
+
+// TH2F *htotEdep_ec_gen=new TH2F("htotEdep_ec_gen","htotEdep_ec_gen",100,0,2000,110,0,11000);
 
 TFile *file=new TFile(input_filename.c_str());
 if (file->IsZombie()) {
@@ -88,13 +83,13 @@ tree_header->SetBranchAddress("var5",&header_var5);
 tree_header->SetBranchAddress("var6",&header_var6);
 tree_header->SetBranchAddress("var7",&header_var7);
 tree_header->SetBranchAddress("var8",&header_var8);
-if(debug){
-char *branchname_header[12]={"time","evn","evn_type","beamPol","var1","var2","var3","var4","var5","var6","var7","var8"};
-cout << endl << "tree_header" << endl;
-for (Int_t i=0;i<12;i++) { 
-cout << branchname_header[i] << " " <<  tree_header->GetBranch(branchname_header[i])->GetLeaf(branchname_header[i])->GetTypeName() << ",";
-}
-}
+// if(debug){
+// char *branchname_header[12]={"time","evn","evn_type","beamPol","var1","var2","var3","var4","var5","var6","var7","var8"};
+// cout << endl << "tree_header" << endl;
+// for (Int_t i=0;i<12;i++) { 
+// cout << branchname_header[i] << " " <<  tree_header->GetBranch(branchname_header[i])->GetLeaf(branchname_header[i])->GetTypeName() << ",";
+// }
+// }
 
 TTree *tree_generated = (TTree*) file->Get("generated");
 vector <int> *gen_pid=0;
@@ -106,13 +101,13 @@ tree_generated->SetBranchAddress("pz",&gen_pz);
 tree_generated->SetBranchAddress("vx",&gen_vx);
 tree_generated->SetBranchAddress("vy",&gen_vy);
 tree_generated->SetBranchAddress("vz",&gen_vz);
-if(debug){
-char *branchname_generated[7]={"pid","px","py","pz","vx","vy","vz"};
-cout << endl << "tree_generated" << endl;
-for (Int_t i=0;i<7;i++) { 
-cout << branchname_generated[i] << " " <<  tree_generated->GetBranch(branchname_generated[i])->GetLeaf(branchname_generated[i])->GetTypeName() << ",";
-}
-}
+// if(debug){
+// char *branchname_generated[7]={"pid","px","py","pz","vx","vy","vz"};
+// cout << endl << "tree_generated" << endl;
+// for (Int_t i=0;i<7;i++) { 
+// cout << branchname_generated[i] << " " <<  tree_generated->GetBranch(branchname_generated[i])->GetLeaf(branchname_generated[i])->GetTypeName() << ",";
+// }
+// }
 
 TTree *tree_flux = (TTree*) file->Get("flux");
 vector<int> *flux_id=0,*flux_hitn=0;
@@ -143,33 +138,27 @@ tree_flux->SetBranchAddress("mvx",&flux_mvx);
 tree_flux->SetBranchAddress("mvy",&flux_mvy);
 tree_flux->SetBranchAddress("mvz",&flux_mvz);
 tree_flux->SetBranchAddress("avg_t",&flux_avg_t);
-if(debug){
-char *branchname_flux[26]={"hitn","id","pid","mpid","tid","mtid","otid","trackE","totEdep","trackE","avg_x","avg_y","avg_z","avg_lx","avg_ly","avg_lz","px","py","pz","vx","vy","vz","mvx","mvy","mvz","avg_t"};
-cout << endl << "tree_flux" << endl;
-for (Int_t i=0;i<26;i++) { 
-cout << branchname_flux[i] << " " <<  tree_flux->GetBranch(branchname_flux[i])->GetLeaf(branchname_flux[i])->GetTypeName() << ",";
-}
-}
-
-TTree *tree_solid_hgc = (TTree*) file->Get("solid_hgc");
-setup_tree_solid_hgc(tree_solid_hgc);
-
-TTree *tree_solid_spd = (TTree*) file->Get("solid_spd");
-setup_tree_solid_spd(tree_solid_spd);
-
-TTree *tree_solid_mrpc = (TTree*) file->Get("solid_mrpc");
-setup_tree_solid_mrpc(tree_solid_mrpc);
+// if(debug){
+// char *branchname_flux[26]={"hitn","id","pid","mpid","tid","mtid","otid","trackE","totEdep","trackE","avg_x","avg_y","avg_z","avg_lx","avg_ly","avg_lz","px","py","pz","vx","vy","vz","mvx","mvy","mvz","avg_t"};
+// cout << endl << "tree_flux" << endl;
+// for (Int_t i=0;i<26;i++) { 
+// cout << branchname_flux[i] << " " <<  tree_flux->GetBranch(branchname_flux[i])->GetLeaf(branchname_flux[i])->GetTypeName() << ",";
+// }
+// }
 
 TTree *tree_solid_ec = (TTree*) file->Get("solid_ec");
 setup_tree_solid_ec(tree_solid_ec);
+
+TTree *tree_solid_lgc = (TTree*) file->Get("solid_lgc");
+setup_tree_solid_lgc(tree_solid_lgc);
 
 int nevent = (int)tree_generated->GetEntries();
 int nselected = 0;
 cout << "nevent " << nevent << endl;
 
 // for (Int_t i=0;i<2;i++) { 
-for (Int_t i=0;i<nevent/10;i++) { 
-// for (Int_t i=0;i<nevent;i++) { 
+// for (Int_t i=0;i<nevent/10;i++) { 
+for (Int_t i=0;i<nevent;i++) { 
 
   cout << i << "\r";
 //   cout << i << "\n";
@@ -193,11 +182,16 @@ for (Int_t i=0;i<nevent/10;i++) {
       theta_gen=acos(pz_gen/p_gen);
       phi_gen=atan2(py_gen,px_gen);
       
-//       cout << "p_gen " << p_gen << endl;      
+//       cout << "p_gen " << p_gen << endl;  
+      hgen_ThetaP->Fill(theta_gen*DEG,p_gen/1e3);            
   }
-
+  
+    bool Is_acc=false,Is_ec=false,Is_gem=false,Is_lgc=false;
+    bool Is_gem_miss=false;
+    
     tree_flux->GetEntry(i);  
     
+    int sec_ec=0;
     for (Int_t j=0;j<flux_hitn->size();j++) {
 //       cout << "flux " << " !!! " << flux_hitn->at(j) << " " << flux_id->at(j) << " " << flux_pid->at(j) << " " << flux_mpid->at(j) << " " << flux_tid->at(j) << " " << flux_mtid->at(j) << " " << flux_trackE->at(j) << " " << flux_totEdep->at(j) << " " << flux_avg_x->at(j) << " " << flux_avg_y->at(j) << " " << flux_avg_z->at(j) << " " << flux_avg_lx->at(j) << " " << flux_avg_ly->at(j) << " " << flux_avg_lz->at(j) << " " << flux_px->at(j) << " " << flux_py->at(j) << " " << flux_pz->at(j) << " " << flux_vx->at(j) << " " << flux_vy->at(j) << " " << flux_vz->at(j) << " " << flux_mvx->at(j) << " " << flux_mvy->at(j) << " " << flux_mvz->at(j) << " " << flux_avg_t->at(j) << endl;  
 
@@ -211,7 +205,9 @@ for (Int_t i=0;i<nevent/10;i++) {
 //       if (detector_ID==4 && subdetector_ID == 1 && subsubdetector_ID == 1)   cout << "particle mom entering MRPC " << flux_trackE->at(j) << endl;   
       
 //       if (detector_ID==3 && subdetector_ID == 1 && subsubdetector_ID == 1)   cout << "particle mom entering EC " << flux_trackE->at(j) << endl;         
-      
+     double hit_r=sqrt(pow(flux_avg_x->at(j),2)+pow(flux_avg_y->at(j),2));
+     double hit_y=flux_avg_y->at(j),hit_x=flux_avg_x->at(j),hit_z=flux_avg_z->at(j);          
+     double hit_phi=atan2(hit_y,hit_x)*DEG+360;
       
       int hit_id=-1;
       if (detector_ID==1 && subdetector_ID == 1 && subsubdetector_ID == 1) hit_id=0;
@@ -229,37 +225,69 @@ for (Int_t i=0;i<nevent/10;i++) {
       
       if (0<=hit_id && hit_id<=11) hflux_hitxy[hit_id]->Fill(flux_avg_x->at(j)/10.,flux_avg_y->at(j)/10.);
 //       else cout << "flux_id->at(j) " << flux_id->at(j) << endl;
-    }
+      
+      //check hit on EC
+      if(hit_id==10 && flux_tid->at(j)==1){
+	if (110<=hit_r/1e1 && hit_r/1e1<=250) { //cut on EC hit
+	Is_ec=true;
+	int sec_shift=1.7;  // shift to match electron turning in field
+	if (hit_phi>=90) sec_ec=int((hit_phi-90-sec_shift)/12+1);
+	else sec_ec=int((hit_phi+360-90-sec_shift)/12+1);
+// 	cout << " hit_phi " << hit_phi << " sec_ec " << sec_ec << endl;	
+	}
+      }
+      
+    //check hit on GEM
+    if (detector_ID==1 && flux_tid->at(j)==1) {
+      // some low mom tracks spiral and travel back in field and go through one plane twice or more,   flux bank average these steps to get hit position which is wrong and can be outside of the virtual plane.
+//       for PVDIS
+//  my @Rin = (48,59,65,105,109);
+//  my @Rout = (122,143,143,230,237);	      
+//       for SIDIS
+//        my @Rin = (36,21,25,32,42,55);
+//        my @Rout = (87,98,112,135,100,123);
+      double Rin[6]={0,0,0,0,0,0},Rout[6]={0,0,0,0,0,0};
+//       if (Is_PVDIS){
+	Rin[0]=48;Rin[1]=59;Rin[2]=65;Rin[3]=105;Rin[4]=109;Rin[5]=0;     
+        Rout[0]=122;Rout[1]=143;Rout[2]=143;Rout[3]=230;Rout[4]=237;Rout[5]=300;
+//       }
+//       else {
+// 	Rin[0]=36;Rin[1]=21;Rin[2]=25;Rin[3]=32;Rin[4]=42;Rin[5]=55;     
+//         Rout[0]=87;Rout[1]=98;Rout[2]=112;Rout[3]=135;Rout[4]=100;Rout[5]=123;
+//       }
 
-  tree_solid_hgc->GetEntry(i);  
-  
-  double Npe_hgc=process_tree_solid_hgc(tree_solid_hgc);  
-//   cout << "Npe_hgc " << Npe_hgc << endl;  
+      if (hit_r/1e1<Rin[subdetector_ID-1] || Rout[subdetector_ID-1]<hit_r/1e1) {
+	Is_gem_miss=true;
+// 	cout << flux_id->at(j) << endl; 	
+	continue;	
+      }  
+                      
+    }
     
-//   tree_solid_spd->GetEntry(i);
-//   
-//   double totEdep_spd=process_tree_solid_spd(tree_solid_spd);
-//   cout << "totEdep_spd " << totEdep_spd << endl;  
-// 
-//   tree_solid_mrpc->GetEntry(i);
-//   
-//   double totEdep_mrpc=process_tree_solid_mrpc(tree_solid_mrpc);
-//   cout << "totEdep_mrpc " << totEdep_mrpc << endl;    
-//   
-//   tree_solid_ec->GetEntry(i);  
-//   
+    }
+    
+    if(Is_gem_miss==false) Is_gem=true;  //require passing all GEM
+
+//   tree_solid_ec->GetEntry(i);    
 //   double totEdep_ec=process_tree_solid_ec(tree_solid_ec);
 //   cout << "totEdep_ec " << totEdep_ec << endl;
 
-/*  htotEdep_spd->Fill(totEdep_spd);
-  htotEdep_mrpc->Fill(totEdep_mrpc);
-  htotEdep_ec->Fill(totEdep_ec); */ 
- if (Npe_hgc >0)  hNpe_hgc->Fill(Npe_hgc/30./5e8*(30e-9*15e-6/1.6e-19));
+  tree_solid_lgc->GetEntry(i);
+  
+  Int_t nphe_lgc[30];
+  process_tree_solid_lgc(tree_solid_lgc,nphe_lgc);
+  
+  if (Is_gem && Is_ec){
+    if (nphe_lgc[sec_ec-1]>3){  // cut on lgc
+      Is_acc=true;
+    }
+  }      
+  
+  if (Is_acc) hacceptance_ThetaP[0]->Fill(theta_gen*DEG,p_gen/1e3);  
   
 //   if (totEdep_spd !=0) htotEdep_spd->Fill(totEdep_spd);
 //   if (totEdep_mrpc !=0) htotEdep_mrpc->Fill(totEdep_mrpc);
 //   if (totEdep_ec !=0) htotEdep_ec->Fill(totEdep_ec);  
-  
   
 /*  htotEdep_ec_gen->Fill(totEdep_ec,p_gen);  
   htotEdep_ec_spd->Fill(totEdep_ec,totEdep_spd);
@@ -272,29 +300,6 @@ file->Close();
 // outputfile->Write();
 // outputfile->Flush();
 
-TCanvas *c_Npe = new TCanvas("Npe","Npe",1000,900);
-c_Npe->Divide(1,1);
-c_Npe->cd(1);
-hNpe_hgc->Draw();
-
-TCanvas *c_totEdep = new TCanvas("totEdep","totEdep",1600,900);
-c_totEdep->Divide(3,1);
-c_totEdep->cd(1);
-htotEdep_spd->Draw();
-c_totEdep->cd(2);
-htotEdep_mrpc->Draw();
-c_totEdep->cd(3);
-htotEdep_ec->Draw();
-
-TCanvas *c_totEdep_compare = new TCanvas("totEdep_compare","totEdep_compare",1600,900);
-c_totEdep_compare->Divide(3,1);
-c_totEdep_compare->cd(1);
-htotEdep_ec_spd->Draw("colz");
-c_totEdep_compare->cd(2);
-htotEdep_ec_mrpc->Draw("colz");
-c_totEdep_compare->cd(3);
-htotEdep_spd_mrpc->Draw("colz");
-
 TCanvas *c_flux_hitxy = new TCanvas("flux_hitxy","flux_hitxy",1800,900);
 c_flux_hitxy->Divide(5,2);
 for (Int_t i=0;i<m;i++) {
@@ -302,5 +307,15 @@ c_flux_hitxy->cd(i+1);
 gPad->SetLogz();
 hflux_hitxy[i]->Draw("colz");
 }
+
+TCanvas *c_acc = new TCanvas("acc","acc",1600,900);
+c_acc->Divide(2,1);
+c_acc->cd(1);
+hgen_ThetaP->Draw("colz");
+c_acc->cd(2);
+hacceptance_ThetaP[0]->Divide(hacceptance_ThetaP[0],hgen_ThetaP);  
+hacceptance_ThetaP[0]->SetMinimum(0);  
+hacceptance_ThetaP[0]->SetMaximum(1);    
+hacceptance_ThetaP[0]->Draw("colz");
 
 }

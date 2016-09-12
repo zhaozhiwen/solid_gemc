@@ -69,7 +69,7 @@ double process_tree_solid_ec(TTree *tree_solid_ec)
       int subsubdetector_ID=((solid_ec_id->at(j)%1000000)%100000)/10000;
       int component_ID=solid_ec_id->at(j)%10000;
       
-    cout << detector_ID << " " << subdetector_ID << " "  << subsubdetector_ID  << " " << component_ID << ", " << solid_ec_totEdep->at(j) << endl; 
+//     cout << detector_ID << " " << subdetector_ID << " "  << subsubdetector_ID  << " " << component_ID << ", " << solid_ec_totEdep->at(j) << endl; 
            
       if (detector_ID==3 && subdetector_ID == 1 && subsubdetector_ID == 0) totEdep +=solid_ec_totEdep->at(j);     
       
