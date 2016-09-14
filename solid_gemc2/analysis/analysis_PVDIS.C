@@ -186,8 +186,7 @@ for (Int_t i=0;i<nevent;i++) {
       hgen_ThetaP->Fill(theta_gen*DEG,p_gen/1e3);            
   }
   
-    bool Is_acc=false,Is_ec=false,Is_gem=false,Is_lgc=false;
-    bool Is_gem_miss=false;
+    bool Is_acc=false,Is_ec=false,Is_gem[5]={false,false,false,false,false},Is_lgc=false;
     
     tree_flux->GetEntry(i);  
     
@@ -256,8 +255,8 @@ for (Int_t i=0;i<nevent;i++) {
 //         Rout[0]=87;Rout[1]=98;Rout[2]=112;Rout[3]=135;Rout[4]=100;Rout[5]=123;
 //       }
 
-      if (hit_r/1e1<Rin[subdetector_ID-1] || Rout[subdetector_ID-1]<hit_r/1e1) {
-	Is_gem_miss=true;
+      if (Rin[subdetector_ID-1]<=hit_r/1e1 && hit_r/1e1<Rout[subdetector_ID-1]) {
+	Is_gem[subdetector_ID-1]=true;
 // 	cout << flux_id->at(j) << endl; 	
 	continue;	
       }  
@@ -265,8 +264,6 @@ for (Int_t i=0;i<nevent;i++) {
     }
     
     }
-    
-    if(Is_gem_miss==false) Is_gem=true;  //require passing all GEM
 
 //   tree_solid_ec->GetEntry(i);    
 //   double totEdep_ec=process_tree_solid_ec(tree_solid_ec);
@@ -277,11 +274,13 @@ for (Int_t i=0;i<nevent;i++) {
   Int_t nphe_lgc[30];
   process_tree_solid_lgc(tree_solid_lgc,nphe_lgc);
   
-  if (Is_gem && Is_ec){
+  if (Is_ec){
+    if(Is_gem[0] && Is_gem[1] && Is_gem[2] && Is_gem[3] && Is_gem[4]){
     if (nphe_lgc[sec_ec-1]>3){  // cut on lgc
       Is_acc=true;
     }
   }      
+  }
   
   if (Is_acc) hacceptance_ThetaP[0]->Fill(theta_gen*DEG,p_gen/1e3);  
   
