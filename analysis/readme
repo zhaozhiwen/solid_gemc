@@ -1,6 +1,15 @@
-the tool here is a very simple example to process different tree from different hit process from different ditector.
-each tree is processed by different file and can be kept independent, they are called by the main analysis which process event by event and combine the result from different detector.
+Here is a set of scripts to process root tree output from solid_gemc
 
+The root file has different trees from different hit process of different ditectors.
+Each tree is processed by an independent routine, they are called by the main analysis routine which process event by event and combine the result.
+flux tree used for the virtual detectors is processed in the main analysis
 
+run the scripts with compliation to avoid error or slowness
+
+for example
+
+root[0].x analysis_PVDIS.C+("solid_gemc_output.root")
+
+root[0].x analysis_SIDIS_He3.C+("solid_gemc_output.root")
 
 
