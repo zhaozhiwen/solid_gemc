@@ -271,7 +271,7 @@ for (Int_t i=0;i<nevent;i++) {
 
   tree_solid_lgc->GetEntry(i);
   
-  Int_t nphe_lgc[30];
+  Int_t nphe_lgc[30]={0};
   process_tree_solid_lgc(tree_solid_lgc,nphe_lgc);
   
   if (Is_ec){
