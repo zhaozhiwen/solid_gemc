@@ -55,6 +55,9 @@ TH2F *hacceptance_ThetaP[2];
 hacceptance_ThetaP[0]=new TH2F("acceptance_ThetaP_FA","acceptance by FA;vertex Theta (deg);P (GeV)",40,10,50,110,0,11);     
 hacceptance_ThetaP[1]=new TH2F("acceptance_ThetaP_LA","acceptance by LA;vertex Theta (deg);P (GeV)",40,10,50,110,0,11);
 
+TH1F *hnphe_lgc=new TH1F("hnphe_lgc","hnphe_lgc",20,-0.5,19.5);
+TH1F *hsectoring_ec_lgc=new TH1F("hsectoring_ec_lgc","hsectoring_ec_lgc",30,-14.5,15.5);
+
 // TH1F *htotEdep_ec=new TH1F("htotEdep_ec","htotEdep_ec",100,0,2000);
 
 // TH2F *htotEdep_ec_gen=new TH2F("htotEdep_ec_gen","htotEdep_ec_gen",100,0,2000,110,0,11000);
@@ -164,6 +167,7 @@ for (Int_t i=0;i<nevent;i++) {
 //   cout << i << "\n";
 
   tree_header->GetEntry(i);
+  double rate=header_var8->at(0);
   
   tree_generated->GetEntry(i);  
   int pid_gen=0;
@@ -225,11 +229,11 @@ for (Int_t i=0;i<nevent;i++) {
       if (0<=hit_id && hit_id<=11) hflux_hitxy[hit_id]->Fill(flux_avg_x->at(j)/10.,flux_avg_y->at(j)/10.);
 //       else cout << "flux_id->at(j) " << flux_id->at(j) << endl;
       
-      //check hit on EC
+      //check hit on EC and find sec_ec
       if(hit_id==10 && flux_tid->at(j)==1){
 	if (110<=hit_r/1e1 && hit_r/1e1<=250) { //cut on EC hit
 	Is_ec=true;
-	int sec_shift=1.7;  // shift to match electron turning in field
+	int sec_shift=12;  // shift to match electron turning in field
 	if (hit_phi>=90) sec_ec=int((hit_phi-90-sec_shift)/12+1);
 	else sec_ec=int((hit_phi+360-90-sec_shift)/12+1);
 // 	cout << " hit_phi " << hit_phi << " sec_ec " << sec_ec << endl;	
@@ -273,10 +277,33 @@ for (Int_t i=0;i<nevent;i++) {
   
   Int_t nphe_lgc[30]={0};
   process_tree_solid_lgc(tree_solid_lgc,nphe_lgc);
+
+  //check how number of p.e. for all LGC sector and plot it with sec_ec at 0
+  for (int j=0;j<30;j++){    
+    int index;
+    if(-14<=j-sec_ec && j-sec_ec<16) index=j-sec_ec;
+    else if (j-sec_ec>=16) index=j-sec_ec-30;
+    else if (j-sec_ec<-14) index=j-sec_ec+30;    
+//     if (nphe_lgc[index]<0) cout << sec_ec << " " << j << " " << index << " " << nphe_lgc[index] << endl;    
+    hsectoring_ec_lgc->Fill(index,nphe_lgc[j]*rate);
+  }
+
+  //sum number of p.e. from LGC sector sec_ec-sec_width_sum to sec_ec+sec_width_sum
+  int sec_width_sum=0; 
+  int nphe_lgc_total=0;  
+  for (int j=sec_ec-sec_width_sum;j<=sec_ec+sec_width_sum;j++){    
+    int index;
+    if (0<=j && j<30) index=j;
+    else if (j>=30) index=j-30;
+    else if (j<0) index=j+30;
+    else cout << "something wrong with sec" << endl;      
+    nphe_lgc_total += nphe_lgc[index];
+  }  
   
   if (Is_ec){
     if(Is_gem[0] && Is_gem[1] && Is_gem[2] && Is_gem[3] && Is_gem[4]){
-    if (nphe_lgc[sec_ec-1]>3){  // cut on lgc
+    hnphe_lgc->Fill(nphe_lgc_total,rate);  
+    if (nphe_lgc_total>1){  // cut on lgc
       Is_acc=true;
     }
   }      
@@ -306,6 +333,14 @@ c_flux_hitxy->cd(i+1);
 gPad->SetLogz();
 hflux_hitxy[i]->Draw("colz");
 }
+
+TCanvas *c_npe_lgc = new TCanvas("npe_lgc","npe_lgc",1600,900);
+c_npe_lgc->Divide(2,1);
+c_npe_lgc->cd(1);
+hnphe_lgc->Draw();
+c_npe_lgc->cd(2);
+hsectoring_ec_lgc->Draw();
+gPad->SetLogy(1);
 
 TCanvas *c_acc = new TCanvas("acc","acc",1600,900);
 c_acc->Divide(2,1);
