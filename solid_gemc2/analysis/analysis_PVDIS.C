@@ -210,7 +210,7 @@ for (Int_t i=0;i<nevent;i++) {
 //       if (detector_ID==3 && subdetector_ID == 1 && subsubdetector_ID == 1)   cout << "particle mom entering EC " << flux_trackE->at(j) << endl;         
      double hit_r=sqrt(pow(flux_avg_x->at(j),2)+pow(flux_avg_y->at(j),2));
      double hit_y=flux_avg_y->at(j),hit_x=flux_avg_x->at(j),hit_z=flux_avg_z->at(j);          
-     double hit_phi=atan2(hit_y,hit_x)*DEG+360;
+     double hit_phi=atan2(hit_y,hit_x)*DEG;
       
       int hit_id=-1;
       if (detector_ID==1 && subdetector_ID == 1 && subsubdetector_ID == 1) hit_id=0;
@@ -233,10 +233,10 @@ for (Int_t i=0;i<nevent;i++) {
       if(hit_id==10 && flux_tid->at(j)==1){
 	if (110<=hit_r/1e1 && hit_r/1e1<=250) { //cut on EC hit
 	Is_ec=true;
-	int sec_shift=12;  // shift to match electron turning in field
-	if (hit_phi>=90) sec_ec=int((hit_phi-90-sec_shift)/12+1);
+	int sec_shift=1.7;  // shift to match electron turning in field
+	if (hit_phi > 90+sec_shift) sec_ec=int((hit_phi-90-sec_shift)/12+1);
 	else sec_ec=int((hit_phi+360-90-sec_shift)/12+1);
-// 	cout << " hit_phi " << hit_phi << " sec_ec " << sec_ec << endl;	
+	// 	cout << " hit_phi " << hit_phi << " sec_ec " << sec_ec << endl;	
 	}
       }
       
@@ -280,11 +280,12 @@ for (Int_t i=0;i<nevent;i++) {
 
   //check how number of p.e. for all LGC sector and plot it with sec_ec at 0
   for (int j=0;j<30;j++){    
+    int lgcsec = j+1;
     int index;
-    if(-14<=j-sec_ec && j-sec_ec<16) index=j-sec_ec;
-    else if (j-sec_ec>=16) index=j-sec_ec-30;
-    else if (j-sec_ec<-14) index=j-sec_ec+30;    
-//     if (nphe_lgc[index]<0) cout << sec_ec << " " << j << " " << index << " " << nphe_lgc[index] << endl;    
+    if(-14<=lgcsec-sec_ec && lgcsec-sec_ec<16) index=lgcsec-sec_ec;
+    else if (lgcsec-sec_ec>=16) index=lgcsec-sec_ec-30;
+    else if (lgcsec-sec_ec<-14) index=lgcsec-sec_ec+30;    
+//     if (nphe_lgc[index]<0) cout << sec_ec << " " << lgcsec << " " << index << " " << nphe_lgc[index] << endl;    
     hsectoring_ec_lgc->Fill(index,nphe_lgc[j]*rate);
   }
 
