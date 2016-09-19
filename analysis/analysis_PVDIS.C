@@ -294,9 +294,9 @@ for (Int_t i=0;i<nevent;i++) {
   int nphe_lgc_total=0;  
   for (int j=sec_ec-sec_width_sum;j<=sec_ec+sec_width_sum;j++){    
     int index;
-    if (0<=j && j<30) index=j;
-    else if (j>=30) index=j-30;
-    else if (j<0) index=j+30;
+    if (0<j && j<=30) index=j-1;
+    else if (j>30) index=j-30-1;
+    else if (j<=0) index=j+30-1;
     else cout << "something wrong with sec" << endl;      
     nphe_lgc_total += nphe_lgc[index];
   }  
