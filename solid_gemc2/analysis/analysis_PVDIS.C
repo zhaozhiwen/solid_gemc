@@ -297,7 +297,7 @@ for (Int_t i=0;i<nevent;i++) {
   Int_t nphe_lgc[30]={0};
   process_tree_solid_lgc(tree_solid_lgc,nphe_lgc);
 
-  if (Is_ec_FA){    
+  if (Is_ec){    
   //check how number of p.e. for all LGC sector and plot it at 0 when it's same sector like sec_ec
   for (int j=0;j<30;j++){    
     int lgcsec = j+1;
