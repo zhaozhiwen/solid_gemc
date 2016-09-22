@@ -278,7 +278,8 @@ for (Int_t i=0;i<nevent;i++) {
   Int_t nphe_lgc[30]={0};
   process_tree_solid_lgc(tree_solid_lgc,nphe_lgc);
 
-  //check how number of p.e. for all LGC sector and plot it with sec_ec at 0
+  if (Is_ec_FA){    
+  //check how number of p.e. for all LGC sector and plot it at 0 when it's same sector like sec_ec
   for (int j=0;j<30;j++){    
     int lgcsec = j+1;
     int index;
@@ -289,21 +290,23 @@ for (Int_t i=0;i<nevent;i++) {
     hsectoring_ec_lgc->Fill(index,nphe_lgc[j]*rate);
   }
 
-  //sum number of p.e. from LGC sector sec_ec-sec_width_sum to sec_ec+sec_width_sum
-  int sec_width_sum=0; 
-  int nphe_lgc_total=0;  
-  for (int j=sec_ec-sec_width_sum;j<=sec_ec+sec_width_sum;j++){    
-    int index;
-    if (0<j && j<=30) index=j-1;
-    else if (j>30) index=j-30-1;
-    else if (j<=0) index=j+30-1;
-    else cout << "something wrong with sec" << endl;      
-    nphe_lgc_total += nphe_lgc[index];
-  }  
+  }
   
   if (Is_ec){
     if(Is_gem[0] && Is_gem[1] && Is_gem[2] && Is_gem[3] && Is_gem[4]){
+    //sum number of p.e. from LGC sector sec_ec-sec_width_sum to sec_ec+sec_width_sum
+    int sec_width_sum=0; 
+    int nphe_lgc_total=0;  
+    for (int j=sec_ec-sec_width_sum;j<=sec_ec+sec_width_sum;j++){    
+      int index;
+      if (0<j && j<=30) index=j-1;
+      else if (j>30) index=j-30-1;
+      else if (j<=0) index=j+30-1;
+      else cout << "something wrong with sec" << endl;      
+      nphe_lgc_total += nphe_lgc[index];
+    }      
     hnphe_lgc->Fill(nphe_lgc_total,rate);  
+    
     if (nphe_lgc_total>1){  // cut on lgc
       Is_acc=true;
     }
