@@ -55,7 +55,14 @@ TH2F *hacceptance_ThetaP[2];
 hacceptance_ThetaP[0]=new TH2F("acceptance_ThetaP_FA","acceptance by FA;vertex Theta (deg);P (GeV)",40,10,50,110,0,11);     
 hacceptance_ThetaP[1]=new TH2F("acceptance_ThetaP_LA","acceptance by LA;vertex Theta (deg);P (GeV)",40,10,50,110,0,11);
 
-TH1F *hnphe_lgc=new TH1F("hnphe_lgc","hnphe_lgc",20,-0.5,19.5);
+TH1F *hdist_x=new TH1F("dist_x","dist_x", 50, 0. , 1.);
+TH1F *hdist_Q2=new TH1F("dist_Q2","dist_Q2", 70, 0. , 14.);
+
+TH2F *hgen_Q2x=new TH2F("gen_Q2x","gen_Q2x", 50, 0. , 1., 70, 0., 14.);
+TH2F *hacceptance_Q2x;
+hacceptance_Q2x=new TH2F("acceptance_Q2x_FA","acceptance by FA; x_{bj}; Q^{2} (MeV/c)", 50, 0. , 1., 70, 0., 14.);     
+
+TH1F *hnphe_lgc=new TH1F("hnphe_lgc","hnphe_lgc",60,-0.5,59.5);
 TH1F *hsectoring_ec_lgc=new TH1F("hsectoring_ec_lgc","hsectoring_ec_lgc",30,-14.5,15.5);
 
 // TH1F *htotEdep_ec=new TH1F("htotEdep_ec","htotEdep_ec",100,0,2000);
@@ -172,6 +179,9 @@ for (Int_t i=0;i<nevent;i++) {
   tree_generated->GetEntry(i);  
   int pid_gen=0;
   double theta_gen=0,phi_gen=0,p_gen=0,px_gen=0,py_gen=0,pz_gen=0,vx_gen=0,vy_gen=0,vz_gen=0;      
+  Double_t Q2 = 0.0;
+  Double_t xbj = 0.0;
+
 //       cout << "gen_pid->size() " << gen_pid->size() << endl;        
   for (int j=0;j<gen_pid->size();j++) {
 //       cout << gen_pid->at(j) << " " << gen_px->at(j) << endl;//<< " " << gen_py->at(j) << " " << gen_pz->at(j) << " " << gen_vx->at(j) << " " << gen_vy->at(j) << " " << gen_vz->at(j) << endl; 
@@ -185,9 +195,18 @@ for (Int_t i=0;i<nevent;i++) {
       p_gen=sqrt(px_gen*px_gen+py_gen*py_gen+pz_gen*pz_gen);
       theta_gen=acos(pz_gen/p_gen);
       phi_gen=atan2(py_gen,px_gen);
+
+      Q2 = 2 * 11.0e3 * p_gen * (1 - cos (theta_gen));
+      xbj = Q2 / 2 / 0.937e3 / (11.0e3 - p_gen);
       
-//       cout << "p_gen " << p_gen << endl;  
-      hgen_ThetaP->Fill(theta_gen*DEG,p_gen/1e3);            
+       // cout << "p_gen " << p_gen 
+       // 	    << " theta_gen " << theta_gen
+       // 	    << " Q2 " << Q2
+       // 	    << " xbj " << xbj
+       // 	    << endl;  
+
+      hgen_ThetaP->Fill(theta_gen*DEG,p_gen/1e3);
+      hgen_Q2x->Fill (xbj, Q2/1e6);
   }
   
     bool Is_acc=false,Is_ec=false,Is_gem[5]={false,false,false,false,false},Is_lgc=false;
@@ -291,7 +310,7 @@ for (Int_t i=0;i<nevent;i++) {
   }
 
   }
-  
+
   if (Is_ec){
     if(Is_gem[0] && Is_gem[1] && Is_gem[2] && Is_gem[3] && Is_gem[4]){
     //sum number of p.e. from LGC sector sec_ec-sec_width_sum to sec_ec+sec_width_sum
@@ -313,8 +332,14 @@ for (Int_t i=0;i<nevent;i++) {
   }      
   }
   
-  if (Is_acc) hacceptance_ThetaP[0]->Fill(theta_gen*DEG,p_gen/1e3);  
-  
+  if (Is_acc) 
+    {
+      hacceptance_ThetaP[0]->Fill(theta_gen*DEG,p_gen/1e3);  
+      hdist_x->Fill (xbj, rate);
+      hdist_Q2->Fill (Q2/1e6, rate);
+      hacceptance_Q2x->Fill (xbj, Q2/1e6);
+    }
+
 //   if (totEdep_spd !=0) htotEdep_spd->Fill(totEdep_spd);
 //   if (totEdep_mrpc !=0) htotEdep_mrpc->Fill(totEdep_mrpc);
 //   if (totEdep_ec !=0) htotEdep_ec->Fill(totEdep_ec);  
@@ -347,7 +372,7 @@ hsectoring_ec_lgc->Draw();
 gPad->SetLogy(1);
 
 TCanvas *c_acc = new TCanvas("acc","acc",1600,900);
-c_acc->Divide(2,1);
+c_acc->Divide(2,3);
 c_acc->cd(1);
 hgen_ThetaP->Draw("colz");
 c_acc->cd(2);
@@ -355,5 +380,16 @@ hacceptance_ThetaP[0]->Divide(hacceptance_ThetaP[0],hgen_ThetaP);
 hacceptance_ThetaP[0]->SetMinimum(0);  
 hacceptance_ThetaP[0]->SetMaximum(1);    
 hacceptance_ThetaP[0]->Draw("colz");
+c_acc->cd(3);
+hdist_x->Draw("");
+c_acc->cd(4);
+hdist_Q2->Draw("");
+c_acc->cd(5);
+hgen_Q2x->Draw("colz");
+c_acc->cd(6);
+hacceptance_Q2x->Divide(hacceptance_Q2x,hgen_Q2x);  
+hacceptance_Q2x->SetMinimum(0);  
+hacceptance_Q2x->SetMaximum(1);    
+hacceptance_Q2x->Draw("colz");
 
 }
