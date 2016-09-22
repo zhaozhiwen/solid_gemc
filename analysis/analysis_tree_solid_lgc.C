@@ -78,20 +78,17 @@ double process_tree_solid_lgc(TTree *tree_solid_lgc, Int_t *nphe_lgc)
   if(!solid_lgc_hitn->size()) return 0;
    //if using root6, uncomment line below, and comment out following line
   //std::vector<std::vector<int>> sectorhits (30, std::vector<int>(9,0));  //initialize a 30x9 vector array
-  Int_t sectorhits[30][9] = {0};  //need to intialize to zero or bad stuff
-  Int_t ntrigpmts =0;
+  Int_t pmt[30][9] = {0};  //need to intialize to zero or bad stuff
  
   for(Int_t i = 0; i < solid_lgc_hitn->size(); i++){
-    if(solid_lgc_nphe->at(i)){
-      sectorhits[solid_lgc_sector->at(i)-1][solid_lgc_pmt->at(i)-1] += solid_lgc_nphe->at(i);
+    if(solid_lgc_nphe->at(i)>0){
+      pmt[solid_lgc_sector->at(i)-1][solid_lgc_pmt->at(i)-1] += solid_lgc_nphe->at(i);
     }
   }
   for(Int_t i = 0; i < 30; i++){
-    ntrigpmts = 0;
     for(Int_t j = 0; j < 9; j++){
-      if(sectorhits[i][j] > 0) ntrigpmts++;
+      if(pmt[i][j] > 0) nphe_lgc[i] += pmt[i][j];
     }
-    nphe_lgc[i]=ntrigpmts;
   }
   
   return 1;
