@@ -20,7 +20,7 @@
 #include <TText.h>
 #include <TSystem.h>
 #include <TArc.h>
-
+#include <TLatex.h>
 #include "analysis_tree_solid_ec.C"
 #include "analysis_tree_solid_lgc.C"
 
@@ -51,16 +51,22 @@ hflux_hitxy[i]=new TH2F(Form("hflux_hitxy_%i",i),Form("flux_hitxy %s;x(cm);y(cm)
 }
 
 TH2F *hgen_ThetaP=new TH2F("gen_ThetaP","gen_ThetaP",40,10,50,110,0,11);     
+ hgen_ThetaP->SetStats(0);
 TH2F *hacceptance_ThetaP[2];
 hacceptance_ThetaP[0]=new TH2F("acceptance_ThetaP_FA","acceptance by FA;vertex Theta (deg);P (GeV)",40,10,50,110,0,11);     
 hacceptance_ThetaP[1]=new TH2F("acceptance_ThetaP_LA","acceptance by LA;vertex Theta (deg);P (GeV)",40,10,50,110,0,11);
+ hacceptance_ThetaP[0]->SetStats(0);
+ hacceptance_ThetaP[1]->SetStats(0);
 
 TH1F *hdist_x=new TH1F("dist_x","dist_x", 50, 0. , 1.);
 TH1F *hdist_Q2=new TH1F("dist_Q2","dist_Q2", 70, 0. , 14.);
 
 TH2F *hgen_Q2x=new TH2F("gen_Q2x","gen_Q2x", 50, 0. , 1., 70, 0., 14.);
+ hgen_Q2x->SetStats(0);
 TH2F *hacceptance_Q2x;
-hacceptance_Q2x=new TH2F("acceptance_Q2x_FA","acceptance by FA; x_{bj}; Q^{2} (MeV/c)", 50, 0. , 1., 70, 0., 14.);     
+hacceptance_Q2x=new TH2F("acceptance_Q2x_FA","acceptance by FA; x_{bj}; Q^{2} (MeV/c)", 50, 0. , 1., 70, 0., 14.);   
+ hacceptance_Q2x->SetStats(0);
+   
 
 TH1F *hnphe_lgc=new TH1F("hnphe_lgc","hnphe_lgc",60,-0.5,59.5);
 TH1F *hsectoring_ec_lgc=new TH1F("hsectoring_ec_lgc","hsectoring_ec_lgc",30,-14.5,15.5);
@@ -380,6 +386,30 @@ hacceptance_ThetaP[0]->Divide(hacceptance_ThetaP[0],hgen_ThetaP);
 hacceptance_ThetaP[0]->SetMinimum(0);  
 hacceptance_ThetaP[0]->SetMaximum(1);    
 hacceptance_ThetaP[0]->Draw("colz");
+
+ TF1* fq2 = new TF1("fq2","6/(2*11*(1-cos(x*3.14159/180)))",10,50);
+ fq2->SetLineColor(2);
+ fq2->Draw("same");
+ TLatex* tq2 = new TLatex (15,9,"Q^{2}>6 GeV^{2}");
+ tq2->SetTextColor(2);
+ tq2->SetTextSize(0.07);
+ tq2->Draw();
+ TF1* fw2 = new TF1("fw2","(.938*.938+2*.938*11-4)/(2*(.938+11*(1-cos(x*3.14159/180))))",10,50);
+ fw2->SetLineColor(6);
+ fw2->Draw("same");
+ TLatex* tw2 = new TLatex (11,5.5,"W>2 GeV");
+ tw2->SetTextColor(6);
+ tw2->SetTextSize(0.07);
+ tw2->Draw();
+ TF1* fxbj = new TF1("fxbj","(.938*.55*11)/(11*(1-cos(x*3.14159/180))+.938*.55)",10,50);
+ fxbj->SetLineColor(1);
+ fxbj->Draw("same");
+ TLatex* txbj = new TLatex (41,2.25,"x_{bj}>0.55");
+ txbj->SetTextColor(1);
+ txbj->SetTextSize(0.07);
+ txbj->Draw();
+ 
+
 c_acc->cd(3);
 hdist_x->Draw("");
 c_acc->cd(4);
@@ -391,5 +421,27 @@ hacceptance_Q2x->Divide(hacceptance_Q2x,hgen_Q2x);
 hacceptance_Q2x->SetMinimum(0);  
 hacceptance_Q2x->SetMaximum(1);    
 hacceptance_Q2x->Draw("colz");
+ TF1* fq22 = new TF1("fq22","6",0,1);
+ fq22->SetLineColor(2);
+ fq22->Draw("same");
+ TLatex* tq22 = new TLatex (0.2,7,"Q^{2}>6 GeV^{2}");
+ tq22->SetTextColor(2);
+ tq22->SetTextSize(0.07);
+ tq22->Draw();
+ TF1* fw22 = new TF1("fw22","x*(4-.938*.938)/(1-x)",0,1);
+ fw22->SetLineColor(6);
+ fw22->Draw("same");
+ TLatex* tw22 = new TLatex (0.25,2.,"W>2 GeV");
+ tw22->SetTextColor(6);
+ tw22->SetTextSize(0.07);
+ tw22->Draw();
+ TLine* fxbj2 = new TLine(0.55,0,0.55,14);
+ fxbj2->SetLineWidth(2);
+ fxbj2->SetLineColor(1);
+ fxbj2->Draw("same");
+ TLatex* txbj2 = new TLatex (.57,2.,"x_{bj}>0.55");
+ txbj2->SetTextColor(1);
+ txbj2->SetTextSize(0.07);
+ txbj2->Draw();
 
 }
