@@ -61,6 +61,8 @@ my $ang_width=360/$N;  #in degree
 # my $ang_tilt = 44.; #degree  #  this is tilt angle of cone and PMTs around the focus axis
 my $ang_tilt = 65; #degree  #  this is tilt angle of cone and PMTs around the focus axis
 
+my $sec_start = 96; #degree where the 1st sector starts
+
 #  all in cm
 my $image_x = 0.;
 my $image_y = 239.7;
@@ -217,7 +219,7 @@ sub make_window_back
 sub make_block
 {
      for(my $i=1; $i<=$N; $i++){
-      my $sector_start=0.5*$ang_width+$ang_width*($i-1);
+      my $sector_start=$sec_start+0.5*$ang_width+$ang_width*($i-1);
       
       my %detector=init_det();
       $detector{"name"}        = "$DetectorName\_block_$i";
@@ -254,11 +256,11 @@ sub make_cone
   my $pos_z = $image_z+cos($ang_tilt/$DEG)*$z_w_half+10;
 print "cone $pos_r $pos_z\n";
      for(my $i=1; $i<=$N; $i++){
-      my $pos_x = $pos_r*cos(($i-1)*$ang_width/$DEG);
-      my $pos_y = $pos_r*sin(($i-1)*$ang_width/$DEG);    
+      my $pos_x = $pos_r*cos(($i-1)*$ang_width/$DEG+$sec_start/$DEG);
+      my $pos_y = $pos_r*sin(($i-1)*$ang_width/$DEG+$sec_start/$DEG);    
 #       my $ang_xrot=-($ang_tilt*sin(($i-1)*$ang_width/$DEG));
 #       my $ang_yrot=($ang_tilt*cos(($i-1)*$ang_width/$DEG));
-      my $ang_zrot=-($i-1)*$ang_width;
+      my $ang_zrot=-(($i+-1)*$ang_width+$sec_start);
       my $ang_xrot=0;
       my $ang_yrot=$ang_tilt; 
 
@@ -308,12 +310,12 @@ sub make_pmt
   my $pos_z = $image_z-cos($ang_tilt/$DEG)*$half_z+10;
   print "pmt $pos_r $pos_z\n";
      for(my $i=1; $i<=$N; $i++){
-      my $pos_x = $pos_r*cos(($i-1)*$ang_width/$DEG);
-      my $pos_y = $pos_r*sin(($i-1)*$ang_width/$DEG);    
+      my $pos_x = $pos_r*cos(($i-1)*$ang_width/$DEG+$sec_start/$DEG);
+      my $pos_y = $pos_r*sin(($i-1)*$ang_width/$DEG+$sec_start/$DEG);    
 #       my $ang_xrot=-($ang_tilt*sin(($i-1)*$ang_width/$DEG));
 #       my $ang_yrot=($ang_tilt*cos(($i-1)*$ang_width/$DEG));
 #       my $ang_zrot=-($i-1)*$ang_width;
-      my $ang_zrot=-($i-1)*$ang_width;
+      my $ang_zrot=-(($i-1)*$ang_width+$sec_start);
       my $ang_xrot=0;
       my $ang_yrot=$ang_tilt; 
 
@@ -558,7 +560,7 @@ print "$ang\n";   #33.19
 #       $detector{"style"}       = 1;            
       print_det(\%configuration, \%detector);      
       
-      my $ang_zrot = ($i-1)*$ang_width;      
+      my $ang_zrot = -($sec_start+($i-1)*$ang_width);      
       
 # Make the subtraction of the inner ellipsoid from the outer barrel:
 # the "Operation:@" indicates that gemc should assume the coordinates
