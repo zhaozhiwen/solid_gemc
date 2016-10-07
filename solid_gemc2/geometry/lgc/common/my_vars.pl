@@ -1,5 +1,7 @@
 print "Loading Variables\n";
 
+our $DEBUG = 0;  #flag for debugging options
+
 our $Nsec = 30;  #The number of sectors to make...  note that there is always "space" for 30, but a value of 10 would only make 10 of the 30 sectors.  This option is nice for drawing graphics (like a cross section of the tank, or if you want to display only one pmt array).
 
 our $use_pvdis = 1;  #if 1, use pvdis.  else uses sidis configuration
@@ -14,6 +16,8 @@ our $buildM3 = 0;
 our $buildSupport = 0;
 our $buildBaffle = 0;
 our $buildBlinders = 0;
+
+our $initRot = -6.0;  #initial rotation of sectors in degrees...  useful for lining up detectors.
 
 our $D2R = 3.14159265/180.0;
 

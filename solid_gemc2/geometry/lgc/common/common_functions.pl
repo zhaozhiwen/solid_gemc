@@ -309,3 +309,10 @@ sub calcIntPoints
 
 
 }1;
+
+#sector map for numbering purposes, input n, output true sector:
+
+sub sec
+{
+	31 - $_[0];
+};
