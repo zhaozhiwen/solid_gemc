@@ -27,9 +27,14 @@ sub makeCones
 
     $shield_offV = $shield_offV*$RpMyc;
     $shield_offV = $shield_offV*$RpMxc;
+	
+	$RpM = &rotateZ($RpM,$initRot*$D2R);
+	my $angRot = $initRot;
 
     for(my $n=1; $n <= $Nsec; $n++)
     {
+		
+	$angRot += 12.0;
 	$RpM = &rotateZ($RpM,12.0*$D2R);
 	my $RpMc = &VMconvert($RpM);
 
@@ -38,11 +43,11 @@ sub makeCones
 	my $temp_pos_V = $Pos_winstonCone_V;
 	$temp_pos_V = $temp_pos_V*$RpMc;
 
-	$detector{"name"} = $namePre."wcone_".$n;
+	$detector{"name"} = $namePre."wcone_".&sec($n);
 	$detector{"mother"} = $namePre."Tank";
-	$detector{"description"} = "Winston Cone number $n";
+	$detector{"description"} = "Winston Cone number ".&sec($n);
 	$detector{"pos"} = sprintf('%.3f',$temp_pos_V->x())."*cm ".sprintf('%.3f',$temp_pos_V->y())."*cm ".sprintf('%.3f',$temp_pos_V->z())."*cm";
-	$detector{"rotation"}   = "ordered: zxy ".(-$ang_zrot + $n*12.0)."*deg -".$ang_xrot."*deg -".$ang_yrot."*deg";
+	$detector{"rotation"}   = "ordered: zxy ".(-$ang_zrot + $angRot)."*deg -".$ang_xrot."*deg -".$ang_yrot."*deg";
 	$detector{"color"}      = "F0F0F0";
 	$detector{"type"}       = "Cons";
 	$detector{"dimensions"} =  $pmtN*$pmt_x."*cm ".($pmtN*$pmt_x + 0.5)."*cm ".$rmin_w_end."*cm ".$rmax_w_end."*cm ".$z_w_half."*cm ". "0.*deg 360.*deg";
@@ -64,11 +69,11 @@ sub makeCones
 	my $temp_pos_Vc = $Pos_winstonCone_V + $shield_offV;
 	$temp_pos_Vc = $temp_pos_Vc*$RpMc;
 
-	$detector{"name"} = $namePre."coneshield_in_".$n;
+	$detector{"name"} = $namePre."coneshield_in_".&sec($n);
 	$detector{"mother"} = $namePre."Tank";
-	$detector{"description"} = "Cone shield in number $n";
+	$detector{"description"} = "Cone shield in number ".&sec($n);
 	$detector{"pos"} = sprintf('%.3f',$temp_pos_Vc->x())."*cm ".sprintf('%.3f',$temp_pos_Vc->y())."*cm ".sprintf('%.3f',$temp_pos_Vc->z())."*cm";
-	$detector{"rotation"}   = "ordered: zxy ".(-$ang_zrot + $n*12.0)."*deg -".$ang_xrot."*deg -".$ang_yrot."*deg";
+	$detector{"rotation"}   = "ordered: zxy ".(-$ang_zrot + $angRot)."*deg -".$ang_xrot."*deg -".$ang_yrot."*deg";
 	$detector{"color"}      = "606060";
 	$detector{"type"}       = "Cons";
 	$detector{"dimensions"} =  (sqrt(2.0)*$pmtN*$pmt_x + 0.5)."*cm ".(sqrt(2.0)*$pmtN*$pmt_x + 0.6)."*cm ".(sqrt(2.0)*$pmtN*$pmt_x + 0.5)."*cm ".(sqrt(2.0)*$pmtN*$pmt_x + 0.6)."*cm ".$pmt_shield_hlength."*cm ". "0.*deg 360.*deg";
@@ -86,11 +91,11 @@ sub makeCones
 	
 
 	#Shield outer cylinder
-	$detector{"name"} = $namePre."coneshield_out_".$n;
+	$detector{"name"} = $namePre."coneshield_out_".&sec($n);
 	$detector{"mother"} = $namePre."Tank";
-	$detector{"description"} = "Cone shield_out number $n";
+	$detector{"description"} = "Cone shield_out number ".&sec($n);
 	$detector{"pos"} = sprintf('%.3f',$temp_pos_Vc->x())."*cm ".sprintf('%.3f',$temp_pos_Vc->y())."*cm ".sprintf('%.3f',$temp_pos_Vc->z())."*cm";
-	$detector{"rotation"}   = "ordered: zxy ".(-$ang_zrot + $n*12.0)."*deg -".$ang_xrot."*deg -".$ang_yrot."*deg";
+	$detector{"rotation"}   = "ordered: zxy ".(-$ang_zrot + $angRot)."*deg -".$ang_xrot."*deg -".$ang_yrot."*deg";
 	$detector{"color"}      = "606060";
 	$detector{"type"}       = "Cons";
 	$detector{"dimensions"} =  (sqrt(2.0)*$pmtN*$pmt_x + 0.6)."*cm ".(sqrt(2.0)*$pmtN*$pmt_x + 0.9)."*cm ".(sqrt(2.0)*$pmtN*$pmt_x + 0.6)."*cm ".(sqrt(2.0)*$pmtN*$pmt_x + 0.9)."*cm ".$pmt_shield_hlength."*cm ". "0.*deg 360.*deg";
@@ -106,6 +111,7 @@ sub makeCones
 	$detector{"identifiers"} = "no";
 	print_det(\%configuration, \%detector);
 
+	
     }
 }1;
 
