@@ -147,7 +147,8 @@ my @hittype = ("no","no","no","no","solid_gem","solid_gem","solid_gem","no","sol
     print_det(\%configuration, \%detector);
 
     for( my $sec = 1; $sec <= 30; $sec++ ){
-      my $thisrot = -($sec-1)*12.0 + $offrot[$n-1];
+#       my $thisrot = -($sec-1)*12.0 + $offrot[$n-1];
+	my $thisrot = -(96.0 + ($sec-1) * 12.0 + $offrot[$n-1]); #1st sector center at 96deg      
     
       for(my $i=1; $i<=$Nlayer; $i++)
       {
