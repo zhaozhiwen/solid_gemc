@@ -89,7 +89,7 @@ TTree *tree_header = (TTree*) file->Get("header");
 vector <string> *header_time=0;
 vector <int> *header_evn=0,*header_evn_type=0;
 vector <double> *header_beamPol=0;
-vector <int> *header_var1=0,*header_var2=0,*header_var3=0,*header_var4=0,*header_var5=0,*header_var6=0,*header_var7=0,*header_var8=0;
+vector <double> *header_var1=0,*header_var2=0,*header_var3=0,*header_var4=0,*header_var5=0,*header_var6=0,*header_var7=0,*header_var8=0;
 tree_header->SetBranchAddress("time",&header_time);
 tree_header->SetBranchAddress("evn",&header_evn);
 tree_header->SetBranchAddress("evn_type",&header_evn_type);
