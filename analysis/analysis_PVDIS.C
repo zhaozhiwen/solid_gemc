@@ -26,7 +26,7 @@
 
 using namespace std;
 
-void analysis_PVDIS(string input_filename,bool debug=false)
+void analysis_PVDIS(string input_filename,bool debug=false, bool kinecut=false)
 {
 gROOT->Reset();
 gStyle->SetPalette(1);
@@ -35,6 +35,7 @@ gStyle->SetOptFit(0);
 gStyle->SetOptStat(1111111);
 
 const double DEG=180./3.1415926;
+ Int_t nphecut = 3;
 
 char the_filename[200];
 sprintf(the_filename, "%s",input_filename.substr(0,input_filename.rfind(".")).c_str());
@@ -53,8 +54,8 @@ hflux_hitxy[i]=new TH2F(Form("hflux_hitxy_%i",i),Form("flux_hitxy %s;x(cm);y(cm)
 TH2F *hgen_ThetaP=new TH2F("gen_ThetaP","gen_ThetaP",40,10,50,110,0,11);     
  hgen_ThetaP->SetStats(0);
 TH2F *hacceptance_ThetaP[2];
-hacceptance_ThetaP[0]=new TH2F("acceptance_ThetaP_FA","acceptance by FA;vertex Theta (deg);P (GeV)",40,10,50,110,0,11);     
-hacceptance_ThetaP[1]=new TH2F("acceptance_ThetaP_LA","acceptance by LA;vertex Theta (deg);P (GeV)",40,10,50,110,0,11);
+hacceptance_ThetaP[0]=new TH2F("acceptance_ThetaP_FA","acceptance by FA;vertex #theta (deg);p (GeV)",40,10,50,110,0,11);     
+hacceptance_ThetaP[1]=new TH2F("acceptance_ThetaP_LA","acceptance by LA;vertex #theta (deg);p (GeV)",40,10,50,110,0,11);
  hacceptance_ThetaP[0]->SetStats(0);
  hacceptance_ThetaP[1]->SetStats(0);
 
@@ -68,8 +69,10 @@ hacceptance_Q2x=new TH2F("acceptance_Q2x_FA","acceptance by FA; x_{bj}; Q^{2} (M
  hacceptance_Q2x->SetStats(0);
    
 
-TH1F *hnphe_lgc=new TH1F("hnphe_lgc","hnphe_lgc",60,-0.5,59.5);
-TH1F *hsectoring_ec_lgc=new TH1F("hsectoring_ec_lgc","hsectoring_ec_lgc",30,-14.5,15.5);
+TH1F *hnphe_lgc=new TH1F("hnphe_lgc","Photoelectrons",60,-0.5,59.5);
+ hnphe_lgc->SetStats(0);
+TH1F *hsectoring_ec_lgc=new TH1F("hsectoring_ec_lgc","PE rate per segment",30,-14.5,15.5);
+ hsectoring_ec_lgc->SetStats(0);
 
 // TH1F *htotEdep_ec=new TH1F("htotEdep_ec","htotEdep_ec",100,0,2000);
 
@@ -169,6 +172,7 @@ TTree *tree_solid_lgc = (TTree*) file->Get("solid_lgc");
 setup_tree_solid_lgc(tree_solid_lgc);
 
 int nevent = (int)tree_generated->GetEntries();
+ if (debug) nevent /= 100;
 int nselected = 0;
 cout << "nevent " << nevent << endl;
 
@@ -186,6 +190,7 @@ for (Int_t i=0;i<nevent;i++) {
   int pid_gen=0;
   double theta_gen=0,phi_gen=0,p_gen=0,px_gen=0,py_gen=0,pz_gen=0,vx_gen=0,vy_gen=0,vz_gen=0;      
   Double_t Q2 = 0.0;
+  Double_t W2 = 0.0;
   Double_t xbj = 0.0;
 
 //       cout << "gen_pid->size() " << gen_pid->size() << endl;        
@@ -198,22 +203,19 @@ for (Int_t i=0;i<nevent;i++) {
       vx_gen=gen_vx->at(j);
       vy_gen=gen_vy->at(j);
       vz_gen=gen_vz->at(j);
-      p_gen=sqrt(px_gen*px_gen+py_gen*py_gen+pz_gen*pz_gen);
-      theta_gen=acos(pz_gen/p_gen);
-      phi_gen=atan2(py_gen,px_gen);
-
-      Q2 = 2 * 11.0e3 * p_gen * (1 - cos (theta_gen));
-      xbj = Q2 / 2 / 0.937e3 / (11.0e3 - p_gen);
-      
-       // cout << "p_gen " << p_gen 
-       // 	    << " theta_gen " << theta_gen
-       // 	    << " Q2 " << Q2
-       // 	    << " xbj " << xbj
-       // 	    << endl;  
-
-      hgen_ThetaP->Fill(theta_gen*DEG,p_gen/1e3);
-      hgen_Q2x->Fill (xbj, Q2/1e6);
   }
+  p_gen=sqrt(px_gen*px_gen+py_gen*py_gen+pz_gen*pz_gen);
+  theta_gen=acos(pz_gen/p_gen);
+  phi_gen=atan2(py_gen,px_gen);
+
+  Q2 = 2 * 11.0e3 * p_gen * (1 - cos (theta_gen));
+  W2 = (.938e3*.938e3+2*.938e3*(11.0e3 - p_gen)-Q2);
+  xbj = Q2 / 2 / 0.938e3 / (11.0e3 - p_gen);
+  if (kinecut && (Q2 < 6000000 || W2 < 4000000 || xbj < 0.55))
+    continue;
+  
+  hgen_ThetaP->Fill(theta_gen*DEG,p_gen/1e3);
+  hgen_Q2x->Fill (xbj, Q2/1e6);
   
     bool Is_acc=false,Is_ec=false,Is_gem[5]={false,false,false,false,false},Is_lgc=false;
     
@@ -332,7 +334,7 @@ for (Int_t i=0;i<nevent;i++) {
     }      
     hnphe_lgc->Fill(nphe_lgc_total,rate);  
     
-    if (nphe_lgc_total>1){  // cut on lgc
+    if (nphe_lgc_total>nphecut){  // cut on lgc
       Is_acc=true;
     }
   }      
@@ -372,16 +374,39 @@ hflux_hitxy[i]->Draw("colz");
 TCanvas *c_npe_lgc = new TCanvas("npe_lgc","npe_lgc",1600,900);
 c_npe_lgc->Divide(2,1);
 c_npe_lgc->cd(1);
-hnphe_lgc->Draw();
+
+ hnphe_lgc->SetFillColor(1);
+ hnphe_lgc->SetBarWidth(0.5);
+ hnphe_lgc->SetBarOffset(0.25);
+hnphe_lgc->Draw("b");
+
+ Double_t intall = hnphe_lgc->Integral();
+ Double_t intcut = hnphe_lgc->Integral(nphecut+2, hnphe_lgc->GetNbinsX());
+ cout << intcut/intall << endl;
+
+ TPaveText* tpt = new TPaveText (0.6, 0.5, 0.85, 0.6, "NDC");
+ tpt->AddText (Form ("Eff = %4.1f%%", intcut/intall*100));
+ tpt->Draw();
+
+ TLine* tl = new TLine (hnphe_lgc->GetBinLowEdge(nphecut+2), 0, 
+			hnphe_lgc->GetBinLowEdge(nphecut+2), hnphe_lgc->GetMaximum()/10);
+ tl->SetLineColor(2);
+ tl->SetLineWidth(3);
+ tl->SetLineStyle(2);
+ tl->Draw();
+
 c_npe_lgc->cd(2);
-hsectoring_ec_lgc->Draw();
+
+ hsectoring_ec_lgc->SetFillColor(1);
+ hsectoring_ec_lgc->SetBarWidth(0.5);
+ hsectoring_ec_lgc->SetBarOffset(0.25);
+hsectoring_ec_lgc->Draw("b");
 gPad->SetLogy(1);
 
 TCanvas *c_acc = new TCanvas("acc","acc",1600,900);
-c_acc->Divide(2,3);
+c_acc->Divide(2,1);
+
 c_acc->cd(1);
-hgen_ThetaP->Draw("colz");
-c_acc->cd(2);
 hacceptance_ThetaP[0]->Divide(hacceptance_ThetaP[0],hgen_ThetaP);  
 hacceptance_ThetaP[0]->SetMinimum(0);  
 hacceptance_ThetaP[0]->SetMaximum(1);    
@@ -392,31 +417,24 @@ hacceptance_ThetaP[0]->Draw("colz");
  fq2->Draw("same");
  TLatex* tq2 = new TLatex (15,9,"Q^{2}>6 GeV^{2}");
  tq2->SetTextColor(2);
- tq2->SetTextSize(0.07);
+ tq2->SetTextSize(0.035);
  tq2->Draw();
  TF1* fw2 = new TF1("fw2","(.938*.938+2*.938*11-4)/(2*(.938+11*(1-cos(x*3.14159/180))))",10,50);
  fw2->SetLineColor(6);
  fw2->Draw("same");
  TLatex* tw2 = new TLatex (11,5.5,"W>2 GeV");
  tw2->SetTextColor(6);
- tw2->SetTextSize(0.07);
+ tw2->SetTextSize(0.035);
  tw2->Draw();
  TF1* fxbj = new TF1("fxbj","(.938*.55*11)/(11*(1-cos(x*3.14159/180))+.938*.55)",10,50);
  fxbj->SetLineColor(1);
  fxbj->Draw("same");
  TLatex* txbj = new TLatex (41,2.25,"x_{bj}>0.55");
  txbj->SetTextColor(1);
- txbj->SetTextSize(0.07);
+ txbj->SetTextSize(0.035);
  txbj->Draw();
  
-
-c_acc->cd(3);
-hdist_x->Draw("");
-c_acc->cd(4);
-hdist_Q2->Draw("");
-c_acc->cd(5);
-hgen_Q2x->Draw("colz");
-c_acc->cd(6);
+c_acc->cd(2);
 hacceptance_Q2x->Divide(hacceptance_Q2x,hgen_Q2x);  
 hacceptance_Q2x->SetMinimum(0);  
 hacceptance_Q2x->SetMaximum(1);    
@@ -426,14 +444,14 @@ hacceptance_Q2x->Draw("colz");
  fq22->Draw("same");
  TLatex* tq22 = new TLatex (0.2,7,"Q^{2}>6 GeV^{2}");
  tq22->SetTextColor(2);
- tq22->SetTextSize(0.07);
+ tq22->SetTextSize(0.035);
  tq22->Draw();
  TF1* fw22 = new TF1("fw22","x*(4-.938*.938)/(1-x)",0,1);
  fw22->SetLineColor(6);
  fw22->Draw("same");
  TLatex* tw22 = new TLatex (0.25,2.,"W>2 GeV");
  tw22->SetTextColor(6);
- tw22->SetTextSize(0.07);
+ tw22->SetTextSize(0.035);
  tw22->Draw();
  TLine* fxbj2 = new TLine(0.55,0,0.55,14);
  fxbj2->SetLineWidth(2);
@@ -441,7 +459,7 @@ hacceptance_Q2x->Draw("colz");
  fxbj2->Draw("same");
  TLatex* txbj2 = new TLatex (.57,2.,"x_{bj}>0.55");
  txbj2->SetTextColor(1);
- txbj2->SetTextSize(0.07);
+ txbj2->SetTextSize(0.035);
  txbj2->Draw();
 
 }
