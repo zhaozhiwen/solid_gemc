@@ -46,12 +46,12 @@ return;
 
 // Bool_t lgc_trigger(TTree *tree_solid_lgc, Int_t eventn, Int_t PMTthresh = 2, Int_t PEthresh = 2){
 //   tree_solid_lgc->GetEntry(eventn);
-Bool_t lgc_trigger(TTree *tree_solid_lgc, Int_t PMTthresh = 2, Int_t PEthresh = 2){
+Bool_t process_tree_solid_lgc_trigger(TTree *tree_solid_lgc,Int_t *trigger_lgc, Int_t &ntrigsecs, Int_t PMTthresh = 2, Int_t PEthresh = 2){
   if(!solid_lgc_hitn->size()) return 0;
    //if using root6, uncomment line below, and comment out following line
   //std::vector<std::vector<int>> sectorhits (30, std::vector<int>(9,0));  //initialize a 30x9 vector array
   Int_t sectorhits[30][9] = {0};  //need to intialize to zero or bad stuff
-  Int_t ntrigsecs =0;
+  
   Int_t ntrigpmts =0;
  
   for(Int_t i = 0; i < solid_lgc_hitn->size(); i++){
@@ -64,7 +64,10 @@ Bool_t lgc_trigger(TTree *tree_solid_lgc, Int_t PMTthresh = 2, Int_t PEthresh = 
     for(Int_t j = 0; j < 9; j++){
       if(sectorhits[i][j] >= PEthresh) ntrigpmts++;
     }
-    if(ntrigpmts >= PMTthresh) ntrigsecs++;
+    if(ntrigpmts >= PMTthresh) {
+      ntrigsecs++;
+      trigger_lgc[i]=1;
+    }
   }
   if(ntrigsecs){
     return 1;
@@ -93,4 +96,5 @@ double process_tree_solid_lgc(TTree *tree_solid_lgc, Int_t *nphe_lgc)
   
   return 1;
 }
+
 

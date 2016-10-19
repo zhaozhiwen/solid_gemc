@@ -58,25 +58,85 @@ return ;
 
 }
 
-double process_tree_solid_mrpc(TTree *tree_solid_mrpc)
+bool find_id_mrpc_FA(double hit_phi,double r,int &sector,int &block,bool Is_debug=false)
+{  
+  double DEG=180./3.1415926;   //rad to degree  
+  
+  int sec_shift=0;  // shift to match electron turning in field
+  if (hit_phi>=90+sec_shift) sector=int((hit_phi-90-sec_shift)/7.2+1);
+  else sector=int((hit_phi+360-90-sec_shift)/7.2+1);			
+
+  //block from 105 to 210cm with 15,30,60cm length		  
+  if(105<=r && r<120){
+	  block=0;
+  }else if(120<=r && r<150){
+	  block=1;
+  }else if(150<=r && r<210){
+	  block=2;
+  }	
+  //do a check for index
+  if(sector<1||sector>50 || block<1 || block>3){
+	  if(Is_debug) cout<<"MRPC index is wrong "<<sector<<"	"<<block<<endl;
+	  return false;
+  }
+  else return true; 
+}
+
+bool process_tree_solid_mrpc_trigger(TTree *tree_solid_mrpc,int *trigger_mrpc_FA,int &ntrigsecs_mrpc_FA,double mrpc_block_threshold_FA = 5,bool Is_debug=false)
 {
-  double totEdep=0;
-//     for (Int_t j=0;j<1;j++) {  
-    for (Int_t j=0;j<solid_mrpc_hitn->size();j++) {
-//       cout << "solid_mrpc " << " !!! " << solid_mrpc_hitn->at(j) << " " << solid_mrpc_id->at(j) << " " << solid_mrpc_pid->at(j) << " " << solid_mrpc_mpid->at(j) << " " << solid_mrpc_tid->at(j) << " " << solid_mrpc_mtid->at(j) << " " << solid_mrpc_trackE->at(j) << " " << solid_mrpc_totEdep->at(j) << " " << solid_mrpc_avg_x->at(j) << " " << solid_mrpc_avg_y->at(j) << " " << solid_mrpc_avg_z->at(j) << " " << solid_mrpc_avg_lx->at(j) << " " << solid_mrpc_avg_ly->at(j) << " " << solid_mrpc_avg_lz->at(j) << " " << solid_mrpc_px->at(j) << " " << solid_mrpc_py->at(j) << " " << solid_mrpc_pz->at(j) << " " << solid_mrpc_vx->at(j) << " " << solid_mrpc_vy->at(j) << " " << solid_mrpc_vz->at(j) << " " << solid_mrpc_mvx->at(j) << " " << solid_mrpc_mvy->at(j) << " " << solid_mrpc_mvz->at(j) << " " << solid_mrpc_avg_t->at(j) << endl;  
+    double DEG=180./3.1415926;   //rad to degree  
+  
+    double mrpc_edep_threshold=16.0e-6; //in unit of MeV
 
-      int detector_ID=solid_mrpc_id->at(j)/1000000;
-      int subdetector_ID=(solid_mrpc_id->at(j)%1000000)/100000;
-      int subsubdetector_ID=((solid_mrpc_id->at(j)%1000000)%100000)/10000;
-      int component_ID=solid_mrpc_id->at(j)%10000;
+    double  counter_mrpc_FA[50][3][10] = {0};    //50 sector, 3 blocks, 10 gas layers
+    ntrigsecs_mrpc_FA=0;
+    
+    //loop over data tree
+    for (int j=0;j<solid_mrpc_hitn->size();j++) {
+
+    int detector_ID=solid_mrpc_id->at(j)/1000000;
+    int subdetector_ID=(solid_mrpc_id->at(j)%1000000)/100000;
+    int subsubdetector_ID=((solid_mrpc_id->at(j)%1000000)%100000)/10000;
+    int component_ID=solid_mrpc_id->at(j)%10000;
+
+    if (detector_ID==4 && subdetector_ID == 1 && subsubdetector_ID == 0){//in gas
       
-    cout << detector_ID << " " << subdetector_ID << " "  << subsubdetector_ID  << " " << component_ID << ", " << solid_mrpc_totEdep->at(j) << endl; 
-           
-      if (detector_ID==4 && subdetector_ID == 1 && subsubdetector_ID == 0) totEdep +=solid_mrpc_totEdep->at(j);     
-         
-    }    
+      if(component_ID<1 || component_ID>10){
+	      cout<<"MRPC index is wrong "<<solid_mrpc_id->at(j)<<endl;
+	      continue;
+      }		  
+      
+      double hit_phi=atan2(solid_mrpc_avg_y->at(j), solid_mrpc_avg_x->at(j))*DEG;  //(-180,180)
+      double r=sqrt(solid_mrpc_avg_y->at(j)*solid_mrpc_avg_y->at(j)+solid_mrpc_avg_x->at(j)*solid_mrpc_avg_x->at(j))/10.; // in cm
+				    
+      int sector=0,block=0;
+      if (find_id_mrpc_FA(hit_phi,r,sector,block,Is_debug)){	    
+	if (solid_mrpc_totEdep->at(j)>mrpc_edep_threshold){
+		counter_mrpc_FA[sector-1][block-1][component_ID-1] ++;
+	}
+      }
 
-return totEdep;
+      }  // process this hit is done
+
+    } // process all the hits
+
+    for(int l_sec=0; l_sec< 50; l_sec++){
+	for(int l_block=0; l_block<3; l_block++){
+		int sum_hit=0;					
+		for(int l_component_ID=0; l_component_ID<10; l_component_ID++){
+			if(counter_mrpc_FA[l_sec][l_block][l_component_ID]>0) sum_hit++;
+		}
+		
+		if(sum_hit>mrpc_block_threshold_FA) {
+		  ntrigsecs_mrpc_FA++;
+// 		  trigger_mrpc_FA[l_sec][l_block]=1;
+		  trigger_mrpc_FA[l_sec*3+l_block]=1;		  
+		}
+	}
+    }	
+    
+    return true;
 
 }
+
 
