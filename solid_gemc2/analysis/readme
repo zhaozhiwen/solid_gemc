@@ -1,7 +1,15 @@
 Here is a set of scripts to process root tree output from solid_gemc
 
-The root file has different trees from different hit process of different ditectors.
-Each tree is processed by an independent routine, they are called by the main analysis routine which process event by event and combine the result.
+This is the production area for the these script
+Their devel version are at 
+solid/subsystem/lgc/analysis/analysis_tree_solid_lgc.C
+solid/subsystem/hgc/analysis/analysis_tree_solid_hgc.C
+solid/subsystem/ec/analysis/analysis_tree_solid_ec.C
+solid/subsystem/spd/analysis/analysis_tree_solid_spd.C
+solid/subsystem/mrpc/analysis/analysis_tree_solid_mrpc.C
+
+The GEMC output root file has different trees from different hit process of different ditectors.
+Each tree is processed by an independent routine, they can be called by the main analysis routine which process event by event and combine the result.
 flux tree used for the virtual detectors is processed in the main analysis
 
 run the scripts with compliation to avoid error or slowness

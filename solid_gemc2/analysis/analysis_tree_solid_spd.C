@@ -26,7 +26,7 @@ vector<int> *solid_spd_id=0,*solid_spd_hitn=0;
 vector<int> *solid_spd_pid=0,*solid_spd_mpid=0,*solid_spd_tid=0,*solid_spd_mtid=0,*solid_spd_otid=0;
 vector<double> *solid_spd_trackE=0,*solid_spd_totEdep=0,*solid_spd_avg_x=0,*solid_spd_avg_y=0,*solid_spd_avg_z=0,*solid_spd_avg_lx=0,*solid_spd_avg_ly=0,*solid_spd_avg_lz=0,*solid_spd_px=0,*solid_spd_py=0,*solid_spd_pz=0,*solid_spd_vx=0,*solid_spd_vy=0,*solid_spd_vz=0,*solid_spd_mvx=0,*solid_spd_mvy=0,*solid_spd_mvz=0,*solid_spd_avg_t=0;
 
-void setup_tree_solid_spd(TTree *tree_solid_spd,bool debug=false)
+void setup_tree_solid_spd(TTree *tree_solid_spd)
 {  
 tree_solid_spd->SetBranchAddress("hitn",&solid_spd_hitn);
 tree_solid_spd->SetBranchAddress("id",&solid_spd_id);
@@ -54,18 +54,102 @@ tree_solid_spd->SetBranchAddress("mvy",&solid_spd_mvy);
 tree_solid_spd->SetBranchAddress("mvz",&solid_spd_mvz);
 tree_solid_spd->SetBranchAddress("avg_t",&solid_spd_avg_t);
 
-if(debug){
-char *branchname_spd[26]={"hitn","id","pid","mpid","tid","mtid","otid","trackE","totEdep","trackE","avg_x","avg_y","avg_z","avg_lx","avg_ly","avg_lz","px","py","pz","vx","vy","vz","mvx","mvy","mvz","avg_t"};
-cout << endl << "tree_solid_spd" << endl;
-for (Int_t i=0;i<26;i++) { 
-cout << branchname_spd[i] << " " <<  tree_solid_spd->GetBranch(branchname_spd[i])->GetLeaf(branchname_spd[i])->GetTypeName() << ",";
-}
-}
-
 return ;
 
 }
 
+bool find_id_spd_FA(double hit_phi,double r,int &sector,int &block,bool Is_debug=false){  
+  double DEG=180./3.1415926;   //rad to degree  
+  
+  int sec_shift=0;  // shift to match electron turning in field
+  if (hit_phi>=90+sec_shift) sector=int((hit_phi-90-sec_shift)/6+1);
+  else sector=int((hit_phi+360-90-sec_shift)/6+1);		
+   
+  //block from 105 to 210cm with 10,20,30,45cm length
+  if(105<=r && r<115){
+	  block=1;
+  }else if(115<=r && r<135){
+	  block=2;
+  }else if(135<=r && r<165){
+	  block=3;
+  }else if(165<=r && r<210){
+	  block=4;
+  }
+  //do a check for index
+  if(sector<1||sector>60||block<1 || block>4){
+	  if (Is_debug) cout<<"spd index is wrong "<<sector<<" "<<block<<endl;
+	  return false;
+  }
+  else return true;
+}
+
+bool find_id_spd_LA(double hit_phi,double r,int &sector,bool Is_debug=false){
+  double DEG=180./3.1415926;   //rad to degree  
+  
+  int sec_shift=0;  // shift to match electron turning in field
+  if (hit_phi>=90+sec_shift) sector=int((hit_phi-90-sec_shift)/6+1);
+  else sector=int((hit_phi+360-90-sec_shift)/6+1);	
+  //do a check for index
+  if(sector<1||sector>60){
+	  if (Is_debug) cout<<"spd index is wrong "<<sector<<endl;
+	  return false;
+  }
+  else return true;
+}
+
+bool process_tree_solid_spd_trigger(TTree *tree_solid_spd,int *trigger_spd_FA,int *trigger_spd_LA,int &ntrigsecs_spd_FA,int &ntrigsecs_spd_LA,double spd_threshold_FA =0.5,double spd_threshold_LA=1.5,bool Is_debug=false)
+{
+    double DEG=180./3.1415926;   //rad to degree  
+    
+    double tot_edep_spd_forward[60][4]={0};   //only forward has 4 blocks in r dimension    
+    double tot_edep_spd_large[60]={0};       
+    
+    ntrigsecs_spd_FA=0;    
+    ntrigsecs_spd_LA=0;		    
+       
+    //loop over data tree
+    for(int j=0; j<solid_spd_hitn->size(); j++){
+
+	    double hit_phi=atan2(solid_spd_avg_y->at(j), solid_spd_avg_x->at(j))*DEG;  //(-180,180)
+	    
+	    double r=sqrt(solid_spd_avg_y->at(j)*solid_spd_avg_y->at(j)+solid_spd_avg_x->at(j)*solid_spd_avg_x->at(j))/10.; // in cm
+		      
+	    if(int(solid_spd_id->at(j))==5100000){ //FASPD
+	      
+		    int sector=0,block=0;
+		    if (find_id_spd_FA(hit_phi,r,sector,block))		  tot_edep_spd_forward[sector-1][block-1] += solid_spd_totEdep->at(j);
+	    }
+	    
+	    if(int(solid_spd_id->at(j))==5200000){ //LASPD
+	      
+		    int sector=0;
+		    if(find_id_spd_LA(hit_phi,r,sector)) tot_edep_spd_large[sector-1] += solid_spd_totEdep->at(j);
+	    }			
+	    
+    } //loop over hits
+
+
+    for(int l_sec=0; l_sec< 60; l_sec++){
+	for(int l_block=0; l_block<4; l_block++){
+		if(tot_edep_spd_forward[l_sec][l_block] >= spd_threshold_FA){
+		  ntrigsecs_spd_FA++;
+// 		  trigger_spd_FA[l_sec][l_block]=1;
+		  trigger_spd_FA[l_sec*4+l_block]=1;		  
+		}
+	}
+    }
+    
+    for(int l_sec=0; l_sec< 60; l_sec++){				
+      if(tot_edep_spd_large[l_sec] >= spd_threshold_LA){
+	ntrigsecs_spd_LA++;				
+	trigger_spd_LA[l_sec]=1;
+      }
+    }
+    
+    return true;
+
+}
+		
 double process_tree_solid_spd(TTree *tree_solid_spd)
 {
   double totEdep=0;
@@ -87,4 +171,6 @@ double process_tree_solid_spd(TTree *tree_solid_spd)
 return totEdep;
 
 }
+		
+
 
