@@ -58,7 +58,7 @@ return ;
 
 }
 
-bool find_id_spd_FA(double hit_phi,double r,int &sector,int &block,bool Is_debug=false){  
+bool find_id_spd_FA(double hit_phi,double hit_r,int &sector,int &block,bool Is_debug=false){  
   double DEG=180./3.1415926;   //rad to degree  
   
   int sec_shift=0;  // shift to match electron turning in field
@@ -66,13 +66,13 @@ bool find_id_spd_FA(double hit_phi,double r,int &sector,int &block,bool Is_debug
   else sector=int((hit_phi+360-90-sec_shift)/6+1);		
    
   //block from 105 to 210cm with 10,20,30,45cm length
-  if(105<=r && r<115){
+  if(105<=hit_r && hit_r<115){
 	  block=1;
-  }else if(115<=r && r<135){
+  }else if(115<=hit_r && hit_r<135){
 	  block=2;
-  }else if(135<=r && r<165){
+  }else if(135<=hit_r && hit_r<165){
 	  block=3;
-  }else if(165<=r && r<210){
+  }else if(165<=hit_r && hit_r<210){
 	  block=4;
   }
   //do a check for index
@@ -83,7 +83,7 @@ bool find_id_spd_FA(double hit_phi,double r,int &sector,int &block,bool Is_debug
   else return true;
 }
 
-bool find_id_spd_LA(double hit_phi,double r,int &sector,bool Is_debug=false){
+bool find_id_spd_LA(double hit_phi,double hit_r,int &sector,bool Is_debug=false){
   double DEG=180./3.1415926;   //rad to degree  
   
   int sec_shift=0;  // shift to match electron turning in field
@@ -112,18 +112,18 @@ bool process_tree_solid_spd_trigger(TTree *tree_solid_spd,int *trigger_spd_FA,in
 
 	    double hit_phi=atan2(solid_spd_avg_y->at(j), solid_spd_avg_x->at(j))*DEG;  //(-180,180)
 	    
-	    double r=sqrt(solid_spd_avg_y->at(j)*solid_spd_avg_y->at(j)+solid_spd_avg_x->at(j)*solid_spd_avg_x->at(j))/10.; // in cm
+	    double hit_r=sqrt(solid_spd_avg_y->at(j)*solid_spd_avg_y->at(j)+solid_spd_avg_x->at(j)*solid_spd_avg_x->at(j))/10.; // in cm
 		      
 	    if(int(solid_spd_id->at(j))==5100000){ //FASPD
 	      
 		    int sector=0,block=0;
-		    if (find_id_spd_FA(hit_phi,r,sector,block))		  tot_edep_spd_forward[sector-1][block-1] += solid_spd_totEdep->at(j);
+		    if (find_id_spd_FA(hit_phi,hit_r,sector,block))		  tot_edep_spd_forward[sector-1][block-1] += solid_spd_totEdep->at(j);
 	    }
 	    
 	    if(int(solid_spd_id->at(j))==5200000){ //LASPD
 	      
 		    int sector=0;
-		    if(find_id_spd_LA(hit_phi,r,sector)) tot_edep_spd_large[sector-1] += solid_spd_totEdep->at(j);
+		    if(find_id_spd_LA(hit_phi,hit_r,sector)) tot_edep_spd_large[sector-1] += solid_spd_totEdep->at(j);
 	    }			
 	    
     } //loop over hits

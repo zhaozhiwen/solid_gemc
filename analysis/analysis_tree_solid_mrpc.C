@@ -58,7 +58,7 @@ return ;
 
 }
 
-bool find_id_mrpc_FA(double hit_phi,double r,int &sector,int &block,bool Is_debug=false)
+bool find_id_mrpc_FA(double hit_phi,double hit_r,int &sector,int &block,bool Is_debug=false)
 {  
   double DEG=180./3.1415926;   //rad to degree  
   
@@ -67,11 +67,11 @@ bool find_id_mrpc_FA(double hit_phi,double r,int &sector,int &block,bool Is_debu
   else sector=int((hit_phi+360-90-sec_shift)/7.2+1);			
 
   //block from 105 to 210cm with 15,30,60cm length		  
-  if(105<=r && r<120){
+  if(105<=hit_r && hit_r<120){
 	  block=0;
-  }else if(120<=r && r<150){
+  }else if(120<=hit_r && hit_r<150){
 	  block=1;
-  }else if(150<=r && r<210){
+  }else if(150<=hit_r && hit_r<210){
 	  block=2;
   }	
   //do a check for index
@@ -107,10 +107,10 @@ bool process_tree_solid_mrpc_trigger(TTree *tree_solid_mrpc,int *trigger_mrpc_FA
       }		  
       
       double hit_phi=atan2(solid_mrpc_avg_y->at(j), solid_mrpc_avg_x->at(j))*DEG;  //(-180,180)
-      double r=sqrt(solid_mrpc_avg_y->at(j)*solid_mrpc_avg_y->at(j)+solid_mrpc_avg_x->at(j)*solid_mrpc_avg_x->at(j))/10.; // in cm
+      double hit_r=sqrt(solid_mrpc_avg_y->at(j)*solid_mrpc_avg_y->at(j)+solid_mrpc_avg_x->at(j)*solid_mrpc_avg_x->at(j))/10.; // in cm
 				    
       int sector=0,block=0;
-      if (find_id_mrpc_FA(hit_phi,r,sector,block,Is_debug)){	    
+      if (find_id_mrpc_FA(hit_phi,hit_r,sector,block,Is_debug)){	    
 	if (solid_mrpc_totEdep->at(j)>mrpc_edep_threshold){
 		counter_mrpc_FA[sector-1][block-1][component_ID-1] ++;
 	}
