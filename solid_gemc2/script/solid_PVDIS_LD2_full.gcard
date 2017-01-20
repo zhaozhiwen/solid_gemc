@@ -5,10 +5,10 @@
 <option name="DBPSWD" value="ilovesolid"/>
 
 <detector name="../geometry/magnet/solid_solenoid" factory="TEXT" variation="Original"/>
-<detector name="../geometry/ec/solid_PVDIS_ec_forwardangle" factory="TEXT" variation="Original"/>
+<detector name="../geometry/ec_segmented/solid_PVDIS_ec_forwardangle" factory="TEXT" variation="Original"/>
 <detector name="../geometry/lgc/lg_cherenkov" factory="TEXT" variation="PVDIS"/>
 <detector name="../geometry/gem/solid_PVDIS_gem" factory="TEXT" variation="Original"/>
-<detector name="../geometry/target/solid_PVDIS_target_LD2_enclosure" factory="TEXT" variation="Original"/>
+<detector name="../geometry/target/solid_PVDIS_target_enclosure" factory="TEXT" variation="LD2"/>
 <detector name="../geometry/beamline/solid_PVDIS_beamline" factory="TEXT" variation="Original"/>
 <detector name="../geometry/baffle/solid_PVDIS_baffle_babarbafflemore1_enclosure" factory="TEXT" variation="Original"/>
 
