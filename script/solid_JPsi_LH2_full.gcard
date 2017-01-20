@@ -5,8 +5,8 @@
 <option name="DBPSWD" value="ilovesolid"/>
 
 <detector name="../geometry/magnet/solid_solenoid" factory="TEXT" variation="Original"/>
-<detector name="../geometry/ec/solid_SIDIS_ec_largeangle" factory="TEXT" variation="Original"/>
-<detector name="../geometry/ec/solid_SIDIS_ec_forwardangle" factory="TEXT" variation="Original"/>
+<detector name="../geometry/ec_segmented/solid_SIDIS_ec_largeangle" factory="TEXT" variation="Original"/>
+<detector name="../geometry/ec_segmented/solid_SIDIS_ec_forwardangle" factory="TEXT" variation="Original"/>
 <detector name="../geometry/hgc/solid_SIDIS_hgc" factory="TEXT" variation="Original"/>
 <detector name="../geometry/lgc/lg_cherenkov" factory="TEXT" variation="SIDIS"/>
 <detector name="../geometry/mrpc/solid_SIDIS_mrpc_forwardangle" factory="TEXT" variation="Original"/>
@@ -34,7 +34,7 @@
 
 <option name="BEAM_P"   value="e-,5.5*GeV,20*deg,0*deg"/>
 <option name="SPREAD_P" value="5.5*GeV,20*deg,180*deg"/>
-<option name="BEAM_V"   value="(0,0,-350)cm"/>
+<option name="BEAM_V"   value="(0,0,-315)cm"/>
 <option name="SPREAD_V" value="(0.3,20)cm"/>
 
 

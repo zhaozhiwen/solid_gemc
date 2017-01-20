@@ -5,8 +5,8 @@
 <option name="DBPSWD" value="ilovesolid"/>
 
 <detector name="../geometry/magnet/solid_solenoid" factory="TEXT" variation="Original"/>
-<detector name="../geometry/ec/solid_SIDIS_ec_largeangle" factory="TEXT" variation="Original"/>
-<detector name="../geometry/ec/solid_SIDIS_ec_forwardangle" factory="TEXT" variation="Original"/>
+<detector name="../geometry/ec_segmented/solid_SIDIS_ec_largeangle" factory="TEXT" variation="Original"/>
+<detector name="../geometry/ec_segmented/solid_SIDIS_ec_forwardangle" factory="TEXT" variation="Original"/>
 <detector name="../geometry/hgc/solid_SIDIS_hgc" factory="TEXT" variation="Original"/>
 <detector name="../geometry/lgc/lg_cherenkov" factory="TEXT" variation="SIDIS"/>
 <detector name="../geometry/mrpc/solid_SIDIS_mrpc_forwardangle" factory="TEXT" variation="Original"/>
