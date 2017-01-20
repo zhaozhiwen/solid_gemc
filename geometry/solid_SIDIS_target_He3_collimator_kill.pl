@@ -23,6 +23,7 @@ my $material="Kryptonite";
 sub make_upstream
 {
  my $z=-355;
+#  my $z=-340;
 
     my %detector=init_det();
     $detector{"name"}        = "$DetectorName\_upstream";
@@ -32,10 +33,27 @@ sub make_upstream
     $detector{"rotation"}   = "0*deg 0*deg 0*deg";
     $detector{"color"}      = "003300";
     $detector{"type"}       = "Cons";
+    
+#     my $Rmin1 = 1.3;
+#     my $Rmax1 = 2.7;
+#     my $Rmin2 = 2.6;
+#     my $Rmax2 = 5.4;
+    
     my $Rmin1 = 1.3;
-    my $Rmax1 = 2.7;
+    my $Rmax1 = 4.5;
     my $Rmin2 = 2.6;
-    my $Rmax2 = 5.4;
+    my $Rmax2 = 8.9;    
+
+#     my $Rmin1 = 3.3;
+#     my $Rmax1 = 6.7;
+#     my $Rmin2 = 4.6;
+#     my $Rmax2 = 9.4;
+
+#     my $Rmin1 = 3.3;
+#     my $Rmax1 = 11.2;
+#     my $Rmin2 = 4.6;
+#     my $Rmax2 = 15.6;
+    
     my $Dz    = 5;
     my $Sphi  = 0;
     my $Dphi  = 360;
@@ -56,6 +74,7 @@ sub make_upstream
 sub make_downstream
 {
  my $z=-315;
+#  my $z=-300; 
 
     my %detector=init_det();
     $detector{"name"}        = "$DetectorName\_downstream";
@@ -65,10 +84,27 @@ sub make_downstream
     $detector{"rotation"}   = "0*deg 0*deg 0*deg";
     $detector{"color"}      = "003300";
     $detector{"type"}       = "Cons";
+
     my $Rmin1 = 1.3;
     my $Rmax1 = 2.7;
     my $Rmin2 = 2.6;
     my $Rmax2 = 5.4;
+    
+#     my $Rmin1 = 1.3;
+#     my $Rmax1 = 4.5;
+#     my $Rmin2 = 2.6;
+#     my $Rmax2 = 8.9;    
+
+#     my $Rmin1 = 3.3;
+#     my $Rmax1 = 6.7;
+#     my $Rmin2 = 4.6;
+#     my $Rmax2 = 9.4;
+
+#     my $Rmin1 = 3.3;
+#     my $Rmax1 = 11.2;
+#     my $Rmin2 = 4.6;
+#     my $Rmax2 = 15.6;
+
     my $Dz    = 5;
     my $Sphi  = 0;
     my $Dphi  = 360;
