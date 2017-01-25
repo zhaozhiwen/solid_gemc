@@ -1,0 +1,22 @@
+#!/bin/sh
+cd magnet
+./solid_solenoid.pl config_solid_solenoid.dat
+cd ../
+cd ec
+./solid_PVDIS_ec_forwardangle.pl config_solid_PVDIS_ec_forwardangle.dat
+cd ../
+cd lgc
+./solid_lgc.pl configs/pvdis_CLEO_hybrid2.pl
+cd ../
+cd baffle
+./solid_PVDIS_baffle_babarbafflemore1_enclosure.pl config_solid_PVDIS_baffle_babarbafflemore1_enclosure.dat
+cd ../
+cd gem
+./solid_PVDIS_gem.pl config_solid_PVDIS_gem.dat
+cd ../
+cd target
+./solid_PVDIS_target_enclosure.pl config_solid_PVDIS_target_enclosure.dat
+cd ../
+cd beamline
+./solid_PVDIS_beamline.pl config_solid_PVDIS_beamline.dat
+cd ../
