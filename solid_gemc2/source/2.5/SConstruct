@@ -1,0 +1,52 @@
+from init_env import init_environment
+
+env = init_environment("qt5 geant4 clhep evio xercesc ccdb mlibrary cadmesh")
+
+# env.Replace(CXX = "/apps/gcc/4.7.2/bin/g++")
+
+# Hit Processes (addtional)
+env.Append(CPPPATH = ['hitprocess'])
+hitp_sources = Split("""
+	hitprocess/solid_ec_hitprocess.cc
+	#hitprocess/solid_gem_hitprocess.cc
+	#hitprocess/solid_hgc_hitprocess.cc
+	#hitprocess/solid_lgc_hitprocess.cc
+	#hitprocess/solid_spd_hitprocess.cc	
+	#hitprocess/solid_mrpc_hitprocess.cc
+	""")
+env.Library(source = hitp_sources, target = "lib/hitprocess")
+
+#gemc (addtional)
+env.Append(CPPPATH = 'src')
+gemc_sources = Split("""
+	solid_gemc.cc""")
+
+# Get GEMC path
+import os
+gemcpath = os.environ['GEMC']+'/'
+env.Append(LIBPATH = gemcpath)
+env.Append(LIBS = "gemc")
+# LIBPATH here is what GEMC used to link all the libraries to gemc.so
+rpath = env['LIBPATH']
+
+# Include Path
+incpath = ['.',gemcpath, gemcpath+'src', gemcpath+'materials',gemcpath+'mirrors',gemcpath+'parameters',gemcpath+'utilities',gemcpath+'detector',gemcpath+'sensitivity',gemcpath+'physics',gemcpath+'fields',gemcpath+'output',gemcpath+'gui/src',gemcpath+'hitprocess', gemcpath+'hitprocess/clas12', gemcpath+'hitprocess/clas12/bdx', gemcpath+'hitprocess/HPS',gemcpath+'hitprocess/injector', gemcpath+'hitprocess/GlueX']
+env.Append(CPPPATH = incpath)
+
+#env.Append(LIBPATH = ['lib'])
+#env.Prepend(LIBS =  ['materials', 'mirrors', 'parameters', 'utilities', 'detector', 'sensitivity', 'physics', 'fields', 'hitprocess', 'output', 'gui'])
+
+env.Program(source = gemc_sources + hitp_sources, target = "solid_gemc")
+
+#if env['LIBRARY'] == "static":
+	#env.Library(source = gemc_sources, target = "gemc")
+
+
+#if env['LIBRARY'] == "shared":
+	#env.SharedLibrary(source = gemc_sources, target = "gemc")
+
+
+
+
+
+
