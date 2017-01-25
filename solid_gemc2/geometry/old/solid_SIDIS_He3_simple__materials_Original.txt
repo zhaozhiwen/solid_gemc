@@ -1,0 +1,35 @@
+           SL_Vacuum  |Vacuum in the beamline and target chamber  |0.00000000000000168  |         2  |                                 G4_N 0.7 G4_O 0.3  | none  | none  | none  | none  | none  
+           SL_Kapton  |                        Kapton  |     1.420  |         4  |G4_H 0.026362 G4_C 0.691133 G4_N 0.07327 G4_O 0.209235  | none  | none  | none  | none  | none  
+         SL_He4_1atm  |               He4 gas at 1atm  | 0.0001786  |         1  |                                           G4_He 1  | none  | none  | none  | none  | none  
+         SL_He4_2atm  |               He4 gas at 2atm  | 0.0003572  |         1  |                                           G4_He 1  | none  | none  | none  | none  | none  
+         SL_He4_3atm  |               He4 gas at 3atm  | 0.0005358  |         1  |                                           G4_He 1  | none  | none  | none  | none  | none  
+         SL_He4_7atm  |               He4 gas at 7atm  | 0.0012502  |         1  |                                           G4_He 1  | none  | none  | none  | none  | none  
+              SL_LD2  |              PVDIS LD2 target  |     0.169  |         1  |                                              LD 1  | none  | none  | none  | none  | none  
+        SL_He3_10amg  |     SIDIS He3 target at 10amg  |  0.001345  |         1  |                                      helium3Gas 1  | none  | none  | none  | none  | none  
+              SL_BaO  |BariumOxide in SIDIS He3 target cell  |     5.720  |         2  |                                          Ba 1 O 1  | none  | none  | none  | none  | none  
+              SL_SrO  |StrontiumOxide in SIDIS He3 target cell  |     4.700  |         2  |                                          Sr 1 O 1  | none  | none  | none  | none  | none  
+      SL_Glass_GE180  |         SIDIS He3 target cell  |     2.760  |         5  |G4_SILICON_DIOXIDE 0.608 G4_ALUMINUM_OXIDE 0.143 G4_CALCIUM_OXIDE 0.065 SL_BaO 0.182 SL_SrO 0.002  | none  | none  | none  | none  | none  
+        SL_NH3_solid  |          NH3 target NH3_solid  |     0.817  |         2  |                                           H 3 N 1  | none  | none  | none  | none  | none  
+       SL_He4_liquid  |         NH3 target He4_liquid  |     0.145  |         1  |                                           G4_He 1  | none  | none  | none  | none  | none  
+            SL_NH3He  |              NH3 target NH3He  |     0.515  |         2  |          SL_NH3_solid 0.8732 SL_He4_liquid 0.1268  | none  | none  | none  | none  | none  
+   SL_StainlessSteel  |    StainlessSteel in Solenoid  |     8.020  |         5  |G4_Si 0.01 G4_Fe 0.68 G4_Mn 0.02 G4_Cr 0.19 G4_Ni 0.10  | none  | none  | none  | none  | none  
+              SL_CO2  |          CO2 mixed in GEM gas  |  0.001977  |         2  |                                           C 1 O 2  | none  | none  | none  | none  | none  
+            SL_Argon  |        Argon mixed in GEM gas  | 0.0017823  |         1  |                                           G4_Ar 1  | none  | none  | none  | none  | none  
+           SL_GEMgas  |                       GEM gas  | 0.0018407  |         2  |                         SL_CO2 0.32 SL_Argon 0.68  | none  | none  | none  | none  | none  
+          SL_NEMAG10  |               NEMA G10 in GEM  |     1.700  |         4  |                                  Si 1 O 2 C 3 H 3  | none  | none  | none  | none  | none  
+       SL_NOMEX_pure  |                    pure NOMEX  |     1.380  |         5  |G4_H 0.04 G4_C 0.54 G4_N 0.09 G4_O 0.10 G4_Cl 0.23  | none  | none  | none  | none  | none  
+            SL_NOMEX  |   NOMEX mixed with air in GEM  |     0.040  |         2  |                    G4_AIR 0.55 SL_NOMEX_pure 0.45  | none  | none  | none  | none  | none  
+            SL_As2O3  |                   As2O3 in EC  |     3.738  |         2  |                                          As 2 O 3  | none  | none  | none  | none  | none  
+            SL_LgTF1  |         LeadGlass LgTF1 in EC  |     3.860  |         5  |G4_LEAD_OXIDE 0.5120 G4_SILICON_DIOXIDE 0.4130 G4_POTASSIUM_OXIDE 0.0422 G4_SODIUM_MONOXIDE 0.0278 SL_As2O3 0.0050  | none  | none  | none  | none  | none  
+            SL_C4F8O  |                         C4F8O  |     0.001  |         3  |                                       C 4 F 8 O 1  | none  | none  | none  | none  | none  
+      SL_CCgas_PVDIS  |            Gas in CC of PVDIS  |  0.001058  |         2  |                       SL_C4F8O 0.6145 G4_N 0.3855  |2*eV 6*eV  |1.001 1.001  | none | none | none
+    SL_LGCCgas_SIDIS  |          Gas in LGCC of SIDIS  |0.00184212  |         1  |                               G4_CARBON_DIOXIDE 1  |2*eV 6*eV  |1.004 1.004  | none | none | none
+    SL_HGCCgas_SIDIS  |          Gas in HGCC of SIDIS  |    0.0015  |         1  |                                        SL_C4F8O 1  |2*eV 6*eV  |1.001 1.002  | none | none | none
+          SL_MMMylar  |                 Mylar in MRPC  |     1.400  |         3  |         G4_H 0.041958 G4_C 0.625017 G4_O 0.333025  | none  | none  | none  | none  | none  
+      SL_AlHoneycomb  |           AlHoneycomb in MRPC  |     0.130  |         1  |                                           G4_Al 1  | none  | none  | none  | none  | none  
+     SL_AlHoneycomb2  |            denser AlHoneycomb  |     1.000  |         1  |                                           G4_Al 1  | none  | none  | none  | none  | none  
+         SL_PCBoardM  |             PCB board in MRPC  |     1.860  |         3  |                      G4_C 0.4 G4_Si 0.3 G4_Fe 0.3  | none  | none  | none  | none  | none  
+            SL_Freon  |             TetraFluoroEthane  |   0.00425  |         3  |                                       C 2 H 2 F 4  | none  | none  | none  | none  | none  
+              SL_SF6  |           Sulfur hexafluoride  |     0.010  |         2  |                                           S 1 F 6  | none  | none  | none  | none  | none  
+         SL_MRPC_Gas  |                   Gas in MRPC  |   0.00445  |         3  |    SL_Freon 0.8659 SL_SF6 0.0269 G4_BUTANE 0.1072  | none  | none  | none  | none  | none  
+    SL_ScintillatorB  |          Scintillator for SPD  |     1.032  |         2  |                                          H 10 C 9  | none  | none  | none  | none  | none  
