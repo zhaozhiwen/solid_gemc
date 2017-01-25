@@ -14,7 +14,7 @@ cd mrpc
 ./solid_SIDIS_mrpc_forwardangle.pl config_solid_SIDIS_mrpc_forwardangle.dat
 cd ../
 cd lgc
-./solid_SIDIS_lgc.pl config_solid_SIDIS_lgc.dat
+./solid_lgc.pl configs/sidis_CLEO_hybrid2.pl
 cd ../
 cd hgc
 ./solid_SIDIS_hgc.pl config_solid_SIDIS_hgc.dat
