@@ -26,8 +26,14 @@
 
 using namespace std;
 
-void analysis_PVDIS(string input_filename,bool debug=false, bool kinecut=false)
+void analysis_PVDIS(string input_filename,bool debug=false, bool kinecut=false, bool lgcpecut=true)
 {
+  // input_filename is normally DIS (no kill) file
+  // debug = true will analyze 1% of file
+  // kinecut = true will impose kinematics cuts, useful for LGC efficiency, not for acceptance
+  // lgcpecut = true will impose PE >= 3 requirement for acceptance, otherwise imposes
+  //    lgc flux counter requirement
+
 gROOT->Reset();
 gStyle->SetPalette(1);
 gStyle->SetOptFit(0);
@@ -293,6 +299,20 @@ for (Int_t i=0;i<nevent;i++) {
       }  
                       
     }
+
+    //check hit on LGC (flux counter)
+    if (detector_ID==2 && flux_tid->at(j)==1) {
+      // some low mom tracks spiral and travel back in field and go through one plane twice or more,   flux bank average these steps to get hit position which is wrong and can be outside of the virtual plane.
+      double RinLGC = 65.0;
+      double RoutLGC = 144.0;
+
+      if (RinLGC<=hit_r/1e1 && hit_r/1e1<RoutLGC) 
+	{
+	  Is_lgc = true;
+	  continue;	
+	}  
+                      
+    }
     
     }
 
@@ -319,26 +339,39 @@ for (Int_t i=0;i<nevent;i++) {
 
   }
 
-  if (Is_ec){
-    if(Is_gem[0] && Is_gem[1] && Is_gem[2] && Is_gem[3] && Is_gem[4]){
-    //sum number of p.e. from LGC sector sec_ec-sec_width_sum to sec_ec+sec_width_sum
-    int sec_width_sum=0; 
-    int nphe_lgc_total=0;  
-    for (int j=sec_ec-sec_width_sum;j<=sec_ec+sec_width_sum;j++){    
-      int index;
-      if (0<j && j<=30) index=j-1;
-      else if (j>30) index=j-30-1;
-      else if (j<=0) index=j+30-1;
-      else cout << "something wrong with sec" << endl;      
-      nphe_lgc_total += nphe_lgc[index];
-    }      
-    hnphe_lgc->Fill(nphe_lgc_total,rate);  
-    
-    if (nphe_lgc_total>nphecut){  // cut on lgc
-      Is_acc=true;
+  if (Is_ec)
+    {
+      if(Is_gem[0] && Is_gem[1] && Is_gem[2] && Is_gem[3] && Is_gem[4])
+	{
+	  //sum number of p.e. from LGC sector sec_ec-sec_width_sum to sec_ec+sec_width_sum
+	  int sec_width_sum=0; 
+	  int nphe_lgc_total=0;  
+	  for (int j=sec_ec-sec_width_sum;j<=sec_ec+sec_width_sum;j++)
+	    {    
+	      int index;
+	      if (0<j && j<=30) index=j-1;
+	      else if (j>30) index=j-30-1;
+	      else if (j<=0) index=j+30-1;
+	      else cout << "something wrong with sec" << endl;      
+	      nphe_lgc_total += nphe_lgc[index];
+	    }      
+	  hnphe_lgc->Fill(nphe_lgc_total,rate);  
+	      
+	  if (lgcpecut)
+	    {
+	      // Require minimal LGC signal for acceptance
+	      if (nphe_lgc_total>nphecut){  // cut on lgc
+		Is_acc=true;
+	      }
+	    }
+	  else
+	    {
+	      // Require LGC flux counter for acceptance
+	      if (Is_lgc)
+		Is_acc = true;
+	    }
+	}      
     }
-  }      
-  }
   
   if (Is_acc) 
     {
@@ -404,9 +437,9 @@ hsectoring_ec_lgc->Draw("b");
 gPad->SetLogy(1);
 
 TCanvas *c_acc = new TCanvas("acc","acc",1600,900);
-c_acc->Divide(2,1);
+// c_acc->Divide(2,1);
 
-c_acc->cd(1);
+// c_acc->cd(1);
 hacceptance_ThetaP[0]->Divide(hacceptance_ThetaP[0],hgen_ThetaP);  
 hacceptance_ThetaP[0]->SetMinimum(0);  
 hacceptance_ThetaP[0]->SetMaximum(1);    
@@ -434,32 +467,32 @@ hacceptance_ThetaP[0]->Draw("colz");
  txbj->SetTextSize(0.035);
  txbj->Draw();
  
-c_acc->cd(2);
-hacceptance_Q2x->Divide(hacceptance_Q2x,hgen_Q2x);  
-hacceptance_Q2x->SetMinimum(0);  
-hacceptance_Q2x->SetMaximum(1);    
-hacceptance_Q2x->Draw("colz");
- TF1* fq22 = new TF1("fq22","6",0,1);
- fq22->SetLineColor(2);
- fq22->Draw("same");
- TLatex* tq22 = new TLatex (0.2,7,"Q^{2}>6 GeV^{2}");
- tq22->SetTextColor(2);
- tq22->SetTextSize(0.035);
- tq22->Draw();
- TF1* fw22 = new TF1("fw22","x*(4-.938*.938)/(1-x)",0,1);
- fw22->SetLineColor(6);
- fw22->Draw("same");
- TLatex* tw22 = new TLatex (0.25,2.,"W>2 GeV");
- tw22->SetTextColor(6);
- tw22->SetTextSize(0.035);
- tw22->Draw();
- TLine* fxbj2 = new TLine(0.55,0,0.55,14);
- fxbj2->SetLineWidth(2);
- fxbj2->SetLineColor(1);
- fxbj2->Draw("same");
- TLatex* txbj2 = new TLatex (.57,2.,"x_{bj}>0.55");
- txbj2->SetTextColor(1);
- txbj2->SetTextSize(0.035);
- txbj2->Draw();
+// c_acc->cd(2);
+// hacceptance_Q2x->Divide(hacceptance_Q2x,hgen_Q2x);  
+// hacceptance_Q2x->SetMinimum(0);  
+// hacceptance_Q2x->SetMaximum(1);    
+// hacceptance_Q2x->Draw("colz");
+//  TF1* fq22 = new TF1("fq22","6",0,1);
+//  fq22->SetLineColor(2);
+//  fq22->Draw("same");
+//  TLatex* tq22 = new TLatex (0.2,7,"Q^{2}>6 GeV^{2}");
+//  tq22->SetTextColor(2);
+//  tq22->SetTextSize(0.035);
+//  tq22->Draw();
+//  TF1* fw22 = new TF1("fw22","x*(4-.938*.938)/(1-x)",0,1);
+//  fw22->SetLineColor(6);
+//  fw22->Draw("same");
+//  TLatex* tw22 = new TLatex (0.25,2.,"W>2 GeV");
+//  tw22->SetTextColor(6);
+//  tw22->SetTextSize(0.035);
+//  tw22->Draw();
+//  TLine* fxbj2 = new TLine(0.55,0,0.55,14);
+//  fxbj2->SetLineWidth(2);
+//  fxbj2->SetLineColor(1);
+//  fxbj2->Draw("same");
+//  TLatex* txbj2 = new TLatex (.57,2.,"x_{bj}>0.55");
+//  txbj2->SetTextColor(1);
+//  txbj2->SetTextSize(0.035);
+//  txbj2->Draw();
 
 }
