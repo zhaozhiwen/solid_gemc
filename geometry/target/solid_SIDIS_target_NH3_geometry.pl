@@ -17,6 +17,11 @@ make_target_field();
 make_scattering_chamber();
 make_scattering_windows();
 make_target();
+make_target_endcaps();
+make_target_LHe();
+make_target_tail_nose();
+make_target_4Kshield();
+make_target_LN2shield();
 }
 
 sub make_target_field
@@ -207,6 +212,194 @@ sub make_target
     $detector{"pos"}        = "0*cm 0*cm $z[$n-1]*cm";
     $detector{"rotation"}   = "-90*deg 0*deg 0*deg";
     $detector{"color"}      = "ff0000";
+    $detector{"type"}       = "Tube";
+    $detector{"dimensions"} = "$Rin[$n-1]*cm $Rout[$n-1]*cm $Dz[$n-1]*cm 0*deg 360*deg";
+    $detector{"material"}   = $mat[$n-1];
+    $detector{"mfield"}     = "no";
+    $detector{"ncopy"}      = 1;
+    $detector{"pMany"}       = 1;
+    $detector{"exist"}       = 1;
+    $detector{"visible"}     = 1;
+    $detector{"style"}       = 1;
+    $detector{"sensitivity"} = "no";
+    $detector{"hit_type"}    = "no";
+    $detector{"identifiers"} = "no";
+    print_det(\%configuration, \%detector);
+ }
+}
+
+# For rest of the items below I had to use  position in y-direction (as suppose to z) to place the material. Maybe due to mother volume rotated already..but I couldn't figure our how to use z direction to place the items ..yet. 
+sub make_target_endcaps
+{
+ my $NUM  = 2;
+ my @y    = (-1.426,1.426); # y instead of z !! ?
+ my @Rin  = (0.0,0.0);
+ my @Rout = (1.613,1.613);
+ my @Dz   = (0.000889,0.000889);
+ my @name = ("up_endcap","down_endcap"); 
+ my @mother = ("$DetectorName\_SC_in","$DetectorName\_SC_in"); 
+ my @mat  = ("G4_Al","G4_Al");
+
+ for(my $n=1; $n<=$NUM; $n++)
+ {
+#     my $pnumber     = cnumber($n-1, 10);
+     my %detector=init_det();
+    $detector{"name"}        = "$DetectorName\_$name[$n-1]";
+    $detector{"mother"}      = "$mother[$n-1]" ;
+    $detector{"description"} = "$DetectorName\_$name[$n-1]";
+    $detector{"pos"}        = "0*cm $y[$n-1]*cm 0*cm";  # y instead of z !! ?
+    $detector{"rotation"}   = "-90*deg 0*deg 0*deg";
+    $detector{"color"}      = "808080";
+    $detector{"type"}       = "Tube";
+    $detector{"dimensions"} = "$Rin[$n-1]*cm $Rout[$n-1]*cm $Dz[$n-1]*cm 0*deg 360*deg";
+    $detector{"material"}   = $mat[$n-1];
+    $detector{"mfield"}     = "no";
+    $detector{"ncopy"}      = 1;
+    $detector{"pMany"}       = 1;
+    $detector{"exist"}       = 1;
+    $detector{"visible"}     = 1;
+    $detector{"style"}       = 1;
+    $detector{"sensitivity"} = "no";
+    $detector{"hit_type"}    = "no";
+    $detector{"identifiers"} = "no";
+    print_det(\%configuration, \%detector);
+ }
+}
+
+sub make_target_LHe
+{
+ my $NUM  = 2;
+ my @y    = (-1.65,1.65);
+ my @Rin  = (0.0,0.0);
+ my @Rout = (1.613,1.613);
+ my @Dz   = (0.218,0.218);
+ my @name = ("up_LHe","down_LHe"); 
+ my @mother = ("$DetectorName\_SC_in","$DetectorName\_SC_in"); 
+ my @mat  = ("SL_target_NH3_He4_liquid","SL_target_NH3_He4_liquid");
+
+ for(my $n=1; $n<=$NUM; $n++)
+ {
+#     my $pnumber     = cnumber($n-1, 10);
+     my %detector=init_det();
+    $detector{"name"}        = "$DetectorName\_$name[$n-1]";
+    $detector{"mother"}      = "$mother[$n-1]" ;
+    $detector{"description"} = "$DetectorName\_$name[$n-1]";
+    $detector{"pos"}        = "0*cm $y[$n-1]*cm 0*cm";
+    $detector{"rotation"}   = "-90*deg 0*deg 0*deg";
+    $detector{"color"}      = "00BFFF";
+    $detector{"type"}       = "Tube";
+    $detector{"dimensions"} = "$Rin[$n-1]*cm $Rout[$n-1]*cm $Dz[$n-1]*cm 0*deg 360*deg";
+    $detector{"material"}   = $mat[$n-1];
+    $detector{"mfield"}     = "no";
+    $detector{"ncopy"}      = 1;
+    $detector{"pMany"}       = 1;
+    $detector{"exist"}       = 1;
+    $detector{"visible"}     = 1;
+    $detector{"style"}       = 1;
+    $detector{"sensitivity"} = "no";
+    $detector{"hit_type"}    = "no";
+    $detector{"identifiers"} = "no";
+    print_det(\%configuration, \%detector);
+ }
+}
+
+sub make_target_tail_nose
+{
+ my $NUM  = 2;
+ my @y    = (-2.65,2.65);
+ my @Rin  = (0.0,0.0);
+ my @Rout = (1.613,1.613);
+ my @Dz   = (0.006345,0.006345);
+ my @name = ("up_tail_nose","down_tail_nose"); 
+ my @mother = ("$DetectorName\_SC_in","$DetectorName\_SC_in"); 
+ my @mat  = ("G4_Al","G4_Al");
+
+ for(my $n=1; $n<=$NUM; $n++)
+ {
+#     my $pnumber     = cnumber($n-1, 10);
+     my %detector=init_det();
+    $detector{"name"}        = "$DetectorName\_$name[$n-1]";
+    $detector{"mother"}      = "$mother[$n-1]" ;
+    $detector{"description"} = "$DetectorName\_$name[$n-1]";
+    $detector{"pos"}        = "0*cm $y[$n-1]*cm 0*cm";
+    $detector{"rotation"}   = "-90*deg 0*deg 0*deg";
+    $detector{"color"}      = "8A2BE2";
+    $detector{"type"}       = "Tube";
+    $detector{"dimensions"} = "$Rin[$n-1]*cm $Rout[$n-1]*cm $Dz[$n-1]*cm 0*deg 360*deg";
+    $detector{"material"}   = $mat[$n-1];
+    $detector{"mfield"}     = "no";
+    $detector{"ncopy"}      = 1;
+    $detector{"pMany"}       = 1;
+    $detector{"exist"}       = 1;
+    $detector{"visible"}     = 1;
+    $detector{"style"}       = 1;
+    $detector{"sensitivity"} = "no";
+    $detector{"hit_type"}    = "no";
+    $detector{"identifiers"} = "no";
+    print_det(\%configuration, \%detector);
+ }
+}
+
+
+sub make_target_4Kshield
+{
+ my $NUM  = 2;
+ my @y    = (-3.65,3.65);
+ my @Rin  = (0.0,0.0);
+ my @Rout = (1.613,1.613);
+ my @Dz   = (0.0006345,0.0006345);
+ my @name = ("up_4Kshield","down_4Kshield"); 
+ my @mother = ("$DetectorName\_SC_in","$DetectorName\_SC_in"); 
+ my @mat  = ("G4_Al","G4_Al");
+
+ for(my $n=1; $n<=$NUM; $n++)
+ {
+#     my $pnumber     = cnumber($n-1, 10);
+     my %detector=init_det();
+    $detector{"name"}        = "$DetectorName\_$name[$n-1]";
+    $detector{"mother"}      = "$mother[$n-1]" ;
+    $detector{"description"} = "$DetectorName\_$name[$n-1]";
+    $detector{"pos"}        = "0*cm $y[$n-1]*cm 0*cm";
+    $detector{"rotation"}   = "-90*deg 0*deg 0*deg";
+    $detector{"color"}      = "2F4F4F";
+    $detector{"type"}       = "Tube";
+    $detector{"dimensions"} = "$Rin[$n-1]*cm $Rout[$n-1]*cm $Dz[$n-1]*cm 0*deg 360*deg";
+    $detector{"material"}   = $mat[$n-1];
+    $detector{"mfield"}     = "no";
+    $detector{"ncopy"}      = 1;
+    $detector{"pMany"}       = 1;
+    $detector{"exist"}       = 1;
+    $detector{"visible"}     = 1;
+    $detector{"style"}       = 1;
+    $detector{"sensitivity"} = "no";
+    $detector{"hit_type"}    = "no";
+    $detector{"identifiers"} = "no";
+    print_det(\%configuration, \%detector);
+ }
+}
+
+
+sub make_target_LN2shield
+{
+ my $NUM  = 2;
+ my @y    = (-4.65,4.65);
+ my @Rin  = (0.0,0.0);
+ my @Rout = (1.613,1.613);
+ my @Dz   = (0.0019,0.0019);
+ my @name = ("up_LN2shield","down_LN2shield"); 
+ my @mother = ("$DetectorName\_SC_in","$DetectorName\_SC_in"); 
+ my @mat  = ("G4_Al","G4_Al");
+
+ for(my $n=1; $n<=$NUM; $n++)
+ {
+#     my $pnumber     = cnumber($n-1, 10);
+     my %detector=init_det();
+    $detector{"name"}        = "$DetectorName\_$name[$n-1]";
+    $detector{"mother"}      = "$mother[$n-1]" ;
+    $detector{"description"} = "$DetectorName\_$name[$n-1]";
+    $detector{"pos"}        = "0*cm $y[$n-1]*cm 0*cm";
+    $detector{"rotation"}   = "-90*deg 0*deg 0*deg";
+    $detector{"color"}      = "FF8C00";
     $detector{"type"}       = "Tube";
     $detector{"dimensions"} = "$Rin[$n-1]*cm $Rout[$n-1]*cm $Dz[$n-1]*cm 0*deg 360*deg";
     $detector{"material"}   = $mat[$n-1];
