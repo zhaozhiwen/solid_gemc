@@ -65,7 +65,7 @@ sub define_material
 	%mat = init_mat();
 	$mat{"name"}          = "SL_target_NH3_NH3_solid";
 	$mat{"description"}   = "NH3 target NH3_solid";
-	$mat{"density"}       = "0.917";  #in g/cm3
+	$mat{"density"}       = "0.819";  #in g/cm3
 	$mat{"ncomponents"}   = "2";
 	$mat{"components"}    = "H 3 N 1";
 	print_mat(\%configuration, \%mat);
@@ -81,9 +81,9 @@ sub define_material
 	%mat = init_mat();
 	$mat{"name"}          = "SL_target_NH3_NH3He4";
 	$mat{"description"}   = "NH3 target NH3He4";
-	$mat{"density"}       = "0.5696";  #in g/cm3,(0.917*0.55+0.145*0.45)=0.5696 
+	$mat{"density"}       = "0.5157";  #in g/cm3,(0.819*0.55+0.145*0.45) = 0.5157
 	$mat{"ncomponents"}   = "2";
-	$mat{"components"}    = "SL_target_NH3_NH3_solid 0.8854 SL_target_NH3_He4_liquid 0.1146";
+	$mat{"components"}    = "SL_target_NH3_NH3_solid 0.8735 SL_target_NH3_He4_liquid 0.1265";
 	print_mat(\%configuration, \%mat);	
 	
 }
