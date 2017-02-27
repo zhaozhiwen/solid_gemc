@@ -47,15 +47,15 @@ sprintf(the_filename, "%s",input_filename.substr(0,input_filename.rfind(".")).c_
 // sprintf(output_filename, "%s_output.root",the_filename);
 // TFile *outputfile=new TFile(output_filename, "recreate");
 
-const int m=12;
-char *detector_name[m]={"GEM 1","GEM 2","GEM 3","GEM 4","GEM 5","GEM 6","LGC","HGC","FASPD","LASPD","FAEC","LAEC"};
-TH2F *hflux_hitxy[m];
-for (Int_t i=0;i<m;i++) {
-hflux_hitxy[i]=new TH2F(Form("hflux_hitxy_%i",i),Form("flux_hitxy %s;x(cm);y(cm)",detector_name[i]),600,-300,300,600,-300,300);
-}
+// const int m=12;
+// char *detector_name[m]={"GEM 1","GEM 2","GEM 3","GEM 4","GEM 5","GEM 6","LGC","HGC","FASPD","LASPD","FAEC","LAEC"};
+// TH2F *hflux_hitxy[m];
+// for (Int_t i=0;i<m;i++) {
+// hflux_hitxy[i]=new TH2F(Form("hflux_hitxy_%i",i),Form("flux_hitxy %s;x(cm);y(cm)",detector_name[i]),600,-300,300,600,-300,300);
+// }
 
-TH1F *hnphe_hgc=new TH1F("hnphe_hgc","hnphe_hgc",1000,0,10);
-TH1F *hnphe_lgc=new TH1F("hnphe_lgc","hnphe_lgc",100,-0.5,99.5);
+TH1F *hnpe_hgc=new TH1F("hnpe_hgc","hnpe_hgc",100,0,10);
+TH1F *hnpe_lgc=new TH1F("hnpe_lgc","hnpe_lgc",100,-0.5,99.5);
 
 TH1F *hsectoring_ec_lgc=new TH1F("hsectoring_ec_lgc","hsectoring_ec_lgc",30,-14.5,15.5);
 
@@ -73,6 +73,24 @@ TH2F *hacceptance_ThetaP[2];
 hacceptance_ThetaP[0]=new TH2F("acceptance_ThetaP_FA","acceptance by FA;vertex Theta (deg);P (GeV)",30,5,35,110,0,11);     
 hacceptance_ThetaP[1]=new TH2F("acceptance_ThetaP_LA","acceptance by LA;vertex Theta (deg);P (GeV)",30,5,35,110,0,11);
 
+const int n=52; // number of detector	
+const int m=13; //number of particles
+
+TString label[m]={"photon+electron+positron","photon","electron+positron","neutron","proton","pip","pim","Kp","Km","Kl","other"};
+	
+TH1F *hfluxR[n][m];
+TH1F *hPlog[n][m];
+for(int k=0;k<n;k++){
+	for(int l=0;l<m;l++){
+		char hstname[100];
+		sprintf(hstname,"fluxR_%i_%i",k,l);
+		hfluxR[k][l]=new TH1F(hstname,hstname,60,0,300);
+		hfluxR[k][l]->SetTitle(";R (cm);flux (kHz/mm2)");
+		sprintf(hstname,"Plog_%i_%i",k,l);
+		hPlog[k][l]=new TH1F(hstname,hstname,50,-6,1.3);
+		hPlog[k][l]->SetTitle(";log(P) GeV;kHz");      
+	}
+}
 
 TFile *file=new TFile(input_filename.c_str());
 if (file->IsZombie()) {
@@ -181,15 +199,15 @@ int nselected = 0;
 cout << "nevent " << nevent << endl;
 
 // for (Int_t i=0;i<2;i++) { 
-// for (Int_t i=0;i<nevent/10;i++) { 
-for (Int_t i=0;i<nevent;i++) { 
+for (Int_t i=0;i<nevent/20;i++) { 
+// for (Int_t i=0;i<nevent;i++) { 
 
   cout << i << "\r";
 //   cout << i << "\n";
 
   tree_header->GetEntry(i);
-//   double rate=header_var8->at(0);
-  double rate=1;  
+  double rate=header_var8->at(0);
+//   double rate=1;  
   
   tree_generated->GetEntry(i);  
   int pid_gen=0;
@@ -220,23 +238,193 @@ for (Int_t i=0;i<nevent;i++) {
     for (Int_t j=0;j<flux_hitn->size();j++) {
 //       cout << "flux " << " !!! " << flux_hitn->at(j) << " " << flux_id->at(j) << " " << flux_pid->at(j) << " " << flux_mpid->at(j) << " " << flux_tid->at(j) << " " << flux_mtid->at(j) << " " << flux_trackE->at(j) << " " << flux_totEdep->at(j) << " " << flux_avg_x->at(j) << " " << flux_avg_y->at(j) << " " << flux_avg_z->at(j) << " " << flux_avg_lx->at(j) << " " << flux_avg_ly->at(j) << " " << flux_avg_lz->at(j) << " " << flux_px->at(j) << " " << flux_py->at(j) << " " << flux_pz->at(j) << " " << flux_vx->at(j) << " " << flux_vy->at(j) << " " << flux_vz->at(j) << " " << flux_mvx->at(j) << " " << flux_mvy->at(j) << " " << flux_mvz->at(j) << " " << flux_avg_t->at(j) << endl;  
 
-      int detector_ID=flux_id->at(j)/1000000;
+/*      int detector_ID=flux_id->at(j)/1000000;
       int subdetector_ID=(flux_id->at(j)%1000000)/100000;
       int subsubdetector_ID=((flux_id->at(j)%1000000)%100000)/10000;
-      int component_ID=flux_id->at(j)%10000;      
-     
+      int component_ID=flux_id->at(j)%10000;   */   
+
+			int particle_ID=int(flux_pid->at(j));
+			int par;
+			if(particle_ID==22) par=1;  //photon    
+			else if (abs(particle_ID)==11) par=2; //electron or positron
+			else if(particle_ID==2112) par=3;  //neutron
+			else if(particle_ID==2212) par=4;  //proton    
+			else if(particle_ID==211)  par=5;  //pip
+			else if(particle_ID==-211) par=6;  //pim
+			else if(particle_ID==321)  par=7;  //Kp    
+			else if(particle_ID==-321)  par=8;  //Km
+			else if(particle_ID==130)  par=9;  //Kl    
+			else if(particle_ID==-13)  par=10;  //mu+
+			else if(particle_ID==13)  par=11;  //mu-			
+			else par=12;  //all other
+			/*End of Check PID}}}*/
+
+			int detector_ID= (int) flux_id->at(j);
+			detector_ID/=100000;
+			/*Check Detector ID{{{*/
+			if ( detector_ID !=11 && detector_ID !=12 &&  detector_ID !=13 && detector_ID !=14 && detector_ID !=15 
+					&& detector_ID !=16 && detector_ID !=17 && detector_ID !=31 && detector_ID !=32 
+					&& detector_ID!=21 && detector_ID!=22 && detector_ID!=41 && detector_ID!=42 && detector_ID!=51 && detector_ID!=52 && detector_ID!=61 && detector_ID!=62 && detector_ID!=63){
+				cout << "wrong detector_ID "  << i  << " " << j << " " << flux_id->at(j) << endl;
+				cout << " " <<  flux_id->at(j) << " " <<  particle_ID << " " <<  flux_mpid->at(j) 
+					<< " " <<   flux_totEdep->at(j) << " " <<  flux_trackE->at(j) << " " 
+					<< flux_avg_x->at(j) << " " <<  flux_avg_y->at(j) << " " <<  flux_avg_z->at(j) 
+					<< " " <<  flux_vx->at(j) << " " <<  flux_vy->at(j) << " " <<  flux_vz->at(j)  
+					<< " " <<  flux_px->at(j) << " " <<  flux_py->at(j) << " " <<  flux_pz->at(j) << endl;
+				continue;
+			}
+
+			int subdetector_ID= (int) flux_id->at(j);
+			subdetector_ID/=10000; 
+			//=========    hit_id and pid defination ==============
+			// hitid  =0 - 5 6 GEM planes, unused
+			//         29 - 40  6 GEM plane,1st layer (odd) and 2nd layer (even) of gas		
+			//         20 - 25  6 GEM plane front			
+			//         6,18    LGCC  PMT, front
+			//         7,19    HGCC  PMT,  front
+			//         8 - 11  FAEC front,middle,inner,rear 
+			//         12 -15  LAEC front,middle,inner,rear 
+			//         16,17,26 MRPC front,gas,glass
+			//         27-28 FASPD front, inner
+			//         41-42 LASPD front inner
+// 			//	   43-44 forward muon detector front,back
+// 			//	   45  encap donut muon detector front
+// 			//	   46.47  barrel muon detector 1st,2nd layer
+			//	   43,44,45,46 forward muon detector front to back
+			//	   47,48   encap donut muon detector front to back
+			//	   49,50  barrel muon detector 1st,2nd layer
+			//   pid =0   photon+electron+positron
+			//        1   photon    
+			//        2   electron + positron
+			//        3   neutron
+			//        4   proton
+			//        5   pip
+			//        6   pim
+			//        7   Kp
+			//        8   Km
+			//        9   Kl
+			//       10   other    
+			//=======================================================    
+
+			int hit_id=-1;
+			switch (detector_ID){
+				case 11:    if (subdetector_ID==110) hit_id=0;
+					    else if (subdetector_ID==111) hit_id=20;
+					    else if (subdetector_ID==112) hit_id=29;
+					    else if (subdetector_ID==113) hit_id=30;
+					    else cout << "wrong flux_ID 11 " << (int)flux_id->at(j)<< endl;		      
+					    break; 
+				case 12:    if (subdetector_ID==120) hit_id=1;
+					    else if (subdetector_ID==121) hit_id=21;
+					    else if (subdetector_ID==122) hit_id=31;//#6 layer
+					    else if (subdetector_ID==123) hit_id=32;//#10 layers
+					    else cout << "wrong flux_ID 12 " << (int)flux_id->at(j)<< endl;		      
+					    break; 
+				case 13:    if (subdetector_ID==130) hit_id=2;
+					    else if (subdetector_ID==131) hit_id=22;
+					    else if (subdetector_ID==132) hit_id=33;
+					    else if (subdetector_ID==133) hit_id=34;
+					    else cout << "wrong flux_ID 13 " << (int)flux_id->at(j)<< endl;		      
+					    break; 
+				case 14:    if (subdetector_ID==140) hit_id=3;
+					    else if (subdetector_ID==141) hit_id=23;
+					    else if (subdetector_ID==142) hit_id=35;
+					    else if (subdetector_ID==143) hit_id=36;
+					    else cout << "wrong flux_ID 14 " << (int)flux_id->at(j)<< endl;		      
+					    break; 
+				case 15:    if (subdetector_ID==150) hit_id=4;
+					    else if (subdetector_ID==151) hit_id=24;
+					    else if (subdetector_ID==152) hit_id=37;
+					    else if (subdetector_ID==153) hit_id=38;
+					    else cout << "wrong flux_ID 15 " << (int)flux_id->at(j)<< endl;		      
+					    break; 
+				case 16:    if (subdetector_ID==160) hit_id=5;
+					    else if (subdetector_ID==161) hit_id=25;
+					    else if (subdetector_ID==162) hit_id=39;
+					    else if (subdetector_ID==163) hit_id=40;
+					    else cout << "wrong flux_ID 16 " << (int)flux_id->at(j)<< endl;		      
+					    break;
+				case 17:    
+					    break;					    
+				case 21:    if (subdetector_ID==210) hit_id=6;
+					    else if (subdetector_ID==211) hit_id=18;
+					    else cout << "wrong flux_ID 21 " << (int)flux_id->at(j)<< endl;		      
+					    break; 
+				case 22:    if (subdetector_ID==220) hit_id=7;
+					    else if (subdetector_ID==221) hit_id=19;
+					    else cout << "wrong flux_ID 22 " << (int)flux_id->at(j)<< endl;		      
+					    break;
+				case 31:    if (subdetector_ID==311) hit_id=8;
+					    else if (subdetector_ID==312) hit_id=9;
+					    else if (subdetector_ID==313) hit_id=10;
+					    else if (subdetector_ID==314) hit_id=11;  
+					    else cout << "wrong flux_ID 31 " << (int)flux_id->at(j)<< endl;		      
+					    break;
+				case 32:     if (subdetector_ID==321) hit_id=12;
+					    else if (subdetector_ID==322) hit_id=13;
+					    else if (subdetector_ID==323) hit_id=14;
+					    else if (subdetector_ID==324) hit_id=15;		     
+					    else cout << "wrong flux_ID 32 " << (int)flux_id->at(j)<< endl;		      
+					    break;
+				case 41:     if (subdetector_ID==411) hit_id=16;
+					    else if (subdetector_ID==410) hit_id=17;
+					    else if (subdetector_ID==412) hit_id=26;
+					    else cout << "wrong flux_ID 41 " << (int)flux_id->at(j)<< endl;		      
+					    break;
+				case 51:     if (subdetector_ID==511) hit_id=27;
+					    else if (subdetector_ID==510) hit_id=28;
+					    else cout << "wrong flux_ID 51 " << (int)flux_id->at(j)<< endl;		      
+					    break;		     
+				case 52:     if (subdetector_ID==521) hit_id=41;
+					    else if (subdetector_ID==520) hit_id=42;
+					    else cout << "wrong flux_ID 52 " << (int)flux_id->at(j)<< endl;
+					    break;		     
+// 				case 61:     if (subdetector_ID==611) hit_id=43;
+// 					    else if (subdetector_ID==612) hit_id=44;
+// 					    else cout << "wrong flux_ID 61 " << (int)flux_id->at(j)<< endl;
+// 					    break;			
+// 				case 62:     if (subdetector_ID==621) hit_id=45;
+// 					    else cout << "wrong flux_ID 62 " << (int)flux_id->at(j)<< endl;
+// 					    break;			
+// 				case 63:     if (subdetector_ID==631) hit_id=46;
+// 					    else if (subdetector_ID==632) hit_id=47;
+// 					    else cout << "wrong flux_ID 63 " << (int)flux_id->at(j)<< endl;
+// 					    break;						    
+				case 61:     if (subdetector_ID==611) hit_id=43;
+					    else if (subdetector_ID==612) hit_id=44;
+					    else if (subdetector_ID==613) hit_id=45;		
+					    else if (subdetector_ID==614) hit_id=46;
+					    else if (subdetector_ID==610) hit_id=51;		    
+					    else cout << "wrong flux_ID 61 " << (int)flux_id->at(j)<< endl;
+					    break;			
+				case 62:     if (subdetector_ID==621) hit_id=47;
+					    else if (subdetector_ID==622) hit_id=48;			
+					    else cout << "wrong flux_ID 62 " << (int)flux_id->at(j)<< endl;
+					    break;			
+				case 63:     if (subdetector_ID==631) hit_id=49;
+					    else if (subdetector_ID==632) hit_id=50;
+					    else cout << "wrong flux_ID 63 " << (int)flux_id->at(j)<< endl;
+					    break;				   		    
+				default:     cout << "wrong flux_ID 00 " << (int)flux_id->at(j)
+							 <<" ID="<<detector_ID<<  endl;
+			}    
+			/*End of Check Detector ID}}}*/
+			
+      if (hit_id<0 || hit_id>51 || par<0 || par > 12) {
+// 	cout << "id " << flux_id->at(j) << " hit_id " << hit_id << " pid " << flux_pid->at(j) << " par " << par << endl;
+	continue;
+      }
+			
+			
 //       if (detector_ID==5 && subdetector_ID == 1 && subsubdetector_ID == 1)   cout << "particle mom entering SPD " << flux_trackE->at(j) << endl;   
 
 //       if (detector_ID==4 && subdetector_ID == 1 && subsubdetector_ID == 1)   cout << "particle mom entering MRPC " << flux_trackE->at(j) << endl;   
       
 //       if (detector_ID==3 && subdetector_ID == 1 && subsubdetector_ID == 1)   cout << "particle mom entering EC " << flux_trackE->at(j) << endl;         
       
-     double hit_r=sqrt(pow(flux_avg_x->at(j),2)+pow(flux_avg_y->at(j),2));
-     double hit_y=flux_avg_y->at(j),hit_x=flux_avg_x->at(j),hit_z=flux_avg_z->at(j);          
-     double hit_phi=atan2(hit_y,hit_x)*DEG;      
-     double p_hit=sqrt(flux_px->at(j)*flux_px->at(j)+flux_py->at(j)*flux_py->at(j)+flux_pz->at(j)*flux_pz->at(j));
+ 
       
-      int hit_id=-1;
+/*      int hit_id=-1;
       if (detector_ID==1 && subdetector_ID == 1 && subsubdetector_ID == 1) hit_id=0;
       if (detector_ID==1 && subdetector_ID == 2 && subsubdetector_ID == 1) hit_id=1;	  
       if (detector_ID==1 && subdetector_ID == 3 && subsubdetector_ID == 1) hit_id=2;	  
@@ -248,15 +436,44 @@ for (Int_t i=0;i<nevent;i++) {
       if (detector_ID==5 && subdetector_ID == 1 && subsubdetector_ID == 1) hit_id=8;
       if (detector_ID==5 && subdetector_ID == 2 && subsubdetector_ID == 1) hit_id=9;	                          
       if (detector_ID==3 && subdetector_ID == 1 && subsubdetector_ID == 1) hit_id=10;
-      if (detector_ID==3 && subdetector_ID == 2 && subsubdetector_ID == 1) hit_id=11;	                    
+      if (detector_ID==3 && subdetector_ID == 2 && subsubdetector_ID == 1) hit_id=11;	 */                   
       
-      if (0<=hit_id && hit_id<=11) hflux_hitxy[hit_id]->Fill(flux_avg_x->at(j)/10.,flux_avg_y->at(j)/10.);
+//       if (0<=hit_id && hit_id<=11) hflux_hitxy[hit_id]->Fill(flux_avg_x->at(j)/10.,flux_avg_y->at(j)/10.);
 //       else cout << "flux_id->at(j) " << flux_id->at(j) << endl;
-      
+     
+		
+     double hit_r=sqrt(pow(flux_avg_x->at(j),2)+pow(flux_avg_y->at(j),2));
+     double hit_y=flux_avg_y->at(j),hit_x=flux_avg_x->at(j),hit_z=flux_avg_z->at(j);          
+     double hit_phi=atan2(hit_y,hit_x)*DEG;      
+     double hit_p=sqrt(flux_px->at(j)*flux_px->at(j)+flux_py->at(j)*flux_py->at(j)+flux_pz->at(j)*flux_pz->at(j));     
+     
+	/*Calculate Weight{{{*/
+	double thisrate=0.0;
+	double weight=0.0,weightR=0.0,weightPhi=0.0,weightTheta=0.0;
+	double area=1.;      /// in 
+	double areaR=2*3.1415926*hit_r*1.; /// in mm2
+	double areaPhi=1.;  /// in any deg      
+// 	double areaTheta=2*3.1415926*r*(flux_avg_z->at(j)*(tan((Theta+0.25)/DEG)-tan((Theta-0.25)/DEG))); ///0.5deg width
+
+// 	if (Is_EM) thisrate=current/Nevent;			
+// 	else thisrate=rate/filenum;			
+	thisrate=15e-6/1.6e-19/0.991e10;				
+// 			cout << "thisrate" << rate << endl;
+	
+	weight=thisrate/1e3/area;
+	weightR=thisrate/1e3/areaR;
+	weightPhi=thisrate/1e3/areaPhi;
+// 	weightTheta=thisrate/1e3/areaTheta;     
+	/*End of Caluclate Weight}}}*/	
+     
+      if (flux_pz->at(j)<0) continue;      
+      hfluxR[hit_id][par]->Fill(hit_r/10.,weightR/50.);   ///in 5cm bin
+      hPlog[hit_id][par]->Fill(log10(hit_p/1e3),weight);
+				
       //check hit on EC and find sec_ec
 //       if(hit_id==10 && flux_tid->at(j)==1 && p_gen<5000){
       if(hit_id==10 && flux_tid->at(j)==1){    
-// 	cout << p_gen << " " << p_hit << endl;
+// 	cout << p_gen << " " << hit_p << endl;
 
 //       cout << "flux " << " !!! " << flux_hitn->at(j) << " " << flux_id->at(j) << " " << flux_pid->at(j) << " " << flux_mpid->at(j) << " " << flux_tid->at(j) << " " << flux_mtid->at(j) << " " << flux_trackE->at(j) << " " << flux_totEdep->at(j) << " " << flux_avg_x->at(j) << " " << flux_avg_y->at(j) << " " << flux_avg_z->at(j) << " " << flux_avg_lx->at(j) << " " << flux_avg_ly->at(j) << " " << flux_avg_lz->at(j) << " " << flux_px->at(j) << " " << flux_py->at(j) << " " << flux_pz->at(j) << " " << flux_vx->at(j) << " " << flux_vy->at(j) << " " << flux_vz->at(j) << " " << flux_mvx->at(j) << " " << flux_mvy->at(j) << " " << flux_mvz->at(j) << " " << flux_avg_t->at(j) << endl;  	
 	
@@ -310,9 +527,12 @@ for (Int_t i=0;i<nevent;i++) {
     
   tree_solid_hgc->GetEntry(i);  
   
-  double npe_hgc=process_tree_solid_hgc(tree_solid_hgc);  
+  double npe_hgc=0;   
+  npe_hgc=process_tree_solid_hgc(tree_solid_hgc);  
+ 
 //   cout << "npe_hgc " << npe_hgc << endl;  
- if (npe_hgc >0)  hnphe_hgc->Fill(npe_hgc/30./5e8*(30e-9*15e-6/1.6e-19));  
+//  if (npe_hgc >0)  hnpe_hgc->Fill(npe_hgc/30./5e8*(30e-9*15e-6/1.6e-19));  
+ if (npe_hgc >0)  hnpe_hgc->Fill(npe_hgc/30.,rate);   
     
 //   tree_solid_spd->GetEntry(i);
 //   
@@ -340,8 +560,8 @@ for (Int_t i=0;i<nevent;i++) {
 
   tree_solid_lgc->GetEntry(i);
   
-  Int_t nphe_lgc[30]={0};
-  process_tree_solid_lgc(tree_solid_lgc,nphe_lgc);
+  Int_t npe_lgc[30]={0};
+  process_tree_solid_lgc(tree_solid_lgc,npe_lgc);
 
   if (Is_ec_FA){  
   //check how number of p.e. for all LGC sector and plot it at 0 when it's same sector like sec_ec
@@ -351,8 +571,8 @@ for (Int_t i=0;i<nevent;i++) {
     if(-14<=lgcsec-sec_ec && lgcsec-sec_ec<16) index=lgcsec-sec_ec;
     else if (lgcsec-sec_ec>=16) index=lgcsec-sec_ec-30;
     else if (lgcsec-sec_ec<-14) index=lgcsec-sec_ec+30;    
-//     if (nphe_lgc[index]<0) cout << sec_ec << " " << j << " " << index << " " << nphe_lgc[index] << endl;    
-    hsectoring_ec_lgc->Fill(index,nphe_lgc[j]*rate);
+//     if (npe_lgc[index]<0) cout << sec_ec << " " << j << " " << index << " " << npe_lgc[index] << endl;    
+    hsectoring_ec_lgc->Fill(index,npe_lgc[j]*rate);
   }
   }
   
@@ -360,18 +580,18 @@ for (Int_t i=0;i<nevent;i++) {
     if(Is_gem[1] && Is_gem[2] && Is_gem[3] && Is_gem[4] && Is_gem[5]){
       //sum number of p.e. from LGC sector sec_ec-sec_width_sum to sec_ec+sec_width_sum
       int sec_width_sum=14; 
-      int nphe_lgc_total=0;  
+      int npe_lgc_total=0;  
       for (int j=sec_ec-sec_width_sum;j<=sec_ec+sec_width_sum;j++){    
 	int index;
 	if (0<j && j<=30) index=j-1;
 	else if (j>30) index=j-30-1;
 	else if (j<=0) index=j+30-1;
 	else cout << "something wrong with sec" << endl;      
-	nphe_lgc_total += nphe_lgc[index];
+	npe_lgc_total += npe_lgc[index];
       }      
-      hnphe_lgc->Fill(nphe_lgc_total,rate); 
+      hnpe_lgc->Fill(npe_lgc_total,rate); 
       
-//     if (nphe_lgc_total>20){  // cut on lgc
+//     if (npe_lgc_total>20){  // cut on lgc
       Is_acc_FA=true;
 //     }
     }       
@@ -402,10 +622,15 @@ file->Close();
 // outputfile->Write();
 // outputfile->Flush();
 
+TCanvas *c_npe_hgc = new TCanvas("npe_hgc","npe_hgc",1600,900);
+c_npe_hgc->Divide(1,1);
+c_npe_hgc->cd(1);
+hnpe_hgc->Draw();
+
 TCanvas *c_npe_lgc = new TCanvas("npe_lgc","npe_lgc",1600,900);
 c_npe_lgc->Divide(2,1);
 c_npe_lgc->cd(1);
-hnphe_lgc->Draw();
+hnpe_lgc->Draw();
 c_npe_lgc->cd(2);
 hsectoring_ec_lgc->Draw();
 gPad->SetLogy(1);
@@ -428,13 +653,43 @@ htotEdep_ec_mrpc->Draw("colz");
 c_totEdep_compare->cd(3);
 htotEdep_spd_mrpc->Draw("colz");
 
-TCanvas *c_flux_hitxy = new TCanvas("flux_hitxy","flux_hitxy",1800,900);
-c_flux_hitxy->Divide(5,2);
-for (Int_t i=0;i<m;i++) {
-c_flux_hitxy->cd(i+1);
-gPad->SetLogz();
-hflux_hitxy[i]->Draw("colz");
-}
+					int nbins=hfluxR[16][1]->GetNbinsX();
+					double binwidth=hfluxR[16][1]->GetBinWidth(1);
+					      cout << nbins << " " << binwidth << endl;
+					double sum=0;
+					for(int k=1;k<nbins;k++){
+						double r=hfluxR[16][1]->GetBinCenter(k);
+						if (r <= 105 || 210<= r) continue;
+						sum += 2*3.1415926*hfluxR[16][1]->GetBinCenter(k)*binwidth*100*hfluxR[16][1]->GetBinContent(k);  // factor 100 is from cm2 to mm2
+					}
+					cout << "sum " << sum << endl;
+
+TCanvas *c_fluxR = new TCanvas("fluxR","fluxR",1000,900);
+gPad->SetLogy();
+hfluxR[16][1]->SetLineColor(1);
+hfluxR[16][1]->Draw();
+cout << hfluxR[16][1]->Integral() << endl;
+hfluxR[16][2]->SetLineColor(2);
+hfluxR[16][2]->Draw("same");
+hfluxR[16][3]->SetLineColor(3);
+hfluxR[16][3]->Draw("same");
+
+TCanvas *c_Plog = new TCanvas("Plog","Plog",1000,900);
+gPad->SetLogy();
+hPlog[16][1]->SetLineColor(1);
+hPlog[16][1]->Draw();
+hPlog[16][2]->SetLineColor(2);
+hPlog[16][2]->Draw("same");
+hPlog[16][3]->SetLineColor(3);
+hPlog[16][3]->Draw("same");
+
+// TCanvas *c_flux_hitxy = new TCanvas("flux_hitxy","flux_hitxy",1800,900);
+// c_flux_hitxy->Divide(5,2);
+// for (Int_t i=0;i<m;i++) {
+// c_flux_hitxy->cd(i+1);
+// gPad->SetLogz();
+// hflux_hitxy[i]->Draw("colz");
+// }
 
 TCanvas *c_acc = new TCanvas("acc","acc",1600,900);
 c_acc->Divide(3,1);
