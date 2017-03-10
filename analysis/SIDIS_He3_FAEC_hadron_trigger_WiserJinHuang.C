@@ -1,3 +1,5 @@
+// refer to http://hallaweb.jlab.org/12GeV/SoLID/download/sim/talk/solid_SIDIS_background_zwzhao_20131118.pdf
+// FAEC MIP trigger cut on 200MeV curve on slide 14
 
 double forward_hadron_trigger_low_P[29]={0.0265,	0.0595,	0.0925,	0.1255,	0.1585,	0.1915,	0.2245,	0.2575,	0.2905,	0.3235,	0.3565,	0.3895,	0.4225,	0.4555,	0.4885,	0.5215,	0.5545,	0.5875,	0.6205,	0.6535,	0.6865,	0.7195,	0.7525,	0.7855,	0.8185,	0.8515,	0.8845,	0.9175,	0.9505};
 
