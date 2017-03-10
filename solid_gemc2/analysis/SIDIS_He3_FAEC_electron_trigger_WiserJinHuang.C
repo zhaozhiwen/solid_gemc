@@ -1,3 +1,8 @@
+// refer to http://hallaweb.jlab.org/12GeV/SoLID/download/sim/talk/solid_SIDIS_background_zwzhao_20131118.pdf
+// FAEC e trigger cut on Q2=1 curve on slide 5
+// FAEC e trigger cut R edge 90,105,115,130,150,200,230 cm
+// FAEC e trigger cut P value 5,4,3,2,1,2 GeV
+// LAEC e trigger cut P>3GeV on slide 3
 
 double forward_electron_trigger_low_R[6]={90,105,115,130,150,200};
 double forward_electron_trigger_high_R[6]={105,115,130,150,200,230};
