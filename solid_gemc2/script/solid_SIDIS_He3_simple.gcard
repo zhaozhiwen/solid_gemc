@@ -4,7 +4,7 @@
 <option name="DBUSER" value="soliduser"/>
 <option name="DBPSWD" value="ilovesolid"/>
 
-<detector name="../geometry/solid_SIDIS_He3_simple" factory="TEXT" variation="Original"/>
+<detector name="../geometry/old/solid_SIDIS_He3_simple" factory="TEXT" variation="Original"/>
 
 <option name="INTEGRATEDRAW" value="flux"/>
 

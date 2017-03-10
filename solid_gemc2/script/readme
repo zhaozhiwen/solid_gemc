@@ -1,0 +1,24 @@
+example gcard files to run solid_gemc simulation
+
+== current gcard show full SoLID simulation in graphic mode==
+solid_PVDIS_LD2_full.gcard
+solid_SIDIS_He3_full.gcard
+solid_SIDIS_NH3_full.gcard
+solid_JPsi_LH2_full.gcard
+solid_DDVCS_JPsi_LH2_full.gcard
+solid_DDVCS_PVDIS_LH2_full.gcard
+
+== old gcard file using simplfied SoLID simulation in graphic mode (outdated)===
+solid_JPsi_LH2.gcard
+solid_JPsi_simple.gcard
+solid_PVDIS_LD2.gcard
+solid_PVDIS_simple.gcard
+solid_SIDIS_He3.gcard
+solid_SIDIS_He3_simple.gcard
+solid_SIDIS_NH3.gcard
+solid_SIDIS_NH3_simple.gcard
+
+== geant4 macro which can be called in gcard==
+
+solid_slice.vis
+
