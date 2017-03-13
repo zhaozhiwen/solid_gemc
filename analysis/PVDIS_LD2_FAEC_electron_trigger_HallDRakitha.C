@@ -12,14 +12,25 @@ Use routines GetRadiusIndex and GetMomentumIndex to get the bin index for radius
 The radius is at the front face of the EC
 
  */
-Double_t trig_low_R[8]={110.0 ,130.0 ,150.0 ,170.0 ,190.0 ,210.0 ,230.0 ,250.0};//radius in cm
-Double_t trig_high_R[8]={130.0 ,150.0 ,170.0 ,190.0 ,210.0 ,230.0 ,250.0 ,270.0};
+
+// 8 bin
+// Double_t trig_low_R[8]={110.0 ,130.0 ,150.0 ,170.0 ,190.0 ,210.0 ,230.0 ,250.0};//radius in cm
+// Double_t trig_high_R[8]={130.0 ,150.0 ,170.0 ,190.0 ,210.0 ,230.0 ,250.0 ,270.0};
+// Shower 6+1 Thresholds : {617.9 ,531.0 ,460.0 ,389.8 , 331.0 ,287.6,271.9 ,272.0} MeV 
+// P value 3.1,2.65,2.3,2.0,1.65,1.44,1.36,1.36 GeV  with 0.2 calibration contstant
+
+//6 bin
+//by merging last 2 bin into 3rd last bin, because last 2 bins has no acceptance of electron from target, thus produced unrelaistic small electron eff. We need to this better estimated decay particle from pi0 caused rate on EC
+Double_t trig_low_R[8]={110.0 ,130.0 ,150.0 ,170.0 ,190.0 ,210.0};//radius in cm
+Double_t trig_high_R[6]={130.0 ,150.0 ,170.0 ,190.0 ,210.0,270.0};
+ 
 Double_t P_low[35] = { 1.0, 1.2, 1.4, 1.6, 1.8, 2.0, 2.2, 2.4, 2.6, 2.8, 3.0, 3.2, 3.4, 3.6, 3.8, 4.0, 4.2, 4.4, 4.6, 4.8, 5.0, 5.2, 5.4, 5.6, 5.8, 6.0, 6.2, 6.4, 6.6, 6.8, 7.0, 7.2, 7.4, 7.6, 7.8}; //momentum in GeV
 Double_t P_high[35] = { 1.2, 1.4, 1.6, 1.8, 2.0, 2.2, 2.4, 2.6, 2.8, 3.0, 3.2, 3.4, 3.6, 3.8, 4.0, 4.2, 4.4, 4.6, 4.8, 5.0, 5.2, 5.4, 5.6, 5.8, 6.0, 6.2, 6.4, 6.6, 6.8, 7.0, 7.2, 7.4, 7.6, 7.8, 8.0}; 
 
 Int_t GetRadiusIndex(Double_t radius){
   Int_t Ri=-1;
-  for (Int_t i =0; i<8;i++){
+//   for (Int_t i =0; i<8;i++){
+  for (Int_t i =0; i<6;i++){       
     if (radius>trig_low_R[i] && radius<=trig_high_R[i]){
       Ri=i;
       break;
