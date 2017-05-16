@@ -1,0 +1,21 @@
+here are some scripts to submit farm job for solid simulation
+
+SoLID full simulations at /work/halla/solid/sim/solid_gemc/ are done by these scripts
+
+To use it, do the following
+====================================================
+login in ifarm (alias to ifarm1401 and ifarm1402 as 2017/05)
+copy a dir to a location, e.g. /work/halla/solid/$USER
+run "LongRun_sim" and give start and end run numbers
+job submission scripts jsc* will be created according to "exec_sim"
+"do_it_all.sh","solid.gcard" and other needed files will be copied to farm, and all jobs will be submitted.
+wait for output files, out.*.root and out.*.log will appear in the dir
+If any job fails or the output files have problem, check farm out and err files at ~/.farm_out for detailed reason
+====================================================
+
+You may use "hadd" to add all resulting root files into a single one.
+
+
+
+
+
