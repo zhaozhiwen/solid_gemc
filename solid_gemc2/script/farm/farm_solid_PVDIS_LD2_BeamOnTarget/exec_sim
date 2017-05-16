@@ -1,4 +1,4 @@
-#!/usr/local/bin/perl
+#!/usr/bin/perl
 # Perl module to run
 ############################################################
 # Set defaults
@@ -43,19 +43,21 @@ foreach (@runs) {
 #         printf SCRIPT_FILE "TRACK : debug \n";
         printf SCRIPT_FILE "TRACK : simulation \n";
         printf SCRIPT_FILE "MAIL: $usrnam\@jlab.org\n";
-        printf SCRIPT_FILE "OS: centos65\n";
+        printf SCRIPT_FILE "OS: centos7\n";
+#        printf SCRIPT_FILE "OS: centos65\n";
 #         printf SCRIPT_FILE "OS: linux64\n";
 # 	printf SCRIPT_FILE "TIME: 720\n";
         printf SCRIPT_FILE "MEMORY: 2500 MB\n";
+        printf SCRIPT_FILE "DISK_SPACE: 10 GB\n";
         printf SCRIPT_FILE "COMMAND: $cdir/do_it_all.sh\n";
         printf SCRIPT_FILE "OTHER_FILES:\n";
         printf SCRIPT_FILE "$cdir/solid.gcard\n";
-#       	printf SCRIPT_FILE "$cdir/SoLIDFileReduce.C\n";
+       	printf SCRIPT_FILE "$cdir/SoLIDFileReduce.C\n";
 #        printf SCRIPT_FILE "$cdir/input.dat\n";
 #       	printf SCRIPT_FILE "$cdir/PolPdf_Linear.txt\n";
 #       	printf SCRIPT_FILE "$cdir/PolQuarkDist_fine.txt\n";
-        printf SCRIPT_FILE "OUTPUT_DATA: out.evio\n";
-        printf SCRIPT_FILE "OUTPUT_TEMPLATE: $cdir/$outevio\n";
+#        printf SCRIPT_FILE "OUTPUT_DATA: out.evio\n";
+#        printf SCRIPT_FILE "OUTPUT_TEMPLATE: $cdir/$outevio\n";
         printf SCRIPT_FILE "OUTPUT_DATA: out.root\n";
         printf SCRIPT_FILE "OUTPUT_TEMPLATE: $cdir/$outroot\n";
         printf SCRIPT_FILE "OUTPUT_DATA: out.log\n";
