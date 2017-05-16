@@ -1,4 +1,4 @@
-example gcard files to run solid_gemc simulation
+scripts to run solid_gemc simulation 
 
 == current gcard show full SoLID simulation in graphic mode==
 solid_PVDIS_LD2_full.gcard
@@ -21,4 +21,10 @@ solid_SIDIS_NH3_simple.gcard
 == geant4 macro which can be called in gcard==
 
 solid_slice.vis
+
+== farm script ==
+
+script to run full simulation in batch mode are under "farm", see readme there
+
+"farm_by_yez" is outdated
 

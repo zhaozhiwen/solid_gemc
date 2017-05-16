@@ -1,0 +1,59 @@
+<gcard>
+<option name="DBHOST" value="soliddb"/>
+<option name="DATABASE" value="test"/>
+<option name="DBUSER" value="soliduser"/>
+<option name="DBPSWD" value="ilovesolid"/>
+
+<detector name="/group/solid/solid_svn/solid_gemc2/geometry/magnet/solid_solenoid" factory="TEXT" variation="Original"/>
+<detector name="/group/solid/solid_svn/solid_gemc2/geometry/ec_segmented/solid_PVDIS_ec_forwardangle" factory="TEXT" variation="Original"/>
+<detector name="/group/solid/solid_svn/solid_gemc2/geometry/lgc/lg_cherenkov" factory="TEXT" variation="PVDIS"/>
+<detector name="/group/solid/solid_svn/solid_gemc2/geometry/gem/solid_PVDIS_gem" factory="TEXT" variation="Original"/>
+<detector name="/group/solid/solid_svn/solid_gemc2/geometry/target/solid_PVDIS_target_enclosure" factory="TEXT" variation="LD2"/>
+<detector name="/group/solid/solid_svn/solid_gemc2/geometry/beamline/solid_PVDIS_beamline" factory="TEXT" variation="Original"/>
+<detector name="/group/solid/solid_svn/solid_gemc2/geometry/baffle/solid_PVDIS_baffle_CLEO2" factory="TEXT" variation="Enclosure"/>
+<detector name="/group/solid/solid_svn/solid_gemc2/geometry/baffle/solid_PVDIS_baffle_observer_CLEO2" factory="TEXT" variation="Enclosure"/>
+
+<option name="INTEGRATEDRAW" value="flux"/>
+
+<option name="RECORD_PASSBY" value="1"/>
+<option name="SAVE_ALL_MOTHERS" value="1"/>
+
+<option name="HIT_PROCESS_LIST" value="solid"/>
+<option name="PHYSICS" value="QGSP_BERT_HP+STD+Optical"/>
+<option name="HALL_MATERIAL" value="G4_AIR"/>
+
+<option name="MAX_X_POS" value="20000"/>
+<option name="MAX_Y_POS" value="20000"/>
+<option name="MAX_Z_POS" value="20000"/>
+<option name="HALL_DIMENSIONS" value="20*m,20*m,20*m"/>
+
+<option name="FIELD_DIR" value="/group/solid/solid_svn/solid_gemc2/field"/>
+<option name="HALL_FIELD" value="solenoid_CLEOv8"/>
+
+<option name="OUTPUT" value="evio,out.evio"/>
+<option name="USE_GUI"  value="0"/>
+</gcard>
+
+<!--  comment out
+<option name="FIELD_VERBOSITY"  value="100"/>
+<option name="GEO_VERBOSITY"  value="100"/>
+
+use this to check overlap
+<option name="CHECK_OVERLAPS"  value="1"/>
+<option name="USE_GUI"  value="0"/>
+
+use this to run batch mode for txt or evio output
+<option name="N" value="1"/>
+<option name="OUTPUT" value="txt,output.txt"/>
+<option name="OUTPUT" value="evio,output.evio"/>
+<option name="USE_GUI"  value="0"/>
+
+use this for interactive mode
+<option name="EXEC_MACRO" value="../../solid_gemc2/script/solid_slice.vis"/>
+<option name="geometry" value="1000x1000"/>
+<option name="HIGH_RES" value="1"/>
+<option name="USE_GUI"  value="1"/>
+
+use "gemc -help" to see all options
+
+-->

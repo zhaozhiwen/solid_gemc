@@ -1,4 +1,4 @@
-#!/usr/local/bin/perl
+#!/usr/bin/perl
 # Perl module to run 
 ############################################################
 print "Give the start run number [2000]\n";
