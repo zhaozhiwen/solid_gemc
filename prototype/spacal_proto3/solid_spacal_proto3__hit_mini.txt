@@ -1,0 +1,1 @@
+        solid_spacal  |sPHENIX SPACAL prototype fiber core  |                                      CH  |   0*MeV   | 1000*ns   |  0.7*mm   |0.044*mm   |    1*ns   |    1*ns   |       1   |       0   |    0*ns  

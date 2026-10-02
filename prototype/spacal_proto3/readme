@@ -1,0 +1,100 @@
+sPHENIX 2017 SPACAL prototype (Prototype3) in solid_gemc
+=========================================================
+
+W/SciFi spaghetti calorimeter: 4 sectors x 4 tower blocks, 2x2 readout sub-towers per block (64 channels),
+39,104 scintillating fibers (polystyrene core, PMMA cladding) in W-epoxy (12.18 g/cm3), PMMA light guides,
+G10 enclosure. Ported from sPHENIX PHG4SpacalPrototypeDetector (Fun4All) to GEMC Perl generators, with a new
+hit process "solid_spacal" (source/2.9/hitprocess/solid_spacal_*) that reproduces sPHENIX's fiber-level light
+model: Birks quenching, fiber transmission and light-guide efficiency maps, 0-60 ns time window.
+Standalone replica in the sPHENIX frame (beam from the origin along theta ~ 43.6 deg).
+
+== quick start (inside the solid_gemc container, from this directory) ==
+solid_gemc must include the solid_spacal hit process (source/2.9, scons OPT=1).
+
+  ./run.sh spacal_proto3_p2_e32GeV_sphenixbeam.gcard my_first_run -RANDOM=1
+  -> runs/my_first_run/{gcard.gcard, out.evio, out.root, log.txt, config.json}
+
+out.root tree "solid_spacal": one entry per fiber with energy, variables
+  id     readout channel 10000 + 1000*sector + 100*tower + 10*subx + suby
+  fiber  fiber code 100000*(sector+1) + 10000*tower + sPHENIX fiber id
+  edep   energy deposited in the core (MeV)
+  edepB  Birks-quenched edep (MeV), kB = 0.07943 mm/MeV
+  light  edepB x fiber transmission x light-guide efficiency (MeV), the quantity sPHENIX calls light yield
+  t      edep-weighted time (ns)
+sPHENIX calibration: E = sum(light) / 0.0190134; photo-electrons 500 per GeV (analyze_p2.py).
+
+GCard requirements: HIT_PROCESS_LIST=solid, PHYSICS=FTFP_BERT+STD (GEMC adds no EM physics without +STD),
+PRODUCTIONCUT=0.7 (GEMC's default is 10 mm). Parallel jobs need distinct -RANDOM seeds.
+The container shell is tcsh: use "env EVIO_OPTS=... ./run.sh ...".
+
+== files ==
+config.dat, solid_spacal.pl, solid_spacal_{geometry,materials,hit,bank}.pl   generators
+solid_spacal_proto3__*_{Original,nofiber,mini}.txt, __bank.txt               generated input for gemc (committed)
+   Original: full prototype; nofiber: everything except fibers (overlap check); mini: 1 sector, 1 tower, 6x4 fibers (tests)
+sphenix_xml2param.py     sPHENIX geometry XML -> __parameters_*.txt
+export_lightmaps.C       sPHENIX Prototype2Module.xml -> source/2.9/hitprocess/solid_spacal_lightmaps.h
+fiber_layout_ref.py      oracle: Python port of the sPHENIX fiber placement
+geo_check.py             independent transform-chain check of every fiber; gives geantino aiming for a fiber
+fiber_clearance.py       analytic fiber-fiber and fiber-tower clearance
+test_spacal_model.C      unit test of the light model vs ROOT TH1/TH2::Interpolate and the oracle
+check_hitprocess.py      hit process vs GEMC integrated raw info
+analyze_p2.py, analyze_scan.py, make_scan.py   analysis, energy-scan gcards/job list and fits
+run.sh                   one job with provenance (config.json)
+spacal_proto3_*.gcard    tests and the runs behind result.md
+plots/                   figures quoted in result.md
+CLAUDE.md (AGENTS.md)    rules and traps for coding agents; SPACAL_PLAN.md design; log.md history; result.md numbers
+log.md/result.md quote run ids from the development workspace; those run directories are not in the repo.
+
+== regenerate (only after changing generators or inputs) ==
+Fetch the sPHENIX inputs (not redistributed here; sPHENIX repos declare no license):
+  C=https://raw.githubusercontent.com/sPHENIX-Collaboration/calibrations/2a978b36929a6410debcefc21245568dfd38451a
+  mkdir -p sphenix_ref
+  curl -L -o sphenix_ref/cemc_geoparams-0-0-4294967295-1483238881.xml $C/Prototype3/Geometry/cemc_geoparams-0-0-4294967295-1483238881.xml
+  curl -L -o sphenix_ref/Prototype2Module.xml $C/CEMC/LightCollection/Prototype2Module.xml
+In the container:
+  python3 sphenix_xml2param.py sphenix_ref/cemc_geoparams-0-0-4294967295-1483238881.xml solid_spacal_proto3
+  ./solid_spacal.pl solid_spacal_proto3 mini ; ./solid_spacal.pl solid_spacal_proto3 nofiber ; ./solid_spacal.pl solid_spacal_proto3
+  root -l -b -q export_lightmaps.C        (then rebuild source/2.9)
+Unchanged inputs and generators reproduce the committed files byte for byte.
+
+== validation (all pass as committed) ==
+In the container:
+  python3 fiber_layout_ref.py solid_spacal_proto3__parameters_mini.txt > ref_fibers_mini.txt
+  python3 fiber_layout_ref.py solid_spacal_proto3__parameters_Original.txt > ref_fibers_Original.txt
+  root -l -b -q test_spacal_model.C              -> ALL OK (interpolation 5e-9, 9776 sub-tower ids)
+  env EVIO_OPTS="-B=$PWD/solid_spacal_proto3 -R=solid_spacal" ./run.sh spacal_proto3_mini_geantino.gcard t1
+  env EVIO_OPTS="-B=$PWD/solid_spacal_proto3 -R=solid_spacal" ./run.sh spacal_proto3_full_geantino.gcard t2
+     -> one hit each, fiber/id as in the gcard comment, exit point (0, 0, +L/2) on the fiber axis (rotation convention)
+  ./run.sh spacal_proto3_nofiber_overlap.gcard t3   -> only 0.56 pm tower/light-guide shared-face reports
+  env EVIO_OPTS="-B=$PWD/solid_spacal_proto3 -R=solid_spacal" ./run.sh spacal_proto3_p2_e1GeV_raw.gcard t4
+On the host (numpy, uproot; the container's Python 3.6 has neither):
+  python3 geo_check.py solid_spacal_proto3 Original     -> 39104 fibers, centre diff < 1e-8 cm
+  python3 fiber_clearance.py solid_spacal_proto3 Original -> ALL OK (0.52 mm fiber clearance)
+  python3 check_hitprocess.py runs/t4                    -> ALL OK
+
+== results (details and run list: result.md) ==
+Light sampling fraction, 32 GeV e-, sPHENIX macro beam (theta 43.6, phi 0, vertex sigma 0.7 cm):
+  0.01885 +- 0.00033 vs sPHENIX 0.0190134 +- 0.000225 (Fun4All_G4_Prototype3.C): ratio 0.992.
+  That beam is centred on the sector 1|2 crack; pencil beams give 0.0181 (block centre) to 0.0204 (sub-tower centre).
+Energy scan 2-32 GeV, block s1 j1 centre, 0.7 cm spot (plots/scan_resolution.png):
+  sampling + Birks:        12.1%/sqrt(E) (+) 1.7%
+  + light maps + p.e.:     15.0%/sqrt(E) (+) 8.2%   (constant term = light-guide map across the spot)
+  2-2.5% low tail from electrons channeling down fiber cores (projective geometry, beam from the vertex).
+
+== known limitations ==
+- Neutral-particle deposits are not Birks-quenched (sPHENIX's G4EmSaturation quenches them): light slightly high.
+- sPHENIX's Prototype3 macro uses the Prototype2 transmission map (+-6.75 cm) for fibers up to +-8.2 cm; clamped, as in sPHENIX.
+- Tower G4Trap pDx4 adjusted by <= 3.2e-4 mm so Geant4 10.7 accepts the side faces as planar.
+- PMMA is G4_PLEXIGLASS (sPHENIX's own PMMA definition passes atom ratios as mass fractions).
+
+== sPHENIX sources (read for the port, pinned 2026-10-01) ==
+https://github.com/sPHENIX-Collaboration/prototype     c82fb15f0aff652de56cc4dcd1a2fa4908c0e3c6
+  simulation/g4simulation/g4caloprototype/PHG4SpacalPrototype{Detector,Subsystem,SteppingAction}.cc, macros/prototype3/Fun4All_G4_Prototype3.C
+https://github.com/sPHENIX-Collaboration/coresoftware  4bd192fab44c7d30d96e54c2c8596c074fe67731
+  simulation/g4simulation/g4detectors/PHG4CylinderGeom_Spacalv{1,3}, PHG4FullProjSpacalCellReco, LightCollectionModel; g4main/PHG4Reco
+https://github.com/sPHENIX-Collaboration/calibrations  2a978b36929a6410debcefc21245568dfd38451a
+  Prototype3/Geometry/cemc_geoparams-0-0-4294967295-1483238881.xml, CEMC/LightCollection/Prototype2Module.xml
+The committed __parameters_*.txt and solid_spacal_lightmaps.h contain numbers derived from the calibrations files.
+
+== log ==
+2026-10-01 by Zhiwen Zhao (with Claude Code): first version

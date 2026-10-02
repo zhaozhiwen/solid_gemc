@@ -1,0 +1,21 @@
+<gcard>
+	<!-- Phase 2: sPHENIX Fun4All_G4_Prototype3.C default beam, where its sampling_fraction = 0.0190134 most plausibly comes from:
+	     32 GeV e-, theta = 90 - 46.4 = 43.6 deg, phi = 0, vertex at the origin with Gaussian sigma 0.7 cm in y and z.
+	     Not reproduced (no effect on the mean sampling fraction): 2% momentum smearing, 1 mrad angular divergence.
+	     Run: ./run.sh <this gcard> <run_id> -RANDOM=<seed> -->
+	<detector name="solid_spacal_proto3" factory="TEXT" variation="Original"/>
+
+	<option name="HIT_PROCESS_LIST" value="solid"/>
+	<option name="PHYSICS" value="FTFP_BERT+STD"/>
+	<option name="PRODUCTIONCUT" value="0.7"/>
+	<option name="HALL_MATERIAL" value="G4_AIR"/>
+	<option name="HALL_DIMENSIONS" value="5*m,5*m,5*m"/>
+
+	<option name="BEAM_P" value="e-, 32*GeV, 43.6*deg, 0*deg"/>
+	<option name="SPREAD_P" value="0*GeV, 0*deg, 0*deg"/>
+	<option name="BEAM_V" value="(0, 0, 0)cm"/>
+	<option name="SPREAD_V" value="(0.0, 0.7, 0.7, cm, gauss)"/>
+
+	<option name="N" value="50"/>
+	<option name="USE_GUI" value="0"/>
+</gcard>

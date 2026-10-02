@@ -1,0 +1,23 @@
+<gcard>
+	<!-- Full-geometry test: geantino along the corner fiber s2 j3 fid4887, 30 cm upstream of its end. L = 16.4172 cm.
+	     BEAM_V/BEAM_P from: python3 geo_check.py solid_spacal_proto3 Original geantino 2 3 4887
+	     Run: EVIO_OPTS="-B=$PWD/solid_spacal_proto3 -R=solid_spacal" ./run.sh <this gcard> <run_id>
+	     Pass: one solid_spacal hit (edep 0), fiber 334887, id 12300, nsteps 1, avg_l = exit point = (~0, ~0, +L/2 = 82.086) mm. -->
+	<detector name="solid_spacal_proto3" factory="TEXT" variation="Original"/>
+
+	<option name="HIT_PROCESS_LIST" value="solid"/>
+	<option name="INTEGRATEDRAW" value="solid_spacal"/>
+	<option name="RECORD_PASSBY" value="1"/>
+	<option name="PHYSICS" value="FTFP_BERT+STD"/>
+	<option name="HALL_MATERIAL" value="G4_AIR"/>
+	<option name="HALL_DIMENSIONS" value="5*m,5*m,5*m"/>
+	<option name="CHECK_OVERLAPS" value="0"/>
+
+	<option name="BEAM_P" value="geantino, 1*GeV, 40.764020146*deg, 0.000031845*deg"/>
+	<option name="SPREAD_P" value="0*GeV, 0*deg, 0*deg"/>
+	<option name="BEAM_V" value="(81.328314, 0.088483, 94.670031)cm"/>
+	<option name="SPREAD_V" value="(0.0, 0.0)cm"/>
+
+	<option name="N" value="1"/>
+	<option name="USE_GUI" value="0"/>
+</gcard>
