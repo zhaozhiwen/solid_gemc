@@ -42,6 +42,7 @@ analyze_p2.py, analyze_scan.py, make_scan.py   analysis, energy-scan gcards/job 
 run.sh                   one job with provenance (config.json)
 spacal_proto3_*.gcard    tests and the runs behind result.md
 plots/                   figures quoted in result.md
+report.html              standalone summary report (figures embedded; open in any browser)
 CLAUDE.md (AGENTS.md)    rules and traps for coding agents; SPACAL_PLAN.md design; log.md history; result.md numbers
 log.md/result.md quote run ids from the development workspace; those run directories are not in the repo.
 
