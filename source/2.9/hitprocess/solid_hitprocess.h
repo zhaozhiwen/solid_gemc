@@ -11,6 +11,7 @@
 #include "solid_lgc_hitprocess.h"
 #include "solid_spd_hitprocess.h"
 #include "solid_mrpc_hitprocess.h"
+#include "solid_spacal_hitprocess.h"
 #include "uRwell_hitprocess.h"
 #include "uRgroove_hitprocess.h"
 
@@ -24,6 +25,7 @@ void solid_hitprocess( map<string, HitProcess_Factory> &hitMap ){
     hitMap["solid_lgc"]= &solid_lgc_HitProcess::createHitClass;        
     hitMap["solid_spd"]= &solid_spd_HitProcess::createHitClass;            
     hitMap["solid_mrpc"]= &solid_mrpc_HitProcess::createHitClass;        
+    hitMap["solid_spacal"]= &solid_spacal_HitProcess::createHitClass;
     hitMap["urwell"]= &uRwell_HitProcess::createHitClass;        
     hitMap["urgroove"]= &uRgroove_HitProcess::createHitClass;        
     return;
