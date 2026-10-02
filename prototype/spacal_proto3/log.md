@@ -18,6 +18,18 @@ quoting their contents.
 
 ---
 
+## 2026-10-02 — Workspace copy retired
+
+### Request
+
+> move those needed into the new location then delete the old dir
+
+### Outcome
+
+- Moved from the development workspace into this directory: `runs/` (52 runs behind result.md; untracked, gitignored) and
+  `report.html` (untracked). Superseded copies (old paths, Phase 1 gcards, `hitprocess_src/`, `run_gemc.sh`) deleted with the old dir.
+- This directory is now the only copy of the project.
+
 ## 2026-10-01 — Add to solid_gemc git under prototype/spacal_proto3
 
 ### Request
@@ -38,7 +50,8 @@ also commit SPACAL_PLAN.md, CLAUDE.md (+ AGENTS.md symlink), log.md, result.md.
 
 ### Outcome
 
-- Branch `spacal_proto3` in the workspace clone; files staged in `prototype/spacal_proto3/` (not yet committed).
+- Commits 8db3497 (hit process), 70e0915 (prototype/spacal_proto3), d170356 (README line) on branch `spacal_proto3`,
+  pushed to zhaozhiwen/solid_gemc; PR https://github.com/JeffersonLab/solid_gemc/pull/9 (merged 2026-10-02 as 0d22f9a).
 - Repo-side changes: `run.sh` (no plugin), paths to `../../source/2.9/hitprocess/`, `.gitignore`, readme, CLAUDE.md rewritten for the repo,
   geantino gcards ported to solid_spacal (Phase 1 geometry was never needed: only the hit type and the clad copy-number meaning changed).
 - Verified from the repo location: pinned sPHENIX inputs reproduce all text files and lightmaps.h byte for byte; model unit test, geo_check,

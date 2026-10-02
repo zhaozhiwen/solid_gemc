@@ -18,6 +18,7 @@ Numbers: `result.md`. Everything runs inside the solid_gemc container (jlabce 2.
 | `check_hitprocess.py <run>` | hit process vs GEMC integrated raw info (gcard INTEGRATEDRAW=solid_spacal, evio2root `-R=solid_spacal`) |
 | `analyze_p2.py <tag> <runs...>`, `analyze_scan.py`, `make_scan.py` | sampling fractions / p.e. digitization; energy scan generator and fits -> `plots/` |
 | `run.sh <gcard> <run_id> [-RANDOM=n]` | one run: freeze gcard into `runs/<id>/`, solid_gemc, evio2root `$EVIO_OPTS`, `config.json` |
+| `report.html` | standalone report (images embedded, links to GitHub); after editing, re-embed with the solid-gemc-claude plugin's `templates/embed_html.py` or by hand |
 | `spacal_proto3_*.gcard` | geometry tests (`mini_geantino`, `full_geantino`, `nofiber_overlap`), hit-process check (`p2_e1GeV_raw`), physics (`p2_*`) |
 | `sphenix_ref/`, `runs/`, `ref_fibers_*`, `__fiberdump_*`, scan gcards | not committed (`.gitignore`); `sphenix_ref/` is fetched, see readme |
 
