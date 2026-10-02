@@ -1,0 +1,24 @@
+<gcard>
+	<!-- Rotation-convention test: geantino along the axis of fiber s0 j0 fid0 (mini variation), 30 cm upstream of its end.
+	     BEAM_V/BEAM_P from: python3 geo_check.py solid_spacal_proto3 mini geantino 0 0 0
+	     Run: EVIO_OPTS="-B=$PWD/solid_spacal_proto3 -R=solid_spacal" ./run.sh <this gcard> <run_id>
+	     Pass: one solid_spacal hit (edep 0), fiber 100000, id 10011, nsteps 1, avg_l = exit point = (0, 0, +L/2) = (~0, ~0, 76.186) mm:
+	     the geantino crosses the whole core on its axis (the step limit does not act on geantinos). -->
+	<detector name="solid_spacal_proto3" factory="TEXT" variation="mini"/>
+
+	<option name="HIT_PROCESS_LIST" value="solid"/>
+	<option name="INTEGRATEDRAW" value="solid_spacal"/>
+	<option name="RECORD_PASSBY" value="1"/>
+	<option name="PHYSICS" value="FTFP_BERT+STD"/>
+	<option name="HALL_MATERIAL" value="G4_AIR"/>
+	<option name="HALL_DIMENSIONS" value="5*m,5*m,5*m"/>
+	<option name="CHECK_OVERLAPS" value="1"/>
+
+	<option name="BEAM_P" value="geantino, 1*GeV, 44.390118178*deg, -2.812507836*deg"/>
+	<option name="SPREAD_P" value="0*GeV, 0*deg, 0*deg"/>
+	<option name="BEAM_V" value="(76.382466, -3.852460, 78.191683)cm"/>
+	<option name="SPREAD_V" value="(0.0, 0.0)cm"/>
+
+	<option name="N" value="1"/>
+	<option name="USE_GUI" value="0"/>
+</gcard>

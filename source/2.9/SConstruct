@@ -23,6 +23,7 @@ hitp_sources = Split("""
 	hitprocess/solid_lgc_hitprocess.cc
 	hitprocess/solid_spd_hitprocess.cc	
 	hitprocess/solid_mrpc_hitprocess.cc
+	hitprocess/solid_spacal_hitprocess.cc
 	hitprocess/uRwell_hitprocess.cc
 	hitprocess/uRwell_strip.cc
 	hitprocess/uRgroove_hitprocess.cc

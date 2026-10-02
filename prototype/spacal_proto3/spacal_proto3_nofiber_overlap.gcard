@@ -1,0 +1,21 @@
+<gcard>
+	<!-- Overlap check of enclosure, sectors, towers, light guides (nofiber variation; no sensitive volumes).
+	     Run: ./run.sh <this gcard> <run_id>; grep "Overlap is detected" runs/<run_id>/log.txt
+	     Pass: only tower / light-guide shared-face reports at the sub-pm level (double-precision rounding). -->
+	<detector name="solid_spacal_proto3" factory="TEXT" variation="nofiber"/>
+
+	<option name="INTEGRATEDRAW" value="flux"/>
+	<option name="RECORD_PASSBY" value="1"/>
+	<option name="PHYSICS" value="FTFP_BERT+STD"/>
+	<option name="HALL_MATERIAL" value="G4_AIR"/>
+	<option name="HALL_DIMENSIONS" value="5*m,5*m,5*m"/>
+	<option name="CHECK_OVERLAPS" value="1"/>
+
+	<option name="BEAM_P" value="geantino, 1*GeV, 44.390118178*deg, -2.812507836*deg"/>
+	<option name="SPREAD_P" value="0*GeV, 0*deg, 0*deg"/>
+	<option name="BEAM_V" value="(76.382466, -3.852460, 78.191683)cm"/>
+	<option name="SPREAD_V" value="(0.0, 0.0)cm"/>
+
+	<option name="N" value="1"/>
+	<option name="USE_GUI" value="0"/>
+</gcard>

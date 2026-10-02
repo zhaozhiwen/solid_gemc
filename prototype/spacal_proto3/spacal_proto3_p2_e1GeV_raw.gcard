@@ -1,0 +1,21 @@
+<gcard>
+	<!-- Phase 2 validation: 1 GeV e- through block s1 j1 centre, 5 events, integrated raw info (true info per hit) saved for solid_spacal.
+	     check_hitprocess.py checks edep, fiber position, channel and light factors per fiber against the raw bank.
+	     Run: EVIO_OPTS="-B=$PWD/solid_spacal_proto3 -R=solid_spacal" ./run.sh <this gcard> <run_id>; python3 check_hitprocess.py runs/<run_id> -->
+	<detector name="solid_spacal_proto3" factory="TEXT" variation="Original"/>
+
+	<option name="HIT_PROCESS_LIST" value="solid"/>
+	<option name="INTEGRATEDRAW" value="solid_spacal"/>
+	<option name="PHYSICS" value="FTFP_BERT+STD"/>
+	<option name="PRODUCTIONCUT" value="0.7"/>
+	<option name="HALL_MATERIAL" value="G4_AIR"/>
+	<option name="HALL_DIMENSIONS" value="5*m,5*m,5*m"/>
+
+	<option name="BEAM_P" value="e-, 1*GeV, 43.4114*deg, -1.4086*deg"/>
+	<option name="SPREAD_P" value="0*GeV, 0*deg, 0*deg"/>
+	<option name="BEAM_V" value="(0, 0, 0)cm"/>
+	<option name="SPREAD_V" value="(0.0, 0.0)cm"/>
+
+	<option name="N" value="5"/>
+	<option name="USE_GUI" value="0"/>
+</gcard>

@@ -1,0 +1,21 @@
+<gcard>
+	<!-- Phase 2 physics run: 8 GeV e- from the origin through the centre of tower block s1 j1 (direction from geo_check),
+	     solid_spacal hit process (Birks kB 0.07943 mm/MeV, 44 um core steps, sPHENIX light maps, 0-60 ns),
+	     Geant4-default 0.7 mm production cut. No vertex/momentum smearing.
+	     Run: ./run.sh <this gcard> <run_id> -RANDOM=<seed> -->
+	<detector name="solid_spacal_proto3" factory="TEXT" variation="Original"/>
+
+	<option name="HIT_PROCESS_LIST" value="solid"/>
+	<option name="PHYSICS" value="FTFP_BERT+STD"/>
+	<option name="PRODUCTIONCUT" value="0.7"/>
+	<option name="HALL_MATERIAL" value="G4_AIR"/>
+	<option name="HALL_DIMENSIONS" value="5*m,5*m,5*m"/>
+
+	<option name="BEAM_P" value="e-, 8*GeV, 43.4114*deg, -1.4086*deg"/>
+	<option name="SPREAD_P" value="0*GeV, 0*deg, 0*deg"/>
+	<option name="BEAM_V" value="(0, 0, 0)cm"/>
+	<option name="SPREAD_V" value="(0.0, 0.0)cm"/>
+
+	<option name="N" value="100"/>
+	<option name="USE_GUI" value="0"/>
+</gcard>

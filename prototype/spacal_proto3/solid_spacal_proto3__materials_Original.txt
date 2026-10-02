@@ -1,0 +1,2 @@
+   SL_spacal_W_Epoxy  |sPHENIX Spacal_W_Epoxy absorber, mass fractions  |     12.18  |         3  |                  G4_W 0.969 G4_C 0.029 G4_H 0.002  | none  | none  | none  | none  | none  | none  | none  |   -1  |   -1  |   -1  |   -1  |   -1  | none  |   -1  
+       SL_spacal_G10  |      sPHENIX G10, atom counts  |     1.700  |         4  |                                  Si 1 O 2 C 3 H 3  | none  | none  | none  | none  | none  | none  | none  |   -1  |   -1  |   -1  |   -1  |   -1  | none  |   -1  

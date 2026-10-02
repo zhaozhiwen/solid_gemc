@@ -1,0 +1,8 @@
+        solid_spacal  |              bankid  |                              solid_spacal bank ID  |  330   |                  Di  
+        solid_spacal  |               fiber  |fiber code 100000*(sector+1) + 10000*tower + sPHENIX fiber id  |    1   |                  Di  
+        solid_spacal  |                edep  |                 energy deposited in the core, MeV  |    2   |                  Dd  
+        solid_spacal  |               edepB  |   Birks-quenched edep (kB = spacal_birks_kB), MeV  |    3   |                  Dd  
+        solid_spacal  |               light  |edepB x fiber transmission x light-guide efficiency, MeV  |    4   |                  Dd  
+        solid_spacal  |                   t  |                            edep-weighted time, ns  |    5   |                  Dd  
+        solid_spacal  |                  id  |readout channel 10000 + 1000*sector + 100*tower + 10*subx + suby  |   98   |                  Di  
+        solid_spacal  |                hitn  |                                        hit number  |   99   |                  Di  
