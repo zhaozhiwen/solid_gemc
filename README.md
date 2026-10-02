@@ -10,6 +10,8 @@ It should be run with container from [solid_release](https://github.com/Jefferso
 
 Read [gemc simulation general note](https://solid.jlab.org/wiki/index.php/Gemc_simulation_general_note) and [solid software wiki](https://solid.jlab.org/wiki/index.php/Software)
 
+To run solid_gemc from plain-language requests with Claude Code or Codex CLI, use the [solid-gemc-claude](https://github.com/zhaozhiwen/solid_gemc_claude) skill.
+
 code structure
 --------
 
