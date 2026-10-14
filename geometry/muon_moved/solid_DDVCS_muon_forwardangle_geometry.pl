@@ -23,6 +23,17 @@ my $DetectorMother="root";
 #  photos at
 #  https://solid.jlab.org/files/cleo_manual/cleo_scan1.pdf
 #  https://solid.jlab.org/files/cleo_manual/cleo_scan2.pdf
+#
+# Arrangement (3 identical layers, all 13 pieces used), beam's-eye view of one layer:
+#  - side blocks _x1/_x2 at x=+-164.4cm: each is one 62" + one 37" piece side by side (99" x 210" x 14")
+#    the two sides leave a 31" (78.7cm) gap in the middle, inner edges at |x|=39.4cm
+#  - fillers _x3/_x4 at y=+-177.8cm: 31" x 70" x 14", fill the gap at top and bottom,
+#    flush with the outer edge of the side blocks (y from 88.9cm to 266.7cm)
+#  - the 6 fillers (2 per layer) come from cutting the 7th 62" piece into 2 (along width) x 3 (along length)
+#  - the opening around the beam is 31" x 70" (78.7cm x 177.8cm), its corner at r=97cm,
+#    inside the scint/virtual plane rmin=100cm, so r=100-285cm is fully covered by iron
+#  - side block half-width kept at 125cm (real 125.7cm) so its inner edge meets the filler edge
+#  see cleo_iron_layout.md in this dir for to-scale drawings
 
  my $color="00ffff";
  my $material="G4_Fe";
@@ -88,6 +99,7 @@ sub make_solid_DDVCS_muon_forwardangle_0
     print_det(\%configuration, \%detector);
 }
 
+# each layer: _x1/_x2 side blocks (62"+37" pair), _x3/_x4 fillers (31"x70" cut from spare 62" piece)
 sub make_solid_DDVCS_muon_forwardangle_1
 {
     my $z=570+50+18;    
@@ -95,7 +107,7 @@ sub make_solid_DDVCS_muon_forwardangle_1
     $detector{"name"}        = "$DetectorName\_11";
     $detector{"mother"}      = "$DetectorMother";
     $detector{"description"} = $detector{"name"};
-    $detector{"pos"}        = "160*cm 0*cm $z*cm";
+    $detector{"pos"}        = "164.4*cm 0*cm $z*cm";
     $detector{"rotation"}   = "0*deg 0*deg 0*deg";
     $detector{"color"}      = $color;
     $detector{"type"}       = "Box";
@@ -115,7 +127,7 @@ sub make_solid_DDVCS_muon_forwardangle_1
     $detector{"name"}        = "$DetectorName\_12";
     $detector{"mother"}      = "$DetectorMother";
     $detector{"description"} = $detector{"name"};
-    $detector{"pos"}        = "-160*cm 0*cm $z*cm";
+    $detector{"pos"}        = "-164.4*cm 0*cm $z*cm";
     $detector{"rotation"}   = "0*deg 0*deg 0*deg";
     $detector{"color"}      = $color;
     $detector{"type"}       = "Box";
@@ -130,7 +142,49 @@ sub make_solid_DDVCS_muon_forwardangle_1
     $detector{"sensitivity"} = "no";
     $detector{"hit_type"}    = "no";
     $detector{"identifiers"} = "no";
-    print_det(\%configuration, \%detector);      
+    print_det(\%configuration, \%detector);
+
+    $detector{"name"}        = "$DetectorName\_13";
+    $detector{"mother"}      = "$DetectorMother";
+    $detector{"description"} = $detector{"name"};
+    $detector{"pos"}        = "0*cm 177.8*cm $z*cm";
+    $detector{"rotation"}   = "0*deg 0*deg 0*deg";
+    $detector{"color"}      = $color;
+    $detector{"type"}       = "Box";
+#     $detector{"dimensions"}  = "62*cm 133*cm 18*cm";
+    $detector{"dimensions"}  = "39.4*cm 88.9*cm 18*cm";
+    $detector{"material"}   = "$material";
+    $detector{"mfield"}     = "no";
+    $detector{"ncopy"}      = 1;
+    $detector{"pMany"}       = 1;
+    $detector{"exist"}       = 1;
+    $detector{"visible"}     = 1;
+    $detector{"style"}       = 1;
+    $detector{"sensitivity"} = "no";
+    $detector{"hit_type"}    = "no";
+    $detector{"identifiers"} = "no";
+    print_det(\%configuration, \%detector);
+
+    $detector{"name"}        = "$DetectorName\_14";
+    $detector{"mother"}      = "$DetectorMother";
+    $detector{"description"} = $detector{"name"};
+    $detector{"pos"}        = "0*cm -177.8*cm $z*cm";
+    $detector{"rotation"}   = "0*deg 0*deg 0*deg";
+    $detector{"color"}      = $color;
+    $detector{"type"}       = "Box";
+#     $detector{"dimensions"}  = "62*cm 133*cm 18*cm";
+    $detector{"dimensions"}  = "39.4*cm 88.9*cm 18*cm";
+    $detector{"material"}   = "$material";
+    $detector{"mfield"}     = "no";
+    $detector{"ncopy"}      = 1;
+    $detector{"pMany"}       = 1;
+    $detector{"exist"}       = 1;
+    $detector{"visible"}     = 1;
+    $detector{"style"}       = 1;
+    $detector{"sensitivity"} = "no";
+    $detector{"hit_type"}    = "no";
+    $detector{"identifiers"} = "no";
+    print_det(\%configuration, \%detector);
 
     my $z_virt_0=$z-18-1;    
     $detector{"name"}        = "$DetectorName\_0_virt";
@@ -204,11 +258,11 @@ sub make_solid_DDVCS_muon_forwardangle_2
     $detector{"name"}        = "$DetectorName\_21";
     $detector{"mother"}      = "$DetectorMother";
     $detector{"description"} = $detector{"name"};
-    $detector{"pos"}        = "0*cm 160*cm $z*cm";
+    $detector{"pos"}        = "164.4*cm 0*cm $z*cm";
     $detector{"rotation"}   = "0*deg 0*deg 0*deg";
     $detector{"color"}      = $color;
     $detector{"type"}       = "Box";
-    $detector{"dimensions"}  = "267*cm 125*cm 18*cm";
+    $detector{"dimensions"}  = "125*cm 267*cm 18*cm";
     $detector{"material"}   = "$material";
     $detector{"mfield"}     = "no";
     $detector{"ncopy"}      = 1;
@@ -220,15 +274,15 @@ sub make_solid_DDVCS_muon_forwardangle_2
     $detector{"hit_type"}    = "no";
     $detector{"identifiers"} = "no";
     print_det(\%configuration, \%detector);
-    
+
     $detector{"name"}        = "$DetectorName\_22";
     $detector{"mother"}      = "$DetectorMother";
     $detector{"description"} = $detector{"name"};
-    $detector{"pos"}        = "0*cm -160*cm $z*cm";
+    $detector{"pos"}        = "-164.4*cm 0*cm $z*cm";
     $detector{"rotation"}   = "0*deg 0*deg 0*deg";
     $detector{"color"}      = $color;
     $detector{"type"}       = "Box";
-    $detector{"dimensions"}  = "267*cm 125*cm 18*cm";
+    $detector{"dimensions"}  = "125*cm 267*cm 18*cm";
     $detector{"material"}   = "$material";
     $detector{"mfield"}     = "no";
     $detector{"ncopy"}      = 1;
@@ -239,7 +293,49 @@ sub make_solid_DDVCS_muon_forwardangle_2
     $detector{"sensitivity"} = "no";
     $detector{"hit_type"}    = "no";
     $detector{"identifiers"} = "no";
-    print_det(\%configuration, \%detector);  
+    print_det(\%configuration, \%detector);
+
+    $detector{"name"}        = "$DetectorName\_23";
+    $detector{"mother"}      = "$DetectorMother";
+    $detector{"description"} = $detector{"name"};
+    $detector{"pos"}        = "0*cm 177.8*cm $z*cm";
+    $detector{"rotation"}   = "0*deg 0*deg 0*deg";
+    $detector{"color"}      = $color;
+    $detector{"type"}       = "Box";
+#     $detector{"dimensions"}  = "62*cm 133*cm 18*cm";
+    $detector{"dimensions"}  = "39.4*cm 88.9*cm 18*cm";
+    $detector{"material"}   = "$material";
+    $detector{"mfield"}     = "no";
+    $detector{"ncopy"}      = 1;
+    $detector{"pMany"}       = 1;
+    $detector{"exist"}       = 1;
+    $detector{"visible"}     = 1;
+    $detector{"style"}       = 1;
+    $detector{"sensitivity"} = "no";
+    $detector{"hit_type"}    = "no";
+    $detector{"identifiers"} = "no";
+    print_det(\%configuration, \%detector);
+
+    $detector{"name"}        = "$DetectorName\_24";
+    $detector{"mother"}      = "$DetectorMother";
+    $detector{"description"} = $detector{"name"};
+    $detector{"pos"}        = "0*cm -177.8*cm $z*cm";
+    $detector{"rotation"}   = "0*deg 0*deg 0*deg";
+    $detector{"color"}      = $color;
+    $detector{"type"}       = "Box";
+#     $detector{"dimensions"}  = "62*cm 133*cm 18*cm";
+    $detector{"dimensions"}  = "39.4*cm 88.9*cm 18*cm";
+    $detector{"material"}   = "$material";
+    $detector{"mfield"}     = "no";
+    $detector{"ncopy"}      = 1;
+    $detector{"pMany"}       = 1;
+    $detector{"exist"}       = 1;
+    $detector{"visible"}     = 1;
+    $detector{"style"}       = 1;
+    $detector{"sensitivity"} = "no";
+    $detector{"hit_type"}    = "no";
+    $detector{"identifiers"} = "no";
+    print_det(\%configuration, \%detector);
     
     my $z_virt=$z+18+1;    
     $detector{"name"}        = "$DetectorName\_2_virt";
@@ -281,7 +377,7 @@ sub make_solid_DDVCS_muon_forwardangle_2
     $detector{"sensitivity"} = "flux";
     $detector{"hit_type"}    = "flux";
     $detector{"identifiers"} = "id manual 6102000";
-    print_det(\%configuration, \%detector);      
+    print_det(\%configuration, \%detector);
 }
 
 
@@ -292,7 +388,7 @@ sub make_solid_DDVCS_muon_forwardangle_3
     $detector{"name"}        = "$DetectorName\_31";
     $detector{"mother"}      = "$DetectorMother";
     $detector{"description"} = $detector{"name"};
-    $detector{"pos"}        = "160*cm 0*cm $z*cm";
+    $detector{"pos"}        = "164.4*cm 0*cm $z*cm";
     $detector{"rotation"}   = "0*deg 0*deg 0*deg";
     $detector{"color"}      = $color;
     $detector{"type"}       = "Box";
@@ -312,7 +408,7 @@ sub make_solid_DDVCS_muon_forwardangle_3
     $detector{"name"}        = "$DetectorName\_32";
     $detector{"mother"}      = "$DetectorMother";
     $detector{"description"} = $detector{"name"};
-    $detector{"pos"}        = "-160*cm 0*cm $z*cm";
+    $detector{"pos"}        = "-164.4*cm 0*cm $z*cm";
     $detector{"rotation"}   = "0*deg 0*deg 0*deg";
     $detector{"color"}      = $color;
     $detector{"type"}       = "Box";
@@ -329,6 +425,48 @@ sub make_solid_DDVCS_muon_forwardangle_3
     $detector{"identifiers"} = "no";
     print_det(\%configuration, \%detector); 
     
+    $detector{"name"}        = "$DetectorName\_33";
+    $detector{"mother"}      = "$DetectorMother";
+    $detector{"description"} = $detector{"name"};
+    $detector{"pos"}        = "0*cm 177.8*cm $z*cm";
+    $detector{"rotation"}   = "0*deg 0*deg 0*deg";
+    $detector{"color"}      = $color;
+    $detector{"type"}       = "Box";
+#     $detector{"dimensions"}  = "62*cm 133*cm 18*cm";
+    $detector{"dimensions"}  = "39.4*cm 88.9*cm 18*cm";
+    $detector{"material"}   = "$material";
+    $detector{"mfield"}     = "no";
+    $detector{"ncopy"}      = 1;
+    $detector{"pMany"}       = 1;
+    $detector{"exist"}       = 1;
+    $detector{"visible"}     = 1;
+    $detector{"style"}       = 1;
+    $detector{"sensitivity"} = "no";
+    $detector{"hit_type"}    = "no";
+    $detector{"identifiers"} = "no";
+    print_det(\%configuration, \%detector);
+
+    $detector{"name"}        = "$DetectorName\_34";
+    $detector{"mother"}      = "$DetectorMother";
+    $detector{"description"} = $detector{"name"};
+    $detector{"pos"}        = "0*cm -177.8*cm $z*cm";
+    $detector{"rotation"}   = "0*deg 0*deg 0*deg";
+    $detector{"color"}      = $color;
+    $detector{"type"}       = "Box";
+#     $detector{"dimensions"}  = "62*cm 133*cm 18*cm";
+    $detector{"dimensions"}  = "39.4*cm 88.9*cm 18*cm";
+    $detector{"material"}   = "$material";
+    $detector{"mfield"}     = "no";
+    $detector{"ncopy"}      = 1;
+    $detector{"pMany"}       = 1;
+    $detector{"exist"}       = 1;
+    $detector{"visible"}     = 1;
+    $detector{"style"}       = 1;
+    $detector{"sensitivity"} = "no";
+    $detector{"hit_type"}    = "no";
+    $detector{"identifiers"} = "no";
+    print_det(\%configuration, \%detector);
+
     my $z_virt=$z+18+1;    
     $detector{"name"}        = "$DetectorName\_3_virt";
     $detector{"mother"}      = "$DetectorMother";
@@ -369,7 +507,7 @@ sub make_solid_DDVCS_muon_forwardangle_3
     $detector{"sensitivity"} = "flux";
     $detector{"hit_type"}    = "flux";
     $detector{"identifiers"} = "id manual 6103000";
-    print_det(\%configuration, \%detector);     
+    print_det(\%configuration, \%detector);
     
     my $z_virt_4=$z+18+10;    
     $detector{"name"}        = "$DetectorName\_4_virt";
@@ -390,5 +528,5 @@ sub make_solid_DDVCS_muon_forwardangle_3
     $detector{"sensitivity"} = "flux";
     $detector{"hit_type"}    = "flux";
     $detector{"identifiers"} = "id manual 6140000";
-    print_det(\%configuration, \%detector);    
+    print_det(\%configuration, \%detector);
 }

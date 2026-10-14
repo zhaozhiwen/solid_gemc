@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-20 -24 250 104" width="1000" height="416">
+  <title>Cutting plan: spare 62 x 210 inch CLEO piece into six 31 x 70 inch fillers</title>
+  <style>
+    text{font-family:"DejaVu Sans Mono",Menlo,Consolas,monospace;fill:#1c252d}
+    .lbl{font-family:"Arial Narrow","Helvetica Neue",Arial,sans-serif;font-weight:700}
+  </style>
+  <defs>
+    <marker id="b" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#1c252d"/></marker>
+  </defs>
+  <rect x="-20" y="-24" width="250" height="104" fill="#ffffff"/>
+  <rect x="0" y="0" width="210" height="62" fill="#f2c79d" stroke="#1c252d" stroke-width=".8"/>
+  <line x1="70" y1="-3" x2="70" y2="65" stroke="#d27a2c" stroke-width="1.1" stroke-dasharray="4 2"/>
+  <line x1="140" y1="-3" x2="140" y2="65" stroke="#d27a2c" stroke-width="1.1" stroke-dasharray="4 2"/>
+  <line x1="-3" y1="31" x2="213" y2="31" stroke="#d27a2c" stroke-width="1.1" stroke-dasharray="4 2"/>
+  <g font-size="7" text-anchor="middle">
+    <text class="lbl" x="35" y="18">L1 top</text><text class="lbl" x="35" y="49">L1 bottom</text>
+    <text class="lbl" x="105" y="18">L2 top</text><text class="lbl" x="105" y="49">L2 bottom</text>
+    <text class="lbl" x="175" y="18">L3 top</text><text class="lbl" x="175" y="49">L3 bottom</text>
+  </g>
+  <line x1="0" y1="-12" x2="210" y2="-12" stroke="#1c252d" stroke-width=".5" marker-start="url(#b)" marker-end="url(#b)"/>
+  <text x="105" y="-15" font-size="5.5" text-anchor="middle">210″ (vertical in the layer)</text>
+  <line x1="0" y1="72" x2="70" y2="72" stroke="#1c252d" stroke-width=".5" marker-start="url(#b)" marker-end="url(#b)"/>
+  <text x="35" y="79" font-size="5" text-anchor="middle">70″</text>
+  <line x1="-8" y1="0" x2="-8" y2="31" stroke="#1c252d" stroke-width=".5" marker-start="url(#b)" marker-end="url(#b)"/>
+  <text x="-11" y="15.5" font-size="5" text-anchor="middle" transform="rotate(-90 -11 15.5)">31″</text>
+  <line x1="218" y1="0" x2="218" y2="62" stroke="#1c252d" stroke-width=".5" marker-start="url(#b)" marker-end="url(#b)"/>
+  <text x="224" y="31" font-size="5" text-anchor="middle" transform="rotate(90 224 31)">62″</text>
+</svg>
