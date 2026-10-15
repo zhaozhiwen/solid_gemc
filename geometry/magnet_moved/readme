@@ -15,6 +15,9 @@ solid_solenoid_v2_geometry.pl
 solid_solenoid_v3_geometry.pl 
 solid_solenoid_v4_geometry.pl 
 
+solid_solenoid_nomod_geometry.pl
+CLEO-II yoke without modification (octagons to +-266.7cm, no endcap), coil collars with round bore at r=144cm
+
 longer endcap cad model,refer to https://solid.jlab.org/wiki/index.php/Engineering_Integration_and_CAD#magnet
 cad model "v1_cad/SoLID_CLEO_MAR_18_v1.0.stl" 
 cad model "v2_cad/SoLID_Iron_Oct20_Update_v2.0_vc.stl"
