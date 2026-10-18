@@ -21,3 +21,15 @@ root -l -b -q  'analysis_SIDIS.C+("/cache/halla/solid/sim/solid_gemc/SIDIS_He3_J
 # root -l -b -q 'analysis_SIDIS.C+("/cache/halla/solid/sim/solid_gemc/SIDIS_He3_JLAB_VERSION_1.3/pass7/background_solid_SIDIS_He3_dirty_weighted_SIDISDuke_epip_filenum75_0.375e6.root","trigger",false,"sidis")'
 
 # root -l -b -q 'analysis_SIDIS.C+("/cache/halla/solid/sim/solid_gemc/SIDIS_He3_JLAB_VERSION_1.3/pass7/background_solid_SIDIS_He3_dirty_normalized_SIDISDuke_epip_filenum75_0.375e6.root","trigger",false,"sidis")'
+
+root -l -b -q  'analysis_SIDIS.C+("/cache/halla/solid/sim/solid_gemc/SIDIS_He3_JLAB_VERSION_1.3/pass7/background_solid_SIDIS_He3_dirty_weighted_eDIS_winup_filenum50_0.5e6.root","trigger",false,"single")'
+root -l -b -q  'analysis_SIDIS.C+("/cache/halla/solid/sim/solid_gemc/SIDIS_He3_JLAB_VERSION_1.3/pass7/background_solid_SIDIS_He3_dirty_normalized_winup_pipWiser_filenum100_1e6.root","trigger",false,"single")'
+root -l -b -q  'analysis_SIDIS.C+("/cache/halla/solid/sim/solid_gemc/SIDIS_He3_JLAB_VERSION_1.3/pass7/background_solid_SIDIS_He3_dirty_normalized_winup_pimWiser_filenum100_1e6.root","trigger",false,"single")'
+root -l -b -q  'analysis_SIDIS.C+("/cache/halla/solid/sim/solid_gemc/SIDIS_He3_JLAB_VERSION_1.3/pass7/background_solid_SIDIS_He3_dirty_normalized_winup_pi0Wiser_filenum100_1e6.root","trigger",false,"single")'
+root -l -b -q  'analysis_SIDIS.C+("/cache/halla/solid/sim/solid_gemc/SIDIS_He3_JLAB_VERSION_1.3/pass7/background_solid_SIDIS_He3_dirty_normalized_winup_pWiser_filenum100_1e6.root","trigger",false,"single")'
+
+root -l -b -q  'analysis_SIDIS.C+("/cache/halla/solid/sim/solid_gemc/SIDIS_He3_JLAB_VERSION_1.3/pass7/background_solid_SIDIS_He3_dirty_weighted_eDIS_windown_filenum50_0.5e6.root","trigger",false,"single")'
+root -l -b -q  'analysis_SIDIS.C+("/cache/halla/solid/sim/solid_gemc/SIDIS_He3_JLAB_VERSION_1.3/pass7/background_solid_SIDIS_He3_dirty_normalized_windown_pipWiser_filenum100_1e6.root","trigger",false,"single")'
+root -l -b -q  'analysis_SIDIS.C+("/cache/halla/solid/sim/solid_gemc/SIDIS_He3_JLAB_VERSION_1.3/pass7/background_solid_SIDIS_He3_dirty_normalized_windown_pimWiser_filenum100_1e6.root","trigger",false,"single")'
+root -l -b -q  'analysis_SIDIS.C+("/cache/halla/solid/sim/solid_gemc/SIDIS_He3_JLAB_VERSION_1.3/pass7/background_solid_SIDIS_He3_dirty_normalized_windown_pi0Wiser_filenum100_1e6.root","trigger",false,"single")'
+root -l -b -q  'analysis_SIDIS.C+("/cache/halla/solid/sim/solid_gemc/SIDIS_He3_JLAB_VERSION_1.3/pass7/background_solid_SIDIS_He3_dirty_normalized_windown_pWiser_filenum100_1e6.root","trigger",false,"single")'

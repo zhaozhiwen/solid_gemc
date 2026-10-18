@@ -244,7 +244,7 @@ Bool_t process_tree_solid_hgc(TTree *tree_solid_hgc,bool Is_simsafe,double *hit_
 	  double E_photon=solid_hgc_trackE->at(j)*1e6; //in eV
 	  
 	  //simulation shouldn't produce any photon beyond the range
-	  if (E_photon<PhotonEnergy[0] || PhotonEnergy[n]<E_photon) cout << "E_photon " << E_photon << endl;
+	  // if (E_photon<PhotonEnergy[0] || PhotonEnergy[n]<E_photon) cout << "E_photon " << E_photon << endl;
 // 	  cout << "E_photon " << E_photon << endl;
 	  double weight=0;
 	  bool Is_pass=false;

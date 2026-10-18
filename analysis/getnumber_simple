@@ -1,0 +1,14 @@
+#!/bin/tcsh -f
+
+root 'analysis_simple.C+("/cache/halla/solid/sim/solid_gemc/SIDIS_He3_JLAB_VERSION_2.5/pass3/solid_SIDIS_He3_moved_full_ele_even_NOcoll_1e6.root","trigger",false,"single")'
+root 'analysis_simple.C+("/cache/halla/solid/sim/solid_gemc/SIDIS_He3_JLAB_VERSION_2.5/pass3/solid_SIDIS_He3_moved_full_ele_even_1e6.root","trigger",false,"single")'
+root 'analysis_simple.C+("/cache/halla/solid/sim/solid_gemc/JPsi_JLAB_VERSION_2.5/pass3/solid_JPsi_LH2_moved_full_ele_even_1e6.root","trigger",false,"single")'
+root 'analysis_simple.C+("/cache/halla/solid/sim/solid_gemc/PVDIS_JLAB_VERSION_2.5/pass3/solid_PVDIS_LH2_moved_full_ele_even_1e6.root","trigger",false,"single")'
+
+root -b -q -l 'analysis_simple.C+("/cache/halla/solid/sim/solid_gemc/SIDIS_He3_JLAB_VERSION_2.5/pass3/solid_SIDIS_He3_moved_full_BeamOnTarget_5e10_filter.root","trigger",false,"single")'
+root -b -q -l 'analysis_simple.C+("/cache/halla/solid/sim/solid_gemc/JPsi_JLAB_VERSION_2.5/pass3/solid_JPsi_LH2_moved_full_BeamOnTarget_5e9_filter.root","trigger",false,"single")'
+root -b -q -l 'analysis_simple.C+("/cache/halla/solid/sim/solid_gemc/PVDIS_JLAB_VERSION_2.5/pass3/solid_PVDIS_LD2_moved_full_BeamOnTarget_1e10_filter.root","trigger",false,"single")'
+
+root -b -q -l 'analysis_simple.C+("/volatile/halla/solid/sim/solid_gemc/SIDIS_He3_JLAB_VERSION_2.5/test/solid_SIDIS_He3_moved_full_ele_even_HGCCO2_1e6.root","trigger",false,"single")'
+root -b -q -l 'analysis_simple.C+("/volatile/halla/solid/sim/solid_gemc/SIDIS_He3_JLAB_VERSION_2.5/test/solid_SIDIS_He3_moved_full_ele_even_HGCCO2ext_1e6.root","trigger",false,"single")'
+root -b -q -l 'analysis_simple.C+("/volatile/halla/solid/sim/solid_gemc/SIDIS_He3_JLAB_VERSION_2.5/test/solid_SIDIS_He3_moved_full_ele_even_HGCCO2extshift_1e6.root","trigger",false,"single")'
