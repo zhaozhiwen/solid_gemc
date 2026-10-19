@@ -8,9 +8,9 @@ It includes all codes of defining and running simulation, digitizing and analyzi
 
 It should be run with container from [solid_release](https://github.com/JeffersonLab/solid_release) which has prerequisites included. 
 
-Read [gemc simulation general note](https://solid.jlab.org/wiki/index.php/Gemc_simulation_general_note) and [solid software wiki](https://solid.jlab.org/wiki/index.php/Software)
+And to run it with the container from plain-language requests with Claude Code or Codex CLI, use the [solid-gemc-claude](https://github.com/zhaozhiwen/solid_gemc_claude) plugin.
 
-To run solid_gemc from plain-language requests with Claude Code or Codex CLI, use the [solid-gemc-claude](https://github.com/zhaozhiwen/solid_gemc_claude) plugin.
+Read [gemc simulation general note](https://solid.jlab.org/wiki/index.php/Gemc_simulation_general_note) and [solid software wiki](https://solid.jlab.org/wiki/index.php/Software)
 
 code structure
 --------
@@ -39,4 +39,4 @@ To keep your fork in sync, do it simply on github. the alternative is do it on y
 * git fetch upstream
 * git checkout master
 * git merge upstream/master
-* git push origin masters
+* git push origin master
