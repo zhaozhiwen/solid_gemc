@@ -2,6 +2,7 @@
 
 use strict;
 use lib ("$ENV{GEMC}/io");
+use lib ("$ENV{GEMC}/api/perl");
 use parameters;
 use utils;
 
@@ -50,7 +51,7 @@ $configuration{"variation"} = "Original";
 our %parameters    = get_parameters(%configuration);
 
 #Geometry definition
-require "solid_JPsi_beamline_geometry.pl";
+require "./solid_JPsi_beamline_geometry.pl";
 solid_JPsi_beamline();
 
 #materials definition 

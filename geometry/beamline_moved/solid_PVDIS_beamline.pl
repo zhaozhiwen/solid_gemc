@@ -2,6 +2,7 @@
 
 use strict;
 use lib ("$ENV{GEMC}/io");
+use lib ("$ENV{GEMC}/api/perl");
 use parameters;
 use utils;
 
@@ -50,11 +51,11 @@ $configuration{"variation"} = "Original";
 our %parameters    = get_parameters(%configuration);
 
 #Geometry definition
-require "solid_PVDIS_beamline_geometry.pl";
+require "./solid_PVDIS_beamline_geometry.pl";
 solid_PVDIS_beamline();
 
 #materials definition 
-require "./solid_beamline_materials.pl";
+# require "./solid_beamline_materials.pl";
 
 #hit definition 
 

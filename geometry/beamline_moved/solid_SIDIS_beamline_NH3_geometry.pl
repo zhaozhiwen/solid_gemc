@@ -85,7 +85,7 @@ sub make_beam_exit
 #  my @Dz   = (412.5,412.5,0.1,0.0125);
  my @name = ("B3PP","B3PV","B3DM","B3W1"); 
  my @mother=("$DetectorMother","$DetectorName\_B3PP","$DetectorName\_B3PV","$DetectorName\_B3PV");
- my @mat  = ("G4_Al","G4_Galactic","G4_Galactic","G4_Be");
+ my @mat  = ("G4_Al","G4_Galactic","Kryptonite","G4_Be");
  my @color = ("0000ff","808080","808080","00FFFF");
 
  for(my $n=1; $n<=$NUM; $n++)

@@ -82,15 +82,15 @@ sub make_beam_entrance
 
 sub make_beam_exit
 {
- my $NUM  = 2;
- my @name = ("B3PP","B3PV"); 
- my @mother=("$DetectorMother","$DetectorName\_B3PP");
- my @mat  = ("G4_Al","G4_Galactic");
- my @color = ("0000ff","808080");
+# front window should connect to scattering chamber
+ my $NUM  = 3;
+ my @name = ("B3PP","B3PV","B3DM");
+ my @mother=("$DetectorMother","$DetectorName\_B3PP","$DetectorName\_B3PV");
+ my @mat  = ("G4_Al","G4_Galactic","Kryptonite");
+ my @color = ("0000ff","808080","808080");
 
  for(my $n=1; $n<=$NUM; $n++)
  {
-#     my $pnumber     = cnumber($n-1, 10);
     my %detector=init_det();
     $detector{"name"}        = "$DetectorName\_$name[$n-1]";
     $detector{"mother"}      = "$mother[$n-1]" ;
@@ -101,9 +101,10 @@ sub make_beam_exit
     $detector{"type"}       = "Polycone";
     if ($n==1) {$detector{"dimensions"} = "0*deg 360*deg 3*counts 0*cm 0*cm 0*cm 5*cm 19*cm 19*cm 47*cm 110*cm 550*cm";}
     if ($n==2) {$detector{"dimensions"} = "0*deg 360*deg 3*counts 0*cm 0*cm 0*cm 4.95*cm 18.95*cm 18.95*cm 47*cm 110*cm 550*cm";}
+    if ($n==3) {$detector{"dimensions"} = "0*deg 360*deg 2*counts 0*cm 0*cm 18.95*cm 18.95*cm 549.9*cm 550*cm";}
     $detector{"material"}   = $mat[$n-1];
     $detector{"mfield"}     = "no";
-    $detector{"ncopy"}      = 1;
+    $detector{"ncopy"}      = $n;
     $detector{"pMany"}       = 1;
     $detector{"exist"}       = 1;
     $detector{"visible"}     = 1;
@@ -111,6 +112,7 @@ sub make_beam_exit
     $detector{"sensitivity"} = "no";
     $detector{"hit_type"}    = "no";
     $detector{"identifiers"} = "no";
+
     print_det(\%configuration, \%detector);
  }
 }

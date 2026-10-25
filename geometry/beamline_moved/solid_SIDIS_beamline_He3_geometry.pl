@@ -95,13 +95,13 @@ sub make_beam_exit
 #  my $pos_end_Be = $pos_end_Al + $thk_Be; 
 
 # Al created white powders on target cell we won't use them in future
- my $NUM  = 3;
- my @name = ("B3PP","B3PV","B3W1"); 
- my @mother=("$DetectorMother","$DetectorName\_B3PP","$DetectorName\_B3PV");
- my @mat  = ("G4_Al","G4_Galactic","G4_Be");
- my @color = ("0000ff","808080","00FFFF");
+ my $NUM  = 4;
+ my @name = ("B3PP","B3PV","B3W1","B3W2");
+ my @mother=("$DetectorMother","$DetectorName\_B3PP","$DetectorName\_B3PV","$DetectorName\_B3PV");
+ my @mat  = ("G4_Al","G4_Galactic","G4_Be","Kryptonite");
+ my @color = ("0000ff","808080","00FFFF","00FFFF");
  my $thk_Be = 0.02*2.54;
- my $pos_end_Be = $z_win_downstream + $thk_Be; 
+ my $pos_end_Be = $z_win_downstream + $thk_Be;
 
  for(my $n=1; $n<=$NUM; $n++)
  {
@@ -128,6 +128,7 @@ sub make_beam_exit
     if ($n==1) {$detector{"dimensions"} = "0*deg 360*deg 3*counts 0*cm 0*cm 0*cm 1.05*cm 19*cm 19*cm -325*cm 190*cm 550*cm";}
     if ($n==2) {$detector{"dimensions"} = "0*deg 360*deg 3*counts 0*cm 0*cm 0*cm 1.*cm 18.95*cm 18.95*cm -325*cm 190*cm 550*cm";}
     if ($n==3) {$detector{"dimensions"} = "0*deg 360*deg 2*counts 0*cm 0*cm 1.*cm 1.*cm $z_win_downstream*cm $pos_end_Be*cm";}
+    if ($n==4) {$detector{"dimensions"} = "0*deg 360*deg 2*counts 0*cm 0*cm 18.95*cm 18.95*cm 549.9*cm 550*cm";}
     $detector{"material"}   = $mat[$n-1];
     $detector{"mfield"}     = "no";
     $detector{"ncopy"}      = $n;
