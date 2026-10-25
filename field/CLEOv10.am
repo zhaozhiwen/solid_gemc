@@ -1,0 +1,136 @@
+SoLID CLEO-II version 10
+;Coil turns: 1282 total, 3 pieces: 2*166-left 2*309-center, 2*166 right
+;Coil Current   3266
+;
+&reg kprob=	0	,           	; Declares a POISSON problem
+
+icylin=1,               ; Cylindrical symmetry
+ienergy=1,              ; Calculate the full energy
+xjfact= 1.0             ; The current multiplicative factor
+dx=1.0,                 ; Mesh interval 0.3 originally
+rhogam=0.08,            ; relaxation parameter, POISSON default. Was 1e-6 (from CLEO_E_03): left saturated steel unconverged
+;mode=-1                ; Use fixed gamma for material 2
+mode=0                  ; Use variable gamma for material 2
+
+xreg1=  80.,  kreg1=  41,
+xreg2= 120.,  kreg2=  81,
+xreg3= 150.,  kreg3= 141,
+xreg4= 156.,  kreg4= 201,
+xreg5= 190.,  kreg5= 269,
+xreg6= 320.,  kreg6= 399,
+xreg7= 400.,  kreg7= 439,
+              kmax = 464,
+
+
+nbsup=0,                ; Dirichlet boundary condition on upper edge
+nbslf=0,                ; Dirichlet boundary condition on left edge
+nbsrt=0,                ; Dirichlet boundary condition on right edge
+nbslo=0,                ; Dirichlet boundary condition on bottom
+ibound=0 &
+
+;Hall      Region  1
+&po y= -500. ,x=  0.  &
+&po y=  700. ,x=  0.  &
+&po y=  700. ,x=500.  &
+&po y= -500. ,x=500.  &
+&po y= -500. ,x=  0.  &
+
+; Upstream coil Inner Region 2
+&reg    mat=1,   cur=542156.0 &
+&po y=-173.80,  x=152.30  &
+&po y= -85.50,  x=152.30  &
+&po y= -85.50,  x=152.70  &
+&po y=-173.80,  x=152.70  &
+&po y=-173.80,  x=152.30  &
+
+; Central coil Inner Region 3
+&reg    mat=1,   cur=1009194.0 &
+&po y= -85.50,  x=152.30  &
+&po y=  85.50,  x=152.30  &
+&po y=  85.50,  x=152.70  &
+&po y= -85.50,  x=152.70  &
+&po y= -85.50,  x=152.30  &
+
+; Downstream coil Inner Region 4
+&reg    mat=1,   cur=542156.0 &
+&po y= 173.80,  x=152.30  &
+&po y=  85.50,  x=152.30  &
+&po y=  85.50,  x=152.70  &
+&po y= 173.80,  x=152.70  &
+&po y= 173.80,  x=152.30  &
+
+; Upstream coil Outer Region 5
+&reg    mat=1,   cur=542156.0 &
+&po y=-173.80,  x=153.90  &
+&po y= -85.50,  x=153.90  &
+&po y= -85.50,  x=154.30  &
+&po y=-173.80,  x=154.30  &
+&po y=-173.80,  x=153.90  &
+
+; Central coil Outer Region 6
+&reg    mat=1,   cur=1009194.0 &
+&po y= -85.50,  x=153.90  &
+&po y=  85.50,  x=153.90  &
+&po y=  85.50,  x=154.30  &
+&po y= -85.50,  x=154.30  &
+&po y= -85.50,  x=153.90  &
+
+; Downstream coil Outer Region 7
+&reg    mat=1,   cur=542156.0 &
+&po y= 173.80,  x=153.90  &
+&po y=  85.50,  x=153.90  &
+&po y=  85.50,  x=154.30  &
+&po y= 173.80,  x=154.30  &
+&po y= 173.80,  x=153.90  &
+
+; Barrel yoke Inner Region 8
+&reg    mat=2  &
+&po y=-266.50,  x=212.60  &
+&po y=-266.50,  x=177.90  &
+&po y=-189.00,  x=177.90  &
+&po y=-189.00,  x=176.60  &
+&po y= 189.00,  x=176.60  &
+&po y= 189.00,  x=177.90  &
+&po y= 266.50,  x=177.90  &
+&po y= 266.50,  x=212.60  &
+&po y=-266.50,  x=212.60  &
+
+; Barrel yoke Outer Region 9
+&reg    mat=2  &
+&po y=-266.50,  x=221.50  &
+&po y= 266.50,  x=221.50  &
+&po y= 266.50,  x=257.50  &
+&po y=-266.50,  x=257.50  &
+&po y=-266.50,  x=221.50  &
+
+; Slab spacer Upstream Region 10 - they cover about 90% of the circumference, compensated here by the width 34cm->30.6cm
+&reg    mat=2  &
+&po y=-266.50,  x=212.60  &
+&po y=-266.50,  x=221.50  &
+&po y=-235.90,  x=221.50  &
+&po y=-235.90,  x=212.60  &
+&po y=-266.50,  x=212.60  &
+
+; Slab spacer Downstream Region 11 - they cover about 90% of the circumference, compensated here by the width 34cm->30.6cm
+&reg    mat=2  &
+&po y= 235.90,  x=212.60  &
+&po y= 235.90,  x=221.50  &
+&po y= 266.50,  x=221.50  &
+&po y= 266.50,  x=212.60  &
+&po y= 235.90,  x=212.60  &
+
+; Coil collar Upstream Region 12
+&reg    mat=2  &
+&po y=-266.50,  x=144.00  &
+&po y=-189.00,  x=144.00  &
+&po y=-189.00,  x=177.90  &
+&po y=-266.50,  x=177.90  &
+&po y=-266.50,  x=144.00  &
+
+; Coil collar Downstream Region 13
+&reg    mat=2  &
+&po y=189.00,  x=144.00  &
+&po y=266.50,  x=144.00  &
+&po y=266.50,  x=177.90  &
+&po y=189.00,  x=177.90  &
+&po y=189.00,  x=144.00  &

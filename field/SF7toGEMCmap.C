@@ -1,5 +1,6 @@
 #include <iomanip>
 #include <iostream>
+#include <vector>
 using namespace std;
 
 void SF7toGEMCmap(string input_filename,int opt=0,double x1=0,double y1=0,double x2=0,double y2=0)
@@ -14,8 +15,9 @@ int Num_R,Num_Z;
 char textline[200];
 string pl;
 
-  // reads and discard the first 27 lines of text
-for (int k = 0; k<27; k++) input.getline(textline,200);
+  // reads and discard the header text up to and including "Magnetic fields for a rectangular area with corners at:"
+  // (its line count depends on how SF7 was run, 27 lines from the pop-up menu, 28 from an .IN7 file)
+while (input.getline(textline,200) && string(textline).find("Magnetic fields for a rectangular area")==string::npos) {}
 
 //================================== 
 //(Rmin,Zmin) = (0.0,-300)
@@ -27,7 +29,7 @@ for (int k = 0; k<27; k++) input.getline(textline,200);
 // input.getline(textline,200);
 input >> textline >> textline >> textline;
 pl=textline;
-int pl_first= pl.find(",");pl_last= pl.rfind(",");pl_init=1;pl_end=pl.size()-1;
+int pl_first= pl.find(","),pl_last= pl.rfind(","),pl_init=1,pl_end=pl.size()-1;
 Rmin=atof(pl.substr(pl_init,pl_first).c_str());
 Zmin=atof(pl.substr(pl_last+1,pl_end).c_str());
 cout << "Rmin " << Rmin << " Zmin " << Zmin << endl; 
@@ -75,7 +77,10 @@ hFI->SetOption("colz");
 for (int k = 0; k<4; k++) input.getline(textline,200);
 
 // reads in R Z Br Bz (R increase first when Z fixed)
-string R_s[constNum_R][constNum_Z],Z_s[constNum_R][constNum_Z],Br_s[constNum_R][constNum_Z],Bz_s[constNum_R][constNum_Z];
+vector<vector<string>> R_s(constNum_R, vector<string>(constNum_Z));
+vector<vector<string>> Z_s(constNum_R, vector<string>(constNum_Z));
+vector<vector<string>> Br_s(constNum_R, vector<string>(constNum_Z));
+vector<vector<string>> Bz_s(constNum_R, vector<string>(constNum_Z));
 double  R,Z,Br,Bz,B,A,dBzdr,dBrdz,FI;
 for (int j = 0; j<constNum_Z; j++) {
   for (int i = 0; i<constNum_R; i++) {
@@ -129,8 +134,9 @@ cout << "the units are in cm and G" << endl;
 }
 
 
-if (opt==1||opt==2){
-TCanvas *c_SF7map = new TCanvas("SF7map","SF7map",1200,900);
+TCanvas *c_SF7map = nullptr;
+if (opt==1||opt==2||opt==3){
+c_SF7map = new TCanvas("SF7map","SF7map",1200,900);
 gStyle->SetPalette(1);
 gStyle->SetOptStat(0);
 c_SF7map->Divide(2,3);
