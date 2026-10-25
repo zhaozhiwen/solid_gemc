@@ -33,7 +33,7 @@ using namespace std;
 #include "analysis_tree_solid_spd.C"
 #include "analysis_tree_solid_mrpc.C"
 #include "analysis_tree_solid_ec.C"
-
+#include "analysis_tree_solid_gem.C"
 
 // some numbers to be hard coded 
 // make sure they are correct while using this script
@@ -267,6 +267,14 @@ cout << "output file " << outputfile_name << endl;
 	TH1F *hhit_spd_LA=new TH1F("hit_spd_LA","hit,SPD LA;module;Edep rate (MeV/kHz)",60,0,60);
 	TH1F *hocc_spd_LA=new TH1F("occ_spd_LA","occupancy,SPD LA;module;event rate (kHz)",60,0,60);	
 	
+	TH1F *hhit_gem_r[6];
+	for(int i=0;i<6;i++){
+	  char hstname[100];
+	  sprintf(hstname,"hhit_gem_r_%i",i);
+	  hhit_gem_r[i]=new TH1F(hstname,"GEM hit rate;radius (cm);hit rate (kHz/cm^{2})",300,0,300);
+	  hhit_gem_r[i]->Sumw2();
+	}
+
 	TH1F *hhit_ec_preshower_FA=new TH1F("hit_ec_preshower_FA","hit,EC FA preshower;module;Edep rate (MeV/kHz)",2000,0,2000);
 	TH1F *hocc_ec_preshower_FA=new TH1F("occ_ec_preshower_FA","occupancy,EC FA preshower;module;event rate (kHz)",2000,0,2000);	
 	TH1F *hhit_ec_preshower_LA=new TH1F("hit_ec_preshower_LA","hit,EC LA preshower;module;Edep rate (MeV/kHz)",2000,0,2000);
@@ -469,6 +477,11 @@ cout << "output file " << outputfile_name << endl;
 	tree_flux->SetBranchAddress("nsteps",&flux_nsteps);     // nsteps
 	tree_flux->SetBranchAddress("procID",&flux_procID);     // process id
 	
+	//---GEM
+	//information recorded by EC
+	TTree *tree_solid_gem = (TTree*) file->Get("solid_gem");
+	setup_tree_solid_gem(tree_solid_gem);
+
 	//---EC
 	//information recorded by EC
 	TTree *tree_solid_ec = (TTree*) file->Get("solid_ec");
@@ -513,8 +526,9 @@ cout << "output file " << outputfile_name << endl;
 	//---------------------------
 	for(int loop_id=1;loop_id<=loop_time;loop_id++){
 		cout<<"loop.....  "<<loop_id<<endl;
-	
-	for(long int i=0;i<N_events;i++){	  
+
+	for(long int i=0;i<N_events;i++){
+	// for(long int i=0;i<N_events/10.;i++){
 // 	for(long int i=0;i<100;i++){	  		
 // 			cout<<"event " << i<<endl;
 			cout<<i<<"\r";
@@ -590,8 +604,8 @@ cout << "output file " << outputfile_name << endl;
 		    
 		}		
 
-		if (Is_SIDIS_He3) if (vz_gen<-3550 || -3450<vz_gen) continue;
-		if (Is_PVDIS) if (vz_gen<50 || 150<vz_gen) continue;
+		// if (Is_SIDIS_He3) if (vz_gen<-3550 || -3450<vz_gen) continue;
+		// if (Is_PVDIS) if (vz_gen<50 || 150<vz_gen) continue;
 
 		hgen_ThetaP->Fill(theta_gen,p_gen/1e3,rate);
 		hgen_ThetaPhi->Fill(theta_gen,phi_gen,rate);                  		
@@ -706,6 +720,13 @@ cout << "output file " << outputfile_name << endl;
 		  //check hit on EC and find sec_ec
 		    		
 		}			
+
+		//---------------------
+		//--- gem
+		//---------------------
+		tree_solid_gem->GetEntry(i);
+
+		process_tree_solid_gem(tree_solid_gem,hhit_gem_r,rate);
 
 		//---------------------
 		//--- ec
