@@ -1,7 +1,7 @@
 == field map list ==
 field map dir besides this dir
 web https://solid.jlab.org/files/field/
-jlab ifarm /group/solid/www/solid/html/files/field
+jlab /group/solid/www/solid-rh9/html/files/field/
 CAD on wiki https://solid.jlab.org/wiki/index.php/Engineering_Integration_and_CAD#magnet
 
 https://solid.jlab.org/files/field/solenoid_v4.dat
@@ -24,6 +24,7 @@ refer to
 https://solid.jlab.org/cgi-bin/public/ShowDocument?docid=54
 https://solid.jlab.org/cgi-bin/public/ShowDocument?docid=62
 
+solenoid_CLEOv10, unmodified CLEO2 iron,using POSSION, by Zhiwen Zhao
 solenoid_CLEOv9, longer endcap than CLEOv8,using POSSION, by Zhiwen Zhao 
 solenoid_CLEOv8, SoLID CLEO2 magnet map,using POSSION, by Zhiwen Zhao 
 solenoid_CLEOv8_Bz  (Bz field only, Br is 0)
