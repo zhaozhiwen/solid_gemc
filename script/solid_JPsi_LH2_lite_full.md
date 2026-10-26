@@ -106,4 +106,5 @@ The front section (z 205–270, r 60–140) has a 1 mm window at z 205–205.101
 ## notes
 
 - The LH2 cell is centered at z = -315 cm, but `BEAM_V` and `LUMI_V` start particles at z = -350 cm, 27.5 cm upstream of the cell inside the entrance pipe. The GEM and EC angle ranges in their readmes are relative to z = -350 cm.
+- Virtual planes (`*virtualplane*`, `*_virt*`) are not real detectors. They are thin vacuum (G4_Galactic) volumes with `flux` hits that record every particle crossing them, a tool for Geant4 studies such as acceptance, rates and track positions.
 - The smallest radial clearance to the magnet is the EC LA module corners (r 142.6) to the cryostat inner wall (r 144) at z -61.7 to -12.3.
