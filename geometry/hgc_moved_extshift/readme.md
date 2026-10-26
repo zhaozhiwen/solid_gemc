@@ -24,6 +24,26 @@ A gcard `<position>` is a displacement added to one volume, matched by volume na
 
 All other volumes are daughters of the chamber and move with it.
 
+## variations
+
+| variation | sectors with cone, shieldback, pmt and mirror |
+|---|---|
+| `Original` | all 30 |
+| `4seg2sec` | 4,5,11,12,19,20,26,27 (4 segments of 2 sectors) |
+
+Chamber, gas, front window, virtual plane and the two support blocks (in sectors 1 and 16) are in both. Materials, mirrors and hit are the same. The sector list is `%sectors_of_variation` in `solid_SIDIS_hgc_geometry.pl`.
+
+Make the text files of both variations, in this dir:
+
+    ./solid_SIDIS_hgc.pl config_solid_SIDIS_hgc.dat
+
+Use one of them in the gcard:
+
+    <detector name="../geometry/hgc_moved_extshift/solid_SIDIS_hgc" factory="TEXT" variation="Original"/>
+    <detector name="../geometry/hgc_moved_extshift/solid_SIDIS_hgc" factory="TEXT" variation="4seg2sec"/>
+
+plus the two 40 cm `<position>` shifts above.
+
 ## the setup
 
 The setup gives a complete definition of the detector.
@@ -35,6 +55,7 @@ The parameter text file has all external parameters and it can be editted by han
 
 After setting up env, a perl script will call other perl scripts and use parameter file to produce all other text files by running command below
 ./solid_SIDIS_hgc.pl config_solid_SIDIS_hgc.dat
+(it writes both variations, Original and 4seg2sec)
 
 The hit definition, bank definitions and corresponding hit processing routine "solid_hgc" of "solid_gemc" have to match to produce meaningful result.
 Any change in hit definition and bank definition, you need to modify the source code "solid_hgc" accordingly and recompile "solid_gemc" by following instruction there

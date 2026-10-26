@@ -34,6 +34,16 @@ my $sec_start = 90+$ang_width/2;  # =96, degree where the 1st sector starts
 my $DEG=180/3.1415926;  # conversion factor between degrees and radians
 my $Z_target=350;  # distance between the target center and the origin
 
+# sectors built for each variation (cone, shieldback, pmt, mirror); a variation not listed gets all $N sectors
+my %sectors_of_variation = ("4seg2sec" => [4,5,11,12,19,20,26,27]);  # 4 segments of 2 sectors
+sub sector_on
+{
+  my ($i) = @_;
+  my $list = $sectors_of_variation{$configuration{"variation"}};
+  return 1 unless $list;
+  return grep { $_ == $i } @$list;
+}
+
 # Parameters
 ## Chamber
 # my $Rmin0_chamber=190;
@@ -258,7 +268,7 @@ sub make_block
       $detector{"pMany"}       = 1;
       $detector{"exist"}       = 1;
       $detector{"visible"}     = 1;
-      $detector{"style"}       = 1;
+      $detector{"style"}       = 0;
 #       $detector{"sensitivity"} = "mirror: SL_HGC_mirror";
 #       $detector{"hit_type"}    = "mirror";
 #       my $id=2200000+$i*1000+3;
@@ -342,6 +352,7 @@ sub make_cone
   my $pos_r = $image_y-sin($ang_tilt/$DEG)*$trd_dz;  
   my $pos_z = $image_z+cos($ang_tilt/$DEG)*$trd_dz;
      for(my $i=1; $i<=$N; $i++){
+      next unless sector_on($i);
       my $pos_x = $pos_r*cos(($i-1)*$ang_width/$DEG+$sec_start/$DEG);
       my $pos_y = $pos_r*sin(($i-1)*$ang_width/$DEG+$sec_start/$DEG);    
       my $ang_zrot=-(($i+-1)*$ang_width+$sec_start);
@@ -404,6 +415,7 @@ sub make_shieldback
   my $pos_r = $image_y-sin($ang_tilt/$DEG)*(-$shieldback_dz-0.1);  
   my $pos_z = $image_z+cos($ang_tilt/$DEG)*(-$shieldback_dz-0.1);
      for(my $i=1; $i<=$N; $i++){
+      next unless sector_on($i);
       my $pos_x = $pos_r*cos(($i-1)*$ang_width/$DEG+$sec_start/$DEG);
       my $pos_y = $pos_r*sin(($i-1)*$ang_width/$DEG+$sec_start/$DEG);    
       my $ang_zrot=-(($i+-1)*$ang_width+$sec_start);
@@ -463,6 +475,7 @@ sub make_pmt
   my $pos_r = $image_y+sin($ang_tilt/$DEG)*$half_z;  
   my $pos_z = $image_z-cos($ang_tilt/$DEG)*$half_z;
      for(my $i=1; $i<=$N; $i++){
+      next unless sector_on($i);
       my $pos_x = $pos_r*cos(($i-1)*$ang_width/$DEG+$sec_start/$DEG);
       my $pos_y = $pos_r*sin(($i-1)*$ang_width/$DEG+$sec_start/$DEG);    
       my $ang_zrot=-(($i-1)*$ang_width+$sec_start);
@@ -536,6 +549,7 @@ sub make_mirror
 {
 #       // make a cone to intersect a sphere      
      for(my $i=1; $i<=$N; $i++){
+      next unless sector_on($i);
       my $ang_start=-0.5*$ang_width+($i-1)*$ang_width+$sec_start;
 
       my %detector=init_det();

@@ -54,10 +54,15 @@ $configuration{"variation"} = "Original";
 # $configuration{"detector_name"} = "solid_SIDIS";
 
 #Geometry definition
+# "Original" has all 30 sectors, "4seg2sec" only sectors 4,5,11,12,19,20,26,27 (see solid_SIDIS_hgc_geometry.pl)
 require "./solid_SIDIS_hgc_geometry.pl";
-solid_SIDIS_hgc_geometry();
 require "./solid_SIDIS_hgc_virtualplane.pl";
+foreach my $variation ("Original", "4seg2sec")
+{
+$configuration{"variation"} = $variation;
+solid_SIDIS_hgc_geometry();
 solid_SIDIS_hgc_virtualplane();
+}
 
 #materials
 require "./solid_SIDIS_hgc_materials.pl";
@@ -70,3 +75,9 @@ require "./solid_hgc_hit.pl";
 
 # bank definition
 require "./solid_hgc_bank.pl";
+
+# materials, mirrors and hit above are written for the variation in the config file (Original), write them for 4seg2sec too
+$configuration{"variation"} = "4seg2sec";
+define_materials();
+print_mirror();
+define_hit();
