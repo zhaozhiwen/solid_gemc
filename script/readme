@@ -2,6 +2,7 @@ scripts to run solid_gemc simulation
 
 ==  gcard show full SoLID lite simulation in graphic mode==
 solid_JPsi_LH2_lite_full.gcard and its md file showing details
+solid_JPsi_DDVCS_LH2_lite_full.gcard (J/psi lite + muon detector) and its md file
 
 ==  gcard show full SoLID simulation with longer endcap in graphic mode==
 solid_PVDIS_LD2_moved_full.gcard
@@ -33,6 +34,14 @@ solid_SIDIS_NH3_simple.gcard
 solid_slice.vis
 
 solid_slice_nohit.vis   (disable hit)
+
+solid_quarter.vis   (cut away a 90 deg wedge)
+
+== geometry outline ==
+
+geometry_outline.py <gcard>   (z/r extents of all volumes in a gcard, used for the md files)
+
+solid_JPsi_LH2_lite_full_outline.py   (draws the boundaries on the lite side view png, scale fitted to that png only)
 
 == farm script ==
 
