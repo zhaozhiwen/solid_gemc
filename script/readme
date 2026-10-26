@@ -1,5 +1,8 @@
 scripts to run solid_gemc simulation 
 
+==  gcard show full SoLID lite simulation in graphic mode==
+solid_JPsi_LH2_lite_full.gcard and its md file showing details
+
 ==  gcard show full SoLID simulation with longer endcap in graphic mode==
 solid_PVDIS_LD2_moved_full.gcard
 solid_SIDIS_He3_moved_full.gcard

@@ -2,16 +2,9 @@
 
 <detector name="../geometry/magnet_moved/solid_solenoid" factory="TEXT" variation="nomod"/>
 <detector name="../geometry/magnet_moved/solid_solenoid_cryo" factory="TEXT" variation="Original"/>
-" variation="Original"/>
-
-<!--
-<detector name="../geometry/ec_segmented_moved/solid_SIDIS_ec_largeangle" factory="TEXT" variation="Original"/>
-<detector name="../geometry/ec_segmented_moved/solid_SIDIS_ec_forwardangle" factory="TEXT" variation="Original"/>
-<detector name="../geometry/lgc_moved/lg_cherenkov" factory="TEXT" variation="SIDIS"/>
--->
-
-<detector name="../geometry/hgc_moved_ext/solid_SIDIS_hgc" factory="TEXT" variation="Original"/>
-
+<detector name="../geometry/ec_segmented_separated/solid_SIDIS_ec_largeangle" factory="TEXT" variation="Original"/>
+<detector name="../geometry/ec_segmented_separated/solid_SIDIS_ec_forwardangle" factory="TEXT" variation="Original"/>
+<detector name="../geometry/hgc_moved_ext/solid_SIDIS_hgc" factory="TEXT" variation="4seg2sec"/>
 <detector name="../geometry/mrpc_moved/solid_SIDIS_mrpc_forwardangle" factory="TEXT" variation="Original"/>
 <detector name="../geometry/spd_moved/solid_SIDIS_spd_forwardangle" factory="TEXT" variation="Original"/>
 <detector name="../geometry/spd_moved/solid_SIDIS_spd_largeangle" factory="TEXT" variation="Original"/>
@@ -36,8 +29,8 @@
 <option name="HALL_DIMENSIONS" value="20*m,20*m,20*m"/>
 
 <option name="FIELD_DIR" value="../field"/>
-<option name="HALL_FIELD" value="solenoid_CLEOv9"/>
-<option name="FIELD_PROPERTIES" value="solenoid_CLEOv9, 1*mm, G4ClassicalRK4,linear"/>
+<option name="HALL_FIELD" value="solenoid_CLEOv10"/>
+<option name="FIELD_PROPERTIES" value="solenoid_CLEOv10, 1*mm, G4ClassicalRK4,linear"/>
 
 <option name="BEAM_P"   value="e-,5.5*GeV,12*deg,76*deg"/>
 <option name="SPREAD_P" value="0*GeV,0*deg,0*deg"/>
